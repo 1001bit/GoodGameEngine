@@ -4,9 +4,9 @@ LDFLAGS 	:= '-Wl,-rpath,$$ORIGIN/lib'
 LIBRARIES	:= -lsfml-graphics -lsfml-window -lsfml-system
 EXECUTABLE	:= main
 
-li: 
+all: 
 	rm linux/bin/$(EXECUTABLE)
 	g++ $(CXX_FLAGS) -Iinclude $(LDFLAGS) -Llinux/lib src/*.cpp -o linux/bin/$(EXECUTABLE) $(LIBRARIES)
-wi:
+win:
 	rm win/bin/$(EXECUTABLE)
 	g++ $(CXX_FLAGS) -Iinclude -Lwin/lib src/*.cpp -o win/bin/$(EXECUTABLE) $(LIBRARIES)

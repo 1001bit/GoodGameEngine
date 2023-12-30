@@ -22,7 +22,7 @@ int main()
     {
         sf::Time deltaTime = clock.restart();
         timeMs = deltaTime.asMicroseconds()/1000.0;
-        cout << int(1000/timeMs) << "FPS \n";
+        cout << int(1000.0/timeMs) << "FPS ; " << timeMs << "\n";
         
         sf::Event event;
         while (window.pollEvent(event))

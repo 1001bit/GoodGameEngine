@@ -1,22 +1,12 @@
-CXX		  := g++
-CXX_FLAGS := -Wall -Wextra -std=c++20 -ggdb
+FLAGS := -Wall -Wextra -std=c++20 -ggdb
 
-BIN		:= bin
-SRC		:= src
-INCLUDE	:= include
-LIB		:= lib
-
-LIBRARIES	:= -lsfml-window -lsfml-graphics -lsfml-system
+LDFLAGS 	:= '-Wl,-rpath,$$ORIGIN/lib'
+LIBRARIES	:= -lsfml-graphics -lsfml-window -lsfml-system
 EXECUTABLE	:= main
 
-all: $(BIN)/$(EXECUTABLE)
-
-run: clean all
-	clear
-	./$(BIN)/$(EXECUTABLE)
-
-$(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
-	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
-
-clean:
-	-rm $(BIN)/*
+li: 
+	rm linux/bin/$(EXECUTABLE)
+	g++ $(CXX_FLAGS) -Iinclude $(LDFLAGS) -Llinux/lib src/*.cpp -o linux/bin/$(EXECUTABLE) $(LIBRARIES)
+wi:
+	rm win/bin/$(EXECUTABLE)
+	g++ $(CXX_FLAGS) -Iinclude -Lwin/lib src/*.cpp -o win/bin/$(EXECUTABLE) $(LIBRARIES)

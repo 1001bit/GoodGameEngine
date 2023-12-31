@@ -13,7 +13,7 @@ void smoothViewMovement(sf::View& view, sf::Vector2f followPosition, float time)
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1440, 880), "Such a Happy Face", sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(1440, 880), "BeGood Effect", sf::Style::Close);
     window.setFramerateLimit(60);
 
     sf::Clock clock;

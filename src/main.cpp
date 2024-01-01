@@ -1,15 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-constexpr float viewLerp = 0.015;
-
 using std::cout;
-
-void smoothViewMovement(sf::View& view, sf::Vector2f followPosition, float time){
-    sf::Vector2f viewPos = view.getCenter();
-    viewPos += (followPosition - viewPos) * time * viewLerp;
-    view.setCenter(viewPos);
-}
 
 int main()
 {
@@ -22,7 +14,7 @@ int main()
     {
         sf::Time deltaTime = clock.restart();
         timeMs = deltaTime.asMicroseconds()/1000.0;
-        cout << int(1000.0/timeMs) << "FPS ; " << timeMs << "\n";
+        cout << 1000.0/timeMs << "FPS ; " << timeMs << "\n";
         
         sf::Event event;
         while (window.pollEvent(event))

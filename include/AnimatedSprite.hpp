@@ -6,21 +6,9 @@
 #include <iostream>
 #include <math.h>
 #include <SFML/Graphics.hpp>
-
-#define TEXTURE_SCALE 7
+#include "Animation.hpp"
 
 using std::cout;
-
-struct Animation
-{
-    sf::Texture texture;
-    std::vector<sf::IntRect> frames;
-    float playTime;
-    float frameTime;
-    bool isLooped;
-    Animation(std::string textureName, int frameWidth, float playTime, bool isLooped);
-    Animation();
-};
 
 typedef std::unordered_map<std::string, Animation> animMap;
 

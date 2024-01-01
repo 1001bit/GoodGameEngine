@@ -1,26 +1,7 @@
 #include "AnimatedSprite.hpp"
 
-// animation constructor
-Animation::Animation(std::string textureName, int frameWidth, float playTime, bool isLooped){
-    this->texture.loadFromFile(textureName);
-
-    // add frames to vector depending on frame width
-    for(int x = 0; x < int(this->texture.getSize().x / frameWidth); ++x){
-        this->frames.push_back(sf::IntRect(x*frameWidth, 0, frameWidth, this->texture.getSize().y));
-    }
-
-    this->playTime = playTime;
-    this->frameTime = this->playTime / this->frames.size();
-    this->isLooped = isLooped;
-}
-
-Animation::Animation(){
-
-}
-
 // animated sprite constructor
 AnimatedSprite::AnimatedSprite() {
-    this->sprite.setScale(TEXTURE_SCALE, TEXTURE_SCALE);
     this->elapsedTime = 0;
     this->isFlipped = false;
     this->currentAnimation = nullptr;
@@ -42,10 +23,11 @@ void AnimatedSprite::playAnimation(std::string name){
     }
 
     if(currentAnimation != nullptr){
+        // if want to play same animation - disallow
         if(currentAnimation == &animationMap.at(name)){
             return;
         }
-        // every non-looped animation will go into idle whis is looped. So when looped animation is played only then we play another one 
+        // allow playing over looped animations
         if(!currentAnimation->isLooped){
             return;
         }
@@ -74,7 +56,7 @@ void AnimatedSprite::updateAnimation(float dTime){
     // set rect
     sprite.setTextureRect(currentFrame);
     if(currentAnimation->playTime == 0){
-        return;
+        return; 
     }
 
     elapsedTime += dTime;
@@ -84,13 +66,9 @@ void AnimatedSprite::updateAnimation(float dTime){
         elapsedTime -= currentAnimation->playTime;
         if(!currentAnimation->isLooped){
             currentAnimation = nullptr;
-            playAnimation("idle");
         }
     }
 }
-
-
-// GETTERS
 
 // returns current frame rect
 const sf::IntRect& AnimatedSprite::getCurrentFrame(){

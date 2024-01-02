@@ -8,10 +8,6 @@ void Camera::smoothViewMovement(sf::View& view, sf::Vector2f followPosition, flo
     view.setCenter(viewPos);
 }
 
-Camera::Camera()
-{
-}
+Camera::Camera(){}
 
-Camera::~Camera()
-{
-}
+Camera::~Camera(){}

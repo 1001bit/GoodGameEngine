@@ -13,10 +13,9 @@ Chapters:
 
 Levels:
 - Are made in level editor
-- May be either 3D, Top-Down or Platformer.
+- May be either Top-Down or Platformer.
     - Home, office, rooms etc. are always platformer
     - Action scenes are always top-down
-    - Outside environment is 3D
 - Requirements to complete: Nothing, Knockdown everybody, Interact with something/someone
 
 Combat:

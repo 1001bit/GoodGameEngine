@@ -24,9 +24,3 @@ Development stages of BeGood Effect:
 7. Main development
 	- Level design, level creations
     - Dialogues writing, character placing
-	
-------------------------------------------------------------------------------
-
-TODO:
-	- Develop level constructor
-    - Develop 3D

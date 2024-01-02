@@ -7,27 +7,42 @@
 #include <math.h>
 #include <SFML/Graphics.hpp>
 #include "Animation.hpp"
+#include "GObject.hpp"
 
 using std::cout;
 
 typedef std::unordered_map<std::string, Animation> animMap;
 
-class AnimatedSprite {
+class AnimatedSprite : public GObject {
 
-animMap animationMap;
-Animation* currentAnimation;
-float elapsedTime;
+private:
+    // Variables
+    animMap animationMap;
+    Animation* currentAnimation;
+    float elapsedTime;
 
 public:
+    // Structors
     AnimatedSprite();
     ~AnimatedSprite();
 
+    // Variables
     sf::Sprite sprite;
     bool isFlipped;
 
+    // Methods
+    // Start animation with name
     void playAnimation(std::string name);
-    void updateAnimation(float dTime);
+    // Update the state of current animation
+    void update(const float& timeMs);
+    // Move sprite after self reposition
+    void updateSpritePos();
+    // Add new animation with name
     void insertAnimation(std::string name, Animation animation);
 
+    // Getters
+    // Get rect of current animation
     const sf::IntRect& getCurrentFrame();
+    // get sprite
+    const sf::Sprite& getSprite();
 };

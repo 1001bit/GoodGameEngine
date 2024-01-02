@@ -1,6 +1,7 @@
 #include "Animation.hpp"
 
-// animation constructor
+// Structors
+
 Animation::Animation(std::string textureName, int frameWidth, float playTime, bool isLooped){
     this->texture.loadFromFile(textureName);
 
@@ -14,6 +15,4 @@ Animation::Animation(std::string textureName, int frameWidth, float playTime, bo
     this->isLooped = isLooped;
 }
 
-Animation::Animation(){
-
-}
+Animation::Animation(){}

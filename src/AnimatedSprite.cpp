@@ -1,19 +1,22 @@
 #include "AnimatedSprite.hpp"
 
+// Structors
 // animated sprite constructor
 AnimatedSprite::AnimatedSprite() {
+    this->sprite.scale(spriteScale, spriteScale);
+
+    this->type = animSprite;
     this->elapsedTime = 0;
     this->isFlipped = false;
     this->currentAnimation = nullptr;
 }
 
-// add animation to map
+AnimatedSprite::~AnimatedSprite(){};
+
+// Methods
+// add animation to animation map
 void AnimatedSprite::insertAnimation(std::string name, Animation animation){
     animationMap.insert({name, animation});
-    // Don't know what to do? Just play idle animation
-    if(name == "idle"){
-        playAnimation(name);
-    }
 }
 
 // start animation
@@ -36,11 +39,11 @@ void AnimatedSprite::playAnimation(std::string name){
     elapsedTime = 0;
     currentAnimation = &animationMap.at(name);
     sprite.setTexture(currentAnimation->texture);
-    updateAnimation(0);
+    update(0);
 }
 
 // update frames, etc
-void AnimatedSprite::updateAnimation(float dTime){
+void AnimatedSprite::update(const float& timeMS){
     // no empty animations
     if(currentAnimation == nullptr){
         return;
@@ -59,7 +62,7 @@ void AnimatedSprite::updateAnimation(float dTime){
         return; 
     }
 
-    elapsedTime += dTime;
+    elapsedTime += timeMS;
     
     // restart or drop frame
     if(elapsedTime >= currentAnimation->playTime){
@@ -68,6 +71,17 @@ void AnimatedSprite::updateAnimation(float dTime){
             currentAnimation = nullptr;
         }
     }
+}
+
+// update position of sprite
+void AnimatedSprite::updateSpritePos(){
+    sprite.setPosition(this->getAbsolutePos());
+}
+
+// Getters
+// returns sprite
+const sf::Sprite& AnimatedSprite::getSprite(){
+    return sprite;
 }
 
 // returns current frame rect

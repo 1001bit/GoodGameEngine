@@ -1,11 +1,12 @@
 #include "Game.hpp"
 
+// #define DRAWCOLLIDER
+
 constexpr unsigned FPS = 60;
 
 using std::cout;
 
 // Structors
-
 Game::Game(){
     this->type = gGame;
 }
@@ -25,6 +26,7 @@ void Game::init(sf::VideoMode mode, const sf::String& title, sf::Uint32 style){
     // init dummy
     std::shared_ptr<PhysBody> dummy = std::make_shared<PhysBody>();
     createNewGObject(dummy, gamePtr, 0);
+    dummy->setColliderSize(16, 16);
     dummy->setRelativePos(500, 0);
     // it's camera
     camera = std::make_shared<Camera>();
@@ -33,45 +35,27 @@ void Game::init(sf::VideoMode mode, const sf::String& title, sf::Uint32 style){
 
     // his sprite
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();
-    createNewGObject(dummySprite, dummy, 0);
+    createNewGObject(dummySprite, dummy, 1);
     dummySprite->insertAnimation("idle", Animation("Assets/Original/Textures/dummy.png", 16, 500, 1));
     dummySprite->playAnimation("idle");
     // and his sword
     std::shared_ptr<GSprite> sword = std::make_shared<GSprite>();
-    createNewGObject(sword, dummy, 3);
+    createNewGObject(sword, dummy, 2);
     sword->setTexture("Assets/Original/Textures/sword.png");
     sword->setRelativePos(-30, 1);
+
+    // a platform
+    std::shared_ptr<SolidBody> platform = std::make_shared<SolidBody>();
+    createNewGObject(platform, gamePtr, 0);
+    platform->setColliderSize(100, 10);
+    platform->setRelativePos(100, 800);
+    // it's sprite
+    std::shared_ptr<GSprite> platformSprite = std::make_shared<GSprite>();
+    createNewGObject(platformSprite, platform, 0);
+    platformSprite->setTexture("Assets/Original/Textures/platform.png");
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
     loop(window);
-}
-
-// add new object to the game
-void Game::createNewGObject(std::shared_ptr<GObject> newGObject, std::shared_ptr<GObject> newParent, u_char layer = 0){
-    // first three layers are for non-drawable GObjects
-    if(drawableGObjectTypes.count(newGObject->getType())){
-        layer += 3;
-    } else {
-        switch (newGObject->getType())
-        {
-        case gCollider:
-            layer = layerType::colliders;
-            break;
-        case gCamera:
-            layer = layerType::camera;
-            break;
-        default:
-            layer = layerType::invisibles;
-            break;
-        }
-    }
-
-    newGObject->setParent(newParent);
-    // if layer doesn't exist - make it
-    if(!GObjectsLayers.count(layer)){
-        GObjectsLayers[layer] = GObjectSet{};
-    }
-    GObjectsLayers[layer].insert(newGObject);
 }
 
 // Main loop
@@ -97,18 +81,65 @@ void Game::loop(sf::RenderWindow& window){
     }
 }
 
+// add new object to the game
+void Game::createNewGObject(std::shared_ptr<GObject> newGObject, std::shared_ptr<GObject> newParent, u_char layer = 0){
+    // first three layers are for non-drawable GObjects
+    if(drawableGObjectTypes.count(newGObject->getType())){
+        layer += 3;
+    } 
+    // very first layer is for bodies
+    else if (bodyGObjectTypes.count(newGObject->getType())) {
+        layer = layerType::bodies;
+    } 
+    // third layer is for camera only
+    else if (newGObject->getType() == gCamera){
+        layer = layerType::camera;
+    } 
+    // second layer is for all other types
+    else {
+        layer = layerType::invisibles;
+    }
+
+    newGObject->setParent(newParent);
+    // if layer doesn't exist - make it
+    if(!GObjectsLayers.count(layer)){
+        GObjectsLayers[layer] = GObjectSet{};
+    }
+    GObjectsLayers[layer].insert(newGObject);
+}
+
 // update and draw
 void Game::update(sf::RenderWindow& window, const float& timeMs){
     window.setView(camera->getView());
     // iterate through whole map
-    for(std::pair<const u_char, GObjectSet > GObjects : GObjectsLayers){
+    for(std::pair<const u_char, GObjectSet> GObjectsLayer : GObjectsLayers){
         // iterate through a single layer
-        for(std::shared_ptr<GObject> Object : GObjects.second){
+        for(std::shared_ptr<GObject> Object : GObjectsLayer.second){
+            // if body layer - collide
+            if(GObjectsLayer.first == layerType::bodies){
+                // draw collider for debug
+                #ifdef DRAWCOLLIDER
+                sf::RectangleShape visible = sf::RectangleShape();
+                visible.setFillColor(sf::Color::Red);
+                visible.setSize(sf::Vector2f(Object->getCollider().width, Object->getCollider().height));
+                visible.setPosition(sf::Vector2f(Object->getCollider().left, Object->getCollider().top));
+                window.draw(visible);
+                #endif
+                // collide main objects with other bodies
+                for(std::shared_ptr<GObject> Object2 : GObjectsLayer.second){
+                    if(Object2 == Object){
+                        continue;
+                    }
+                    Object->collide(Object2);
+                }
+            }
             // update an object
             Object->update(timeMs);
-            // draw it
+            // if drawable - draw on a screen
             if(drawableGObjectTypes.count(Object->getType())){
+                #ifndef DRAWCOLLIDER
                 window.draw(Object->getSprite());
+                #endif
             }
         }
     }

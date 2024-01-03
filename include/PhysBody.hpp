@@ -7,10 +7,11 @@ private:
     sf::Vector2f velocity;
 
     // Methods
-    // Control the unit
-    virtual void control();
     // Gravity force
     void gravity(const float& timeMs);
+protected:
+    // Control the unit
+    virtual void control();
 public:
     // Structors
     PhysBody();
@@ -19,4 +20,6 @@ public:
     // Methods
     // Update the state
     void update(const float& timeMs);
+    // collision behaviour
+    void collide(std::shared_ptr<GObject> obstacle);
 };

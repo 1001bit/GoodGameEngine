@@ -5,6 +5,11 @@ std::unordered_set<GObjectType> drawableGObjectTypes{
     gAnimSprite, gSprite
 };
 
+// GObjects that are bodies
+std::unordered_set<GObjectType> bodyGObjectTypes{
+    gPhysBody, gSolidBody
+};
+
 // Structors
 
 GObject::GObject(){
@@ -17,7 +22,7 @@ GObject::~GObject(){}
 // Virtuals
 void GObject::update(const float& timeMs){}
 void GObject::updateSpritePos(){}
-void GObject::collide(collisionDirection direction){};
+void GObject::collide(std::shared_ptr<GObject> obstacle){};
 
 // Main
 
@@ -32,6 +37,8 @@ void GObject::updatePos(){
         return;
     }
     absolutePos = parent->getAbsolutePos() + relativePos;
+    colliderRect.left = absolutePos.x;
+    colliderRect.top = absolutePos.y;
     updateSpritePos();
     for(std::shared_ptr<GObject> child : children) {
         child->updatePos();
@@ -48,9 +55,14 @@ void GObject::setRelativePos(float x, float y){
     updatePos();
 }
 
-void GObject::setRelativePos(sf::Vector2f newPos){
+void GObject::setRelativePos(const sf::Vector2f& newPos){
     relativePos = newPos;
     updatePos();
+}
+
+void GObject::setColliderSize(float w, float h){
+    colliderRect.width = w*SPRITE_SCALE;
+    colliderRect.height = h*SPRITE_SCALE;
 }
 
 // Getters
@@ -70,4 +82,8 @@ const sf::Vector2f& GObject::getRelativePos(){
 
 const GObjectType& GObject::getType(){
     return type;
+}
+
+const sf::FloatRect& GObject::getCollider(){
+    return colliderRect;
 }

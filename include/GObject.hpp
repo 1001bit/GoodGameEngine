@@ -4,7 +4,7 @@
 #include <unordered_set>
 #include <memory>
 
-constexpr float spriteScale = 7;
+constexpr float SPRITE_SCALE = 7;
 
 // All types of objects
 enum GObjectType{
@@ -12,18 +12,15 @@ enum GObjectType{
     gGame, // done
     gSprite, // done
     gAnimSprite, // done
-    gCollider, // TODO
     gPhysBody, // done
-    gSolidBody, // TODO
-    gCamera, // Camera
+    gSolidBody, // done
+    gCamera, // done
     gText // TODO
-};
-// all directions of collision
-enum collisionDirection {
-    top, bottom, left, right
 };
 // All drawable types of objects
 extern std::unordered_set<GObjectType> drawableGObjectTypes;
+// All physical types of objects
+extern std::unordered_set<GObjectType> bodyGObjectTypes;
 
 // GObject class
 class GObject : public std::enable_shared_from_this<GObject>
@@ -33,6 +30,7 @@ private:
     std::unordered_set<std::shared_ptr<GObject>> children;
     sf::Vector2f relativePos;
     sf::Vector2f absolutePos;
+    sf::FloatRect colliderRect;
 
     // Methods
     void updatePos(); 
@@ -57,12 +55,14 @@ public:
     // Update the state of the object
     virtual void update(const float& timeMs);
     // recieve collision data 
-    virtual void collide(collisionDirection direction);
+    virtual void collide(std::shared_ptr<GObject> obstacle);
     // Set position relative to parent's position
     void setRelativePos(float x, float y);
-    void setRelativePos(sf::Vector2f newPos);
+    void setRelativePos(const sf::Vector2f& newPos);
     // Set a parent
     void setParent(std::shared_ptr<GObject> newParent);
+    // set collider rect size
+    void setColliderSize(float x, float y);
 
     // Getters
     // Get sprite if it exists
@@ -73,4 +73,6 @@ public:
     const sf::Vector2f& getAbsolutePos();
     // Get type of the object
     const GObjectType& getType();
+    // Get collider
+    const sf::FloatRect& getCollider();
 };

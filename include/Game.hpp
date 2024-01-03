@@ -7,13 +7,14 @@
 #include "GSprite.hpp"
 #include "PhysBody.hpp"
 #include "Camera.hpp"
+#include "SolidBody.hpp"
 
 // Set of GObjects
 typedef std::unordered_set<std::shared_ptr<GObject>> GObjectSet;
 
 // Types of layers
 enum layerType {
-    colliders = 0,
+    bodies = 0,
     invisibles = 1,
     camera = 2
 };

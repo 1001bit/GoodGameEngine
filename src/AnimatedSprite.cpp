@@ -2,7 +2,7 @@
 
 // Structors
 AnimatedSprite::AnimatedSprite() {
-    this->sprite.scale(spriteScale, spriteScale);
+    this->sprite.scale(SPRITE_SCALE, SPRITE_SCALE);
 
     this->type = gAnimSprite;
     this->elapsedTime = 0;

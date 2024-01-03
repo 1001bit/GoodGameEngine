@@ -1,5 +1,8 @@
-- Working physics
 - Colliders
-- Working camera
+- Character
+- NPCs
+- Enemies
 - GUI
+    - Main menu
+    - Settings
 - Level editor

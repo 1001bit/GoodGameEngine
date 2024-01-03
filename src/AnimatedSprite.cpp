@@ -1,11 +1,10 @@
 #include "AnimatedSprite.hpp"
 
 // Structors
-// animated sprite constructor
 AnimatedSprite::AnimatedSprite() {
     this->sprite.scale(spriteScale, spriteScale);
 
-    this->type = animSprite;
+    this->type = gAnimSprite;
     this->elapsedTime = 0;
     this->isFlipped = false;
     this->currentAnimation = nullptr;

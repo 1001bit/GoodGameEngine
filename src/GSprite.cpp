@@ -1,11 +1,9 @@
 #include "GSprite.hpp"
 
 // Structors
-
-GSprite::GSprite()
-{
+GSprite::GSprite(){
     this->sprite.scale(spriteScale, spriteScale);
-    this->type = gsprite;
+    this->type = gSprite;
 }
 
 GSprite::~GSprite(){}

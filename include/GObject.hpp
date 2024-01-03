@@ -8,13 +8,15 @@ constexpr float spriteScale = 7;
 
 // All types of objects
 enum GObjectType{
-    none,
-    game,
-    gsprite,
-    animSprite,
-    collider,
-    physBody,
-    solidBody
+    gNone, // done
+    gGame, // done
+    gSprite, // done
+    gAnimSprite, // done
+    gCollider, // TODO
+    gPhysBody, // done
+    gSolidBody, // TODO
+    gCamera, // Camera
+    gText // TODO
 };
 // All drawable types of objects
 extern std::unordered_set<GObjectType> drawableGObjectTypes;
@@ -39,7 +41,7 @@ protected:
     GObjectType type;
 
     // Methods
-    // Set drawable position after repositioning (if exists)
+    // Set SFML object position after repositioning (if exists)
     virtual void updateSpritePos();
 
 public:
@@ -51,12 +53,13 @@ public:
     // Update the state of the object
     virtual void update(const float& timeMs);
     // Set position relative to parent's position
+    void setRelativePos(float x, float y);
     void setRelativePos(sf::Vector2f newPos);
     // Set a parent
     void setParent(std::shared_ptr<GObject> newParent);
 
     // Getters
-    // Get sprite is it exists
+    // Get sprite if it exists
     virtual const sf::Sprite& getSprite();
     // Get position relative to parent's position
     const sf::Vector2f& getRelativePos();

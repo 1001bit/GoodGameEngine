@@ -5,6 +5,8 @@
 #include "GObject.hpp"
 #include "AnimatedSprite.hpp"
 #include "GSprite.hpp"
+#include "PhysBody.hpp"
+#include "Camera.hpp"
 
 // Set of GObjects
 typedef std::unordered_set<std::shared_ptr<GObject>> GObjectSet;
@@ -17,6 +19,8 @@ private:
     std::map<u_char, GObjectSet> GObjectsLayers;
     // pointer to the game itself
     std::shared_ptr<GObject> gamePtr;
+    // main camera
+    std::shared_ptr<Camera> camera;
 
     // Methods
     // Main game loop

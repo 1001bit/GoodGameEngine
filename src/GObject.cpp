@@ -2,14 +2,13 @@
 
 // All drawable types of objects
 std::unordered_set<GObjectType> drawableGObjectTypes{
-    animSprite, gsprite
+    gAnimSprite, gSprite
 };
 
 // Structors
 
-GObject::GObject()
-{
-    this->type = none;
+GObject::GObject(){
+    this->type = gNone;
 }
 
 GObject::~GObject(){}
@@ -17,13 +16,9 @@ GObject::~GObject(){}
 // Methods
 // Virtuals
 void GObject::update(const float& timeMs){}
-const sf::Sprite& GObject::getSprite(){
-    static sf::Sprite dummySprite;
-    return dummySprite;
-}
 void GObject::updateSpritePos(){}
 
-// Base
+// Main
 
 void GObject::setParent(std::shared_ptr<GObject> newParent){
     this->parent = newParent;
@@ -32,6 +27,9 @@ void GObject::setParent(std::shared_ptr<GObject> newParent){
 }
 
 void GObject::updatePos(){
+    if(!parent){
+        return;
+    }
     absolutePos = parent->getAbsolutePos() + relativePos;
     updateSpritePos();
     for(std::shared_ptr<GObject> child : children) {
@@ -44,12 +42,22 @@ void GObject::addChild(std::shared_ptr<GObject> newChild){
     newChild->updatePos();
 }
 
-void GObject::setRelativePos(sf::Vector2f newRelativePos){
-    relativePos = newRelativePos;
+void GObject::setRelativePos(float x, float y){
+    relativePos = sf::Vector2f(x, y);
+    updatePos();
+}
+
+void GObject::setRelativePos(sf::Vector2f newPos){
+    relativePos = newPos;
     updatePos();
 }
 
 // Getters
+
+const sf::Sprite& GObject::getSprite(){
+    static sf::Sprite dummySprite;
+    return dummySprite;
+}
 
 const sf::Vector2f& GObject::getAbsolutePos(){
     return absolutePos;

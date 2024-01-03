@@ -1,15 +1,28 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "GObject.hpp"
 
-class Camera
+class Camera : public GObject
 {
-
 private:
-    void smoothViewMovement(sf::View& view, sf::Vector2f followPosition, float time);
+    // Variables
+    std::shared_ptr<GObject> subject;
+    sf::View view;
     
 public:
+    // Structors
     Camera();
     ~Camera();
 
+    // Methods
+    // set size of view
+    void setSize(float w, float h);
+    // set subject to follow
+    void setSubject(std::shared_ptr<GObject> newSubject);
+    // smoothly move camera
+    void update(const float& timeMs);
+
+    // Getters
+    // get view
+    const sf::View& getView();
 };

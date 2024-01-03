@@ -1,13 +1,39 @@
 #include "Camera.hpp"
+#include <iostream>
 
 constexpr float viewLerp = 0.015;
 
-void Camera::smoothViewMovement(sf::View& view, sf::Vector2f followPosition, float time){
-    sf::Vector2f viewPos = view.getCenter();
-    viewPos += (followPosition - viewPos) * time * viewLerp;
-    view.setCenter(viewPos);
+// Structors
+
+Camera::Camera(){
+    type = gCamera;
 }
 
-Camera::Camera(){}
-
 Camera::~Camera(){}
+
+// Methods
+// Smooth movement
+void Camera::update(const float& timeMs){
+    sf::Vector2f viewPos = view.getCenter();
+    const sf::Vector2f& subjectPos = subject->getAbsolutePos();
+
+    viewPos += (subjectPos - viewPos) * timeMs * viewLerp;
+    view.setCenter(viewPos);
+    std::cout << subjectPos.y << " " << view.getCenter().y << "\n";
+}
+
+// set subject of view
+void Camera::setSubject(std::shared_ptr<GObject> newSubject){
+    subject = newSubject;
+}
+
+// set size of view
+void Camera::setSize(float w, float h){
+    view.setSize(sf::Vector2f(w, h));
+}
+
+// Getters
+// get view
+const sf::View& Camera::getView(){
+    return view;
+}

@@ -6,9 +6,8 @@ using std::cout;
 
 // Structors
 
-Game::Game()
-{
-    this->type = game;
+Game::Game(){
+    this->type = gGame;
 }
 
 Game::~Game(){}
@@ -24,21 +23,30 @@ void Game::init(sf::VideoMode mode, const sf::String& title, sf::Uint32 style){
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     // init dummy
+    std::shared_ptr<PhysBody> dummy = std::make_shared<PhysBody>();
+    createNewGObject(dummy, gamePtr, 0);
+    dummy->setRelativePos(500, 0);
+    // it's camera
+    camera = std::make_shared<Camera>();
+    camera->setSize(1440, 880);
+    camera->setSubject(dummy);
+    createNewGObject(camera, gamePtr, 0);
+    // his sprite
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();
     dummySprite->insertAnimation("idle", Animation("Assets/Original/Textures/dummy.png", 16, 500, 1));
     dummySprite->playAnimation("idle");
-    createNewGObject(dummySprite, gamePtr, 0);
-    dummySprite->setRelativePos(sf::Vector2f(100, 100));
+    createNewGObject(dummySprite, dummy, 1);
     // and his sword
     std::shared_ptr<GSprite> sword = std::make_shared<GSprite>();
     sword->setTexture("Assets/Original/Textures/sword.png");
-    createNewGObject(sword, dummySprite, 1);
-    sword->setRelativePos(sf::Vector2f(-30, 0));
+    createNewGObject(sword, dummy, 2);
+    sword->setRelativePos(-30, 0);
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
     loop(window);
 }
 
+// add new object to the game
 void Game::createNewGObject(std::shared_ptr<GObject> newGObject, std::shared_ptr<GObject> newParent, int layer){
     newGObject->setParent(newParent);
     // if layer doesn't exist - make it
@@ -55,7 +63,7 @@ void Game::loop(sf::RenderWindow& window){
     while (window.isOpen())
     {
         sf::Time deltaTime = clock.restart();
-        timeMs = deltaTime.asMicroseconds()/1000.0;
+        timeMs = deltaTime.asMicroseconds()/1000.f;
         cout << 1000.0/timeMs << "FPS ; " << timeMs << "\n";
 
         sf::Event event;
@@ -73,6 +81,7 @@ void Game::loop(sf::RenderWindow& window){
 
 // update and draw
 void Game::update(sf::RenderWindow& window, const float& timeMs){
+    window.setView(camera->getView());
     // iterate through map
     for(std::pair<const u_char, GObjectSet > GObjects : GObjectsLayers){
         // iterate through a single layer

@@ -19,7 +19,6 @@ void Camera::update(const float& timeMs){
 
     viewPos += (subjectPos - viewPos) * timeMs * viewLerp;
     view.setCenter(viewPos);
-    std::cout << subjectPos.y << " " << view.getCenter().y << "\n";
 }
 
 // set subject of view

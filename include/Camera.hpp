@@ -6,7 +6,6 @@ class Camera : public GObject
 {
 private:
     // Variables
-    std::shared_ptr<GObject> subject;
     sf::View view;
     
 public:
@@ -17,8 +16,6 @@ public:
     // Methods
     // set size of view
     void setSize(float w, float h);
-    // set subject to follow
-    void setSubject(std::shared_ptr<GObject> newSubject);
     // smoothly move camera
     void update(const float& timeMs);
 

@@ -17,6 +17,7 @@ GObject::~GObject(){}
 // Virtuals
 void GObject::update(const float& timeMs){}
 void GObject::updateSpritePos(){}
+void GObject::collide(collisionDirection direction){};
 
 // Main
 

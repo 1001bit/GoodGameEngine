@@ -28,9 +28,8 @@ void Game::init(sf::VideoMode mode, const sf::String& title, sf::Uint32 style){
     dummy->setRelativePos(500, 0);
     // it's camera
     camera = std::make_shared<Camera>();
-    createNewGObject(camera, gamePtr, 0);
+    createNewGObject(camera, dummy, 0);
     camera->setSize(1440, 880);
-    camera->setSubject(dummy);
 
     // his sprite
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();

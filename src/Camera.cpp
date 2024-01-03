@@ -15,15 +15,10 @@ Camera::~Camera(){}
 // Smooth movement
 void Camera::update(const float& timeMs){
     sf::Vector2f viewPos = view.getCenter();
-    const sf::Vector2f& subjectPos = subject->getAbsolutePos();
+    const sf::Vector2f& parentPos = parent->getAbsolutePos();
 
-    viewPos += (subjectPos - viewPos) * timeMs * viewLerp;
+    viewPos += (parentPos - viewPos) * timeMs * viewLerp;
     view.setCenter(viewPos);
-}
-
-// set subject of view
-void Camera::setSubject(std::shared_ptr<GObject> newSubject){
-    subject = newSubject;
 }
 
 // set size of view

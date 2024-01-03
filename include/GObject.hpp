@@ -18,6 +18,10 @@ enum GObjectType{
     gCamera, // Camera
     gText // TODO
 };
+// all directions of collision
+enum collisionDirection {
+    top, bottom, left, right
+};
 // All drawable types of objects
 extern std::unordered_set<GObjectType> drawableGObjectTypes;
 
@@ -52,6 +56,8 @@ public:
     // Methods
     // Update the state of the object
     virtual void update(const float& timeMs);
+    // recieve collision data 
+    virtual void collide(collisionDirection direction);
     // Set position relative to parent's position
     void setRelativePos(float x, float y);
     void setRelativePos(sf::Vector2f newPos);

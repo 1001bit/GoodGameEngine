@@ -1,7 +1,6 @@
 #include "Camera.hpp"
-#include <iostream>
 
-constexpr float viewLerp = 0.015;
+constexpr float VIEW_LERP = 0.015;
 
 // Structors
 
@@ -15,9 +14,9 @@ Camera::~Camera(){}
 // Smooth movement
 void Camera::update(const float& timeMs){
     sf::Vector2f viewPos = view.getCenter();
-    const sf::Vector2f& parentPos = parent->getAbsolutePos();
+    const sf::Vector2f& parentPos = parent->getRect().getPosition();
 
-    viewPos += (parentPos - viewPos) * timeMs * viewLerp;
+    viewPos += (parentPos - viewPos) * timeMs * VIEW_LERP;
     view.setCenter(viewPos);
 }
 

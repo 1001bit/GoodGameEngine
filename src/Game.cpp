@@ -4,8 +4,6 @@
 
 constexpr unsigned FPS = 60;
 
-using std::cout;
-
 // Structors
 Game::Game(){
     this->type = gGame;
@@ -24,9 +22,9 @@ void Game::init(sf::VideoMode mode, const sf::String& title, sf::Uint32 style){
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     // init dummy
-    std::shared_ptr<PhysBody> dummy = std::make_shared<PhysBody>();
+    std::shared_ptr<PhysPlayer> dummy = std::make_shared<PhysPlayer>();
     createNewGObject(dummy, gamePtr, 0);
-    dummy->setColliderSize(16, 16);
+    dummy->setRectSize(16, 16);
     dummy->setRelativePos(500, 0);
     // it's camera
     camera = std::make_shared<Camera>();
@@ -47,7 +45,7 @@ void Game::init(sf::VideoMode mode, const sf::String& title, sf::Uint32 style){
     // a platform
     std::shared_ptr<SolidBody> platform = std::make_shared<SolidBody>();
     createNewGObject(platform, gamePtr, 0);
-    platform->setColliderSize(100, 10);
+    platform->setRectSize(100, 10);
     platform->setRelativePos(100, 800);
     // it's sprite
     std::shared_ptr<GSprite> platformSprite = std::make_shared<GSprite>();
@@ -66,7 +64,7 @@ void Game::loop(sf::RenderWindow& window){
     {
         sf::Time deltaTime = clock.restart();
         timeMs = deltaTime.asMicroseconds()/1000.f;
-        cout << 1000.0/timeMs << "FPS ; " << timeMs << "\n";
+        std::cout << 1000.0/timeMs << "FPS ; " << timeMs << "\n";
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -84,20 +82,20 @@ void Game::loop(sf::RenderWindow& window){
 // add new object to the game
 void Game::createNewGObject(std::shared_ptr<GObject> newGObject, std::shared_ptr<GObject> newParent, u_char layer = 0){
     // first three layers are for non-drawable GObjects
-    if(drawableGObjectTypes.count(newGObject->getType())){
+    if(DRAWABLE_GOBJECT_TYPES.count(newGObject->getType())){
         layer += 3;
     } 
     // very first layer is for bodies
-    else if (bodyGObjectTypes.count(newGObject->getType())) {
-        layer = layerType::bodies;
+    else if (BODY_GOBJECT_TYPES.count(newGObject->getType())) {
+        layer = LAYER_TYPE::bodies;
     } 
     // third layer is for camera only
     else if (newGObject->getType() == gCamera){
-        layer = layerType::camera;
+        layer = LAYER_TYPE::camera;
     } 
     // second layer is for all other types
     else {
-        layer = layerType::invisibles;
+        layer = LAYER_TYPE::invisibles;
     }
 
     newGObject->setParent(newParent);
@@ -116,7 +114,7 @@ void Game::update(sf::RenderWindow& window, const float& timeMs){
         // iterate through a single layer
         for(std::shared_ptr<GObject> Object : GObjectsLayer.second){
             // if body layer - collide
-            if(GObjectsLayer.first == layerType::bodies){
+            if(GObjectsLayer.first == LAYER_TYPE::bodies){
                 // draw collider for debug
                 #ifdef DRAWCOLLIDER
                 sf::RectangleShape visible = sf::RectangleShape();
@@ -125,7 +123,8 @@ void Game::update(sf::RenderWindow& window, const float& timeMs){
                 visible.setPosition(sf::Vector2f(Object->getCollider().left, Object->getCollider().top));
                 window.draw(visible);
                 #endif
-                // collide main objects with other bodies
+
+                // collide body with other bodies
                 for(std::shared_ptr<GObject> Object2 : GObjectsLayer.second){
                     if(Object2 == Object){
                         continue;
@@ -136,11 +135,11 @@ void Game::update(sf::RenderWindow& window, const float& timeMs){
             // update an object
             Object->update(timeMs);
             // if drawable - draw on a screen
-            if(drawableGObjectTypes.count(Object->getType())){
-                #ifndef DRAWCOLLIDER
+            #ifndef DRAWCOLLIDER
+            if(DRAWABLE_GOBJECT_TYPES.count(Object->getType())){
                 window.draw(Object->getSprite());
-                #endif
             }
+            #endif
         }
     }
 }

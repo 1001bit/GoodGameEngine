@@ -1,11 +1,10 @@
 #pragma once
 
-#include <iostream>
 #include <map>
 #include "GObject.hpp"
 #include "AnimatedSprite.hpp"
 #include "GSprite.hpp"
-#include "PhysBody.hpp"
+#include "PhysPlayer.hpp"
 #include "Camera.hpp"
 #include "SolidBody.hpp"
 
@@ -13,7 +12,7 @@
 typedef std::unordered_set<std::shared_ptr<GObject>> GObjectSet;
 
 // Types of layers
-enum layerType {
+enum LAYER_TYPE {
     bodies = 0,
     invisibles = 1,
     camera = 2

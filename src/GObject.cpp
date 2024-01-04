@@ -1,13 +1,13 @@
 #include "GObject.hpp"
 
 // All drawable types of objects
-std::unordered_set<GObjectType> drawableGObjectTypes{
+const std::unordered_set<GOBJECT_TYPE> DRAWABLE_GOBJECT_TYPES{
     gAnimSprite, gSprite
 };
 
 // GObjects that are bodies
-std::unordered_set<GObjectType> bodyGObjectTypes{
-    gPhysBody, gSolidBody
+const std::unordered_set<GOBJECT_TYPE> BODY_GOBJECT_TYPES{
+    gKinematicBody, gSolidBody
 };
 
 // Structors
@@ -36,9 +36,8 @@ void GObject::updatePos(){
     if(!parent){
         return;
     }
-    absolutePos = parent->getAbsolutePos() + relativePos;
-    colliderRect.left = absolutePos.x;
-    colliderRect.top = absolutePos.y;
+    selfRect.left = parent->getRect().left + relativePos.x;
+    selfRect.top = parent->getRect().top + relativePos.y;
     updateSpritePos();
     for(std::shared_ptr<GObject> child : children) {
         child->updatePos();
@@ -60,9 +59,9 @@ void GObject::setRelativePos(const sf::Vector2f& newPos){
     updatePos();
 }
 
-void GObject::setColliderSize(float w, float h){
-    colliderRect.width = w*SPRITE_SCALE;
-    colliderRect.height = h*SPRITE_SCALE;
+void GObject::setRectSize(float w, float h){
+    selfRect.width = w*SPRITE_SCALE;
+    selfRect.height = h*SPRITE_SCALE;
 }
 
 // Getters
@@ -72,18 +71,14 @@ const sf::Sprite& GObject::getSprite(){
     return dummySprite;
 }
 
-const sf::Vector2f& GObject::getAbsolutePos(){
-    return absolutePos;
-}
-
 const sf::Vector2f& GObject::getRelativePos(){
     return relativePos;
 }
 
-const GObjectType& GObject::getType(){
+const GOBJECT_TYPE& GObject::getType(){
     return type;
 }
 
-const sf::FloatRect& GObject::getCollider(){
-    return colliderRect;
+const sf::FloatRect& GObject::getRect(){
+    return selfRect;
 }

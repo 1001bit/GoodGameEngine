@@ -11,7 +11,7 @@ GSprite::~GSprite(){}
 // Methods
 // update position of sprite
 void GSprite::updateSpritePos(){
-    sprite.setPosition(this->getAbsolutePos());
+    sprite.setPosition(getRect().getPosition());
 }
 
 // set a texture

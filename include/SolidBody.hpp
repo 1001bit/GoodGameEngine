@@ -1,3 +1,5 @@
+#pragma once
+
 #include "GObject.hpp"
 
 class SolidBody : public GObject

@@ -14,7 +14,7 @@ AnimatedSprite::~AnimatedSprite(){};
 
 // Methods
 // add animation to animation map
-void AnimatedSprite::insertAnimation(std::string name, Animation animation){
+void AnimatedSprite::insertAnimation(std::string name, const Animation& animation){
     animationMap.insert({name, animation});
 }
 
@@ -74,7 +74,7 @@ void AnimatedSprite::update(const float& timeMS){
 
 // update position of sprite
 void AnimatedSprite::updateSpritePos(){
-    sprite.setPosition(this->getAbsolutePos());
+    sprite.setPosition(getRect().getPosition());
 }
 
 // Getters

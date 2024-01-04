@@ -1,25 +1,17 @@
-#include "GObject.hpp"
+#include "KinematicBody.hpp"
 
-class PhysBody : public GObject
+class PhysBody : public KinematicBody
 {
 private:
-    // Variables
-    sf::Vector2f velocity;
-
     // Methods
     // Gravity force
     void gravity(const float& timeMs);
 protected:
-    // Control the unit
-    virtual void control();
+    // Methods
+    // control the unit
+    virtual void control(const float& timeMs);
 public:
     // Structors
     PhysBody();
     ~PhysBody();
-
-    // Methods
-    // Update the state
-    void update(const float& timeMs);
-    // collision behaviour
-    void collide(std::shared_ptr<GObject> obstacle);
 };

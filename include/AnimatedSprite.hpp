@@ -3,13 +3,10 @@
 #include <unordered_map>
 #include <string>
 #include <vector>
-#include <iostream>
 #include <math.h>
 #include <SFML/Graphics.hpp>
 #include "Animation.hpp"
 #include "GObject.hpp"
-
-using std::cout;
 
 typedef std::unordered_map<std::string, Animation> animMap;
 
@@ -38,7 +35,7 @@ public:
     // Move sprite after self reposition
     void updateSpritePos();
     // Add new animation with name
-    void insertAnimation(std::string name, Animation animation);
+    void insertAnimation(std::string name, const Animation& animation);
 
     // Getters
     // Get rect of current animation

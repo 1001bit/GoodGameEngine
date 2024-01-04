@@ -3,24 +3,26 @@
 #include <SFML/Graphics.hpp>
 #include <unordered_set>
 #include <memory>
+#include <iostream>
 
 constexpr float SPRITE_SCALE = 7;
 
 // All types of objects
-enum GObjectType{
+enum GOBJECT_TYPE{
     gNone, // done
     gGame, // done
     gSprite, // done
     gAnimSprite, // done
-    gPhysBody, // done
+    gKinematicBody, // TODO
     gSolidBody, // done
     gCamera, // done
     gText // TODO
 };
 // All drawable types of objects
-extern std::unordered_set<GObjectType> drawableGObjectTypes;
+extern const std::unordered_set<GOBJECT_TYPE> DRAWABLE_GOBJECT_TYPES;
 // All physical types of objects
-extern std::unordered_set<GObjectType> bodyGObjectTypes;
+extern const std::unordered_set<GOBJECT_TYPE> BODY_GOBJECT_TYPES;
+
 
 // GObject class
 class GObject : public std::enable_shared_from_this<GObject>
@@ -29,10 +31,10 @@ private:
     // Variables
     std::unordered_set<std::shared_ptr<GObject>> children;
     sf::Vector2f relativePos;
-    sf::Vector2f absolutePos;
-    sf::FloatRect colliderRect;
+    sf::FloatRect selfRect;
 
     // Methods
+    // update slef position and children
     void updatePos(); 
     // Add a new child
     void addChild(std::shared_ptr<GObject> newChild);
@@ -40,7 +42,7 @@ private:
 protected:
     // Variables
     std::shared_ptr<GObject> parent;
-    GObjectType type;
+    GOBJECT_TYPE type;
 
     // Methods
     // Set SFML object position after repositioning (if exists)
@@ -61,18 +63,16 @@ public:
     void setRelativePos(const sf::Vector2f& newPos);
     // Set a parent
     void setParent(std::shared_ptr<GObject> newParent);
-    // set collider rect size
-    void setColliderSize(float x, float y);
+    // set rect size
+    void setRectSize(float x, float y);
 
     // Getters
     // Get sprite if it exists
     virtual const sf::Sprite& getSprite();
     // Get position relative to parent's position
     const sf::Vector2f& getRelativePos();
-    // Get absolute position of the object
-    const sf::Vector2f& getAbsolutePos();
     // Get type of the object
-    const GObjectType& getType();
+    const GOBJECT_TYPE& getType();
     // Get collider
-    const sf::FloatRect& getCollider();
+    const sf::FloatRect& getRect();
 };

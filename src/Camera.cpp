@@ -3,7 +3,6 @@
 constexpr float VIEW_LERP = 0.015;
 
 // Structors
-
 Camera::Camera(){
     type = gCamera;
 }
@@ -14,9 +13,10 @@ Camera::~Camera(){}
 // Smooth movement
 void Camera::update(const float& timeMs){
     sf::Vector2f viewPos = view.getCenter();
-    const sf::Vector2f& parentPos = parent->getRect().getPosition();
+    const sf::FloatRect& parentRect = parent->getRect();
+    sf::Vector2f parentCenterPos(parentRect.left + (parentRect.width / 2), parentRect.top + (parentRect.height / 2));
 
-    viewPos += (parentPos - viewPos) * timeMs * VIEW_LERP;
+    viewPos += (parentCenterPos - viewPos) * timeMs * VIEW_LERP;
     view.setCenter(viewPos);
 }
 

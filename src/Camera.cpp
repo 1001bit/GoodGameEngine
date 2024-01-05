@@ -1,6 +1,6 @@
 #include "Camera.hpp"
 
-constexpr float VIEW_LERP = 0.015;
+constexpr float VIEW_LERP = 0.02;
 
 // Structors
 Camera::Camera(){

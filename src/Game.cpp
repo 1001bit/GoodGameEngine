@@ -113,6 +113,9 @@ void Game::update(sf::RenderWindow& window, const float& timeMs){
     for(std::pair<const u_char, GObjectSet> GObjectsLayer : GObjectsLayers){
         // iterate through a single layer
         for(std::shared_ptr<GObject> Object : GObjectsLayer.second){
+            // update an object
+            Object->update(timeMs);
+
             // if body layer - collide
             if(GObjectsLayer.first == LAYER_TYPE::bodies){
                 // draw collider for debug
@@ -132,8 +135,7 @@ void Game::update(sf::RenderWindow& window, const float& timeMs){
                     Object->collide(Object2);
                 }
             }
-            // update an object
-            Object->update(timeMs);
+
             // if drawable - draw on a screen
             #ifndef DRAWCOLLIDER
             if(DRAWABLE_GOBJECT_TYPES.count(Object->getType())){

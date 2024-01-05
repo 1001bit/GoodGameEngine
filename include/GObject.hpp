@@ -13,7 +13,7 @@ enum GOBJECT_TYPE{
     gGame, // done
     gSprite, // done
     gAnimSprite, // done
-    gKinematicBody, // TODO
+    gKinematicBody, // done
     gSolidBody, // done
     gCamera, // done
     gText // TODO

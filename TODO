@@ -1,6 +1,8 @@
+- Top-Down gameplay
 - NPCs
-- Enemies
+- Interactions
 - GUI
     - Main menu
     - Settings
 - Level editor
+- Publish the engine into github and call it SAFGE (Simple And Fast Game Engine)

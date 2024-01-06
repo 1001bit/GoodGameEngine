@@ -9,8 +9,8 @@ PhysBody::~PhysBody(){}
 
 // Methods
 // Control
-void PhysBody::control(const float& timeMs){}
+void PhysBody::control(){}
 // Gravity impact
 void PhysBody::gravity(const float& timeMs){
-    velocity.y += GFORCE * timeMs;
+    acceleration.y += GFORCE * timeMs;
 }

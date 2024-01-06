@@ -2,7 +2,8 @@
 
 // #define DRAWCOLLIDER
 
-constexpr unsigned FPS = 60;
+// Max framerate
+constexpr unsigned FPS = 120;
 
 // Structors
 Game::Game(){
@@ -51,6 +52,16 @@ void Game::init(sf::VideoMode mode, const sf::String& title, sf::Uint32 style){
     std::shared_ptr<GSprite> platformSprite = std::make_shared<GSprite>();
     createNewGObject(platformSprite, platform, 0);
     platformSprite->setTexture("Assets/Original/Textures/platform.png");
+
+    // 2nd platform
+    std::shared_ptr<SolidBody> platform2 = std::make_shared<SolidBody>();
+    createNewGObject(platform2, gamePtr, 0);
+    platform2->setRectSize(100, 10);
+    platform2->setRelativePos(800, 730);
+    // it's sprite
+    std::shared_ptr<GSprite> platformSprite2 = std::make_shared<GSprite>();
+    createNewGObject(platformSprite2, platform2, 0);
+    platformSprite2->setTexture("Assets/Original/Textures/platform.png");
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
     loop(window);
@@ -79,6 +90,46 @@ void Game::loop(sf::RenderWindow& window){
     }
 }
 
+// update and draw
+void Game::update(sf::RenderWindow& window, const float& timeMs){
+    window.setView(camera->getView());
+    // iterate through whole map
+    for(std::pair<const u_char, GObjectSet> GObjectsLayer : GObjectsLayers){
+        // iterate through a single layer
+        for(std::shared_ptr<GObject> Object : GObjectsLayer.second){
+            // update an object
+            Object->update(timeMs);
+
+            // if current layer == body layer: collide
+            if(GObjectsLayer.first == LAYER_TYPE::bodies && Object->getRect() != sf::FloatRect()){
+                // collide body with other bodies
+                for(std::shared_ptr<GObject> Object2 : GObjectsLayer.second){
+                    if(Object2 == Object || Object2->getRect() == sf::FloatRect()){
+                        continue;
+                    }
+                    Object->collide(Object2);
+                }
+
+                // draw collider for debug
+                #ifdef DRAWCOLLIDER
+                sf::RectangleShape visible = sf::RectangleShape();
+                visible.setFillColor(sf::Color::Red);
+                visible.setSize(sf::Vector2f(Object->getCollider().width, Object->getCollider().height));
+                visible.setPosition(sf::Vector2f(Object->getCollider().left, Object->getCollider().top));
+                window.draw(visible);
+                #endif
+            }
+
+            #ifndef DRAWCOLLIDER
+            // if drawable - draw on a screen
+            if(DRAWABLE_GOBJECT_TYPES.count(Object->getType())){
+                window.draw(Object->getSprite());
+            }
+            #endif
+        }
+    }
+}
+
 // add new object to the game
 void Game::createNewGObject(std::shared_ptr<GObject> newGObject, std::shared_ptr<GObject> newParent, u_char layer = 0){
     // first three layers are for non-drawable GObjects
@@ -104,44 +155,4 @@ void Game::createNewGObject(std::shared_ptr<GObject> newGObject, std::shared_ptr
         GObjectsLayers[layer] = GObjectSet{};
     }
     GObjectsLayers[layer].insert(newGObject);
-}
-
-// update and draw
-void Game::update(sf::RenderWindow& window, const float& timeMs){
-    window.setView(camera->getView());
-    // iterate through whole map
-    for(std::pair<const u_char, GObjectSet> GObjectsLayer : GObjectsLayers){
-        // iterate through a single layer
-        for(std::shared_ptr<GObject> Object : GObjectsLayer.second){
-            // update an object
-            Object->update(timeMs);
-
-            // if body layer - collide
-            if(GObjectsLayer.first == LAYER_TYPE::bodies){
-                // draw collider for debug
-                #ifdef DRAWCOLLIDER
-                sf::RectangleShape visible = sf::RectangleShape();
-                visible.setFillColor(sf::Color::Red);
-                visible.setSize(sf::Vector2f(Object->getCollider().width, Object->getCollider().height));
-                visible.setPosition(sf::Vector2f(Object->getCollider().left, Object->getCollider().top));
-                window.draw(visible);
-                #endif
-
-                // collide body with other bodies
-                for(std::shared_ptr<GObject> Object2 : GObjectsLayer.second){
-                    if(Object2 == Object){
-                        continue;
-                    }
-                    Object->collide(Object2);
-                }
-            }
-
-            // if drawable - draw on a screen
-            #ifndef DRAWCOLLIDER
-            if(DRAWABLE_GOBJECT_TYPES.count(Object->getType())){
-                window.draw(Object->getSprite());
-            }
-            #endif
-        }
-    }
 }

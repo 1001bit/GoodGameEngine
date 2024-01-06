@@ -17,12 +17,13 @@ private:
 protected:
     // Variables
     sf::Vector2f velocity;
+    sf::Vector2f acceleration;
     CollisionDirection collisionVerticalDir;
     CollisionDirection collisionHorizontalDir;
     
     // Methods
     // Control the unit
-    virtual void control(const float& timeMs);
+    virtual void control();
     // Gravity force
     virtual void gravity(const float& timeMs);
 public:

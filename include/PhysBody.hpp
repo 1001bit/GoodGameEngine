@@ -9,7 +9,7 @@ private:
 protected:
     // Methods
     // control the unit
-    virtual void control(const float& timeMs);
+    virtual void control();
 public:
     // Structors
     PhysBody();

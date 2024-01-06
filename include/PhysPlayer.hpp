@@ -8,7 +8,7 @@ class PhysPlayer : public PhysBody
 private:
     // Methods
     // Control your character
-    void control(const float& timeMs);
+    void control();
 
 public:
     // Structors

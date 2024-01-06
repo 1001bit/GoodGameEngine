@@ -75,6 +75,10 @@ void Game::loop(sf::RenderWindow& window){
     {
         sf::Time deltaTime = clock.restart();
         timeMs = deltaTime.asMicroseconds()/1000.f;
+        // Limit max dt
+        if(timeMs > 50){
+            timeMs = 50;
+        }
         std::cout << 1000.0/timeMs << "FPS ; " << timeMs << "\n";
 
         sf::Event event;

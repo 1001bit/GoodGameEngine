@@ -23,10 +23,10 @@ void Game::init(sf::VideoMode mode, const sf::String& title, sf::Uint32 style){
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     // init dummy
-    std::shared_ptr<PhysPlayer> dummy = std::make_shared<PhysPlayer>();
+    std::shared_ptr<TDPlayer> dummy = std::make_shared<TDPlayer>();
     createNewGObject(dummy, gamePtr, 0);
     dummy->setRectSize(16, 16);
-    dummy->setRelativePos(500, 0);
+    dummy->setRelativePos(500, 300);
     // it's camera
     camera = std::make_shared<Camera>();
     createNewGObject(camera, dummy, 0);

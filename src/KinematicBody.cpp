@@ -7,6 +7,8 @@ constexpr float ACCEL_COEFF = 0.1;
 std::unordered_map<std::string, sf::Keyboard::Key> movementControlsMap{
     {"wLeft", sf::Keyboard::A},
     {"wRight", sf::Keyboard::D},
+    {"wUp", sf::Keyboard::W},
+    {"wDown", sf::Keyboard::S},
     {"jump", sf::Keyboard::Space}
 };
 
@@ -50,12 +52,12 @@ void KinematicBody::collide(std::shared_ptr<GObject> obstacle){
         return;
     }
 
-    sf::FloatRect checkRect;
+    sf::FloatRect prevRect;
     
     // vertical
-    checkRect = selfRect;
-    checkRect.top -= velocity.y;
-    if(!checkRect.intersects(obstacleRect)){
+    prevRect = selfRect;
+    prevRect.top -= velocity.y;
+    if(!prevRect.intersects(obstacleRect)){
         // bottom
         if(velocity.y > 0){
             setRelativePos(selfRect.left, obstacleRect.top - selfRect.height);
@@ -71,9 +73,9 @@ void KinematicBody::collide(std::shared_ptr<GObject> obstacle){
     }
 
     // horizontal
-    checkRect = selfRect;
-    checkRect.left -= velocity.x;
-    if(!checkRect.intersects(obstacleRect)){
+    prevRect = selfRect;
+    prevRect.left -= velocity.x;
+    if(!prevRect.intersects(obstacleRect)){
         // right
         if(velocity.x > 0){
             setRelativePos(obstacleRect.left-selfRect.width, selfRect.top);

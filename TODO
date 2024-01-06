@@ -1,6 +1,8 @@
-- Top-Down gameplay
+- Linear collision
 - NPCs
-- Interactions
+    - Top-down
+    - Platformer
+- Dialogue system
 - GUI
     - Main menu
     - Settings

@@ -7,6 +7,7 @@
 #include "PhysPlayer.hpp"
 #include "Camera.hpp"
 #include "SolidBody.hpp"
+#include "TDPlayer.hpp"
 
 // Set of GObjects
 typedef std::unordered_set<std::shared_ptr<GObject>> GObjectSet;

@@ -1,6 +1,6 @@
 #include "TDPlayer.hpp"
 
-constexpr float WALK_SPEED = 4;
+constexpr float WALK_SPEED = 15;
 constexpr float GROUND_FRICTION = 0.1;
 
 // Structors

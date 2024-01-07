@@ -2,7 +2,7 @@
 
 // Structors
 SolidBody::SolidBody(){
-    this->type = gSolidBody;
+    this->type = TSolidBody;
 }
 
 SolidBody::~SolidBody(){}

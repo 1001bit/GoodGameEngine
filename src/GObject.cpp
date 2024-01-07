@@ -1,19 +1,21 @@
 #include "GObject.hpp"
 
 // All drawable types of objects
-const std::unordered_set<GOBJECT_TYPE> DRAWABLE_GOBJECT_TYPES{
-    gAnimSprite, gSprite
+const std::unordered_set<GObjectType> DRAWABLE_GOBJECT_TYPES{
+    TAnimSprite,
+    TSprite
 };
 
 // GObjects that are bodies
-const std::unordered_set<GOBJECT_TYPE> BODY_GOBJECT_TYPES{
-    gKinematicBody, gSolidBody
+const std::unordered_set<GObjectType> BODY_GOBJECT_TYPES{
+    TKinematicBody,
+    TSolidBody
 };
 
 // Structors
 
 GObject::GObject(){
-    this->type = gNone;
+    this->type = TNone;
 }
 
 GObject::~GObject(){}
@@ -75,7 +77,7 @@ const sf::Vector2f& GObject::getRelativePos(){
     return relativePos;
 }
 
-const GOBJECT_TYPE& GObject::getType(){
+const GObjectType& GObject::getType(){
     return type;
 }
 

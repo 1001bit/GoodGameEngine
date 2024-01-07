@@ -2,9 +2,14 @@
 
 #include "GObject.hpp"
 
-// 4 directions of possible collisions
-enum CollisionDirection {
-    none, top, bottom, right, left
+// all types of npcs
+enum NpcType {
+    Hostile, Neutral, Pacifist
+};
+
+// 4 directions
+enum Direction {
+    None, Top, Bottom, Right, Left
 };
 
 // all the controls
@@ -18,8 +23,8 @@ protected:
     // Variables
     sf::Vector2f velocity;
     sf::Vector2f acceleration;
-    CollisionDirection collisionVerticalDir;
-    CollisionDirection collisionHorizontalDir;
+    Direction collisionVerticalDir;
+    Direction collisionHorizontalDir;
     
     // Methods
     // Control the unit

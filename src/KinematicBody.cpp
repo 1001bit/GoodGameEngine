@@ -14,7 +14,7 @@ std::unordered_map<std::string, sf::Keyboard::Key> movementControlsMap{
 
 // Structors
 KinematicBody::KinematicBody(){
-    this->type = gKinematicBody;
+    this->type = TKinematicBody;
 }
 
 KinematicBody::~KinematicBody(){}
@@ -33,22 +33,23 @@ void KinematicBody::update(const float& timeMs){
     setRelativePos(getRelativePos() + velocity);
 
     acceleration = sf::Vector2f();
-    collisionVerticalDir = none;
-    collisionHorizontalDir = none;
+    collisionVerticalDir = None;
+    collisionHorizontalDir = None;
 }
 
 // behaviour on collide
 void KinematicBody::collide(std::shared_ptr<GObject> obstacle){
-    const sf::FloatRect& selfRect = getRect();
-    const sf::FloatRect& obstacleRect = obstacle->getRect();
-
-    // no collision if no collision!
-    if(!(selfRect.intersects(obstacleRect))){
+    // only solid body can stop physics body
+    if(obstacle->getType() != TSolidBody){
         return;
     }
 
-    // only solid body can stop physics body
-    if(obstacle->getType() != gSolidBody){
+    const sf::FloatRect& selfRect = getRect();
+    const sf::FloatRect& obstacleRect = obstacle->getRect();
+
+    // prevRect collision method
+    // no collision if no collision!
+    if(!(selfRect.intersects(obstacleRect))){
         return;
     }
 
@@ -61,12 +62,12 @@ void KinematicBody::collide(std::shared_ptr<GObject> obstacle){
         // bottom
         if(velocity.y > 0){
             setRelativePos(selfRect.left, obstacleRect.top - selfRect.height);
-            collisionVerticalDir = bottom;
+            collisionVerticalDir = Bottom;
         } 
         // top
         else {
             setRelativePos(selfRect.left, obstacleRect.top + obstacleRect.height);
-            collisionVerticalDir = top;
+            collisionVerticalDir = Bottom;
         }
         velocity.y = 0;
         return;
@@ -79,12 +80,12 @@ void KinematicBody::collide(std::shared_ptr<GObject> obstacle){
         // right
         if(velocity.x > 0){
             setRelativePos(obstacleRect.left-selfRect.width, selfRect.top);
-            collisionHorizontalDir = right;
+            collisionHorizontalDir = Right;
         } 
         // left
         else {
             setRelativePos(obstacleRect.left + obstacleRect.width, selfRect.top);
-            collisionHorizontalDir = left;
+            collisionHorizontalDir = Right;
         }
         velocity.x = 0;
     }

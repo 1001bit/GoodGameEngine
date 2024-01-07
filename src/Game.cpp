@@ -2,24 +2,16 @@
 
 // #define DRAWCOLLIDER
 
-// Max framerate
-constexpr unsigned FPS = 120;
-
 // Structors
-Game::Game(){
-    this->type = gGame;
-}
+Game::Game(){}
 
 Game::~Game(){}
 
 // Methods
 // Game init
-void Game::init(sf::VideoMode mode, const sf::String& title, sf::Uint32 style){
+void Game::init(){
     // init self pointer
     gamePtr = shared_from_this();
-    // init window
-    sf::RenderWindow window(mode, title, style);
-    window.setFramerateLimit(FPS);
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     // init dummy
@@ -62,9 +54,6 @@ void Game::init(sf::VideoMode mode, const sf::String& title, sf::Uint32 style){
     std::shared_ptr<GSprite> platformSprite2 = std::make_shared<GSprite>();
     createNewGObject(platformSprite2, platform2, 0);
     platformSprite2->setTexture("Assets/Original/Textures/platform.png");
-    /////////////////////////////////////////////////////////////////////////////////////////////////
-
-    loop(window);
 }
 
 // Main loop
@@ -105,7 +94,7 @@ void Game::update(sf::RenderWindow& window, const float& timeMs){
             Object->update(timeMs);
 
             // if current layer == body layer: collide
-            if(GObjectsLayer.first == LAYER_TYPE::bodies && Object->getRect() != sf::FloatRect()){
+            if(GObjectsLayer.first == LayerType::LBodies && Object->getRect() != sf::FloatRect() && Object->getType() == TKinematicBody){
                 // collide body with other bodies
                 for(std::shared_ptr<GObject> Object2 : GObjectsLayer.second){
                     if(Object2 == Object || Object2->getRect() == sf::FloatRect()){
@@ -142,15 +131,15 @@ void Game::createNewGObject(std::shared_ptr<GObject> newGObject, std::shared_ptr
     } 
     // very first layer is for bodies
     else if (BODY_GOBJECT_TYPES.count(newGObject->getType())) {
-        layer = LAYER_TYPE::bodies;
+        layer = LayerType::LBodies;
     } 
     // third layer is for camera only
-    else if (newGObject->getType() == gCamera){
-        layer = LAYER_TYPE::camera;
+    else if (newGObject->getType() == TCamera){
+        layer = LayerType::LCamera;
     } 
     // second layer is for all other types
     else {
-        layer = LAYER_TYPE::invisibles;
+        layer = LayerType::LInvisibles;
     }
 
     newGObject->setParent(newParent);

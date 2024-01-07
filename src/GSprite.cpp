@@ -3,7 +3,7 @@
 // Structors
 GSprite::GSprite(){
     this->sprite.scale(SPRITE_SCALE, SPRITE_SCALE);
-    this->type = gSprite;
+    this->type = TSprite;
 }
 
 GSprite::~GSprite(){}

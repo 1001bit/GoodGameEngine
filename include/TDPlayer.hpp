@@ -9,6 +9,7 @@ private:
     // Methods
     // control your character
     void control();
+
 public:
     // Structors
     TDPlayer();

@@ -8,20 +8,20 @@
 constexpr float SPRITE_SCALE = 7;
 
 // All types of objects
-enum GOBJECT_TYPE{
-    gNone, // done
-    gGame, // done
-    gSprite, // done
-    gAnimSprite, // done
-    gKinematicBody, // done
-    gSolidBody, // done
-    gCamera, // done
-    gText // TODO
+enum GObjectType{
+    TNone, // done
+    TGame, // done
+    TSprite, // done
+    TAnimSprite, // done
+    TKinematicBody, // done
+    TSolidBody, // done
+    TCamera, // done
+    TText // TODO
 };
 // All drawable types of objects
-extern const std::unordered_set<GOBJECT_TYPE> DRAWABLE_GOBJECT_TYPES;
+extern const std::unordered_set<GObjectType> DRAWABLE_GOBJECT_TYPES;
 // All physical types of objects
-extern const std::unordered_set<GOBJECT_TYPE> BODY_GOBJECT_TYPES;
+extern const std::unordered_set<GObjectType> BODY_GOBJECT_TYPES;
 
 
 // GObject class
@@ -42,7 +42,7 @@ private:
 protected:
     // Variables
     std::shared_ptr<GObject> parent;
-    GOBJECT_TYPE type;
+    GObjectType type;
 
     // Methods
     // Set SFML object position after repositioning (if exists)
@@ -72,7 +72,7 @@ public:
     // Get position relative to parent's position
     const sf::Vector2f& getRelativePos();
     // Get type of the object
-    const GOBJECT_TYPE& getType();
+    const GObjectType& getType();
     // Get collider
     const sf::FloatRect& getRect();
 };

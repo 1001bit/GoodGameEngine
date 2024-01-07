@@ -1,8 +1,8 @@
 #pragma once
 
-#include "KinematicBody.hpp"
+#include "PhysBody.hpp"
 
-class TDNpc : public KinematicBody
+class PhysNpc : public PhysBody
 {
 private:
     // Variables
@@ -15,9 +15,6 @@ private:
     
 public:
     // Structors
-    TDNpc();
-    ~TDNpc();
-    // methods
-    // set type of npc
-    void setType(NpcType newType);
+    PhysNpc(/* args */);
+    ~PhysNpc();
 };

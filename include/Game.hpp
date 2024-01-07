@@ -8,6 +8,8 @@
 #include "Camera.hpp"
 #include "SolidBody.hpp"
 #include "TDPlayer.hpp"
+#include "TDNpc.hpp"
+#include "PhysNpc.hpp"
 
 // Set of GObjects
 typedef std::unordered_set<std::shared_ptr<GObject>> GObjectSet;
@@ -29,6 +31,8 @@ private:
     std::shared_ptr<GObject> gamePtr;
     // main camera
     std::shared_ptr<Camera> camera;
+    // storage of the textures
+    std::unordered_map<std::string, sf::Texture> textureMap;
 
     // Methods
     // Update states of all the objects and draw them

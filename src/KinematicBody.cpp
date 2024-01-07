@@ -32,9 +32,19 @@ void KinematicBody::update(const float& timeMs){
 
     setRelativePos(getRelativePos() + velocity);
 
+    // nullify all
     acceleration = sf::Vector2f();
     collisionVerticalDir = None;
     collisionHorizontalDir = None;
+
+    // manage cooldowns
+    for(std::pair<const std::string, float>& cooldown : cooldownMap){
+        if(cooldown.second > 0){
+            cooldown.second -= timeMs;
+        } else if (cooldown.second < 0){
+            cooldown.second = 0;
+        }
+    }
 }
 
 // behaviour on collide
@@ -62,12 +72,12 @@ void KinematicBody::collide(std::shared_ptr<GObject> obstacle){
         // bottom
         if(velocity.y > 0){
             setRelativePos(selfRect.left, obstacleRect.top - selfRect.height);
-            collisionVerticalDir = Bottom;
+            collisionVerticalDir = Down;
         } 
         // top
         else {
             setRelativePos(selfRect.left, obstacleRect.top + obstacleRect.height);
-            collisionVerticalDir = Bottom;
+            collisionVerticalDir = Up;
         }
         velocity.y = 0;
         return;
@@ -79,13 +89,13 @@ void KinematicBody::collide(std::shared_ptr<GObject> obstacle){
     if(!prevRect.intersects(obstacleRect)){
         // right
         if(velocity.x > 0){
-            setRelativePos(obstacleRect.left-selfRect.width, selfRect.top);
+            setRelativePos(obstacleRect.left - selfRect.width, selfRect.top);
             collisionHorizontalDir = Right;
         } 
         // left
         else {
             setRelativePos(obstacleRect.left + obstacleRect.width, selfRect.top);
-            collisionHorizontalDir = Right;
+            collisionHorizontalDir = Left;
         }
         velocity.x = 0;
     }

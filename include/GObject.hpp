@@ -10,7 +10,6 @@ constexpr float SPRITE_SCALE = 7;
 // All types of objects
 enum GObjectType{
     TNone, // done
-    TGame, // done
     TSprite, // done
     TAnimSprite, // done
     TKinematicBody, // done

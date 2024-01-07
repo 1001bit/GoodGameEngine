@@ -15,9 +15,8 @@ void GSprite::updateSpritePos(){
 }
 
 // set a texture
-void GSprite::setTexture(const sf::String& textureName){
-    texture.loadFromFile(textureName);
-    sprite.setTexture(texture);
+void GSprite::setTexture(const sf::Texture& newTexture){
+    sprite.setTexture(newTexture);
 }
 
 // Getters

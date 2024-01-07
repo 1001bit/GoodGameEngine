@@ -4,12 +4,14 @@
 
 // all types of npcs
 enum NpcType {
-    Hostile, Neutral, Pacifist
+    Walking, // just walking around
+    Neutral, // just walking around but fights back
+    Hostile // fights when sees you
 };
 
 // 4 directions
 enum Direction {
-    None, Top, Bottom, Right, Left
+    None, Up, Down, Right, Left
 };
 
 // all the controls
@@ -25,6 +27,7 @@ protected:
     sf::Vector2f acceleration;
     Direction collisionVerticalDir;
     Direction collisionHorizontalDir;
+    std::unordered_map<std::string, float> cooldownMap;
     
     // Methods
     // Control the unit

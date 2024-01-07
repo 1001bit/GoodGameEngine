@@ -5,12 +5,12 @@
 struct Animation
 {
     // Variables
-    sf::Texture texture;
+    sf::Texture* texture;
     std::vector<sf::IntRect> frames;
     float playTime;
     float frameTime;
     bool isLooped;
     // Structors
-    Animation(std::string textureName, int frameWidth, float playTime, bool isLooped);
+    Animation(sf::Texture& newTexture, int frameWidth, float playTime, bool isLooped);
     Animation();
 };

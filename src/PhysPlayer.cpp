@@ -14,7 +14,7 @@ PhysPlayer::~PhysPlayer(){}
 // control the player
 void PhysPlayer::control(){
     float walkSpeed = WALK_SPEED;
-    if(collisionVerticalDir == Bottom){
+    if(collisionVerticalDir == Down){
         velocity.x *= GROUND_FRICTION;
     } else {
         velocity.x *= AIR_FRICTION;
@@ -31,7 +31,7 @@ void PhysPlayer::control(){
     }
 
     // jump
-    if(sf::Keyboard::isKeyPressed(movementControlsMap.at("jump")) && collisionVerticalDir == Bottom){
+    if(sf::Keyboard::isKeyPressed(movementControlsMap.at("jump")) && collisionVerticalDir == Down){
         acceleration.y -= JUMP_FORCE;
     }
 }

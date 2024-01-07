@@ -13,6 +13,15 @@ void Game::init(){
     // init self pointer
     gamePtr = shared_from_this();
 
+    // init texture storage
+    sf::Texture texture;
+    texture.loadFromFile("Assets/Original/Textures/dummy.png");
+    textureMap["Original/dummy.png"] = texture;
+    texture.loadFromFile("Assets/Original/Textures/sword.png");
+    textureMap["Original/sword.png"] = texture;
+    texture.loadFromFile("Assets/Original/Textures/platform.png");
+    textureMap["Original/platform.png"] = texture;
+
     /////////////////////////////////////////////////////////////////////////////////////////////////
     // init dummy
     std::shared_ptr<TDPlayer> dummy = std::make_shared<TDPlayer>();
@@ -27,13 +36,24 @@ void Game::init(){
     // his sprite
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();
     createNewGObject(dummySprite, dummy, 1);
-    dummySprite->insertAnimation("idle", Animation("Assets/Original/Textures/dummy.png", 16, 500, 1));
+    dummySprite->insertAnimation("idle", Animation(textureMap.at("Original/dummy.png"), 16, 500, 1));
     dummySprite->playAnimation("idle");
     // and his sword
     std::shared_ptr<GSprite> sword = std::make_shared<GSprite>();
     createNewGObject(sword, dummy, 2);
-    sword->setTexture("Assets/Original/Textures/sword.png");
+    sword->setTexture(textureMap.at("Original/sword.png"));
     sword->setRelativePos(-30, 1);
+
+    // Npc
+    std::shared_ptr<PhysNpc> npc = std::make_shared<PhysNpc>();
+    createNewGObject(npc, gamePtr, 0);
+    npc->setRectSize(16, 16);
+    npc->setRelativePos(500, 300);
+    // his sprite
+    std::shared_ptr<AnimatedSprite> npcSprite = std::make_shared<AnimatedSprite>();
+    createNewGObject(npcSprite, npc, 1);
+    npcSprite->insertAnimation("idle", Animation(textureMap.at("Original/dummy.png"), 16, 500, 1));
+    npcSprite->playAnimation("idle");
 
     // a platform
     std::shared_ptr<SolidBody> platform = std::make_shared<SolidBody>();
@@ -43,7 +63,7 @@ void Game::init(){
     // it's sprite
     std::shared_ptr<GSprite> platformSprite = std::make_shared<GSprite>();
     createNewGObject(platformSprite, platform, 0);
-    platformSprite->setTexture("Assets/Original/Textures/platform.png");
+    platformSprite->setTexture(textureMap.at("Original/platform.png"));
 
     // 2nd platform
     std::shared_ptr<SolidBody> platform2 = std::make_shared<SolidBody>();
@@ -53,7 +73,7 @@ void Game::init(){
     // it's sprite
     std::shared_ptr<GSprite> platformSprite2 = std::make_shared<GSprite>();
     createNewGObject(platformSprite2, platform2, 0);
-    platformSprite2->setTexture("Assets/Original/Textures/platform.png");
+    platformSprite2->setTexture(textureMap.at("Original/platform.png"));
 }
 
 // Main loop

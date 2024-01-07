@@ -6,8 +6,7 @@
 class GSprite : public GObject
 {
 private:
-    // Variables
-    sf::Texture texture;
+
 public:
     // Structors
     GSprite();
@@ -20,7 +19,7 @@ public:
     // Move sprite after self reposition
     void updateSpritePos();
     // Set a texture
-    void setTexture(const sf::String& textureName);
+    void setTexture(const sf::Texture& newTexture);
 
     // Getters
     // get sprite

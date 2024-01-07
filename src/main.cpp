@@ -6,6 +6,8 @@ constexpr unsigned FPS = 120;
 
 int main()
 {
+    srand(time(NULL));
+
     // init window
     sf::RenderWindow window(sf::VideoMode(1440, 880), "BeGood Effect", sf::Style::Close);
     window.setFramerateLimit(FPS);

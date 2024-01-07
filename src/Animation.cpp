@@ -2,12 +2,12 @@
 
 // Structors
 
-Animation::Animation(std::string textureName, int frameWidth, float playTime, bool isLooped){
-    this->texture.loadFromFile(textureName);
+Animation::Animation(sf::Texture& newTexture, int frameWidth, float playTime, bool isLooped){
+    texture = &newTexture;
 
     // add frames to vector depending on frame width
-    for(int x = 0; x < int(this->texture.getSize().x / frameWidth); ++x){
-        this->frames.push_back(sf::IntRect(x*frameWidth, 0, frameWidth, this->texture.getSize().y));
+    for(int x = 0; x < int(texture->getSize().x / frameWidth); ++x){
+        this->frames.push_back(sf::IntRect(x*frameWidth, 0, frameWidth, texture->getSize().y));
     }
 
     this->playTime = playTime;

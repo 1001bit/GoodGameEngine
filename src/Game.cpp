@@ -24,7 +24,7 @@ void Game::init(){
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
     // init dummy
-    std::shared_ptr<TDPlayer> dummy = std::make_shared<TDPlayer>();
+    std::shared_ptr<PhysPlayer> dummy = std::make_shared<PhysPlayer>();
     createNewGObject(dummy, gamePtr, 0);
     dummy->setRectSize(16, 16);
     dummy->setRelativePos(500, 300);

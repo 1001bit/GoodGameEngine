@@ -1,7 +1,9 @@
-- Dialogue system
 - GUI
+    - Text
+    - Elements
     - Main menu
     - Settings
+- Dialogue system
 - Level editor
 - Smarter NPCs
 - Physics and collision optimisations

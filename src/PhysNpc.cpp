@@ -2,8 +2,6 @@
 
 constexpr float WALK_SPEED = 2;
 constexpr float AIR_SLOWDOWN = 0.1;
-constexpr float GROUND_FRICTION = 0.6;
-constexpr float AIR_FRICTION = 0.95;
 
 constexpr float CHANGE_DIR_MIN_CD = 700;
 constexpr int CHANGE_DIR_CD_RAND = 300;
@@ -21,10 +19,8 @@ PhysNpc::~PhysNpc(){}
 // Movement of the NPC
 void PhysNpc::control(){
     float walkSpeed = WALK_SPEED;
-    if(collisionVerticalDir == Down){
-        velocity.x *= GROUND_FRICTION;
-    } else {
-        velocity.x *= AIR_FRICTION;
+
+    if(collisionVerticalDir != Down){
         walkSpeed *= AIR_SLOWDOWN;
     }
 

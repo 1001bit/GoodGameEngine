@@ -2,8 +2,6 @@
 constexpr float WALK_SPEED = 2;
 constexpr float JUMP_FORCE = 15;
 constexpr float AIR_SLOWDOWN = 0.1;
-constexpr float GROUND_FRICTION = 0.6;
-constexpr float AIR_FRICTION = 0.95;
 
 // Structors
 PhysPlayer::PhysPlayer(){}
@@ -14,10 +12,8 @@ PhysPlayer::~PhysPlayer(){}
 // control the player
 void PhysPlayer::control(){
     float walkSpeed = WALK_SPEED;
-    if(collisionVerticalDir == Down){
-        velocity.x *= GROUND_FRICTION;
-    } else {
-        velocity.x *= AIR_FRICTION;
+
+    if(collisionVerticalDir != Down){
         walkSpeed *= AIR_SLOWDOWN;
     }
 

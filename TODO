@@ -1,10 +1,8 @@
 - GUI
-    - Text
-    - Elements
     - Main menu
     - Settings
 - Dialogue system
 - Level editor
 - Smarter NPCs
 - Physics and collision optimisations
-- Publish the engine into github and call it SAFGE (Simple And Fast Game Engine)
+- Publish the engine into github and call it BGGE (BeGood GameEngine)

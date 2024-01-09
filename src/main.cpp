@@ -9,7 +9,7 @@ int main()
     srand(time(NULL));
 
     // init window
-    sf::RenderWindow window(sf::VideoMode(1440, 880), "BeGood Effect", sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), "BeGood Effect", sf::Style::Close);
     window.setFramerateLimit(FPS);
 
     // init the game

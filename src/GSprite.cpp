@@ -10,7 +10,7 @@ GSprite::~GSprite(){}
 
 // Methods
 // update position of sprite
-void GSprite::updateSpritePos(){
+void GSprite::updateDrawablePos(){
     sprite.setPosition(getRect().getPosition());
 }
 
@@ -21,6 +21,6 @@ void GSprite::setTexture(const sf::Texture& newTexture){
 
 // Getters
 // returns sprite
-const sf::Sprite& GSprite::getSprite(){
+const sf::Drawable& GSprite::getDrawable(){
     return sprite;
 }

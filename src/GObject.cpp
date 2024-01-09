@@ -3,7 +3,8 @@
 // All drawable types of objects
 const std::unordered_set<GObjectType> DRAWABLE_GOBJECT_TYPES{
     TAnimSprite,
-    TSprite
+    TSprite,
+    TText
 };
 
 // GObjects that are bodies
@@ -23,7 +24,7 @@ GObject::~GObject(){}
 // Methods
 // Virtuals
 void GObject::update(const float& timeMs){}
-void GObject::updateSpritePos(){}
+void GObject::updateDrawablePos(){}
 void GObject::collide(std::shared_ptr<GObject> obstacle){};
 
 // Main
@@ -40,7 +41,7 @@ void GObject::updatePos(){
     }
     selfRect.left = parent->getRect().left + relativePos.x;
     selfRect.top = parent->getRect().top + relativePos.y;
-    updateSpritePos();
+    updateDrawablePos();
     for(std::shared_ptr<GObject> child : children) {
         child->updatePos();
     }
@@ -68,7 +69,7 @@ void GObject::setRectSize(float w, float h){
 
 // Getters
 
-const sf::Sprite& GObject::getSprite(){
+const sf::Drawable& GObject::getDrawable(){
     static sf::Sprite dummySprite;
     return dummySprite;
 }

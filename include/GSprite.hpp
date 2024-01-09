@@ -17,11 +17,11 @@ public:
 
     // Methods
     // Move sprite after self reposition
-    void updateSpritePos();
+    void updateDrawablePos();
     // Set a texture
     void setTexture(const sf::Texture& newTexture);
 
     // Getters
     // get sprite
-    const sf::Sprite& getSprite();
+    const sf::Drawable& getDrawable();
 };

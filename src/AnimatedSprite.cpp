@@ -73,13 +73,13 @@ void AnimatedSprite::update(const float& timeMS){
 }
 
 // update position of sprite
-void AnimatedSprite::updateSpritePos(){
+void AnimatedSprite::updateDrawablePos(){
     sprite.setPosition(getRect().getPosition());
 }
 
 // Getters
 // returns sprite
-const sf::Sprite& AnimatedSprite::getSprite(){
+const sf::Drawable& AnimatedSprite::getDrawable(){
     return sprite;
 }
 

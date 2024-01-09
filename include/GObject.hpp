@@ -45,7 +45,7 @@ protected:
 
     // Methods
     // Set SFML object position after repositioning (if exists)
-    virtual void updateSpritePos();
+    virtual void updateDrawablePos();
 
 public:
     // Structors
@@ -66,8 +66,8 @@ public:
     void setRectSize(float x, float y);
 
     // Getters
-    // Get sprite if it exists
-    virtual const sf::Sprite& getSprite();
+    // Get drawable if it exists
+    virtual const sf::Drawable& getDrawable();
     // Get position relative to parent's position
     const sf::Vector2f& getRelativePos();
     // Get type of the object

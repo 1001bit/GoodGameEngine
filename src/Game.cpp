@@ -45,7 +45,7 @@ void Game::initGObjects(){
     // it's camera
     camera = std::make_shared<Camera>();
     addNewGameObject(camera, dummy, 0);
-    camera->setSize(1440, 880);
+    camera->setSize(GAME_WIDTH, GAME_HEIGHT);
 
     // his sprite
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();

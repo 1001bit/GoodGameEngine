@@ -19,8 +19,7 @@ void GSprite::setTexture(const sf::Texture& newTexture){
     sprite.setTexture(newTexture);
 }
 
-// Getters
-// returns sprite
-const sf::Drawable& GSprite::getDrawable(){
-    return sprite;
-}
+// draw self drawable object
+void GSprite::drawSelf(sf::RenderWindow& window){
+    window.draw(sprite);
+};

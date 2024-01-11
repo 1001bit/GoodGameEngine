@@ -34,12 +34,12 @@ public:
     void update(const float& timeMs);
     // Move sprite after self reposition
     void updateDrawablePos();
+    // draw self drawable object
+    void drawSelf(sf::RenderWindow& window);
     // Add new animation with name
     void insertAnimation(std::string name, const Animation& animation);
 
     // Getters
     // Get rect of current animation
     const sf::IntRect& getCurrentFrame();
-    // get sprite
-    const sf::Drawable& getDrawable();
 };

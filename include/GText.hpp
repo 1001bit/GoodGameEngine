@@ -17,8 +17,6 @@ public:
     // Methods
     // set text's new position
     void updateDrawablePos();
-
-    // Getters
-    // get text
-    const sf::Drawable& getDrawable();
+    // draw self text
+    void drawSelf(sf::RenderWindow& window);
 };

@@ -1,8 +1,9 @@
 - GUI
+    - Dialogue system (currently)
     - Main menu
     - Settings
-- Dialogue system
-    - Do them
+- Collision grid object
+- Trigger system (triggers for level transition, dialogue start, etc.)
 - Level editor
 - Smarter NPCs
 - Physics and collision optimisations

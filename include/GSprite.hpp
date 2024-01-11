@@ -20,8 +20,6 @@ public:
     void updateDrawablePos();
     // Set a texture
     void setTexture(const sf::Texture& newTexture);
-
-    // Getters
-    // get sprite
-    const sf::Drawable& getDrawable();
+    // draw self sprite
+    void drawSelf(sf::RenderWindow& window);
 };

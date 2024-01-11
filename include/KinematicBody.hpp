@@ -9,11 +9,6 @@ enum NpcType {
     Hostile // fights when sees you
 };
 
-// 4 directions
-enum Direction {
-    None, Up, Down, Right, Left
-};
-
 // all the controls
 extern std::unordered_map<std::string, sf::Keyboard::Key> movementControlsMap;
 

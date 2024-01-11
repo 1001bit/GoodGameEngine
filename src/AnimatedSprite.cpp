@@ -77,11 +77,12 @@ void AnimatedSprite::updateDrawablePos(){
     sprite.setPosition(getRect().getPosition());
 }
 
+// draw self drawable object
+void AnimatedSprite::drawSelf(sf::RenderWindow& window){
+    window.draw(sprite);
+};
+
 // Getters
-// returns sprite
-const sf::Drawable& AnimatedSprite::getDrawable(){
-    return sprite;
-}
 
 // returns current frame rect
 const sf::IntRect& AnimatedSprite::getCurrentFrame(){

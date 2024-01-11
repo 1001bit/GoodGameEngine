@@ -8,11 +8,12 @@ GText::GText(){
 GText::~GText(){}
 
 // Methods
+
 void GText::updateDrawablePos(){
     text.setPosition(getRect().getPosition());
 }
 
-// Getters
-const sf::Drawable& GText::getDrawable(){
-    return text;
-}
+// draw self sprite
+void GText::drawSelf(sf::RenderWindow& window){
+    window.draw(text);
+};

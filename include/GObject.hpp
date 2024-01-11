@@ -17,6 +17,10 @@ enum GObjectType{
     TCamera, // done
     TText // TODO
 };
+// 4 directions
+enum Direction {
+    None, Up, Down, Right, Left
+};
 // All drawable types of objects
 extern const std::unordered_set<GObjectType> DRAWABLE_GOBJECT_TYPES;
 // All physical types of objects
@@ -64,10 +68,10 @@ public:
     void setParent(std::shared_ptr<GObject> newParent);
     // set rect size
     void setRectSize(float x, float y);
+    // draw self drawable object
+    virtual void drawSelf(sf::RenderWindow& window);
 
     // Getters
-    // Get drawable if it exists
-    virtual const sf::Drawable& getDrawable();
     // Get position relative to parent's position
     const sf::Vector2f& getRelativePos();
     // Get type of the object

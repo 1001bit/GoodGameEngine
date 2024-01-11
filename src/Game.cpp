@@ -157,7 +157,7 @@ void Game::updateGame(sf::RenderWindow& window, const float& timeMs){
             #ifndef DRAWCOLLIDER
             // if drawable - draw on a screen
             if(DRAWABLE_GOBJECT_TYPES.count(object->getType())){
-                window.draw(object->getDrawable());
+                object->drawSelf(window);
             }
             #endif
         }
@@ -173,8 +173,7 @@ void Game::updateGui(sf::RenderWindow& window, const float& timeMs){
                 continue;
             }
 
-            window.draw(object->getDrawable());
-            std::cout << "1\n";
+            object->drawSelf(window);
         }
     }
 }

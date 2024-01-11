@@ -26,6 +26,7 @@ GObject::~GObject(){}
 void GObject::update(const float& timeMs){}
 void GObject::updateDrawablePos(){}
 void GObject::collide(std::shared_ptr<GObject> obstacle){};
+void GObject::drawSelf(sf::RenderWindow& window){};
 
 // Main
 
@@ -67,12 +68,8 @@ void GObject::setRectSize(float w, float h){
     selfRect.height = h*SPRITE_SCALE;
 }
 
-// Getters
 
-const sf::Drawable& GObject::getDrawable(){
-    static sf::Sprite dummySprite;
-    return dummySprite;
-}
+// Getters
 
 const sf::Vector2f& GObject::getRelativePos(){
     return relativePos;

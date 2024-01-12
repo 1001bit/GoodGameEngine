@@ -13,6 +13,21 @@ void Game::init(){
     // init self pointer
     gamePtr = shared_from_this();
 
+    // init controls
+    ControlsManager* controls = ControlsManager::getInstance();
+    controls->setKeyboardControlsMap({
+        {"wLeft", sf::Keyboard::A},
+        {"wRight", sf::Keyboard::D},
+        {"wUp", sf::Keyboard::W},
+        {"wDown", sf::Keyboard::S},
+        {"jump", sf::Keyboard::Space},
+    });
+    // for test purposes
+    controls->setMouseControlsMap({
+        {"wLeft", sf::Mouse::Left},
+        {"jump", sf::Mouse::Right}
+    });
+
     // init texture storage
     sf::Texture texture;
     texture.loadFromFile("Assets/Original/Textures/dummy.png");
@@ -100,33 +115,58 @@ void Game::initGObjects(){
 
 // Main loop
 void Game::loop(sf::RenderWindow& window){
+    window.setKeyRepeatEnabled(false);
+
     sf::Clock clock;
     float timeMs;
     while (window.isOpen())
     {
+        // Time
         sf::Time deltaTime = clock.restart();
         timeMs = deltaTime.asMicroseconds()/1000.f;
         // Limit max dt
         if(timeMs > 50){
             timeMs = 50;
         }
-        std::cout << 1000.0/timeMs << "FPS ; " << timeMs << "\n";
+        // std::cout << 1000.0/timeMs << "FPS ; " << timeMs << "\n";
+
+        // Events
+        ControlsManager* controls = ControlsManager::getInstance();
+        controls->clearOncePressed();
 
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            handleEvent(event);
         }
 
+        // Updates
         window.clear();
         update(window, timeMs);
         window.display();
     }
 }
 
+// handle window events
+void Game::handleEvent(const sf::Event& event){
+    ControlsManager* controls = ControlsManager::getInstance();
+    switch (event.type)
+    {
+    case sf::Event::KeyPressed:
+        controls->addOncePressedKeyboard(event.key.code);
+        break;
+    case sf::Event::MouseButtonPressed:
+        controls->addOncePressedMouse(event.mouseButton.button);
+        break;
+    default:
+        break;
+    }
+}
+
 // update the game
-void Game::updateGame(sf::RenderWindow& window, const float& timeMs){
+void Game::updateGameObjects(sf::RenderWindow& window, const float& timeMs){
     // iterate through whole map
     for(std::pair<const u_char, GObjectSet> GObjectsLayer : GameLayers){
         // iterate through a single layer
@@ -165,7 +205,7 @@ void Game::updateGame(sf::RenderWindow& window, const float& timeMs){
 }
 
 // update gui
-void Game::updateGui(sf::RenderWindow& window, const float& timeMs){
+void Game::updateGuiObjects(sf::RenderWindow& window, const float& timeMs){
     // iterate through whole map
     for(std::pair<const u_char, GObjectSet> GObjectsLayer : GuiLayers){
         for(std::shared_ptr<GObject> object : GObjectsLayer.second){
@@ -181,9 +221,9 @@ void Game::updateGui(sf::RenderWindow& window, const float& timeMs){
 // update all
 void Game::update(sf::RenderWindow& window, const float& timeMs){
     window.setView(camera->getView());
-    updateGame(window, timeMs);
+    updateGameObjects(window, timeMs);
     window.setView(guiView);
-    updateGui(window, timeMs);
+    updateGuiObjects(window, timeMs);
 }
 
 // add new object to the game

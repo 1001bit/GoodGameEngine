@@ -2,16 +2,6 @@
 
 constexpr float ACCEL_COEFF = 0.1;
 
-// Variables
-// all the controls
-std::unordered_map<std::string, sf::Keyboard::Key> movementControlsMap{
-    {"wLeft", sf::Keyboard::A},
-    {"wRight", sf::Keyboard::D},
-    {"wUp", sf::Keyboard::W},
-    {"wDown", sf::Keyboard::S},
-    {"jump", sf::Keyboard::Space}
-};
-
 // Structors
 KinematicBody::KinematicBody(){
     this->type = TKinematicBody;

@@ -1,4 +1,5 @@
 #include "PhysPlayer.hpp"
+
 constexpr float WALK_SPEED = 2;
 constexpr float JUMP_FORCE = 15;
 constexpr float AIR_SLOWDOWN = 0.1;
@@ -11,6 +12,8 @@ PhysPlayer::~PhysPlayer(){}
 // Methods
 // control the player
 void PhysPlayer::control(){
+    ControlsManager* controls = ControlsManager::getInstance();
+
     float walkSpeed = WALK_SPEED;
 
     if(collisionVerticalDir != Down){
@@ -18,16 +21,16 @@ void PhysPlayer::control(){
     }
 
     // walk left
-    if(sf::Keyboard::isKeyPressed(movementControlsMap.at("wLeft"))){
+    if(controls->isControlHeld("wLeft")){
         acceleration.x -= walkSpeed;
     }
     // walk right
-    if(sf::Keyboard::isKeyPressed(movementControlsMap.at("wRight"))){
+    if(controls->isControlHeld("wRight")){
         acceleration.x += walkSpeed;
     }
 
     // jump
-    if(sf::Keyboard::isKeyPressed(movementControlsMap.at("jump")) && collisionVerticalDir == Down){
+    if(controls->isControlPressedOnce("jump") && collisionVerticalDir == Down){
         acceleration.y -= JUMP_FORCE;
     }
 }

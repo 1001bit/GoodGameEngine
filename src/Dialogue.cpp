@@ -25,3 +25,9 @@ void Dialogue::addParticipant(u_char id, std::shared_ptr<GObject> pointer){
 void Dialogue::setLines(std::vector<std::pair<u_char, std::string>> newLines){
     linesList = newLines;
 }
+
+// Getters
+
+const std::pair<u_char, std::string>& Dialogue::getCurrentLine(){
+    return linesList[currentLineId];
+}

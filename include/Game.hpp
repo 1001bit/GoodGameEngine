@@ -51,15 +51,17 @@ private:
     // Methods
     // Update states of all the objects
     void update(sf::RenderWindow& window, const float& timeMs);
+    // Handle window events
+    void handleEvent(const sf::Event& event);
     // Update all the objects of the game
-    void updateGame(sf::RenderWindow& window, const float& timeMs);
+    void updateGameObjects(sf::RenderWindow& window, const float& timeMs);
     // Update all the objects of the GUI
-    void updateGui(sf::RenderWindow& window, const float& timeMs);
+    void updateGuiObjects(sf::RenderWindow& window, const float& timeMs);
     // Create new object for game
     void addNewGameObject(std::shared_ptr<GObject>, std::shared_ptr<GObject> newParent, u_char layer);
     // Create new object for gui
     void addNewGuiObject(std::shared_ptr<GObject>, std::shared_ptr<GObject> newParent, u_char layer);
-    // Init new object
+    // Init all the objects, that are needed for gameplay
     void initGObjects();
 
 public:

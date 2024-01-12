@@ -9,8 +9,7 @@ enum NpcType {
     Hostile // fights when sees you
 };
 
-// all the controls
-extern std::unordered_map<std::string, sf::Keyboard::Key> movementControlsMap;
+// Class
 
 class KinematicBody : public GObject 
 {

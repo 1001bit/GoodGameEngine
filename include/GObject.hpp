@@ -4,6 +4,7 @@
 #include <unordered_set>
 #include <memory>
 #include <iostream>
+#include "ControlsManager.hpp"
 
 constexpr float SPRITE_SCALE = 7;
 

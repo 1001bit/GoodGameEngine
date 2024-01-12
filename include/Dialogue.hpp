@@ -11,6 +11,14 @@ How dialogue participants are chosen:
 - When dialogues are created, they pick values from that map.
 */
 
+/*
+How dialogues are shown:
+- There is a single dialogue shower "visibleDialogue" object (just a group of sprites, text, etc.)
+- There is a pointer "currentDialogue" that refers to current Dialogue object
+- If currentDialogue is null, visibleDialogue is hidden.
+- If currentDialogue isn't null, visibleDialogue gets all the information about it and shows it.
+*/
+
 class Dialogue : public GObject
 {
 private:
@@ -20,7 +28,7 @@ private:
     // participant id and their line
     std::vector<std::pair<u_char, std::string>> linesList;
     // current line
-    std::pair<u_char, std::string>* currentLine;
+    uint currentLineId;
 
     // Methods
     // control the flow of the dialogue
@@ -38,4 +46,8 @@ public:
     void setLines(std::vector<std::pair<u_char, std::string>> newLines);
     // update dialogue
     void update();
+
+    // Getters
+
+    const std::pair<u_char, std::string>& getCurrentLine();
 };

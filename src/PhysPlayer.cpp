@@ -30,7 +30,7 @@ void PhysPlayer::control(){
     }
 
     // jump
-    if(controls->isControlPressedOnce("jump") && collisionVerticalDir == Down){
+    if(controls->isControlHeld("jump") && collisionVerticalDir == Down){
         acceleration.y -= JUMP_FORCE;
     }
 }

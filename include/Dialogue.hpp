@@ -19,16 +19,23 @@ How dialogues are shown:
 - If currentDialogue isn't null, visibleDialogue gets all the information about it and shows it.
 */
 
-class Dialogue : public GObject
+struct DialogueLine {
+    u_char characterId;
+    std::string line;
+};
+
+class Dialogue
 {
 private:
     // Variables
     // participant id and pointer
-    std::unordered_map<u_char, std::shared_ptr<GObject>> participantsList;
+    std::unordered_map<uint16_t, std::shared_ptr<GObject>> participantsList;
     // participant id and their line
-    std::vector<std::pair<u_char, std::string>> linesList;
+    std::vector<DialogueLine> linesList;
     // current line
-    uint currentLineId;
+    int16_t currentLineId;
+    // can be repeated
+    bool isRepeatable;
 
     // Methods
     // control the flow of the dialogue
@@ -41,13 +48,15 @@ public:
 
     // Methods
     // add a new participant
-    void addParticipant(u_char id, std::shared_ptr<GObject> pointer);
+    void addParticipant(uint16_t id, std::shared_ptr<GObject> pointer);
     // set new lines list
-    void setLines(std::vector<std::pair<u_char, std::string>> newLines);
+    void setLines(std::vector<DialogueLine> newLines);
     // update dialogue
     void update();
+    // make the dialogue repeatable
+    void makeRepeatable();
 
     // Getters
-
-    const std::pair<u_char, std::string>& getCurrentLine();
+    // Get current line from number
+    const DialogueLine& getCurrentLine();
 };

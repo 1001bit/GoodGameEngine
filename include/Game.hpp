@@ -80,6 +80,8 @@ private:
     void addNewGuiObject(std::shared_ptr<GObject>, std::shared_ptr<GObject> newParent, u_char layer);
     // Init all the objects, that are needed for gameplay
     void initGObjects();
+    // Init all the assets
+    void initAssets();
 
 public:
     // Structors

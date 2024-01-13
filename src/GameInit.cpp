@@ -2,6 +2,25 @@
 
 // Methods
 
+// init all the assets
+void Game::initAssets(){
+    // init texture storage
+    sf::Texture texture;
+    texture.loadFromFile("Assets/Textures/dummy.png");
+    textureMap["dummy.png"] = texture;
+    texture.loadFromFile("Assets/Textures/sword.png");
+    textureMap["sword.png"] = texture;
+    texture.loadFromFile("Assets/Textures/platform.png");
+    textureMap["platform.png"] = texture;
+    texture.loadFromFile("Assets/Textures/dialogueBackground.png");
+    textureMap["dialogueBackground.png"] = texture;
+
+    // init font storage
+    sf::Font font;
+    font.loadFromFile("Assets/Fonts/font1.ttf");
+    fontMap["font1.ttf"] = font;
+}
+
 // init all the objects
 void Game::initGObjects(){
     // Game
@@ -19,12 +38,12 @@ void Game::initGObjects(){
     // his sprite
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();
     addNewGameObject(dummySprite, dummy, 1);
-    dummySprite->insertAnimation("idle", Animation(textureMap.at("Original/dummy.png"), 16, 500, 1));
+    dummySprite->insertAnimation("idle", Animation(textureMap.at("dummy.png"), 16, 500, 1));
     dummySprite->playAnimation("idle");
     // and his sword
     std::shared_ptr<GSprite> sword = std::make_shared<GSprite>();
     addNewGameObject(sword, dummy, 2);
-    sword->setTexture(textureMap.at("Original/sword.png"));
+    sword->setTexture(textureMap.at("sword.png"));
     sword->setRelativePos(-30, 1);
 
     // Npc
@@ -35,7 +54,7 @@ void Game::initGObjects(){
     // his sprite
     std::shared_ptr<AnimatedSprite> npcSprite = std::make_shared<AnimatedSprite>();
     addNewGameObject(npcSprite, npc, 1);
-    npcSprite->insertAnimation("idle", Animation(textureMap.at("Original/dummy.png"), 16, 500, 1));
+    npcSprite->insertAnimation("idle", Animation(textureMap.at("dummy.png"), 16, 500, 1));
     npcSprite->playAnimation("idle");
 
     // a platform
@@ -46,7 +65,7 @@ void Game::initGObjects(){
     // it's sprite
     std::shared_ptr<GSprite> platformSprite = std::make_shared<GSprite>();
     addNewGameObject(platformSprite, platform, 0);
-    platformSprite->setTexture(textureMap.at("Original/platform.png"));
+    platformSprite->setTexture(textureMap.at("platform.png"));
 
     // 2nd platform
     std::shared_ptr<SolidBody> platform2 = std::make_shared<SolidBody>();
@@ -56,7 +75,7 @@ void Game::initGObjects(){
     // it's sprite
     std::shared_ptr<GSprite> platformSprite2 = std::make_shared<GSprite>();
     addNewGameObject(platformSprite2, platform2, 0);
-    platformSprite2->setTexture(textureMap.at("Original/platform.png"));
+    platformSprite2->setTexture(textureMap.at("platform.png"));
 
     // 3rd platform
     std::shared_ptr<SolidBody> platform3 = std::make_shared<SolidBody>();
@@ -66,20 +85,20 @@ void Game::initGObjects(){
     // it's sprite
     std::shared_ptr<GSprite> platformSprite3 = std::make_shared<GSprite>();
     addNewGameObject(platformSprite3, platform3, 0);
-    platformSprite3->setTexture(textureMap.at("Original/platform.png"));
+    platformSprite3->setTexture(textureMap.at("platform.png"));
 
     /////////////////////
     // Gui
     // Dialogue box
     dialogueBox = std::make_shared<GSprite>();
     addNewGuiObject(dialogueBox, gamePtr, 0);
-    dialogueBox->setTexture(textureMap.at("Original/dialogueBackground.png"));
+    dialogueBox->setTexture(textureMap.at("dialogueBackground.png"));
     dialogueBox->setRelativePos((GAME_WIDTH-(dialogueBox->sprite.getGlobalBounds().width))/2, 600); // centralize it on X position
     
     // Dialogue text
     dialogueText = std::make_shared<GText>();
     addNewGuiObject(dialogueText, dialogueBox, 1);
-    dialogueText->text.setFont(fontMap["Original/font1.ttf"]);
+    dialogueText->text.setFont(fontMap["font1.ttf"]);
     dialogueText->text.setCharacterSize(30);
     dialogueText->text.setString("Hi");
     dialogueText->setRelativePos(60, 20);
@@ -95,6 +114,7 @@ void Game::initGObjects(){
     });
     currentDialogue = dialogue1;
 }
+
 
 // add new object to the game
 void Game::addNewGameObject(std::shared_ptr<GObject> newGObject, std::shared_ptr<GObject> newParent, u_char layer, uint16_t id){

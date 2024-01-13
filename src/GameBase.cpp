@@ -29,21 +29,8 @@ void Game::init(){
         {"dialogueNext", sf::Mouse::Left}
     });
 
-    // init texture storage
-    sf::Texture texture;
-    texture.loadFromFile("Assets/Original/Textures/dummy.png");
-    textureMap["Original/dummy.png"] = texture;
-    texture.loadFromFile("Assets/Original/Textures/sword.png");
-    textureMap["Original/sword.png"] = texture;
-    texture.loadFromFile("Assets/Original/Textures/platform.png");
-    textureMap["Original/platform.png"] = texture;
-    texture.loadFromFile("Assets/Original/Textures/dialogueBackground.png");
-    textureMap["Original/dialogueBackground.png"] = texture;
-
-    // init font storage
-    sf::Font font;
-    font.loadFromFile("Assets/Original/Fonts/font1.ttf");
-    fontMap["Original/font1.ttf"] = font;
+    // init all the assets
+    initAssets();
 
     // init all the gameObjects
     initGObjects();

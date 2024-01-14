@@ -78,10 +78,16 @@ private:
     void addNewGameObject(std::shared_ptr<GObject>, std::shared_ptr<GObject> newParent, u_char layer = 0, uint16_t id = 0);
     // Create new object for gui
     void addNewGuiObject(std::shared_ptr<GObject>, std::shared_ptr<GObject> newParent, u_char layer);
+
+    // Inits
     // Init all the objects, that are needed for gameplay
-    void initGObjects();
+    void initNecessaryGObjects();
     // Init all the assets
     void initAssets();
+    // Delete all the game objects
+    void cleanGObjetcs();
+    // Init controls
+    void initControls();
 
 public:
     // Structors
@@ -94,4 +100,7 @@ public:
 
     // Main game loop
     void loop(sf::RenderWindow& window);
+
+    // load the level from file
+    void loadLevel(const sf::String& path);
 };

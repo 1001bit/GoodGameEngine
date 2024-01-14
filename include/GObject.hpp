@@ -33,7 +33,6 @@ class GObject : public std::enable_shared_from_this<GObject>
 {
 private:
     // Variables
-    std::unordered_set<std::shared_ptr<GObject>> children;
     sf::Vector2f relativePos;
     sf::FloatRect selfRect;
 
@@ -45,7 +44,8 @@ private:
 
 protected:
     // Variables
-    std::shared_ptr<GObject> parent;
+    std::weak_ptr<GObject> parent;
+    std::unordered_set<std::shared_ptr<GObject>> children;
     GObjectType type;
 
     // Methods

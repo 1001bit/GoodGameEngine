@@ -12,6 +12,10 @@ Camera::~Camera(){}
 // Methods
 // Smooth movement
 void Camera::update(const float& timeMs){
+    if(followTarget == nullptr){
+        return;
+    }
+
     sf::Vector2f viewPos = view.getCenter();
     const sf::FloatRect& targetRect = followTarget->getRect();
     sf::Vector2f targetCenterPos(targetRect.left + (targetRect.width / 2), targetRect.top + (targetRect.height / 2));

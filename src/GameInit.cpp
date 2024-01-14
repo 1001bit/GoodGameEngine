@@ -22,7 +22,7 @@ void Game::initAssets(){
 }
 
 // init all the objects
-void Game::initGObjects(){
+void Game::initNecessaryGObjects(){
     // Game
     // init camera
     camera = std::make_shared<Camera>();
@@ -113,6 +113,45 @@ void Game::initGObjects(){
         {2, "goodbye"}
     });
     currentDialogue = dialogue1;
+}
+
+// init necessary controls
+void Game::initControls(){
+    ControlsManager* controls = ControlsManager::getInstance();
+    // Keyboard controls
+    controls->setKeyboardControlsMap({
+        {"wLeft", sf::Keyboard::A},
+        {"wRight", sf::Keyboard::D},
+        {"wUp", sf::Keyboard::W},
+        {"wDown", sf::Keyboard::S},
+        {"jump", sf::Keyboard::Space},
+    });
+    // mouse controls
+    controls->setMouseControlsMap({
+        {"dialogueNext", sf::Mouse::Left}
+    });
+}
+
+// delete all
+void Game::cleanGObjetcs(){
+    children.clear();
+    GameLayers.clear();
+    GuiLayers.clear();
+    GameObjectsWId.clear();
+    dialogues.clear();
+    textureMap.clear();
+    fontMap.clear();
+    if(camera != nullptr){
+        camera->setTarget(nullptr);
+    }
+    currentDialogue = nullptr;
+}
+
+// load the level from file
+void Game::loadLevel(const sf::String& path){
+    cleanGObjetcs();
+    initAssets();
+    initNecessaryGObjects();
 }
 
 

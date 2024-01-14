@@ -1,7 +1,7 @@
-- GUI
-    - Dialogue system (currently)
-    - Main menu
-    - Settings
+- Levels
+    - Level is a GObject, which stores all the GUI, And game objects
+    - Move most of the functionality of Game class to Level
+    - Base levels: Settings, Menu, Game Level
 - Collision grid object
 - Trigger system (triggers for level transition, dialogue start, etc.)
 - Level editor

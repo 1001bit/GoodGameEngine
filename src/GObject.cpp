@@ -19,7 +19,9 @@ GObject::GObject(){
     this->type = TNone;
 }
 
-GObject::~GObject(){}
+GObject::~GObject(){
+    std::cout << "destroyed\n";
+}
 
 // Methods
 // Virtuals
@@ -32,19 +34,19 @@ void GObject::drawSelf(sf::RenderWindow& window){};
 
 void GObject::setParent(std::shared_ptr<GObject> newParent){
     this->parent = newParent;
-    std::shared_ptr<GObject> sharedThis = shared_from_this(); 
-    parent->addChild(sharedThis);
+    std::shared_ptr<GObject> sharedThis = shared_from_this();
+    newParent->addChild(sharedThis);
 }
 
 void GObject::updatePos(){
-    if(!parent){
-        return;
-    }
-    selfRect.left = parent->getRect().left + relativePos.x;
-    selfRect.top = parent->getRect().top + relativePos.y;
-    updateDrawablePos();
-    for(std::shared_ptr<GObject> child : children) {
-        child->updatePos();
+    // locking parent so it's shared ptr
+    if(std::shared_ptr lockedParent = parent.lock()){
+        selfRect.left = lockedParent->getRect().left + relativePos.x;
+        selfRect.top = lockedParent->getRect().top + relativePos.y;
+        updateDrawablePos();
+        for(std::shared_ptr<GObject> child : children) {
+            child->updatePos();
+        }
     }
 }
 

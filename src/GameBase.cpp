@@ -14,26 +14,11 @@ void Game::init(){
     // init self pointer
     gamePtr = shared_from_this();
 
-    // init controls
-    ControlsManager* controls = ControlsManager::getInstance();
-    // Keyboard controls
-    controls->setKeyboardControlsMap({
-        {"wLeft", sf::Keyboard::A},
-        {"wRight", sf::Keyboard::D},
-        {"wUp", sf::Keyboard::W},
-        {"wDown", sf::Keyboard::S},
-        {"jump", sf::Keyboard::Space},
-    });
-    // mouse controls
-    controls->setMouseControlsMap({
-        {"dialogueNext", sf::Mouse::Left}
-    });
+    // init all the controls
+    initControls();
 
-    // init all the assets
-    initAssets();
-
-    // init all the gameObjects
-    initGObjects();
+    // load very first level - menu
+    loadLevel("no");
 
     // init view
     guiView.setSize(GAME_WIDTH, GAME_HEIGHT);

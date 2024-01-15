@@ -17,12 +17,8 @@ void Game::init(){
     // init all the controls
     initControls();
 
-    // load very first level - menu
-    loadLevel("no");
-
-    // init view
-    guiView.setSize(GAME_WIDTH, GAME_HEIGHT);
-    guiView.setCenter(GAME_WIDTH/2, GAME_HEIGHT/2);
+    currentLevel = std::make_shared<Level>();
+    currentLevel->init();
 }
 
 // Main loop
@@ -56,9 +52,26 @@ void Game::loop(sf::RenderWindow& window){
 
         // Updates
         window.clear();
-        update(window, timeMs);
+        currentLevel->update(window, timeMs);
         window.display();
     }
+}
+
+// init necessary controls
+void Game::initControls(){
+    ControlsManager* controls = ControlsManager::getInstance();
+    // Keyboard controls
+    controls->setKeyboardControlsMap({
+        {"wLeft", sf::Keyboard::A},
+        {"wRight", sf::Keyboard::D},
+        {"wUp", sf::Keyboard::W},
+        {"wDown", sf::Keyboard::S},
+        {"jump", sf::Keyboard::Space},
+    });
+    // mouse controls
+    controls->setMouseControlsMap({
+        {"dialogueNext", sf::Mouse::Left}
+    });
 }
 
 // handle window events

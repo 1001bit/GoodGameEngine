@@ -1,17 +1,8 @@
-#include "Game.hpp"
+#include "Level.hpp"
 
 // Methods
-
-// update all
-void Game::update(sf::RenderWindow& window, const float& timeMs){
-    window.setView(camera->getView());
-    updateGameObjects(window, timeMs);
-    window.setView(guiView);
-    updateGuiObjects(window, timeMs);
-}
-
-// update the game
-void Game::updateGameObjects(sf::RenderWindow& window, const float& timeMs){
+// Update all the objects of the game
+void Level::updateLevelObjects(sf::RenderWindow& window, const float& timeMs){
     // iterate through whole map
     for(std::pair<const u_char, GObjectSet> GObjectsLayer : GameLayers){
         // iterate through a single layer
@@ -47,10 +38,10 @@ void Game::updateGameObjects(sf::RenderWindow& window, const float& timeMs){
             #endif
         }
     }
-}
+};
 
-// update gui
-void Game::updateGuiObjects(sf::RenderWindow& window, const float& timeMs){
+// Update all the objects of the GUI
+void Level::updateGuiObjects(sf::RenderWindow& window, const float& timeMs){
     if(currentDialogue != nullptr){
         currentDialogue->update();
     }
@@ -71,17 +62,25 @@ void Game::updateGuiObjects(sf::RenderWindow& window, const float& timeMs){
                 // if current active dialogue had ended - skip
                 if(currentDialogue->getCurrentLine().line == ""){
                     currentDialogue = nullptr;
-                    camera->setTarget(GameObjectsWId.at(1));
+                    camera->setTarget(LevelObjectsWId.at(1));
                     continue;
                 }
 
                 // set text of current line
                 dialogueText->text.setString(currentDialogue->getCurrentLine().line);
                 // point camera to talker
-                camera->setTarget(GameObjectsWId.at(currentDialogue->getCurrentLine().characterId));
+                camera->setTarget(LevelObjectsWId.at(currentDialogue->getCurrentLine().characterId));
             }
 
             object->drawSelf(window);
         }
     }
-}
+};
+
+// Update states of all the objects
+void Level::update(sf::RenderWindow& window, const float& timeMs){
+    window.setView(camera->getView());
+    updateLevelObjects(window, timeMs);
+    window.setView(guiView);
+    updateGuiObjects(window, timeMs);
+};

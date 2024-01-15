@@ -12,21 +12,22 @@
 #include "PhysNpc.hpp"
 #include "GText.hpp"
 #include "Dialogue.hpp"
+#include "Level.hpp"
 
-// Set of GObjects
-typedef std::unordered_set<std::shared_ptr<GObject>> GObjectSet;
+// // Set of GObjects
+// typedef std::unordered_set<std::shared_ptr<GObject>> GObjectSet;
 
-// Types of layers
-enum GameLayerType {
-    LBodies,
-    LInvisibles,
-    LCamera,
-    Drawables
-};
+// // Types of layers
+// enum GameLayerType {
+//     LBodies,
+//     LInvisibles,
+//     LCamera,
+//     Drawables
+// };
 
-// sizes of the game
-constexpr uint GAME_WIDTH = 1440;
-constexpr uint GAME_HEIGHT = 880;
+// // sizes of the game
+// constexpr uint GAME_WIDTH = 1440;
+// constexpr uint GAME_HEIGHT = 880;
 
 class Game : public GObject
 {
@@ -34,59 +35,14 @@ private:
     // Variables
     // pointer to the game itself
     std::shared_ptr<GObject> gamePtr;
-
-    // layers of game objects
-    std::map<u_char, GObjectSet> GameLayers;
-    // layers of GUI objects
-    std::map<u_char, GObjectSet> GuiLayers;
-
-    // set of objects with own id
-    std::unordered_map<uint16_t, std::shared_ptr<GObject>> GameObjectsWId;
-
-    // set of dialogues and their id's
-    std::unordered_map<u_char, std::shared_ptr<Dialogue>> dialogues;
-
-    // gui view
-    sf::View guiView;
-
-    // storage of the textures
-    std::unordered_map<std::string, sf::Texture> textureMap;
-    // storage of the fonts
-    std::unordered_map<std::string, sf::Font> fontMap;
-
-
-    // Needed Object
-    // game camera
-    std::shared_ptr<Camera> camera;
-    // dialogue box
-    std::shared_ptr<GSprite> dialogueBox;
-    // dialogue text
-    std::shared_ptr<GText> dialogueText;
-    // current dialogue
-    std::shared_ptr<Dialogue> currentDialogue;
+    // pointer to the level
+    std::shared_ptr<Level> currentLevel;
 
     // Methods
-    // Update states of all the objects
-    void update(sf::RenderWindow& window, const float& timeMs);
     // Handle window events
     void handleEvent(const sf::Event& event);
-    // Update all the objects of the game
-    void updateGameObjects(sf::RenderWindow& window, const float& timeMs);
-    // Update all the objects of the GUI
-    void updateGuiObjects(sf::RenderWindow& window, const float& timeMs);
-    // Create new object for game
-    void addNewGameObject(std::shared_ptr<GObject>, std::shared_ptr<GObject> newParent, u_char layer = 0, uint16_t id = 0);
-    // Create new object for gui
-    void addNewGuiObject(std::shared_ptr<GObject>, std::shared_ptr<GObject> newParent, u_char layer);
 
     // Inits
-    // Init all the objects, that are needed for gameplay
-    void initNecessaryGObjects();
-    // Init all the assets
-    void initAssets();
-    // Delete all the game objects
-    void cleanGObjetcs();
-    // Init controls
     void initControls();
 
 public:
@@ -100,7 +56,4 @@ public:
 
     // Main game loop
     void loop(sf::RenderWindow& window);
-
-    // load the level from file
-    void loadLevel(const sf::String& path);
 };

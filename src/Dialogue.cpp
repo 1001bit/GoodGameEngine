@@ -42,7 +42,7 @@ void Dialogue::addParticipant(uint16_t id, std::shared_ptr<GObject> pointer){
 // set new lines list
 void Dialogue::setLines(std::vector<DialogueLine> newLines){
     linesList = newLines;
-    linesList.insert(linesList.begin(), {0, ""});
+    linesList.insert(linesList.begin(), {1, ""});
 }
 
 // Getters

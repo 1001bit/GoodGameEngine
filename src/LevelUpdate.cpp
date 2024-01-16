@@ -4,7 +4,7 @@
 // Update all the objects of the game
 void Level::updateLevelObjects(sf::RenderWindow& window, const float& timeMs){
     // iterate through whole map
-    for(std::pair<const u_char, GObjectSet> GObjectsLayer : GameLayers){
+    for(std::pair<const u_char, GObjectPtrSet> GObjectsLayer : GameLayers){
         // iterate through a single layer
         for(std::shared_ptr<GObject> object : GObjectsLayer.second){
             // update an object
@@ -38,40 +38,38 @@ void Level::updateLevelObjects(sf::RenderWindow& window, const float& timeMs){
             #endif
         }
     }
+    camera->update(timeMs);
 };
 
 // Update all the objects of the GUI
 void Level::updateGuiObjects(sf::RenderWindow& window, const float& timeMs){
-    if(currentDialogue != nullptr){
+    // if current dialogue is active
+    if(auto currentDialogue = currentDialogueWeak.lock()){
         currentDialogue->update();
+        // set camera target
+        if(auto currentSpeaker = LevelObjectsWId.at(currentDialogue->getCurrentLine().characterId).lock()){
+            camera->setTarget(currentSpeaker);
+        }
+        // set dialogue text
+        if(auto dialogueText = dialogueTextWeak.lock()){
+            dialogueText->text.setString(currentDialogue->getCurrentLine().line);
+        }
+
+        // if empty string (after last line) - stop it
+        if(currentDialogue->getCurrentLine().line == ""){
+            currentDialogueWeak.reset();
+            if(auto dialogueBox = dialogueBoxWeak.lock()){
+                dialogueBox->setRelativePos(9999, 9999);
+            }
+        }
     }
 
     // iterate through whole map
-    for(std::pair<const u_char, GObjectSet> GObjectsLayer : GuiLayers){
+    for(std::pair<const u_char, GObjectPtrSet> GObjectsLayer : GuiLayers){
         for(std::shared_ptr<GObject> object : GObjectsLayer.second){
             if(!DRAWABLE_GOBJECT_TYPES.count(object->getType())){
                 continue;
             }
-
-            // update dialogue
-            if(object == dialogueBox || object == dialogueText){
-                // if current dialogue is not active - skip
-                if(currentDialogue == nullptr){
-                    continue;
-                }
-                // if current active dialogue had ended - skip
-                if(currentDialogue->getCurrentLine().line == ""){
-                    currentDialogue = nullptr;
-                    camera->setTarget(LevelObjectsWId.at(1));
-                    continue;
-                }
-
-                // set text of current line
-                dialogueText->text.setString(currentDialogue->getCurrentLine().line);
-                // point camera to talker
-                camera->setTarget(LevelObjectsWId.at(currentDialogue->getCurrentLine().characterId));
-            }
-
             object->drawSelf(window);
         }
     }

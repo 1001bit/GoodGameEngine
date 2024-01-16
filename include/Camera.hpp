@@ -7,7 +7,7 @@ class Camera : public GObject
 private:
     // Variables
     sf::View view;
-    std::shared_ptr<GObject> followTarget;
+    std::weak_ptr<GObject> followTargetWeak;
     
 public:
     // Structors

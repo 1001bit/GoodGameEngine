@@ -12,16 +12,14 @@ Camera::~Camera(){}
 // Methods
 // Smooth movement
 void Camera::update(const float& timeMs){
-    if(followTarget == nullptr){
-        return;
+    if(auto followTarget = followTargetWeak.lock()){
+        sf::Vector2f viewPos = view.getCenter();
+        const sf::FloatRect& targetRect = followTarget->getRect();
+        sf::Vector2f targetCenterPos(targetRect.left + (targetRect.width / 2), targetRect.top + (targetRect.height / 2));
+
+        viewPos += (targetCenterPos - viewPos) * timeMs * VIEW_LERP;
+        view.setCenter(viewPos);
     }
-
-    sf::Vector2f viewPos = view.getCenter();
-    const sf::FloatRect& targetRect = followTarget->getRect();
-    sf::Vector2f targetCenterPos(targetRect.left + (targetRect.width / 2), targetRect.top + (targetRect.height / 2));
-
-    viewPos += (targetCenterPos - viewPos) * timeMs * VIEW_LERP;
-    view.setCenter(viewPos);
 }
 
 // set size of view
@@ -31,7 +29,7 @@ void Camera::setSize(float w, float h){
 
 // set target of following
 void Camera::setTarget(std::shared_ptr<GObject> newTarget){
-    followTarget = newTarget;
+    followTargetWeak = newTarget;
 };
 
 // Getters

@@ -20,7 +20,7 @@ GObject::GObject(){
 }
 
 GObject::~GObject(){
-    std::cout << "destroyed\n";
+    std::cout << "destroyed " << getType() << "\n";
 }
 
 // Methods
@@ -33,16 +33,15 @@ void GObject::drawSelf(sf::RenderWindow& window){};
 // Main
 
 void GObject::setParent(std::shared_ptr<GObject> newParent){
-    this->parent = newParent;
-    std::shared_ptr<GObject> sharedThis = shared_from_this();
-    newParent->addChild(sharedThis);
+    this->parentWeak = newParent;
+    newParent->addChild(shared_from_this());
 }
 
 void GObject::updatePos(){
     // locking parent so it's shared ptr
-    if(std::shared_ptr lockedParent = parent.lock()){
-        selfRect.left = lockedParent->getRect().left + relativePos.x;
-        selfRect.top = lockedParent->getRect().top + relativePos.y;
+    if(auto parent = parentWeak.lock()){
+        selfRect.left = parent->getRect().left + relativePos.x;
+        selfRect.top = parent->getRect().top + relativePos.y;
         updateDrawablePos();
         for(std::shared_ptr<GObject> child : children) {
             child->updatePos();

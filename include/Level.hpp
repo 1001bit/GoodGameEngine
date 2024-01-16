@@ -13,13 +13,12 @@
 #include "Dialogue.hpp"
 
 // Set of GObjects
-typedef std::unordered_set<std::shared_ptr<GObject>> GObjectSet;
+typedef std::unordered_set<std::shared_ptr<GObject>> GObjectPtrSet;
 
 // Types of layers
 enum GameLayerType {
     LBodies,
     LInvisibles,
-    LCamera,
     Drawables
 };
 
@@ -31,19 +30,16 @@ class Level : public GObject
 {
 private:
     // GObjects
-    // Self level pointer
-    std::shared_ptr<GObject> levelPtr;
 
     // layers of level GObjects
-    std::map<u_char, GObjectSet> GameLayers;
+    std::map<u_char, GObjectPtrSet> GameLayers;
     // layers of GUI GObjects
-    std::map<u_char, GObjectSet> GuiLayers;
-
-    // set of GObjects with own id
-    std::unordered_map<uint16_t, std::shared_ptr<GObject>> LevelObjectsWId;
-
+    std::map<u_char, GObjectPtrSet> GuiLayers;
     // set of dialogues and their id's
     std::unordered_map<u_char, std::shared_ptr<Dialogue>> dialogues;
+
+    // set of GObjects with own id
+    std::unordered_map<uint16_t, std::weak_ptr<GObject>> LevelObjectsWId;
 
     // Storages
     // storage of the textures
@@ -55,11 +51,11 @@ private:
     // game camera that is following some GObject
     std::shared_ptr<Camera> camera;
     // dialogue box
-    std::shared_ptr<GSprite> dialogueBox;
+    std::weak_ptr<GSprite> dialogueBoxWeak;
     // dialogue text inside a box
-    std::shared_ptr<GText> dialogueText;
+    std::weak_ptr<GText> dialogueTextWeak;
     // current dialogue
-    std::shared_ptr<Dialogue> currentDialogue;
+    std::weak_ptr<Dialogue> currentDialogueWeak;
     // gui view
     sf::View guiView;
 
@@ -76,12 +72,8 @@ private:
     void updateGuiObjects(sf::RenderWindow& window, const float& timeMs);
 
     // Data init patterns
-    // GObjects
     void initNecessaryGObjects();
-    void initTestGObjects();
-    // Assets
     void initNecessaryAssets();
-    void initTestAssets();
     
 public:
     // Structors
@@ -95,4 +87,8 @@ public:
     void update(sf::RenderWindow& window, const float& timeMs);
     // Load level from file
     void loadFromFile(const sf::String& fileName);
+
+    // test inits
+    void initTestGObjects();
+    void initTestAssets();
 };

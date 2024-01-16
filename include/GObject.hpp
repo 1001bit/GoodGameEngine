@@ -10,13 +10,13 @@ constexpr float SPRITE_SCALE = 7;
 
 // All types of objects
 enum GObjectType{
-    TNone, // done
-    TSprite, // done
-    TAnimSprite, // done
-    TKinematicBody, // done
-    TSolidBody, // done
-    TCamera, // done
-    TText // TODO
+    TNone,
+    TSprite,
+    TAnimSprite,
+    TKinematicBody,
+    TSolidBody,
+    TCamera, 
+    TText,
 };
 // 4 directions
 enum Direction {
@@ -44,7 +44,7 @@ private:
 
 protected:
     // Variables
-    std::weak_ptr<GObject> parent;
+    std::weak_ptr<GObject> parentWeak;
     std::unordered_set<std::shared_ptr<GObject>> children;
     GObjectType type;
 

@@ -1,7 +1,6 @@
 - Collision grid object
 - Trigger system (triggers for level transition, dialogue start, etc.)
 - Levels
-    - Think of how to make efficient level patterns making 
     - Level editor
     - Base levels: Menu, Simple Game Level
 - Smarter NPCs

@@ -33,8 +33,6 @@ class Game : public GObject
 {
 private:
     // Variables
-    // pointer to the game itself
-    std::shared_ptr<GObject> gamePtr;
     // pointer to the level
     std::shared_ptr<Level> currentLevel;
 

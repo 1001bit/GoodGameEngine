@@ -75,11 +75,13 @@ private:
     // Update all the GObjects of the GUI
     void updateGuiObjects(sf::RenderWindow& window, const float& timeMs);
 
-    // GObjects init patterns
-    // GObjects inits 
-    void initDummyGObjects();
-    // Assets inits
-    void initDummyAssets();
+    // Data init patterns
+    // GObjects
+    void initNecessaryGObjects();
+    void initTestGObjects();
+    // Assets
+    void initNecessaryAssets();
+    void initTestAssets();
     
 public:
     // Structors

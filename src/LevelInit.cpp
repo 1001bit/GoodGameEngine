@@ -1,14 +1,34 @@
 #include "Level.hpp"
 
-// methods
-// Init all the objects, that are needed for gameplay
-void Level::initDummyGObjects(){
+// GObjects
+// necessary
+void Level::initNecessaryGObjects(){
     // Level
     // init camera
     camera = std::make_shared<Camera>();
     addNewLevelObject(camera, levelPtr);
     camera->setSize(GAME_WIDTH, GAME_HEIGHT);
 
+    /////////////////////
+    // Gui
+    // Dialogue box
+    dialogueBox = std::make_shared<GSprite>();
+    addNewGuiObject(dialogueBox, levelPtr, 0);
+    dialogueBox->setTexture(textureMap.at("dialogueBackground.png"));
+    dialogueBox->setRelativePos((GAME_WIDTH-(dialogueBox->sprite.getGlobalBounds().width))/2, 600); // centralize it on X position
+    
+    // Dialogue text
+    dialogueText = std::make_shared<GText>();
+    addNewGuiObject(dialogueText, dialogueBox, 1);
+    dialogueText->text.setFont(fontMap["font1.ttf"]);
+    dialogueText->text.setCharacterSize(30);
+    dialogueText->text.setString("Hi");
+    dialogueText->setRelativePos(60, 20);
+};
+
+// test
+void Level::initTestGObjects(){
+    // Level
     // init dummy
     std::shared_ptr<PhysPlayer> dummy = std::make_shared<PhysPlayer>();
     addNewLevelObject(dummy, levelPtr, 0, 1);
@@ -69,20 +89,6 @@ void Level::initDummyGObjects(){
 
     /////////////////////
     // Gui
-    // Dialogue box
-    dialogueBox = std::make_shared<GSprite>();
-    addNewGuiObject(dialogueBox, levelPtr, 0);
-    dialogueBox->setTexture(textureMap.at("dialogueBackground.png"));
-    dialogueBox->setRelativePos((GAME_WIDTH-(dialogueBox->sprite.getGlobalBounds().width))/2, 600); // centralize it on X position
-    
-    // Dialogue text
-    dialogueText = std::make_shared<GText>();
-    addNewGuiObject(dialogueText, dialogueBox, 1);
-    dialogueText->text.setFont(fontMap["font1.ttf"]);
-    dialogueText->text.setCharacterSize(30);
-    dialogueText->text.setString("Hi");
-    dialogueText->setRelativePos(60, 20);
-
     // dummy-npc dialogue
     std::shared_ptr<Dialogue> dialogue1 = std::make_shared<Dialogue>();
     dialogues.insert({0, dialogue1});
@@ -95,9 +101,23 @@ void Level::initDummyGObjects(){
     currentDialogue = dialogue1;
 };
 
-// Init all the assets
-void Level::initDummyAssets(){
-    // init texture storage
+// Assets
+// necessary
+void Level::initNecessaryAssets(){
+    // texture
+    sf::Texture texture;
+    texture.loadFromFile("Assets/Textures/dialogueBackground.png");
+    textureMap["dialogueBackground.png"] = texture;
+
+    // font
+    sf::Font font;
+    font.loadFromFile("Assets/Fonts/font1.ttf");
+    fontMap["font1.ttf"] = font;
+};
+
+// test
+void Level::initTestAssets(){
+    // texture
     sf::Texture texture;
     texture.loadFromFile("Assets/Textures/dummy.png");
     textureMap["dummy.png"] = texture;
@@ -105,15 +125,10 @@ void Level::initDummyAssets(){
     textureMap["sword.png"] = texture;
     texture.loadFromFile("Assets/Textures/platform.png");
     textureMap["platform.png"] = texture;
-    texture.loadFromFile("Assets/Textures/dialogueBackground.png");
-    textureMap["dialogueBackground.png"] = texture;
-
-    // init font storage
-    sf::Font font;
-    font.loadFromFile("Assets/Fonts/font1.ttf");
-    fontMap["font1.ttf"] = font;
 };
 
+
+// All
 // Init level
 void Level::init(){
     levelPtr = shared_from_this();
@@ -123,6 +138,8 @@ void Level::init(){
     guiView.setCenter(GAME_WIDTH/2, GAME_HEIGHT/2);
 
     // init object
-    initDummyAssets();
-    initDummyGObjects();
+    initNecessaryAssets();
+    initNecessaryGObjects();
+    initTestAssets();
+    initTestGObjects();
 };

@@ -11,9 +11,6 @@ Game::~Game(){}
 
 // Game init
 void Game::init(){
-    // init self pointer
-    gamePtr = shared_from_this();
-
     // init all the controls
     initControls();
 

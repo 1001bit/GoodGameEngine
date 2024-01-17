@@ -10,7 +10,7 @@ const std::unordered_set<GObjectType> DRAWABLE_GOBJECT_TYPES{
 // GObjects that are bodies
 const std::unordered_set<GObjectType> BODY_GOBJECT_TYPES{
     TKinematicBody,
-    TSolidBody
+    TBody
 };
 
 // Structors

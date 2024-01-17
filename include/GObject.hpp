@@ -14,7 +14,7 @@ enum GObjectType{
     TSprite,
     TAnimSprite,
     TKinematicBody,
-    TSolidBody,
+    TBody,
     TCamera, 
     TText,
 };

@@ -8,13 +8,13 @@
 #include "Animation.hpp"
 #include "GObject.hpp"
 
-typedef std::unordered_map<std::string, Animation> animMap;
+typedef std::unordered_map<std::string, Animation> anim_map;
 
 class AnimatedSprite : public GObject {
 
 private:
     // Variables
-    animMap animationMap;
+    anim_map animationMap;
     Animation* currentAnimation;
     float elapsedTime;
 

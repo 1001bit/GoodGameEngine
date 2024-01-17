@@ -35,7 +35,7 @@ void Level::addNewLevelObject(std::shared_ptr<GObject> newGObject, std::shared_p
     newGObject->setParent(newParent);
     // if layer doesn't exist - make it
     if(!GameLayers.count(layer)){
-        GameLayers[layer] = GObjectPtrSet{};
+        GameLayers[layer] = gobject_ptr_set{};
     }
     GameLayers[layer].insert(newGObject);
 };
@@ -49,7 +49,7 @@ void Level::addNewGuiObject(std::shared_ptr<GObject> newGObject, std::shared_ptr
     newGObject->setParent(newParent);
     // if layer doesn't exist - make it
     if(!GuiLayers.count(layer)){
-        GuiLayers[layer] = GObjectPtrSet{};
+        GuiLayers[layer] = gobject_ptr_set{};
     }
     GuiLayers[layer].insert(newGObject);
 };

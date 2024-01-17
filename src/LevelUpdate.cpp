@@ -4,7 +4,7 @@
 // Update all the objects of the game
 void Level::updateLevelObjects(sf::RenderWindow& window, const float& timeMs){
     // iterate through whole map
-    for(std::pair<const u_char, GObjectPtrSet> GObjectsLayer : GameLayers){
+    for(std::pair<const u_char, gobject_ptr_set> GObjectsLayer : GameLayers){
         // iterate through a single layer
         for(std::shared_ptr<GObject> object : GObjectsLayer.second){
             // update an object
@@ -65,7 +65,7 @@ void Level::updateGuiObjects(sf::RenderWindow& window, const float& timeMs){
     }
 
     // iterate through whole map
-    for(std::pair<const u_char, GObjectPtrSet> GObjectsLayer : GuiLayers){
+    for(std::pair<const u_char, gobject_ptr_set> GObjectsLayer : GuiLayers){
         for(std::shared_ptr<GObject> object : GObjectsLayer.second){
             if(!DRAWABLE_GOBJECT_TYPES.count(object->getType())){
                 continue;

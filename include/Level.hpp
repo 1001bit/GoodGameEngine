@@ -5,7 +5,7 @@
 #include "GSprite.hpp"
 #include "PhysPlayer.hpp"
 #include "Camera.hpp"
-#include "SolidBody.hpp"
+#include "Body.hpp"
 #include "TDPlayer.hpp"
 #include "TDNpc.hpp"
 #include "PhysNpc.hpp"
@@ -13,7 +13,7 @@
 #include "Dialogue.hpp"
 
 // Set of GObjects
-typedef std::unordered_set<std::shared_ptr<GObject>> GObjectPtrSet;
+typedef std::unordered_set<std::shared_ptr<GObject>> gobject_ptr_set;
 
 // Types of layers
 enum GameLayerType {
@@ -32,9 +32,9 @@ private:
     // GObjects
 
     // layers of level GObjects
-    std::map<u_char, GObjectPtrSet> GameLayers;
+    std::map<u_char, gobject_ptr_set> GameLayers;
     // layers of GUI GObjects
-    std::map<u_char, GObjectPtrSet> GuiLayers;
+    std::map<u_char, gobject_ptr_set> GuiLayers;
     // set of dialogues and their id's
     std::unordered_map<u_char, std::shared_ptr<Dialogue>> dialogues;
 

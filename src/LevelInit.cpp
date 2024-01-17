@@ -33,7 +33,7 @@ void Level::initTestGObjects(){
     npcSprite->playAnimation("idle");
 
     // a platform
-    std::shared_ptr<SolidBody> platform = std::make_shared<SolidBody>();
+    std::shared_ptr<Body> platform = std::make_shared<Body>();
     addNewLevelObject(platform, nullptr);
     platform->setRectSize(100, 10);
     platform->setRelativePos(100, 800);
@@ -43,7 +43,7 @@ void Level::initTestGObjects(){
     platformSprite->setTexture(textureMap.at("platform.png"));
 
     // 2nd platform
-    std::shared_ptr<SolidBody> platform2 = std::make_shared<SolidBody>();
+    std::shared_ptr<Body> platform2 = std::make_shared<Body>();
     addNewLevelObject(platform2, nullptr);
     platform2->setRectSize(100, 10);
     platform2->setRelativePos(800, 730);
@@ -53,7 +53,7 @@ void Level::initTestGObjects(){
     platformSprite2->setTexture(textureMap.at("platform.png"));
 
     // 3rd platform
-    std::shared_ptr<SolidBody> platform3 = std::make_shared<SolidBody>();
+    std::shared_ptr<Body> platform3 = std::make_shared<Body>();
     addNewLevelObject(platform3, nullptr);
     platform3->setRectSize(100, 10);
     platform3->setRelativePos(-600, 730);

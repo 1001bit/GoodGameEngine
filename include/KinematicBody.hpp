@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GObject.hpp"
+#include "Body.hpp"
 
 // all types of npcs
 enum NpcType {
@@ -11,7 +11,7 @@ enum NpcType {
 
 // Class
 
-class KinematicBody : public GObject 
+class KinematicBody : public Body 
 {
 private:
 

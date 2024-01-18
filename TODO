@@ -1,6 +1,7 @@
 - Collision grid object
 - Collision optimisations:
     - Make collision work with: Body, CollisionGrid
+- Cooldowns singleton class
 - Trigger system (triggers for level transition, dialogue start, etc.)
 - Levels
     - Level editor

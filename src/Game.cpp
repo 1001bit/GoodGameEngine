@@ -1,7 +1,5 @@
 #include "Game.hpp"
 
-// #define DRAWCOLLIDER
-
 // Structors
 Game::Game(){}
 

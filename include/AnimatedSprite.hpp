@@ -6,11 +6,11 @@
 #include <math.h>
 #include <SFML/Graphics.hpp>
 #include "Animation.hpp"
-#include "GObject.hpp"
+#include "GDrawable.hpp"
 
 typedef std::unordered_map<std::string, Animation> anim_map;
 
-class AnimatedSprite : public GObject {
+class AnimatedSprite : public GDrawable {
 
 private:
     // Variables

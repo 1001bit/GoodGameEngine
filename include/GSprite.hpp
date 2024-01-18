@@ -1,9 +1,9 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "GObject.hpp"
+#include "GDrawable.hpp"
 
-class GSprite : public GObject
+class GSprite : public GDrawable
 {
 private:
 

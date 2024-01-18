@@ -1,44 +1,54 @@
 #include "Level.hpp"
 
+// #define DRAWCOLLIDER
+
 // Methods
 // Update all the objects of the game
 void Level::updateLevelObjects(sf::RenderWindow& window, const float& timeMs){
-    // iterate through whole map
-    for(std::pair<const u_char, gobject_ptr_set> GObjectsLayer : GameLayers){
-        // iterate through a single layer
-        for(std::shared_ptr<GObject> object : GObjectsLayer.second){
-            // update an object
-            object->update(timeMs);
+    // update and collide bodies
+    for(std::shared_ptr<Body> body : levelBodiesSet){
+        body->update(timeMs);
 
-            // if current layer == body layer: collide
-            if(GObjectsLayer.first == GameLayerType::LBodies && object->getRect() != sf::FloatRect() && object->getType() == TKinematicBody){
-                // collide body with other bodies
-                for(std::shared_ptr<GObject> Object2 : GObjectsLayer.second){
-                    if(Object2 == object || Object2->getRect() == sf::FloatRect()){
-                        continue;
-                    }
-                    object->collide(Object2);
-                }
+        // don't collide if no collider
+        if(body->getRect() == sf::FloatRect()){
+            continue;
+        }
 
-                // draw collider for debug
-                #ifdef DRAWCOLLIDER
-                sf::RectangleShape visible = sf::RectangleShape();
-                visible.setFillColor(sf::Color::Red);
-                visible.setSize(sf::Vector2f(object->getCollider().width, object->getCollider().height));
-                visible.setPosition(sf::Vector2f(object->getCollider().left, object->getCollider().top));
-                window.draw(visible);
-                #endif
+        // collide body with other body 
+        for(std::shared_ptr<Body> body2 : levelBodiesSet){
+            if(body2 == body || body2->getRect() == sf::FloatRect()){
+                continue;
             }
+            body->collide(body2);
+        }
+
+        // draw collider for debug
+        #ifdef DRAWCOLLIDER
+        sf::RectangleShape visible = sf::RectangleShape();
+        visible.setFillColor(sf::Color::Red);
+        visible.setSize(sf::Vector2f(body->getRect().width, body->getRect().height));
+        visible.setPosition(sf::Vector2f(body->getRect().left, body->getRect().top));
+        window.draw(visible);
+        #endif
+    }
+
+    // update other gobjects
+    for(std::shared_ptr<GObject> object : levelGObjectsSet){
+        object->update(timeMs);
+    }
+
+    // draw and update drawables
+    for(std::pair<const u_char, gdrawable_ptr_set> drawablesLayer : levelDrawableLayers){
+        // iterate through a single layer
+        for(std::shared_ptr<GDrawable> drawable : drawablesLayer.second){
+            // update an object
+            drawable->update(timeMs);
 
             #ifndef DRAWCOLLIDER
-            // if drawable - draw on a screen
-            if(DRAWABLE_GOBJECT_TYPES.count(object->getType())){
-                object->drawSelf(window);
-            }
+            drawable->drawSelf(window);
             #endif
         }
     }
-    camera->update(timeMs);
 };
 
 // Update all the objects of the GUI
@@ -47,7 +57,7 @@ void Level::updateGuiObjects(sf::RenderWindow& window, const float& timeMs){
     if(auto currentDialogue = currentDialogueWeak.lock()){
         currentDialogue->update();
         // set camera target
-        if(auto currentSpeaker = LevelObjectsWId.at(currentDialogue->getCurrentLine().characterId).lock()){
+        if(auto currentSpeaker = levelGObjectsWId.at(currentDialogue->getCurrentLine().characterId).lock()){
             camera->setTarget(currentSpeaker);
         }
         // set dialogue text
@@ -65,12 +75,12 @@ void Level::updateGuiObjects(sf::RenderWindow& window, const float& timeMs){
     }
 
     // iterate through whole map
-    for(std::pair<const u_char, gobject_ptr_set> GObjectsLayer : GuiLayers){
-        for(std::shared_ptr<GObject> object : GObjectsLayer.second){
-            if(!DRAWABLE_GOBJECT_TYPES.count(object->getType())){
-                continue;
-            }
-            object->drawSelf(window);
+    // draw drawables
+    for(std::pair<const u_char, gdrawable_ptr_set> drawablesLayer : guiDrawableLayers){
+        // iterate through a single layer
+        for(std::shared_ptr<GDrawable> drawable : drawablesLayer.second){
+            drawable->update(timeMs);
+            drawable->drawSelf(window);
         }
     }
 };

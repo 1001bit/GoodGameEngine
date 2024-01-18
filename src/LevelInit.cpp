@@ -6,60 +6,73 @@ void Level::initTestGObjects(){
     // Level
     // dummy
     std::shared_ptr<PhysPlayer> dummy = std::make_shared<PhysPlayer>();
-    addNewLevelObject(dummy, nullptr, 0, 1);
+    dummy->setParent(shared_from_this());
+    levelBodiesSet.insert(dummy);
+    levelGObjectsWId[1] = dummy;
     dummy->setRectSize(16, 16);
     dummy->setRelativePos(500, 300);
     camera->setTarget(dummy);
     // his sprite
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();
-    addNewLevelObject(dummySprite, dummy, 1);
+    dummySprite->setParent(dummy);
+    levelDrawableLayers[0].insert(dummySprite);
     dummySprite->insertAnimation("idle", Animation(textureMap.at("dummy.png"), 16, 500, 1));
     dummySprite->playAnimation("idle");
     // his sword
     std::shared_ptr<GSprite> sword = std::make_shared<GSprite>();
-    addNewLevelObject(sword, dummy, 2);
+    sword->setParent(dummy);
+    levelDrawableLayers[1].insert(sword);
     sword->setTexture(textureMap.at("sword.png"));
     sword->setRelativePos(-30, 1);
 
     // Npc
     std::shared_ptr<PhysNpc> npc = std::make_shared<PhysNpc>();
-    addNewLevelObject(npc, nullptr, 0, 2);
+    npc->setParent(shared_from_this());
+    levelBodiesSet.insert(npc);
+    levelGObjectsWId[2] = npc;
     npc->setRectSize(16, 16);
     npc->setRelativePos(500, 300);
     // his sprite
     std::shared_ptr<AnimatedSprite> npcSprite = std::make_shared<AnimatedSprite>();
-    addNewLevelObject(npcSprite, npc, 1);
+    npcSprite->setParent(npc);
+    levelDrawableLayers[0].insert(npcSprite);
     npcSprite->insertAnimation("idle", Animation(textureMap.at("dummy.png"), 16, 500, 1));
     npcSprite->playAnimation("idle");
 
     // a platform
     std::shared_ptr<Body> platform = std::make_shared<Body>();
-    addNewLevelObject(platform, nullptr);
+    platform->setParent(shared_from_this());
+    levelBodiesSet.insert(platform);
     platform->setRectSize(100, 10);
     platform->setRelativePos(100, 800);
     // it's sprite
     std::shared_ptr<GSprite> platformSprite = std::make_shared<GSprite>();
-    addNewLevelObject(platformSprite, platform, 0);
+    platformSprite->setParent(platform);
+    levelDrawableLayers[0].insert(platformSprite);
     platformSprite->setTexture(textureMap.at("platform.png"));
 
     // 2nd platform
     std::shared_ptr<Body> platform2 = std::make_shared<Body>();
-    addNewLevelObject(platform2, nullptr);
+    platform2->setParent(shared_from_this());
+    levelBodiesSet.insert(platform2);
     platform2->setRectSize(100, 10);
     platform2->setRelativePos(800, 730);
     // it's sprite
     std::shared_ptr<GSprite> platformSprite2 = std::make_shared<GSprite>();
-    addNewLevelObject(platformSprite2, platform2, 0);
+    platformSprite2->setParent(platform2);
+    levelDrawableLayers[0].insert(platformSprite2);
     platformSprite2->setTexture(textureMap.at("platform.png"));
 
     // 3rd platform
     std::shared_ptr<Body> platform3 = std::make_shared<Body>();
-    addNewLevelObject(platform3, nullptr);
+    platform3->setParent(shared_from_this());
+    levelBodiesSet.insert(platform3);
     platform3->setRectSize(100, 10);
     platform3->setRelativePos(-600, 730);
     // it's sprite
     std::shared_ptr<GSprite> platformSprite3 = std::make_shared<GSprite>();
-    addNewLevelObject(platformSprite3, platform3, 0);
+    platformSprite3->setParent(platform3);
+    levelDrawableLayers[0].insert(platformSprite3);
     platformSprite3->setTexture(textureMap.at("platform.png"));
 
     // Gui
@@ -95,19 +108,22 @@ void Level::initNecessaryGObjects(){
     // camera
     camera = std::make_shared<Camera>();
     camera->setSize(GAME_WIDTH, GAME_HEIGHT);
+    levelGObjectsSet.insert(camera);
 
     // Gui
     // Dialogue box
     std::shared_ptr<GSprite> dialogueBox = std::make_shared<GSprite>();
     dialogueBoxWeak = dialogueBox;
-    addNewGuiObject(dialogueBox, nullptr, 0);
+    dialogueBox->setParent(shared_from_this());
+    guiDrawableLayers[0].insert(dialogueBox);
     dialogueBox->setTexture(textureMap.at("dialogueBackground.png"));
     dialogueBox->setRelativePos((GAME_WIDTH-(dialogueBox->sprite.getGlobalBounds().width))/2, 600); // centralize it on X position
     
     // Dialogue text
     std::shared_ptr<GText> dialogueText = std::make_shared<GText>();
     dialogueTextWeak = dialogueText;
-    addNewGuiObject(dialogueText, dialogueBox, 1);
+    dialogueText->setParent(dialogueBox);
+    guiDrawableLayers[1].insert(dialogueText);
     dialogueText->text.setFont(fontMap["font1.ttf"]);
     dialogueText->text.setCharacterSize(30);
     dialogueText->text.setString("Hi");
@@ -131,6 +147,13 @@ void Level::initNecessaryAssets(){
 // All
 // Init level
 void Level::init(){
+    // create layers of drawables
+    const u_char layersCount = 10;
+    for(u_char i = 0; i < layersCount; ++i){
+        guiDrawableLayers[i] = gdrawable_ptr_set();
+        levelDrawableLayers[i] = gdrawable_ptr_set();
+    }
+
     // init gui view
     guiView.setSize(GAME_WIDTH, GAME_HEIGHT);
     guiView.setCenter(GAME_WIDTH/2, GAME_HEIGHT/2);

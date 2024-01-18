@@ -11,16 +11,12 @@
 #include "PhysNpc.hpp"
 #include "GText.hpp"
 #include "Dialogue.hpp"
+#include "GDrawable.hpp"
 
 // Set of GObjects
+typedef std::unordered_set<std::shared_ptr<GDrawable>> gdrawable_ptr_set;
+typedef std::unordered_set<std::shared_ptr<Body>> body_ptr_set;
 typedef std::unordered_set<std::shared_ptr<GObject>> gobject_ptr_set;
-
-// Types of layers
-enum GameLayerType {
-    LBodies,
-    LInvisibles,
-    Drawables
-};
 
 // sizes of the game
 constexpr uint GAME_WIDTH = 1440;
@@ -29,17 +25,21 @@ constexpr uint GAME_HEIGHT = 880;
 class Level : public GObject
 {
 private:
-    // GObjects
+    // Level GObjects
+    // Layers of drawable objects
+    std::map<u_char, gdrawable_ptr_set> levelDrawableLayers;
+    // Set of body objects
+    body_ptr_set levelBodiesSet;
+    // Set of other objects
+    gobject_ptr_set levelGObjectsSet;
+    // set of level GObjects with own id
+    std::unordered_map<uint16_t, std::weak_ptr<GObject>> levelGObjectsWId;
 
-    // layers of level GObjects
-    std::map<u_char, gobject_ptr_set> GameLayers;
-    // layers of GUI GObjects
-    std::map<u_char, gobject_ptr_set> GuiLayers;
+    // GUI GObjects
+    // layers of drawable GUI GObjects
+    std::map<u_char, gdrawable_ptr_set> guiDrawableLayers;
     // set of dialogues and their id's
     std::unordered_map<u_char, std::shared_ptr<Dialogue>> dialogues;
-
-    // set of GObjects with own id
-    std::unordered_map<uint16_t, std::weak_ptr<GObject>> LevelObjectsWId;
 
     // Storages
     // storage of the textures
@@ -58,12 +58,6 @@ private:
     std::weak_ptr<Dialogue> currentDialogueWeak;
     // gui view
     sf::View guiView;
-
-    // Create GObjects patterns
-    // Create new object for game
-    void addNewLevelObject(std::shared_ptr<GObject> newGObject, std::shared_ptr<GObject> newParent, u_char layer = 0, uint16_t id = 0);
-    // Create new object for gui
-    void addNewGuiObject(std::shared_ptr<GObject> newGObject, std::shared_ptr<GObject> newParent, u_char layer);
 
     // Updates
     // Update all the GObjects of the level

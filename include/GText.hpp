@@ -1,8 +1,8 @@
 #pragma once
 
-#include "GObject.hpp"
+#include "GDrawable.hpp"
 
-class GText : public GObject
+class GText : public GDrawable
 {
 private:
     

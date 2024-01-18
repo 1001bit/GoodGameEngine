@@ -1,9 +1,7 @@
 #include "GText.hpp"
 
 // Structors
-GText::GText(){
-    this->type = TText;
-}
+GText::GText(){}
 
 GText::~GText(){}
 

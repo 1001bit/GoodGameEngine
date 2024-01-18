@@ -12,6 +12,7 @@ public:
     ~Body();
 
     // Methods
-    virtual sf::FloatRect getOverlap(const sf::FloatRect& otherRect);
+    // collide seft with obstacle body
+    virtual void collide(std::shared_ptr<Body> obstacle);
 };
 

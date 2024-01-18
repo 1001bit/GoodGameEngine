@@ -1,34 +1,16 @@
 #include "GObject.hpp"
 
-// All drawable types of objects
-const std::unordered_set<GObjectType> DRAWABLE_GOBJECT_TYPES{
-    TAnimSprite,
-    TSprite,
-    TText
-};
-
-// GObjects that are bodies
-const std::unordered_set<GObjectType> BODY_GOBJECT_TYPES{
-    TKinematicBody,
-    TBody
-};
-
 // Structors
-
 GObject::GObject(){
     this->type = TNone;
 }
 
-GObject::~GObject(){
-    std::cout << "destroyed " << getType() << "\n";
-}
+GObject::~GObject(){}
 
 // Methods
 // Virtuals
 void GObject::update(const float& timeMs){}
 void GObject::updateDrawablePos(){}
-void GObject::collide(std::shared_ptr<GObject> obstacle){};
-void GObject::drawSelf(sf::RenderWindow& window){};
 
 // Main
 

@@ -3,8 +3,7 @@
 // Structors
 AnimatedSprite::AnimatedSprite() {
     this->sprite.scale(SPRITE_SCALE, SPRITE_SCALE);
-
-    this->type = TAnimSprite;
+    
     this->elapsedTime = 0;
     this->isFlipped = false;
     this->currentAnimation = nullptr;

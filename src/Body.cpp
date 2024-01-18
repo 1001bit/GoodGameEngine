@@ -8,8 +8,5 @@ Body::Body(){
 Body::~Body(){}
 
 // Methods
-sf::FloatRect Body::getOverlap(const sf::FloatRect& otherRect){
-    sf::FloatRect overlap;
-    otherRect.intersects(this->getRect(), overlap);
-    return overlap;
-}
+// collide seft with obstacle body
+void Body::collide(std::shared_ptr<Body> obstacle){};

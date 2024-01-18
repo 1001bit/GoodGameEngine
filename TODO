@@ -1,9 +1,6 @@
-? Make a set for each type of object (all, body, drawable)
-- Collision optimisations:
-    - Make Body object, which is an ancestor for KinematicBody, SolidBody and CollisionGrid
-    - Body object has "getCollisionOverlap(rect)" method, which returns overlap of collision of itself and rect.
-    - Remake collision system (simply, move self looking on overlap instead of obstacle)
 - Collision grid object
+- Collision optimisations:
+    - Make collision work with: Body, CollisionGrid
 - Trigger system (triggers for level transition, dialogue start, etc.)
 - Levels
     - Level editor

@@ -38,7 +38,7 @@ void KinematicBody::update(const float& timeMs){
 }
 
 // behaviour on collide
-void KinematicBody::collide(std::shared_ptr<GObject> obstacle){
+void KinematicBody::collide(std::shared_ptr<Body> obstacle){
     // only solid body can stop physics body
     if(obstacle->getType() != TBody){
         return;

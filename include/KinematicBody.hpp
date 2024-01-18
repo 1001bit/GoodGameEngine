@@ -35,7 +35,7 @@ public:
 
     // Methods
     // collision behaviour
-    void collide(std::shared_ptr<GObject> obstacle);
+    void collide(std::shared_ptr<Body> obstacle);
     // Update the state
     void update(const float& timeMs);
 };

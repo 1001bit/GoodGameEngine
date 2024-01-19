@@ -13,6 +13,6 @@ public:
 
     // Methods
     // collide seft with obstacle body
-    virtual void collide(std::shared_ptr<Body> obstacle);
+    virtual void collideWith(std::shared_ptr<Body> obstacle);
 };
 

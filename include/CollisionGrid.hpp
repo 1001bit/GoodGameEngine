@@ -13,8 +13,8 @@ class CollisionGrid : public GObject
 private:
     // Variables
     u_char tileSize;
-    unsigned height;
-    unsigned width;
+    uint32_t height;
+    uint32_t width;
     TileType** tileGrid;
 
 public:
@@ -23,6 +23,10 @@ public:
     ~CollisionGrid();
 
     // Methods
-    // init the grid parameters
-    void initGrid(u_char newTileSize, unsigned newHeight, unsigned newWidth);
+    // init the grid parameters and set the grid from vector
+    void setGrid(std::vector<std::string> stringsVector, u_char newTileSize);
+
+    // Getters
+    // get collision grid map
+    TileType** const getTileGrid();
 };

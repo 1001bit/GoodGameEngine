@@ -37,17 +37,13 @@ void KinematicBody::update(const float& timeMs){
     }
 }
 
-// behaviour on collide
-void KinematicBody::collide(std::shared_ptr<Body> obstacle){
-    // only solid body can stop physics body
-    if(obstacle->getType() != TBody){
-        return;
-    }
+// collide with base body (solid)
+void KinematicBody::collideWithSolidBody(std::shared_ptr<Body> obstacle){
+    // prevRect collision method
 
     const sf::FloatRect& selfRect = getRect();
     const sf::FloatRect& obstacleRect = obstacle->getRect();
 
-    // prevRect collision method
     // no collision if no collision!
     if(!(selfRect.intersects(obstacleRect))){
         return;
@@ -88,5 +84,25 @@ void KinematicBody::collide(std::shared_ptr<Body> obstacle){
             collisionHorizontalDir = Left;
         }
         velocity.x = 0;
+    }
+};
+
+// collide with collision grid (solid)
+void KinematicBody::collideWithCollisionGrid(std::shared_ptr<Body> obstacle){
+    
+};
+
+// choose how to behave collision depending on obstacle
+void KinematicBody::collideWith(std::shared_ptr<Body> obstacle){
+    switch (obstacle->getType())
+    {
+    case TBody:
+        collideWithSolidBody(obstacle);
+        break;
+    case TCollisionGrid:
+        collideWithCollisionGrid(obstacle);
+        break;
+    default:
+        break;
     }
 }

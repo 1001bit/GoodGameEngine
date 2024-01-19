@@ -22,20 +22,24 @@ protected:
     Direction collisionVerticalDir;
     Direction collisionHorizontalDir;
     std::unordered_map<std::string, float> cooldownMap;
-    
+
     // Methods
     // Control the unit
     virtual void control();
     // Gravity force
     virtual void gravity(const float& timeMs);
+    // collide with base body (solid)
+    void collideWithSolidBody(std::shared_ptr<Body> obstacle);
+    // collide with collision grid (solid)
+    void collideWithCollisionGrid(std::shared_ptr<Body> obstacle);
 public:
     // Structors
     KinematicBody();
     ~KinematicBody();
 
     // Methods
-    // collision behaviour
-    void collide(std::shared_ptr<Body> obstacle);
+    // choose how to behave collision depending on obstacle
+    void collideWith(std::shared_ptr<Body> obstacle);
     // Update the state
     void update(const float& timeMs);
 };

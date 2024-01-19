@@ -12,8 +12,9 @@ constexpr float SPRITE_SCALE = 7;
 enum GObjectType{
     TNone,
     TDrawable,
-    TKinematicBody,
     TBody,
+    TKinematicBody,
+    TCollisionGrid,
     TCamera, 
 };
 // 4 directions

@@ -9,4 +9,4 @@ Body::~Body(){}
 
 // Methods
 // collide seft with obstacle body
-void Body::collide(std::shared_ptr<Body> obstacle){};
+void Body::collideWith(std::shared_ptr<Body> obstacle){};

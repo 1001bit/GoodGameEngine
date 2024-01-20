@@ -1,7 +1,5 @@
 #include "Level.hpp"
 
-// #define DRAWCOLLIDER
-
 // Methods
 // Update all the objects of the game
 void Level::updateLevelObjects(sf::RenderWindow& window, const float& timeMs){
@@ -19,16 +17,16 @@ void Level::updateLevelObjects(sf::RenderWindow& window, const float& timeMs){
             if(body2 == body || body2->getRect() == sf::FloatRect()){
                 continue;
             }
-            body->collideWith(body2);
+            body->collideWith(body2, window);
         }
 
         // draw collider for debug
         #ifdef DRAWCOLLIDER
-        sf::RectangleShape visible = sf::RectangleShape();
-        visible.setFillColor(sf::Color::Red);
-        visible.setSize(sf::Vector2f(body->getRect().width, body->getRect().height));
-        visible.setPosition(sf::Vector2f(body->getRect().left, body->getRect().top));
-        window.draw(visible);
+        sf::RectangleShape visibleRect = sf::RectangleShape();
+        visibleRect.setFillColor(sf::Color(255, 0, 0, 40));
+        visibleRect.setSize(body->getRect().getSize());
+        visibleRect.setPosition(body->getRect().getPosition());
+        window.draw(visibleRect);
         #endif
     }
 

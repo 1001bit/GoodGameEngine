@@ -9,7 +9,7 @@ void Level::initTestGObjects(){
     dummy->setParent(shared_from_this());
     levelBodiesSet.insert(dummy);
     levelGObjectsWId[1] = dummy;
-    dummy->setRectSize(16, 16);
+    dummy->setRectPixelSize(16, 16);
     dummy->setRelativePos(500, 300);
     camera->setTarget(dummy);
     // his sprite
@@ -30,7 +30,7 @@ void Level::initTestGObjects(){
     npc->setParent(shared_from_this());
     levelBodiesSet.insert(npc);
     levelGObjectsWId[2] = npc;
-    npc->setRectSize(16, 16);
+    npc->setRectPixelSize(16, 16);
     npc->setRelativePos(500, 300);
     // his sprite
     std::shared_ptr<AnimatedSprite> npcSprite = std::make_shared<AnimatedSprite>();
@@ -43,7 +43,7 @@ void Level::initTestGObjects(){
     std::shared_ptr<Body> platform = std::make_shared<Body>();
     platform->setParent(shared_from_this());
     levelBodiesSet.insert(platform);
-    platform->setRectSize(100, 10);
+    platform->setRectPixelSize(100, 10);
     platform->setRelativePos(100, 800);
     // it's sprite
     std::shared_ptr<GSprite> platformSprite = std::make_shared<GSprite>();
@@ -55,7 +55,7 @@ void Level::initTestGObjects(){
     std::shared_ptr<Body> platform2 = std::make_shared<Body>();
     platform2->setParent(shared_from_this());
     levelBodiesSet.insert(platform2);
-    platform2->setRectSize(100, 10);
+    platform2->setRectPixelSize(100, 10);
     platform2->setRelativePos(800, 730);
     // it's sprite
     std::shared_ptr<GSprite> platformSprite2 = std::make_shared<GSprite>();
@@ -67,13 +67,23 @@ void Level::initTestGObjects(){
     std::shared_ptr<Body> platform3 = std::make_shared<Body>();
     platform3->setParent(shared_from_this());
     levelBodiesSet.insert(platform3);
-    platform3->setRectSize(100, 10);
+    platform3->setRectPixelSize(100, 10);
     platform3->setRelativePos(-600, 730);
     // it's sprite
     std::shared_ptr<GSprite> platformSprite3 = std::make_shared<GSprite>();
     platformSprite3->setParent(platform3);
     levelDrawableLayers[0].insert(platformSprite3);
     platformSprite3->setTexture(textureMap.at("platform.png"));
+
+    // collision grid
+    std::shared_ptr<CollisionGrid> colGrid = std::make_shared<CollisionGrid>();
+    std::vector<std::string> emptyColMap;
+    for(unsigned i = 0; i < 60; i++){
+        emptyColMap.push_back("1" + std::string(99, '0'));
+    }
+    colGrid->setParent(shared_from_this());
+    levelBodiesSet.insert(colGrid);
+    colGrid->setGrid(emptyColMap, 2);
 
     // Gui
     // dummy-npc dialogue

@@ -61,7 +61,7 @@ public:
     // Set a parent
     void setParent(std::shared_ptr<GObject> newParent);
     // set rect size
-    void setRectSize(float x, float y);
+    void setRectPixelSize(float x, float y);
     
     // Getters
     // Get position relative to parent's position

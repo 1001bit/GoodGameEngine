@@ -12,6 +12,7 @@
 #include "GText.hpp"
 #include "Dialogue.hpp"
 #include "GDrawable.hpp"
+#include "CollisionGrid.hpp"
 
 // Set of GObjects
 typedef std::unordered_set<std::shared_ptr<GDrawable>> gdrawable_ptr_set;

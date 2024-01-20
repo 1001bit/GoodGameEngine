@@ -37,32 +37,49 @@ void KinematicBody::update(const float& timeMs){
     }
 }
 
-// collide with base body (solid)
-void KinematicBody::collideWithSolidBody(std::shared_ptr<Body> obstacle){
-    // prevRect collision method
-
+// choose how to behave collision depending on obstacle
+void KinematicBody::collideWith(std::shared_ptr<Body> obstacle, sf::RenderWindow& window){
+    // collidable types of GObjects
+    if(!std::unordered_set{TCollisionGrid, TBody}.count(obstacle->getType())){
+        return;
+    }
     const sf::FloatRect& selfRect = getRect();
-    const sf::FloatRect& obstacleRect = obstacle->getRect();
 
-    // no collision if no collision!
-    if(!(selfRect.intersects(obstacleRect))){
+    // get overlap of colliding with obstacle
+    sf::FloatRect overlap = obstacle->getOverlapWith(selfRect);
+    if(overlap == sf::FloatRect()){
         return;
     }
 
+    // draw overlap rect for debug
+    #ifdef DRAWCOLLIDER
+    sf::RectangleShape visibleOverlap = sf::RectangleShape();
+    visibleOverlap.setFillColor(sf::Color(0, 255, 0, 200));
+    visibleOverlap.setSize(overlap.getSize());
+    visibleOverlap.setPosition(overlap.getPosition());
+    window.draw(visibleOverlap);
+    #endif
+
+    if(obstacle->getType() == TCollisionGrid){
+        std::cout << overlap.width << " " << overlap.height << "\n";
+        return;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // prev rect method (if body in past didn't touch the obstacle in some direction and now it does, it stops in this direction)
     sf::FloatRect prevRect;
     
     // vertical
     prevRect = selfRect;
     prevRect.top -= velocity.y;
-    if(!prevRect.intersects(obstacleRect)){
+    if(!prevRect.intersects(overlap)){
         // bottom
         if(velocity.y > 0){
-            setRelativePos(selfRect.left, obstacleRect.top - selfRect.height);
+            setRelativePos(selfRect.left, overlap.top - selfRect.height);
             collisionVerticalDir = Down;
         } 
         // top
         else {
-            setRelativePos(selfRect.left, obstacleRect.top + obstacleRect.height);
+            setRelativePos(selfRect.left, overlap.top + overlap.height);
             collisionVerticalDir = Up;
         }
         velocity.y = 0;
@@ -72,37 +89,17 @@ void KinematicBody::collideWithSolidBody(std::shared_ptr<Body> obstacle){
     // horizontal
     prevRect = selfRect;
     prevRect.left -= velocity.x;
-    if(!prevRect.intersects(obstacleRect)){
+    if(!prevRect.intersects(overlap)){
         // right
         if(velocity.x > 0){
-            setRelativePos(obstacleRect.left - selfRect.width, selfRect.top);
+            setRelativePos(overlap.left - selfRect.width, selfRect.top);
             collisionHorizontalDir = Right;
         } 
         // left
         else {
-            setRelativePos(obstacleRect.left + obstacleRect.width, selfRect.top);
+            setRelativePos(overlap.left + overlap.width, selfRect.top);
             collisionHorizontalDir = Left;
         }
         velocity.x = 0;
-    }
-};
-
-// collide with collision grid (solid)
-void KinematicBody::collideWithCollisionGrid(std::shared_ptr<Body> obstacle){
-    
-};
-
-// choose how to behave collision depending on obstacle
-void KinematicBody::collideWith(std::shared_ptr<Body> obstacle){
-    switch (obstacle->getType())
-    {
-    case TBody:
-        collideWithSolidBody(obstacle);
-        break;
-    case TCollisionGrid:
-        collideWithCollisionGrid(obstacle);
-        break;
-    default:
-        break;
     }
 }

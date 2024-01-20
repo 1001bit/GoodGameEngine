@@ -28,10 +28,6 @@ protected:
     virtual void control();
     // Gravity force
     virtual void gravity(const float& timeMs);
-    // collide with base body (solid)
-    void collideWithSolidBody(std::shared_ptr<Body> obstacle);
-    // collide with collision grid (solid)
-    void collideWithCollisionGrid(std::shared_ptr<Body> obstacle);
 public:
     // Structors
     KinematicBody();
@@ -39,7 +35,7 @@ public:
 
     // Methods
     // choose how to behave collision depending on obstacle
-    void collideWith(std::shared_ptr<Body> obstacle);
+    void collideWith(std::shared_ptr<Body> obstacle, sf::RenderWindow& window);
     // Update the state
     void update(const float& timeMs);
 };

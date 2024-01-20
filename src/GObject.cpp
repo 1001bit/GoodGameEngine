@@ -46,7 +46,7 @@ void GObject::setRelativePos(const sf::Vector2f& newPos){
     updatePos();
 }
 
-void GObject::setRectSize(float w, float h){
+void GObject::setRectPixelSize(float w, float h){
     selfRect.width = w*SPRITE_SCALE;
     selfRect.height = h*SPRITE_SCALE;
 }

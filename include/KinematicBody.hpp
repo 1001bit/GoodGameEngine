@@ -35,7 +35,7 @@ public:
 
     // Methods
     // choose how to behave collision depending on obstacle
-    void collideWith(std::shared_ptr<Body> obstacle, sf::RenderWindow& window);
+    void collideWith(std::shared_ptr<Body> obstacle);
     // Update the state
     void update(const float& timeMs);
 };

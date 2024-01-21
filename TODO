@@ -1,4 +1,3 @@
-- Collision grid algorithm
 - Body horizontal flip
 - Cooldowns singleton class
 - Trigger system (triggers for level transition, dialogue start, etc.)

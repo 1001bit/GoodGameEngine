@@ -75,16 +75,6 @@ void Level::initTestGObjects(){
     levelDrawableLayers[0].insert(platformSprite3);
     platformSprite3->setTexture(textureMap.at("platform.png"));
 
-    // collision grid
-    std::shared_ptr<CollisionGrid> colGrid = std::make_shared<CollisionGrid>();
-    std::vector<std::string> emptyColMap;
-    for(unsigned i = 0; i < 60; i++){
-        emptyColMap.push_back("1" + std::string(99, '0'));
-    }
-    colGrid->setParent(shared_from_this());
-    levelBodiesSet.insert(colGrid);
-    colGrid->setGrid(emptyColMap, 2);
-
     // Gui
     // dummy-npc dialogue
     std::shared_ptr<Dialogue> dialogue1 = std::make_shared<Dialogue>();

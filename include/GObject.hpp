@@ -14,7 +14,6 @@ enum GObjectType{
     TDrawable,
     TBody,
     TKinematicBody,
-    TCollisionGrid,
     TCamera, 
 };
 // 4 directions

@@ -17,7 +17,7 @@ void Level::updateLevelObjects(sf::RenderWindow& window, const float& timeMs){
             if(body2 == body || body2->getRect() == sf::FloatRect()){
                 continue;
             }
-            body->collideWith(body2, window);
+            body->collideWith(body2);
         }
 
         // draw collider for debug

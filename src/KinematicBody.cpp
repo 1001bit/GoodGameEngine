@@ -13,7 +13,7 @@ KinematicBody::~KinematicBody(){}
 void KinematicBody::gravity(const float& timeMs){};
 void KinematicBody::control(){};
 
-// update the statement
+// update the state
 void KinematicBody::update(const float& timeMs){
     control();
     gravity(timeMs);
@@ -38,34 +38,27 @@ void KinematicBody::update(const float& timeMs){
 }
 
 // choose how to behave collision depending on obstacle
-void KinematicBody::collideWith(std::shared_ptr<Body> obstacle, sf::RenderWindow& window){
-    // collidable types of GObjects
-    if(!std::unordered_set{TCollisionGrid, TBody}.count(obstacle->getType())){
+void KinematicBody::collideWith(std::shared_ptr<Body> obstacle){
+    switch (obstacle->getType())
+    {
+    case TBody:
+        break;
+    default:
         return;
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    // prev rect method (if selfRect in past didn't touch obstacleRect in some direction and now selfRect does, kinematicBody stops in this direction)
+
     const sf::FloatRect& selfRect = getRect();
 
     // get overlap of colliding with obstacle
-    sf::FloatRect overlap = obstacle->getOverlapWith(selfRect);
+    sf::FloatRect overlap;
+    selfRect.intersects(obstacle->getRect(), overlap);
     if(overlap == sf::FloatRect()){
         return;
     }
-
-    // draw overlap rect for debug
-    #ifdef DRAWCOLLIDER
-    sf::RectangleShape visibleOverlap = sf::RectangleShape();
-    visibleOverlap.setFillColor(sf::Color(0, 255, 0, 200));
-    visibleOverlap.setSize(overlap.getSize());
-    visibleOverlap.setPosition(overlap.getPosition());
-    window.draw(visibleOverlap);
-    #endif
-
-    if(obstacle->getType() == TCollisionGrid){
-        std::cout << overlap.width << " " << overlap.height << "\n";
-        return;
-    }
-    ///////////////////////////////////////////////////////////////////////
-    // prev rect method (if body in past didn't touch the obstacle in some direction and now it does, it stops in this direction)
+    
     sf::FloatRect prevRect;
     
     // vertical

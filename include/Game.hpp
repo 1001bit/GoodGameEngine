@@ -15,6 +15,7 @@ private:
 
     // Inits
     void initControls();
+    void initCooldowns();
 
 public:
     // Structors

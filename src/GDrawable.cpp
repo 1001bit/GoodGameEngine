@@ -9,6 +9,4 @@ GDrawable::~GDrawable(){}
 
 // Methods
 // draw self drawable object
-void GDrawable::drawSelf(sf::RenderWindow& window){
-
-};
+void GDrawable::drawSelf(sf::RenderWindow& window){};

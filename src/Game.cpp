@@ -9,9 +9,13 @@ Game::~Game(){}
 
 // Game init
 void Game::init(){
-    // init all the controls
+    // Main game inits
+    // controls
     initControls();
+    // cooldown
+    initCooldowns();
 
+    // Level
     currentLevel = std::make_shared<Level>();
     currentLevel->init();
     currentLevel->initTestAssets();
@@ -68,6 +72,16 @@ void Game::initControls(){
     // mouse controls
     controls->setMouseControlsMap({
         {"dialogueNext", sf::Mouse::Left}
+    });
+}
+
+// init necessary cooldown
+void Game::initCooldowns(){
+    CooldownsManager* cooldowns = CooldownsManager::getInstance();
+    // Keyboard controls
+    cooldowns->setCooldownsMap({
+        {"npcIdle", {0, 2000}},
+        {"npcWalk", {0, 3000}},
     });
 }
 

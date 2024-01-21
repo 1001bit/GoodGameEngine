@@ -45,9 +45,11 @@ void PhysNpc::control(){
     {
     case Left:
         acceleration.x -= walkSpeed;
+        setFlip(1);
         break;
     case Right:
         acceleration.x += walkSpeed;
+        setFlip(0);
         break;
     default:
         break;

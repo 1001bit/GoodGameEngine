@@ -23,10 +23,12 @@ void PhysPlayer::control(){
     // walk left
     if(controls->isControlHeld("wLeft")){
         acceleration.x -= walkSpeed;
+        setFlip(1);
     }
     // walk right
     if(controls->isControlHeld("wRight")){
         acceleration.x += walkSpeed;
+        setFlip(0);
     }
 
     // jump

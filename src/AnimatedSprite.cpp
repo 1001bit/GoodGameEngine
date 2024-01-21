@@ -5,7 +5,6 @@ AnimatedSprite::AnimatedSprite() {
     this->sprite.scale(SPRITE_SCALE, SPRITE_SCALE);
     
     this->elapsedTime = 0;
-    this->isFlipped = false;
     this->currentAnimation = nullptr;
 }
 
@@ -49,7 +48,7 @@ void AnimatedSprite::update(const float& timeMS){
 
     // flip
     sf::IntRect currentFrame = getCurrentFrame();
-    if(isFlipped){
+    if(isFlipped()){
         currentFrame.left += currentFrame.width;
         currentFrame.width *= -1;
     }

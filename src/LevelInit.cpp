@@ -22,8 +22,9 @@ void Level::initTestGObjects(){
     std::shared_ptr<GSprite> sword = std::make_shared<GSprite>();
     sword->setParent(dummy);
     levelDrawableLayers[1].insert(sword);
+    sword->setDoesFlipMirror(1);
     sword->setTexture(textureMap.at("sword.png"));
-    sword->setRelativePos(-30, 1);
+    sword->setRelativePos(60, 0);
 
     // Npc
     std::shared_ptr<PhysNpc> npc = std::make_shared<PhysNpc>();

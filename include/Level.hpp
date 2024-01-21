@@ -13,7 +13,7 @@
 #include "Dialogue.hpp"
 #include "GDrawable.hpp"
 
-#define DRAWCOLLIDER
+// #define DRAWCOLLIDER
 
 // Set of GObjects
 typedef std::unordered_set<std::shared_ptr<GDrawable>> gdrawable_ptr_set;

@@ -3,6 +3,8 @@
 // Structors
 GObject::GObject(){
     this->type = TNone;
+    this->flipped = 0;
+    this->doesFlipMirror = 0;
 }
 
 GObject::~GObject(){}
@@ -51,6 +53,19 @@ void GObject::setRectPixelSize(float w, float h){
     selfRect.height = h*SPRITE_SCALE;
 }
 
+void GObject::setFlip(bool newFlip){
+    if(flipped != newFlip && doesFlipMirror){
+        setRelativePos(-getRelativePos().x, getRelativePos().y);
+    }
+    flipped = newFlip;
+    for(std::shared_ptr<GObject> child : children) {
+        child->setFlip(flipped);
+    }
+}
+
+void GObject::setDoesFlipMirror(bool newDoesFlipMirror){
+    doesFlipMirror = newDoesFlipMirror;
+};
 
 // Getters
 
@@ -65,3 +80,7 @@ const GObjectType& GObject::getType(){
 const sf::FloatRect& GObject::getRect(){
     return selfRect;
 }
+
+const bool& GObject::isFlipped(){
+    return flipped;
+};

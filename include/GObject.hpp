@@ -29,6 +29,8 @@ private:
     // Variables
     sf::Vector2f relativePos;
     sf::FloatRect selfRect;
+    bool flipped;
+    bool doesFlipMirror;
 
     // Methods
     // update slef position and children
@@ -61,6 +63,10 @@ public:
     void setParent(std::shared_ptr<GObject> newParent);
     // set rect size
     void setRectPixelSize(float x, float y);
+    // set the flip of the object
+    void setFlip(bool newFlip);
+    // set flip ability of the object
+    void setDoesFlipMirror(bool newdoesFlipMirror);
     
     // Getters
     // Get position relative to parent's position
@@ -69,4 +75,6 @@ public:
     const GObjectType& getType();
     // Get collider
     const sf::FloatRect& getRect();
+    // get flipped
+    const bool& isFlipped();
 };

@@ -25,7 +25,6 @@ public:
 
     // Variables
     sf::Sprite sprite;
-    bool isFlipped;
 
     // Methods
     // Start animation with name

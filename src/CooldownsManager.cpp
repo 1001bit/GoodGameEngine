@@ -4,40 +4,17 @@ CooldownsManager* CooldownsManager::instance = nullptr;
 
 // Methods
 // update all the cooldowns
-void CooldownsManager::update(const float& timeMs){
-    for(std::pair<const std::string, Cooldown>& cooldown : cooldownsMap){
-        float& cooldownValue = cooldown.second.currentValue; 
-        if(cooldownValue == 0){
-            continue;
-        }
-        cooldownValue -= timeMs;
-        if(cooldownValue < 0){
-            cooldownValue = 0;
-        }
+void CooldownsManager::updateCooldowns(const float& timeMs){
+    for(std::shared_ptr<Cooldown> cooldown : cooldownsSet){
+        cooldown->update(timeMs);
     }
 };
 
-// start cooldown with id
-void CooldownsManager::startCooldown(std::string cooldownId, unsigned random){
-    if(!cooldownsMap.count(cooldownId)){
-        return;
-    }
-    // set cooldown to it's start value + random value
-    cooldownsMap.at(cooldownId).currentValue = cooldownsMap.at(cooldownId).startValue + rand() % random;
-};
-
-// set cooldownMap
-void CooldownsManager::setCooldownsMap(std::unordered_map<std::string, Cooldown> newCooldownsMap){
-    cooldownsMap = newCooldownsMap;
-};
-
-// Getters
-// get value of cooldown with id
-float CooldownsManager::getCooldownCount(std::string cooldownId){
-    if(!cooldownsMap.count(cooldownId)){
-        return 0;
-    }
-    return cooldownsMap.at(cooldownId).currentValue;
+// get newly created clone of cooldown at id
+std::shared_ptr<Cooldown> CooldownsManager::newCooldown(float startValue){
+    std::shared_ptr<Cooldown> newCooldown = std::make_shared<Cooldown>(startValue);
+    cooldownsSet.insert(newCooldown);
+    return newCooldown;
 };
 
 // get instance of singleton

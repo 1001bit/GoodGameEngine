@@ -12,8 +12,6 @@ void Game::init(){
     // Main game inits
     // controls
     initControls();
-    // cooldown
-    initCooldowns();
 
     // Level
     currentLevel = std::make_shared<Level>();
@@ -51,8 +49,12 @@ void Game::loop(sf::RenderWindow& window){
             handleEvent(event);
         }
 
+        // cooldowns
+        CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
+
         // Updates
         window.clear();
+        cooldownsManager->updateCooldowns(timeMs);
         currentLevel->update(window, timeMs);
         window.display();
     }
@@ -72,16 +74,6 @@ void Game::initControls(){
     // mouse controls
     controls->setMouseControlsMap({
         {"dialogueNext", sf::Mouse::Left}
-    });
-}
-
-// init necessary cooldown
-void Game::initCooldowns(){
-    CooldownsManager* cooldowns = CooldownsManager::getInstance();
-    // Keyboard controls
-    cooldowns->setCooldownsMap({
-        {"npcIdle", {0, 2000}},
-        {"npcWalk", {0, 3000}},
     });
 }
 

@@ -21,7 +21,6 @@ protected:
     sf::Vector2f acceleration;
     Direction collisionVerticalDir;
     Direction collisionHorizontalDir;
-    std::unordered_map<std::string, float> cooldownMap;
 
     // Methods
     // Control the unit

@@ -2,13 +2,9 @@
 
 #include <string>
 #include <unordered_map>
-
-struct Cooldown
-{
-    float currentValue;
-    float startValue;
-};
-
+#include <unordered_set>
+#include <memory>
+#include "Cooldown.hpp"
 
 class CooldownsManager
 {
@@ -17,23 +13,19 @@ private:
     static CooldownsManager* instance;
 
     // Variables
-    // all the cooldowns
-    std::unordered_map<std::string, Cooldown> cooldownsMap;
+    // all the cooldowns clones
+    std::unordered_set<std::shared_ptr<Cooldown>> cooldownsSet;
 
     // Constructor
     CooldownsManager(){};
 public:
     // Methods
     // update all the cooldowns
-    void update(const float& timeMs);
-    // start cooldown with id
-    void startCooldown(std::string cooldownId, unsigned random);
-    // set cooldownMap
-    void setCooldownsMap(std::unordered_map<std::string, Cooldown> newCooldownsMap);
+    void updateCooldowns(const float& timeMs);
+    // get newly created clone of cooldown at id
+    std::shared_ptr<Cooldown> newCooldown(float startValue);
 
     // Getters
-    // get value of cooldown with id
-    float getCooldownCount(std::string cooldownId);
-    // get self instance of singletoc
+    // get self instance of the singleton
     static CooldownsManager* getInstance();
 };

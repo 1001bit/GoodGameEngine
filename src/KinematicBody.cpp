@@ -26,15 +26,6 @@ void KinematicBody::update(const float& timeMs){
     acceleration = sf::Vector2f();
     collisionVerticalDir = None;
     collisionHorizontalDir = None;
-
-    // manage cooldowns
-    for(std::pair<const std::string, float>& cooldown : cooldownMap){
-        if(cooldown.second > 0){
-            cooldown.second -= timeMs;
-        } else if (cooldown.second < 0){
-            cooldown.second = 0;
-        }
-    }
 }
 
 // choose how to behave collision depending on obstacle

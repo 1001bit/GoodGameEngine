@@ -10,7 +10,11 @@ constexpr int CHANGE_DIR_CD_RAND = 300;
 PhysNpc::PhysNpc(){
     npcType = Walking;
     movementDir = None;
-    cooldownMap["idle"] = CHANGE_DIR_MIN_CD + rand() % CHANGE_DIR_CD_RAND;
+
+    CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
+    selfCooldownMap["idle"] = cooldownsManager->newCooldown(2000);
+    selfCooldownMap["walk"] = cooldownsManager->newCooldown(3000);
+    selfCooldownMap.at("idle")->start(500);
 }
 
 PhysNpc::~PhysNpc(){}
@@ -18,26 +22,34 @@ PhysNpc::~PhysNpc(){}
 // Methods
 // Movement of the NPC
 void PhysNpc::control(){
-    float walkSpeed = WALK_SPEED;
-
-    if(collisionVerticalDir != Down){
-        walkSpeed *= AIR_SLOWDOWN;
-    }
-
     // no movement while on idle cooldown
-    if(cooldownMap.at("idle") != 0){
+    if(selfCooldownMap.at("idle")->getCurrentValueMs()){
         return;
     }
 
-    // if no direction - give one
-    if(movementDir == None){
-        movementDir = static_cast<Direction>(rand() % 2 + 3);
+    // if movement cooldown is over - start idle
+    if((!selfCooldownMap.at("walk")->getCurrentValueMs() && movementDir != None)){
+        movementDir = None;
+        selfCooldownMap.at("idle")->start(500);
+        return;
     }
 
-    // if collision - start cooldown
-    if(movementDir == collisionHorizontalDir || movementDir == collisionVerticalDir){
+    // if collision and walking in collision direction - start idle
+    if(selfCooldownMap.at("walk")->getCurrentValueMs() && movementDir == collisionHorizontalDir){
         movementDir = None;
-        cooldownMap["idle"] = CHANGE_DIR_MIN_CD + rand() % CHANGE_DIR_CD_RAND;
+        selfCooldownMap.at("idle")->start(500);
+        return;
+    }
+
+    // if idle cooldown is over and movementDir is still none
+    if(!selfCooldownMap.at("idle")->getCurrentValueMs() && movementDir == None){
+        movementDir = static_cast<Direction>(rand() % 2 + 3);
+        selfCooldownMap.at("walk")->start(1000);
+    }
+
+    float walkSpeed = WALK_SPEED;
+    if(collisionVerticalDir != Down){
+        walkSpeed *= AIR_SLOWDOWN;
     }
 
     // movement depending on direction

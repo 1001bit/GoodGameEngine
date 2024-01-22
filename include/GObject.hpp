@@ -44,6 +44,7 @@ protected:
     std::weak_ptr<GObject> parentWeak;
     std::unordered_set<std::shared_ptr<GObject>> children;
     GObjectType type;
+    std::unordered_map<std::string, std::shared_ptr<Cooldown>> selfCooldownMap;
 
     // Methods
     // Set SFML object position after repositioning (if exists)

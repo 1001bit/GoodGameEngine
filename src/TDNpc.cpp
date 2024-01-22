@@ -9,7 +9,10 @@ constexpr int CHANGE_DIR_CD_RAND = 300;
 TDNpc::TDNpc(){
     npcType = Walking;
     movementDir = None;
-    cooldownMap["idle"] = CHANGE_DIR_MIN_CD + rand() % CHANGE_DIR_CD_RAND;
+    
+    CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
+    selfCooldownMap["idle"] = cooldownsManager->newCooldown(2000);
+    selfCooldownMap["walk"] = cooldownsManager->newCooldown(3000);
 }
 TDNpc::~TDNpc(){}
 
@@ -19,19 +22,28 @@ void TDNpc::control(){
     velocity *= GROUND_FRICTION;
 
     // no movement while on idle cooldown
-    if(cooldownMap.at("idle") != 0){
+    if(selfCooldownMap.at("idle")->getCurrentValueMs()){
         return;
     }
 
-    // if no direction - give one
-    if(movementDir == None){
-        movementDir = static_cast<Direction>(rand() % 4 + 1);
+    // if movement cooldown is over - start idle
+    if((!selfCooldownMap.at("walk")->getCurrentValueMs() && movementDir != None)){
+        movementDir = None;
+        selfCooldownMap.at("idle")->start(500);
+        return;
     }
 
-    // if collision - start cooldown
-    if(movementDir == collisionHorizontalDir || movementDir == collisionVerticalDir){
+    // if collision and walking in collision direction - start idle
+    if(selfCooldownMap.at("walk")->getCurrentValueMs() && movementDir == collisionHorizontalDir){
         movementDir = None;
-        cooldownMap["idle"] = CHANGE_DIR_MIN_CD + rand() % CHANGE_DIR_CD_RAND;
+        selfCooldownMap.at("idle")->start(500);
+        return;
+    }
+
+    // if idle cooldown is over and movementDir is still none
+    if(!selfCooldownMap.at("idle") && movementDir == None){
+        movementDir = static_cast<Direction>(rand() % 4 + 1);
+        selfCooldownMap.at("walk")->start(1000);
     }
 
     // movement depending on direction

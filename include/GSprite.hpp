@@ -22,4 +22,6 @@ public:
     void setTexture(const sf::Texture& newTexture);
     // draw self sprite
     void drawSelf(sf::RenderWindow& window);
+    // set sprite flip
+    void setSpriteFlip(bool newSpriteFlip);
 };

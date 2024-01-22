@@ -1,6 +1,3 @@
-- Cooldowns
-    - Singleton CooldownManager class, that has has an instance of cooldowns under id's that will be cloned to different parts
-    - Cooldown class
 - Trigger system (triggers for level transition, dialogue start, etc.)
 - Levels
     - Level editor

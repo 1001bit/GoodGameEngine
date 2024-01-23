@@ -34,8 +34,6 @@ private:
     std::vector<DialogueLine> linesList;
     // current line
     int16_t currentLineId;
-    // can be repeated
-    bool isRepeatable;
 
     // Methods
     // control the flow of the dialogue
@@ -53,8 +51,6 @@ public:
     void setLines(std::vector<DialogueLine> newLines);
     // update dialogue
     void update();
-    // make the dialogue repeatable
-    void makeRepeatable();
 
     // Getters
     // Get current line from number

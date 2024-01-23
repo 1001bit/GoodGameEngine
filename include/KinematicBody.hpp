@@ -3,7 +3,7 @@
 #include "Body.hpp"
 
 // all types of npcs
-enum NpcType {
+enum class NpcType {
     Walking, // just walking around
     Neutral, // just walking around but fights back
     Hostile // fights when sees you

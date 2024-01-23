@@ -3,7 +3,6 @@
 // Structors
 Dialogue::Dialogue(){
     currentLineId = 1;
-    isRepeatable = 0;
 }
 
 Dialogue::~Dialogue(){}
@@ -12,7 +11,7 @@ Dialogue::~Dialogue(){}
 // update the dialogue 
 void Dialogue::update(){
     // restart the dialogue if it may be played again
-    if(currentLineId == 0 && isRepeatable){
+    if(currentLineId == 0){
         currentLineId = 1;
     }
     control();
@@ -27,11 +26,6 @@ void Dialogue::control(){
             currentLineId = 0;
         }
     }
-}
-
-// make the dialogue repeatable
-void Dialogue::makeRepeatable(){
-    isRepeatable = 1;
 }
 
 // add a new participant

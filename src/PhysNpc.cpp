@@ -2,13 +2,11 @@
 
 constexpr float WALK_SPEED = 2;
 constexpr float AIR_SLOWDOWN = 0.1;
-
-constexpr float CHANGE_DIR_MIN_CD = 700;
-constexpr int CHANGE_DIR_CD_RAND = 300;
+constexpr unsigned MOVEMENT_RAND = 500;
 
 // Structors
 PhysNpc::PhysNpc(){
-    npcType = Walking;
+    npcType = NpcType::Walking;
     movementDir = Direction::None;
 
     CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
@@ -30,7 +28,7 @@ void PhysNpc::control(){
     // if movement cooldown is over - start idle
     if((!selfCooldownMap.at("walk")->getCurrentValueMs() && movementDir != Direction::None)){
         movementDir = Direction::None;
-        selfCooldownMap.at("idle")->start(500);
+        selfCooldownMap.at("idle")->start(MOVEMENT_RAND);
         return;
     }
 
@@ -38,7 +36,7 @@ void PhysNpc::control(){
     if(selfCooldownMap.at("walk")->getCurrentValueMs() && movementDir == collisionHorizontalDir){
         movementDir = Direction::None;
         selfCooldownMap.at("walk")->stop();
-        selfCooldownMap.at("idle")->start(500);
+        selfCooldownMap.at("idle")->start(MOVEMENT_RAND);
         return;
     }
 

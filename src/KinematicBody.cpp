@@ -42,11 +42,9 @@ void KinematicBody::collideWith(std::shared_ptr<Body> obstacle){
     // prev rect method (if selfRect in past didn't touch obstacleRect in some direction and now selfRect does, kinematicBody stops in this direction)
 
     const sf::FloatRect& selfRect = getRect();
+    const sf::FloatRect& obstacleRect = obstacle->getRect();
 
-    // get overlap of colliding with obstacle
-    sf::FloatRect overlap;
-    selfRect.intersects(obstacle->getRect(), overlap);
-    if(overlap == sf::FloatRect()){
+    if(!selfRect.intersects(obstacleRect)){
         return;
     }
     
@@ -55,15 +53,15 @@ void KinematicBody::collideWith(std::shared_ptr<Body> obstacle){
     // vertical
     prevRect = selfRect;
     prevRect.top -= velocity.y;
-    if(!prevRect.intersects(overlap)){
+    if(!prevRect.intersects(obstacleRect)){
         // bottom
         if(velocity.y > 0){
-            setRelativePos(selfRect.left, overlap.top - selfRect.height);
+            setRelativePos(selfRect.left, obstacleRect.top - selfRect.height);
             collisionVerticalDir = Down;
         } 
         // top
         else {
-            setRelativePos(selfRect.left, overlap.top + overlap.height);
+            setRelativePos(selfRect.left, obstacleRect.top + obstacleRect.height);
             collisionVerticalDir = Up;
         }
         velocity.y = 0;
@@ -73,15 +71,15 @@ void KinematicBody::collideWith(std::shared_ptr<Body> obstacle){
     // horizontal
     prevRect = selfRect;
     prevRect.left -= velocity.x;
-    if(!prevRect.intersects(overlap)){
+    if(!prevRect.intersects(obstacleRect)){
         // right
         if(velocity.x > 0){
-            setRelativePos(overlap.left - selfRect.width, selfRect.top);
+            setRelativePos(obstacleRect.left - selfRect.width, selfRect.top);
             collisionHorizontalDir = Right;
         } 
         // left
         else {
-            setRelativePos(overlap.left + overlap.width, selfRect.top);
+            setRelativePos(obstacleRect.left + obstacleRect.width, selfRect.top);
             collisionHorizontalDir = Left;
         }
         velocity.x = 0;

@@ -16,6 +16,11 @@ void Cooldown::start(unsigned randomMs){
     currentValueMs = startValueMs + rand() % randomMs;
 };
 
+// set count to 0
+void Cooldown::stop(){
+    currentValueMs = 0;
+};
+
 // update cooldown value
 void Cooldown::update(const float& timeMs){
     if(currentValueMs == 0){

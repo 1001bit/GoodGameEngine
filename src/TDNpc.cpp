@@ -33,9 +33,10 @@ void TDNpc::control(){
         return;
     }
 
-    // if collision and walking in collision direction - start idle
+    // if collision and walking in collision direction - start idle and stop walk
     if(selfCooldownMap.at("walk")->getCurrentValueMs() && movementDir == collisionHorizontalDir){
         movementDir = None;
+        selfCooldownMap.at("walk")->stop();
         selfCooldownMap.at("idle")->start(500);
         return;
     }

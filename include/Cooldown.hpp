@@ -16,6 +16,8 @@ public:
     // Methods
     // start count
     void start(unsigned randomMs);
+    // set count to 0
+    void stop();
     // update cooldown
     void update(const float& timeMs);
 

@@ -1,9 +1,7 @@
 #include "GDrawable.hpp"
 
 // Structors
-GDrawable::GDrawable(){
-    this->type = TDrawable;
-}
+GDrawable::GDrawable(){}
 
 GDrawable::~GDrawable(){}
 

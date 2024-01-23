@@ -3,9 +3,7 @@
 constexpr float VIEW_LERP = 0.02;
 
 // Structors
-Camera::Camera(){
-    type = TCamera;
-}
+Camera::Camera(){}
 
 Camera::~Camera(){}
 

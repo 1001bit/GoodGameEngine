@@ -2,7 +2,7 @@
 
 // Structors
 Body::Body(){
-    this->type = TBody;
+    this->type = GObjectType::Body;
 }
 
 Body::~Body(){}

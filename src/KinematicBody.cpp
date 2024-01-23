@@ -4,7 +4,7 @@ constexpr float ACCEL_COEFF = 0.1;
 
 // Structors
 KinematicBody::KinematicBody(){
-    this->type = TKinematicBody;
+    this->type = GObjectType::KinematicBody;
 }
 
 KinematicBody::~KinematicBody(){}
@@ -24,15 +24,15 @@ void KinematicBody::update(const float& timeMs){
 
     // nullify all
     acceleration = sf::Vector2f();
-    collisionVerticalDir = None;
-    collisionHorizontalDir = None;
+    collisionVerticalDir = Direction::None;
+    collisionHorizontalDir = Direction::None;
 }
 
 // choose how to behave collision depending on obstacle
 void KinematicBody::collideWith(std::shared_ptr<Body> obstacle){
     switch (obstacle->getType())
     {
-    case TBody:
+    case GObjectType::Body:
         break;
     default:
         return;
@@ -57,12 +57,12 @@ void KinematicBody::collideWith(std::shared_ptr<Body> obstacle){
         // bottom
         if(velocity.y > 0){
             setRelativePos(selfRect.left, obstacleRect.top - selfRect.height);
-            collisionVerticalDir = Down;
+            collisionVerticalDir = Direction::Down;
         } 
         // top
         else {
             setRelativePos(selfRect.left, obstacleRect.top + obstacleRect.height);
-            collisionVerticalDir = Up;
+            collisionVerticalDir = Direction::Up;
         }
         velocity.y = 0;
         return;
@@ -75,12 +75,12 @@ void KinematicBody::collideWith(std::shared_ptr<Body> obstacle){
         // right
         if(velocity.x > 0){
             setRelativePos(obstacleRect.left - selfRect.width, selfRect.top);
-            collisionHorizontalDir = Right;
+            collisionHorizontalDir = Direction::Right;
         } 
         // left
         else {
             setRelativePos(obstacleRect.left + obstacleRect.width, selfRect.top);
-            collisionHorizontalDir = Left;
+            collisionHorizontalDir = Direction::Left;
         }
         velocity.x = 0;
     }

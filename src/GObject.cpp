@@ -2,7 +2,7 @@
 
 // Structors
 GObject::GObject(){
-    this->type = TNone;
+    this->type = GObjectType::None;
     this->flipped = 0;
     this->doesFlipMirror = 0;
 }

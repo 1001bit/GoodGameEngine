@@ -26,6 +26,6 @@ public:
     std::shared_ptr<Cooldown> newCooldown(float startValue);
 
     // Getters
-    // get self instance of the singleton
+    // get self singleton instance
     static CooldownsManager* getInstance();
 };

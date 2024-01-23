@@ -17,7 +17,7 @@ std::shared_ptr<Cooldown> CooldownsManager::newCooldown(float startValue){
     return newCooldown;
 };
 
-// get instance of singleton
+// get self singleton instance
 CooldownsManager* CooldownsManager::getInstance(){
     if (!instance)
         instance = new CooldownsManager();

@@ -45,6 +45,6 @@ public:
     void clearOncePressed();
 
     // Getters
-    // get instance
+    // get self singleton instance
     static ControlsManager* getInstance();
 };

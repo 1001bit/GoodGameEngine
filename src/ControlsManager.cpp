@@ -57,7 +57,7 @@ void ControlsManager::clearOncePressed(){
 }
 
 // Getters
-
+// get self singleton instance
 ControlsManager* ControlsManager::getInstance(){
     if (!instance)
         instance = new ControlsManager();

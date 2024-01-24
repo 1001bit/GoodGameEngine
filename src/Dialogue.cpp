@@ -19,8 +19,8 @@ void Dialogue::update(){
 
 // control the flow of the dialogue
 void Dialogue::control(){
-    ControlsManager* control = ControlsManager::getInstance();
-    if(control->isControlPressedOnce("dialogueNext")){
+    ControlsManager* controlsManager = ControlsManager::getInstance();
+    if(controlsManager->isControlPressedOnce("dialogueNext")){
         currentLineId += 1;
         if(currentLineId >= linesList.size()){
             currentLineId = 0;

@@ -2,7 +2,7 @@
 
 // Methods
 // Update all the objects of the game
-void Level::updateLevelObjects(sf::RenderWindow& window, const float& timeMs){
+void Level::updateLevelObjects(const float& timeMs){
     // update and collide bodies
     for(std::shared_ptr<Body> body : levelBodiesSet){
         body->update(timeMs);
@@ -19,15 +19,6 @@ void Level::updateLevelObjects(sf::RenderWindow& window, const float& timeMs){
             }
             body->collideWith(body2);
         }
-
-        // draw collider for debug
-        #ifdef DRAWCOLLIDER
-        sf::RectangleShape visibleRect = sf::RectangleShape();
-        visibleRect.setFillColor(sf::Color(255, 0, 0, 40));
-        visibleRect.setSize(body->getRect().getSize());
-        visibleRect.setPosition(body->getRect().getPosition());
-        window.draw(visibleRect);
-        #endif
     }
 
     // update other gobjects
@@ -41,16 +32,12 @@ void Level::updateLevelObjects(sf::RenderWindow& window, const float& timeMs){
         for(std::shared_ptr<GDrawable> drawable : drawablesLayer.second){
             // update an object
             drawable->update(timeMs);
-
-            #ifndef DRAWCOLLIDER
-            drawable->drawSelf(window);
-            #endif
         }
     }
 };
 
 // Update all the objects of the GUI
-void Level::updateGuiObjects(sf::RenderWindow& window, const float& timeMs){
+void Level::updateGuiObjects(const float& timeMs){
     // if current dialogue is active
     if(auto currentDialogue = currentDialogueWeak.lock()){
         currentDialogue->update();
@@ -73,20 +60,39 @@ void Level::updateGuiObjects(sf::RenderWindow& window, const float& timeMs){
     }
 
     // iterate through whole map
-    // draw drawables
     for(std::pair<const u_char, gdrawable_ptr_set> drawablesLayer : guiDrawableLayers){
         // iterate through a single layer
         for(std::shared_ptr<GDrawable> drawable : drawablesLayer.second){
             drawable->update(timeMs);
-            drawable->drawSelf(window);
         }
     }
 };
 
-// Update states of all the objects
-void Level::update(sf::RenderWindow& window, const float& timeMs){
+// draw drawables
+void Level::drawGObjetcs(sf::RenderWindow& window){
+    // Level
     window.setView(camera->getView());
-    updateLevelObjects(window, timeMs);
+    // iterate through whole map
+    for(std::pair<const u_char, gdrawable_ptr_set> drawablesLayer : levelDrawableLayers){
+        // iterate through a single layer
+        for(std::shared_ptr<GDrawable> drawable : drawablesLayer.second){
+            // update an object
+            drawable->drawSelf(window);
+        }
+    }
+
+    // Gui
     window.setView(guiView);
-    updateGuiObjects(window, timeMs);
+    for(std::pair<const u_char, gdrawable_ptr_set> drawablesLayer : guiDrawableLayers){
+        // iterate through a single layer
+        for(std::shared_ptr<GDrawable> drawable : drawablesLayer.second){
+            drawable->drawSelf(window);
+        }
+    }
+}
+
+// Update states of all the objects
+void Level::update(const float& timeMs){
+    updateLevelObjects(timeMs);
+    updateGuiObjects(timeMs);
 };

@@ -16,7 +16,6 @@ void Game::init(){
     // Level
     currentLevel = std::make_shared<Level>();
     currentLevel->init();
-    currentLevel->initTestAssets();
     currentLevel->initTestGObjects();
 }
 
@@ -38,8 +37,8 @@ void Game::loop(sf::RenderWindow& window){
         // std::cout << 1000.0/timeMs << "FPS ; " << timeMs << "\n";
 
         // Events
-        ControlsManager* controls = ControlsManager::getInstance();
-        controls->clearOncePressed();
+        ControlsManager* controlsManager = ControlsManager::getInstance();
+        controlsManager->clearOncePressed();
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -51,20 +50,21 @@ void Game::loop(sf::RenderWindow& window){
 
         // cooldowns
         CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
+        cooldownsManager->updateCooldowns(timeMs);
+        currentLevel->update(timeMs);
 
         // Updates
         window.clear();
-        cooldownsManager->updateCooldowns(timeMs);
-        currentLevel->update(window, timeMs);
+        currentLevel->drawGObjetcs(window);
         window.display();
     }
 }
 
 // init necessary controls
 void Game::initControls(){
-    ControlsManager* controls = ControlsManager::getInstance();
+    ControlsManager* controlsManager = ControlsManager::getInstance();
     // Keyboard controls
-    controls->setKeyboardControlsMap({
+    controlsManager->setKeyboardControlsMap({
         {"wLeft", sf::Keyboard::A},
         {"wRight", sf::Keyboard::D},
         {"wUp", sf::Keyboard::W},
@@ -72,21 +72,21 @@ void Game::initControls(){
         {"jump", sf::Keyboard::Space},
     });
     // mouse controls
-    controls->setMouseControlsMap({
+    controlsManager->setMouseControlsMap({
         {"dialogueNext", sf::Mouse::Left}
     });
 }
 
 // handle window events
 void Game::handleEvent(const sf::Event& event){
-    ControlsManager* controls = ControlsManager::getInstance();
+    ControlsManager* controlsManager = ControlsManager::getInstance();
     switch (event.type)
     {
     case sf::Event::KeyPressed:
-        controls->addOncePressedKeyboard(event.key.code);
+        controlsManager->addOncePressedKeyboard(event.key.code);
         break;
     case sf::Event::MouseButtonPressed:
-        controls->addOncePressedMouse(event.mouseButton.button);
+        controlsManager->addOncePressedMouse(event.mouseButton.button);
         break;
     default:
         break;

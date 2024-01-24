@@ -3,6 +3,8 @@
 // Test
 // GObjects
 void Level::initTestGObjects(){
+    ResourceManager* resourceManager = ResourceManager::getInstance();
+
     // Level
     // dummy
     std::shared_ptr<PhysPlayer> dummy = std::make_shared<PhysPlayer>();
@@ -16,14 +18,14 @@ void Level::initTestGObjects(){
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();
     dummySprite->setParent(dummy);
     levelDrawableLayers[0].insert(dummySprite);
-    dummySprite->insertAnimation("idle", Animation(textureMap.at("dummy.png"), 16, 500, 1));
+    dummySprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
     dummySprite->playAnimation("idle");
     // his sword
     std::shared_ptr<GSprite> sword = std::make_shared<GSprite>();
     sword->setParent(dummy);
     levelDrawableLayers[1].insert(sword);
     sword->setDoesFlipMirror(1);
-    sword->setTexture(textureMap.at("sword.png"));
+    sword->setTexture(resourceManager->getTexture("Assets/Textures/sword.png"));
     sword->setRelativePos(60, 0);
 
     // Npc
@@ -37,7 +39,7 @@ void Level::initTestGObjects(){
     std::shared_ptr<AnimatedSprite> npcSprite = std::make_shared<AnimatedSprite>();
     npcSprite->setParent(npc);
     levelDrawableLayers[0].insert(npcSprite);
-    npcSprite->insertAnimation("idle", Animation(textureMap.at("dummy.png"), 16, 500, 1));
+    npcSprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
     npcSprite->playAnimation("idle");
 
     // a platform
@@ -50,7 +52,7 @@ void Level::initTestGObjects(){
     std::shared_ptr<GSprite> platformSprite = std::make_shared<GSprite>();
     platformSprite->setParent(platform);
     levelDrawableLayers[0].insert(platformSprite);
-    platformSprite->setTexture(textureMap.at("platform.png"));
+    platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
     // 2nd platform
     std::shared_ptr<Body> platform2 = std::make_shared<Body>();
@@ -62,7 +64,7 @@ void Level::initTestGObjects(){
     std::shared_ptr<GSprite> platformSprite2 = std::make_shared<GSprite>();
     platformSprite2->setParent(platform2);
     levelDrawableLayers[0].insert(platformSprite2);
-    platformSprite2->setTexture(textureMap.at("platform.png"));
+    platformSprite2->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
     // 3rd platform
     std::shared_ptr<Body> platform3 = std::make_shared<Body>();
@@ -74,7 +76,7 @@ void Level::initTestGObjects(){
     std::shared_ptr<GSprite> platformSprite3 = std::make_shared<GSprite>();
     platformSprite3->setParent(platform3);
     levelDrawableLayers[0].insert(platformSprite3);
-    platformSprite3->setTexture(textureMap.at("platform.png"));
+    platformSprite3->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
     // Gui
     // dummy-npc dialogue
@@ -89,22 +91,11 @@ void Level::initTestGObjects(){
     currentDialogueWeak = dialogue1;
 };
 
-// assets
-void Level::initTestAssets(){
-    // texture
-    sf::Texture texture;
-    texture.loadFromFile("Assets/Textures/dummy.png");
-    textureMap["dummy.png"] = texture;
-    texture.loadFromFile("Assets/Textures/sword.png");
-    textureMap["sword.png"] = texture;
-    texture.loadFromFile("Assets/Textures/platform.png");
-    textureMap["platform.png"] = texture;
-};
-
-
 // Necessary
 // GObjects
 void Level::initNecessaryGObjects(){
+    ResourceManager* resourceManager = ResourceManager::getInstance();
+
     // Level
     // camera
     camera = std::make_shared<Camera>();
@@ -117,7 +108,7 @@ void Level::initNecessaryGObjects(){
     dialogueBoxWeak = dialogueBox;
     dialogueBox->setParent(shared_from_this());
     guiDrawableLayers[0].insert(dialogueBox);
-    dialogueBox->setTexture(textureMap.at("dialogueBackground.png"));
+    dialogueBox->setTexture(resourceManager->getTexture("Assets/Textures/dialogueBackground.png"));
     dialogueBox->setRelativePos((GAME_WIDTH-(dialogueBox->sprite.getGlobalBounds().width))/2, 600); // centralize it on X position
     
     // Dialogue text
@@ -125,25 +116,11 @@ void Level::initNecessaryGObjects(){
     dialogueTextWeak = dialogueText;
     dialogueText->setParent(dialogueBox);
     guiDrawableLayers[1].insert(dialogueText);
-    dialogueText->text.setFont(fontMap["font1.ttf"]);
+    dialogueText->text.setFont(resourceManager->getFont("Assets/Fonts/font1.ttf"));
     dialogueText->text.setCharacterSize(30);
     dialogueText->text.setString("Hi");
     dialogueText->setRelativePos(60, 20);
 };
-
-// assets
-void Level::initNecessaryAssets(){
-    // texture
-    sf::Texture texture;
-    texture.loadFromFile("Assets/Textures/dialogueBackground.png");
-    textureMap["dialogueBackground.png"] = texture;
-
-    // font
-    sf::Font font;
-    font.loadFromFile("Assets/Fonts/font1.ttf");
-    fontMap["font1.ttf"] = font;
-};
-
 
 // All
 // Init level
@@ -160,6 +137,5 @@ void Level::init(){
     guiView.setCenter(GAME_WIDTH/2, GAME_HEIGHT/2);
 
     // init object
-    initNecessaryAssets();
     initNecessaryGObjects();
 };

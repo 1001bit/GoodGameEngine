@@ -9,15 +9,14 @@
 class CooldownsManager
 {
 private:
-    // Self instance of singleton
+    // Self Singleton
     static CooldownsManager* instance;
+    CooldownsManager(){};
 
     // Variables
     // all the cooldowns clones
     std::unordered_set<std::shared_ptr<Cooldown>> cooldownsSet;
-
-    // Constructor
-    CooldownsManager(){};
+    
 public:
     // Methods
     // update all the cooldowns

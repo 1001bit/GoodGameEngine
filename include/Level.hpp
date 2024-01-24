@@ -12,6 +12,7 @@
 #include "GText.hpp"
 #include "Dialogue.hpp"
 #include "GDrawable.hpp"
+#include "ResourceManager.hpp"
 
 // #define DRAWCOLLIDER
 
@@ -43,12 +44,6 @@ private:
     // set of dialogues and their id's
     std::unordered_map<u_char, std::shared_ptr<Dialogue>> dialogues;
 
-    // Storages
-    // storage of the textures
-    std::unordered_map<std::string, sf::Texture> textureMap;
-    // storage of the fonts
-    std::unordered_map<std::string, sf::Font> fontMap;
-
     // Necessary GObjects
     // game camera that is following some GObject
     std::shared_ptr<Camera> camera;
@@ -63,13 +58,12 @@ private:
 
     // Updates
     // Update all the GObjects of the level
-    void updateLevelObjects(sf::RenderWindow& window, const float& timeMs);
+    void updateLevelObjects(const float& timeMs);
     // Update all the GObjects of the GUI
-    void updateGuiObjects(sf::RenderWindow& window, const float& timeMs);
+    void updateGuiObjects(const float& timeMs);
 
     // Data init patterns
     void initNecessaryGObjects();
-    void initNecessaryAssets();
     
 public:
     // Structors
@@ -79,12 +73,13 @@ public:
     // Methods
     // Init level
     void init();
-    // Update states of all the objects
-    void update(sf::RenderWindow& window, const float& timeMs);
     // Load level from file
     void loadFromFile(const sf::String& fileName);
-
     // test inits
     void initTestGObjects();
-    void initTestAssets();
+
+    // Update states of all the objects
+    void update(const float& timeMs);
+    // Draw drawable objects
+    void drawGObjetcs(sf::RenderWindow& window);
 };

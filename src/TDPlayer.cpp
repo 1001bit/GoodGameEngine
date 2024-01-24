@@ -11,24 +11,24 @@ TDPlayer::~TDPlayer(){}
 // Methods
 // control
 void TDPlayer::control(){
-    ControlsManager* controls = ControlsManager::getInstance();
+    ControlsManager* controlsManager = ControlsManager::getInstance();
 
     velocity *= GROUND_FRICTION;
 
     // walk left
-    if(controls->isControlHeld("wLeft")){
+    if(controlsManager->isControlHeld("wLeft")){
         acceleration.x -= WALK_SPEED;
     }
     // walk right
-    if(controls->isControlHeld("wRight")){
+    if(controlsManager->isControlHeld("wRight")){
         acceleration.x += WALK_SPEED;
     }
     // walk up
-    if(controls->isControlHeld("wUp")){
+    if(controlsManager->isControlHeld("wUp")){
         acceleration.y -= WALK_SPEED;
     }
     // walk down
-    if(controls->isControlHeld("wDown")){
+    if(controlsManager->isControlHeld("wDown")){
         acceleration.y += WALK_SPEED;
     }
 }

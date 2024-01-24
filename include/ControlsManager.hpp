@@ -6,8 +6,9 @@
 class ControlsManager
 {
 private:
-    // Self instance of singleton
+    // Singleton
     static ControlsManager* instance;
+    ControlsManager() {};
 
     // Variables
     // all the controls of keyboard
@@ -21,7 +22,6 @@ private:
     std::unordered_set<sf::Mouse::Button> pressedOnceMouseButtons;
 
     // Constructor
-    ControlsManager() {};
     
 public:
     // Methods

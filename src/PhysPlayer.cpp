@@ -12,7 +12,7 @@ PhysPlayer::~PhysPlayer(){}
 // Methods
 // control the player
 void PhysPlayer::control(){
-    ControlsManager* controls = ControlsManager::getInstance();
+    ControlsManager* controlsManager = ControlsManager::getInstance();
 
     float walkSpeed = WALK_SPEED;
 
@@ -21,18 +21,18 @@ void PhysPlayer::control(){
     }
 
     // walk left
-    if(controls->isControlHeld("wLeft")){
+    if(controlsManager->isControlHeld("wLeft")){
         acceleration.x -= walkSpeed;
         setFlip(1);
     }
     // walk right
-    if(controls->isControlHeld("wRight")){
+    if(controlsManager->isControlHeld("wRight")){
         acceleration.x += walkSpeed;
         setFlip(0);
     }
 
     // jump
-    if(controls->isControlHeld("jump") && collisionVerticalDir == Direction::Down){
+    if(controlsManager->isControlHeld("jump") && collisionVerticalDir == Direction::Down){
         acceleration.y -= JUMP_FORCE;
     }
 }

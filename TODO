@@ -1,4 +1,5 @@
 - Trigger system (triggers for level transition, dialogue start, etc.)
+    - make level singleton and get all the stuff what is going on there (new branch)
 - Levels
     - Level editor
     - Base levels: Menu, Simple Game Level

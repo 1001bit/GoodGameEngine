@@ -28,22 +28,6 @@ constexpr uint GAME_HEIGHT = 880;
 class Level : public GObject
 {
 private:
-    // Level GObjects
-    // Layers of drawable objects
-    std::map<u_char, gdrawable_ptr_set> levelDrawableLayers;
-    // Set of body objects
-    body_ptr_set levelBodiesSet;
-    // Set of other objects
-    gobject_ptr_set levelGObjectsSet;
-    // set of level GObjects with own id
-    std::unordered_map<uint16_t, std::weak_ptr<GObject>> levelGObjectsWId;
-
-    // GUI GObjects
-    // layers of drawable GUI GObjects
-    std::map<u_char, gdrawable_ptr_set> guiDrawableLayers;
-    // set of dialogues and their id's
-    std::unordered_map<u_char, std::shared_ptr<Dialogue>> dialogues;
-
     // Necessary GObjects
     // game camera that is following some GObject
     std::shared_ptr<Camera> camera;
@@ -69,6 +53,24 @@ public:
     // Structors
     Level();
     ~Level();
+
+    ///////////////////////////
+    // Level GObjects
+    // Layers of drawable objects
+    std::vector<gdrawable_ptr_set> levelDrawableLayers;
+    // Set of body objects
+    body_ptr_set levelBodiesSet;
+    // Set of other objects
+    gobject_ptr_set levelGObjectsSet;
+    // set of level GObjects with own id
+    std::unordered_map<uint16_t, std::weak_ptr<GObject>> levelGObjectsWId;
+
+    // GUI GObjects
+    // layers of drawable GUI GObjects
+    std::vector<gdrawable_ptr_set> guiDrawableLayers;
+    // set of dialogues and their id's
+    std::unordered_map<u_char, std::shared_ptr<Dialogue>> dialogues;
+    ///////////////////////////
 
     // Methods
     // Init level

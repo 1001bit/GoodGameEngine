@@ -126,10 +126,10 @@ void Level::initNecessaryGObjects(){
 // Init level
 void Level::init(){
     // create layers of drawables
-    const u_char layersCount = 10;
-    for(u_char i = 0; i < layersCount; ++i){
-        guiDrawableLayers[i] = gdrawable_ptr_set();
-        levelDrawableLayers[i] = gdrawable_ptr_set();
+    const int layersCount = 10;
+    for(int i = 0; i < layersCount; ++i){
+        levelDrawableLayers.push_back(gdrawable_ptr_set());
+        guiDrawableLayers.push_back(gdrawable_ptr_set());
     }
 
     // init gui view

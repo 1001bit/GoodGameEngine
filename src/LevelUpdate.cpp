@@ -27,9 +27,9 @@ void Level::updateLevelObjects(const float& timeMs){
     }
 
     // draw and update drawables
-    for(std::pair<const u_char, gdrawable_ptr_set> drawablesLayer : levelDrawableLayers){
+    for(gdrawable_ptr_set drawablesLayer : levelDrawableLayers){
         // iterate through a single layer
-        for(std::shared_ptr<GDrawable> drawable : drawablesLayer.second){
+        for(std::shared_ptr<GDrawable> drawable : drawablesLayer){
             // update an object
             drawable->update(timeMs);
         }
@@ -60,9 +60,9 @@ void Level::updateGuiObjects(const float& timeMs){
     }
 
     // iterate through whole map
-    for(std::pair<const u_char, gdrawable_ptr_set> drawablesLayer : guiDrawableLayers){
+    for(gdrawable_ptr_set drawablesLayer : guiDrawableLayers){
         // iterate through a single layer
-        for(std::shared_ptr<GDrawable> drawable : drawablesLayer.second){
+        for(std::shared_ptr<GDrawable> drawable : drawablesLayer){
             drawable->update(timeMs);
         }
     }
@@ -73,9 +73,9 @@ void Level::drawGObjetcs(sf::RenderWindow& window){
     // Level
     window.setView(camera->getView());
     // iterate through whole map
-    for(std::pair<const u_char, gdrawable_ptr_set> drawablesLayer : levelDrawableLayers){
+    for(gdrawable_ptr_set drawablesLayer : levelDrawableLayers){
         // iterate through a single layer
-        for(std::shared_ptr<GDrawable> drawable : drawablesLayer.second){
+        for(std::shared_ptr<GDrawable> drawable : drawablesLayer){
             // update an object
             drawable->drawSelf(window);
         }
@@ -83,9 +83,9 @@ void Level::drawGObjetcs(sf::RenderWindow& window){
 
     // Gui
     window.setView(guiView);
-    for(std::pair<const u_char, gdrawable_ptr_set> drawablesLayer : guiDrawableLayers){
+    for(gdrawable_ptr_set drawablesLayer : guiDrawableLayers){
         // iterate through a single layer
-        for(std::shared_ptr<GDrawable> drawable : drawablesLayer.second){
+        for(std::shared_ptr<GDrawable> drawable : drawablesLayer){
             drawable->drawSelf(window);
         }
     }

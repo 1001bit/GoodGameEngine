@@ -22,11 +22,13 @@ void GObject::setParent(std::shared_ptr<GObject> newParent){
 }
 
 void GObject::updatePos(){
-    // locking parent so it's shared ptr
+    // set self position related to parent's
     if(auto parent = parentWeak.lock()){
         selfRect.left = parent->getRect().left + relativePos.x;
         selfRect.top = parent->getRect().top + relativePos.y;
         updateDrawablePos();
+
+        // update children's position
         for(std::shared_ptr<GObject> child : children) {
             child->updatePos();
         }
@@ -38,15 +40,18 @@ void GObject::addChild(std::shared_ptr<GObject> newChild){
     newChild->updatePos();
 }
 
-void GObject::setRelativePos(float x, float y){
-    relativePos = sf::Vector2f(x, y);
-    updatePos();
-}
-
 void GObject::setRelativePos(const sf::Vector2f& newPos){
     relativePos = newPos;
     updatePos();
 }
+
+void GObject::setRelativePos(float x, float y){
+    setRelativePos(sf::Vector2f(x, y));
+}
+
+void GObject::move(const sf::Vector2f& distance){
+    setRelativePos(getRelativePos() + distance);
+};
 
 void GObject::setRectPixelSize(float w, float h){
     selfRect.width = w*SPRITE_SCALE;

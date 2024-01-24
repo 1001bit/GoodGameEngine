@@ -33,7 +33,7 @@ private:
     bool doesFlipMirror;
 
     // Methods
-    // update slef position and children
+    // set self rect relative position and children's position
     void updatePos(); 
     // Add a new child
     void addChild(std::shared_ptr<GObject> newChild);
@@ -60,6 +60,8 @@ public:
     // Set position relative to parent's position
     void setRelativePos(float x, float y);
     void setRelativePos(const sf::Vector2f& newPos);
+    // move self by some distance
+    void move(const sf::Vector2f& distance);
     // Set a parent
     void setParent(std::shared_ptr<GObject> newParent);
     // set rect size

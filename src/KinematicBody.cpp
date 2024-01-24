@@ -20,7 +20,7 @@ void KinematicBody::update(const float& timeMs){
 
     velocity += acceleration * ACCEL_COEFF * timeMs;
 
-    setRelativePos(getRelativePos() + velocity);
+    move(velocity);
 
     // nullify all
     acceleration = sf::Vector2f();

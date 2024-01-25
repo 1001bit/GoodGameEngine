@@ -32,3 +32,10 @@ void TDPlayer::control(){
         acceleration.y += WALK_SPEED;
     }
 }
+
+// update state
+void TDPlayer::update(const float& timeMs){
+    Body::update(timeMs);
+    
+    control();
+};

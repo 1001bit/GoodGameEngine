@@ -10,8 +10,6 @@ PhysBody::PhysBody(){}
 PhysBody::~PhysBody(){}
 
 // Methods
-// Control
-void PhysBody::control(){}
 // Gravity impact
 void PhysBody::gravity(const float& timeMs){
     acceleration.y += GFORCE * timeMs;
@@ -23,3 +21,10 @@ void PhysBody::gravity(const float& timeMs){
         velocity.x *= AIR_FRICTION;
     }
 }
+
+// update state
+void PhysBody::update(const float& timeMs){
+    Body::update(timeMs);
+
+    gravity(timeMs);
+};

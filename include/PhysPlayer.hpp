@@ -14,4 +14,8 @@ public:
     // Structors
     PhysPlayer();
     ~PhysPlayer();
+
+    // Methods
+    // update state
+    void update(const float& timeMs);
 };

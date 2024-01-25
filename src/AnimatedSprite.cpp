@@ -40,7 +40,9 @@ void AnimatedSprite::playAnimation(std::string name){
 }
 
 // update frames, etc
-void AnimatedSprite::update(const float& timeMS){
+void AnimatedSprite::update(const float& timeMs){
+    GObject::update(timeMs);
+
     // no empty animations
     if(currentAnimation == nullptr){
         return;
@@ -59,7 +61,7 @@ void AnimatedSprite::update(const float& timeMS){
         return; 
     }
 
-    elapsedTime += timeMS;
+    elapsedTime += timeMs;
     
     // restart or drop frame
     if(elapsedTime >= currentAnimation->playTime){

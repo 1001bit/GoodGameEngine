@@ -1,6 +1,12 @@
 #include "ResourceManager.hpp"
 
+// Singleton
 ResourceManager* ResourceManager::instance = nullptr;
+ResourceManager* ResourceManager::getInstance(){
+    if (!instance)
+        instance = new ResourceManager();
+    return instance;
+}
 
 // Get resource
 // Texture
@@ -36,10 +42,3 @@ sf::Font& ResourceManager::getFont(const std::string& path){
     fontMap[path] = newFont;
     return fontMap.at(path);
 };
-
-// Singleton
-ResourceManager* ResourceManager::getInstance(){
-    if (!instance)
-        instance = new ResourceManager();
-    return instance;
-}

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "KinematicBody.hpp"
+#include "Body.hpp"
 
 // Top-Down player
-class TDPlayer : public KinematicBody
+class TDPlayer : public Body
 {
 private:
     // Methods
@@ -14,4 +14,8 @@ public:
     // Structors
     TDPlayer();
     ~TDPlayer();
+
+    // Methods
+    // update state
+    void update(const float& timeMs);
 };

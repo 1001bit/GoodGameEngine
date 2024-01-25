@@ -36,3 +36,10 @@ void PhysPlayer::control(){
         acceleration.y -= JUMP_FORCE;
     }
 }
+
+// update state
+void PhysPlayer::update(const float& timeMs){
+    PhysBody::update(timeMs);
+
+    control();
+};

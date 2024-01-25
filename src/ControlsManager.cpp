@@ -1,6 +1,12 @@
 #include "ControlsManager.hpp"
 
+// Singleton
 ControlsManager* ControlsManager::instance = nullptr;
+ControlsManager* ControlsManager::getInstance(){
+    if (!instance)
+        instance = new ControlsManager();
+    return instance;
+}
 
 // Methods
 
@@ -54,12 +60,4 @@ void ControlsManager::addOncePressedMouse(sf::Mouse::Button controlId){
 void ControlsManager::clearOncePressed(){
     pressedOnceKeyboardKeys.clear();
     pressedOnceMouseButtons.clear();
-}
-
-// Getters
-// get self singleton instance
-ControlsManager* ControlsManager::getInstance(){
-    if (!instance)
-        instance = new ControlsManager();
-    return instance;
 }

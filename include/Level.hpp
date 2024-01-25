@@ -13,13 +13,9 @@
 #include "Dialogue.hpp"
 #include "GDrawable.hpp"
 #include "ResourceManager.hpp"
+#include "CollisionManager.hpp"
 
 // #define DRAWCOLLIDER
-
-// Set of GObjects
-typedef std::unordered_set<std::shared_ptr<GDrawable>> gdrawable_ptr_set;
-typedef std::unordered_set<std::shared_ptr<Body>> body_ptr_set;
-typedef std::unordered_set<std::shared_ptr<GObject>> gobject_ptr_set;
 
 // sizes of the game
 constexpr uint GAME_WIDTH = 1440;
@@ -41,10 +37,8 @@ private:
     sf::View guiView;
 
     // Updates
-    // Update all the GObjects of the level
-    void updateLevelObjects(const float& timeMs);
     // Update all the GObjects of the GUI
-    void updateGuiObjects(const float& timeMs);
+    void updateCurrentDialogue();
 
     // Data init patterns
     void initNecessaryGObjects();
@@ -55,19 +49,14 @@ public:
     ~Level();
 
     ///////////////////////////
-    // Level GObjects
-    // Layers of drawable objects
-    std::vector<gdrawable_ptr_set> levelDrawableLayers;
-    // Set of body objects
-    body_ptr_set levelBodiesSet;
-    // Set of other objects
-    gobject_ptr_set levelGObjectsSet;
-    // set of level GObjects with own id
+    // Drawable Level GObjects
+    std::vector< std::vector<std::weak_ptr<GDrawable>> > levelDrawableLayers;
+    // Level GObjects with own id
     std::unordered_map<uint16_t, std::weak_ptr<GObject>> levelGObjectsWId;
 
     // GUI GObjects
     // layers of drawable GUI GObjects
-    std::vector<gdrawable_ptr_set> guiDrawableLayers;
+    std::vector< std::vector<std::weak_ptr<GDrawable>> > guiDrawableLayers;
     // set of dialogues and their id's
     std::unordered_map<u_char, std::shared_ptr<Dialogue>> dialogues;
     ///////////////////////////

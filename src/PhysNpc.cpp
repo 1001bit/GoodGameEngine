@@ -66,3 +66,10 @@ void PhysNpc::control(){
         break;
     }
 }
+
+// update state
+void PhysNpc::update(const float& timeMs){
+    PhysBody::update(timeMs);
+    
+    control();
+};

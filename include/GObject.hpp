@@ -9,13 +9,6 @@
 
 constexpr float SPRITE_SCALE = 7;
 
-// All types of objects
-enum class GObjectType{
-    None,
-    Body,
-    KinematicBody,
-};
-
 // 4 directions
 enum class Direction {
     None, Up, Down, Right, Left
@@ -42,7 +35,6 @@ protected:
     // Variables
     std::weak_ptr<GObject> parentWeak;
     std::unordered_set<std::shared_ptr<GObject>> children;
-    GObjectType type;
     std::unordered_map<std::string, std::shared_ptr<Cooldown>> selfCooldownMap;
 
     // Methods
@@ -74,8 +66,6 @@ public:
     // Getters
     // Get position relative to parent's position
     const sf::Vector2f& getRelativePos();
-    // Get type of the object
-    const GObjectType& getType();
     // Get collider
     const sf::FloatRect& getRect();
     // get flipped

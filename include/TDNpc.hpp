@@ -1,13 +1,12 @@
 #pragma once
 
-#include "KinematicBody.hpp"
+#include "Body.hpp"
 
-class TDNpc : public KinematicBody
+class TDNpc : public Body
 {
 private:
     // Variables
     Direction movementDir;
-    NpcType npcType;
 
     // Methods
     // npc movement
@@ -17,7 +16,11 @@ public:
     // Structors
     TDNpc();
     ~TDNpc();
-    // methods
-    // set type of npc
-    void setType(NpcType newType);
+
+    // Variables
+    NpcType npcType;
+
+    // Methods
+    // update state
+    void update(const float& timeMs);
 };

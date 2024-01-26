@@ -41,8 +41,6 @@ void AnimatedSprite::playAnimation(std::string name){
 
 // update frames, etc
 void AnimatedSprite::update(const float& timeMs){
-    GObject::update(timeMs);
-
     // no empty animations
     if(currentAnimation == nullptr){
         return;
@@ -70,6 +68,8 @@ void AnimatedSprite::update(const float& timeMs){
             currentAnimation = nullptr;
         }
     }
+
+    GObject::update(timeMs);
 }
 
 // update position of sprite

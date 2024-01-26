@@ -68,7 +68,7 @@ void TDNpc::control(){
 
 // update state
 void TDNpc::update(const float& timeMs){
-    Body::update(timeMs);
-    
     control();
+
+    Body::update(timeMs);
 };

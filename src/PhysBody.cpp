@@ -24,7 +24,7 @@ void PhysBody::gravity(const float& timeMs){
 
 // update state
 void PhysBody::update(const float& timeMs){
-    Body::update(timeMs);
-
     gravity(timeMs);
+    
+    Body::update(timeMs);
 };

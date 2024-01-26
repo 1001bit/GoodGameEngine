@@ -29,19 +29,19 @@ void Level::initTestGObjects(){
     sword->setTexture(resourceManager->getTexture("Assets/Textures/sword.png"));
     sword->setRelativePos(60, 0);
 
-    // // Npc
-    // std::shared_ptr<PhysNpc> npc = std::make_shared<PhysNpc>();
-    // npc->setParent(shared_from_this());
-    // collisionManager->addNewBody(npc);
-    // levelGObjectsWId[2] = npc;
-    // npc->setRectPixelSize(16, 16);
-    // npc->setRelativePos(500, 300);
-    // // his sprite
-    // std::shared_ptr<AnimatedSprite> npcSprite = std::make_shared<AnimatedSprite>();
-    // npcSprite->setParent(npc);
-    // levelDrawableLayers[0].push_back(npcSprite);
-    // npcSprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
-    // npcSprite->playAnimation("idle");
+    // Npc
+    std::shared_ptr<PhysNpc> npc = std::make_shared<PhysNpc>();
+    npc->setParent(shared_from_this());
+    collisionManager->addNewBody(npc);
+    levelGObjectsWId[2] = npc;
+    npc->setRectPixelSize(16, 16);
+    npc->setRelativePos(500, 300);
+    // his sprite
+    std::shared_ptr<AnimatedSprite> npcSprite = std::make_shared<AnimatedSprite>();
+    npcSprite->setParent(npc);
+    levelDrawableLayers[0].push_back(npcSprite);
+    npcSprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
+    npcSprite->playAnimation("idle");
 
     // a platform
     std::shared_ptr<Body> platform = std::make_shared<Body>();

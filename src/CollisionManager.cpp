@@ -11,20 +11,21 @@ CollisionManager* CollisionManager::getInstance(){
 
 // Functions
 // Collide two objects
-Direction getCollisionDirection(std::shared_ptr<Body> currentBody, std::shared_ptr<Body> obstacleBody){
-    if(!obstacleBody->solid){
-        return Direction::None;
-    }
-
+void collideTwoBodies(std::shared_ptr<Body> currentBody, std::shared_ptr<Body> obstacleBody){
     ///////////////////////////////////////////////////////////////////////
     // prev rect method (if currentRect in past didn't touch obstacleRect in some direction and now currentRect does, kinematicBody stops in this direction)
 
     const sf::FloatRect& currentRect = currentBody->getRect();
     const sf::FloatRect& obstacleRect = obstacleBody->getRect();
-    const sf::Vector2f& currentBodyVel = currentBody->getVelocity();
+    sf::Vector2f& currentBodyVel = currentBody->velocity;
 
+    // if no collision now - return
     if(!currentRect.intersects(obstacleRect)){
-        return Direction::None;
+        return;
+    }
+
+    if(currentBody->solid || !obstacleBody->solid){
+        return;
     }
     
     sf::FloatRect prevRect;
@@ -35,12 +36,16 @@ Direction getCollisionDirection(std::shared_ptr<Body> currentBody, std::shared_p
     if(!prevRect.intersects(obstacleRect)){
         // down
         if(currentBodyVel.y > 0){
-            return Direction::Down;
+            currentBody->setRelativePos(currentRect.left, obstacleRect.top - currentRect.height);
+            currentBody->collisionVerticalDir = Direction::Down;
         } 
         // up
         else {
-            return Direction::Up;
+            currentBody->setRelativePos(currentRect.left, obstacleRect.top + obstacleRect.height);
+            currentBody->collisionVerticalDir = Direction::Up;
         }
+        currentBodyVel.y = 0;
+        return;
     }
 
     // horizontal
@@ -49,21 +54,22 @@ Direction getCollisionDirection(std::shared_ptr<Body> currentBody, std::shared_p
     if(!prevRect.intersects(obstacleRect)){
         // right
         if(currentBodyVel.x > 0){
-            return Direction::Right;
+            currentBody->setRelativePos(obstacleRect.left - currentRect.width, currentRect.top);
+            currentBody->collisionHorizontalDir = Direction::Right;
         } 
         // left
         else {
-            return Direction::Left;
+            currentBody->setRelativePos(obstacleRect.left + obstacleRect.width, currentRect.top);
+            currentBody->collisionHorizontalDir = Direction::Left;
         }
+        currentBodyVel.x = 0;
     }
-
-    return Direction::None;
 }
 
 // Methods
 // Collide all the objects
 void CollisionManager::collideAllBodies(){
-    for(std::weak_ptr<Body> currentBodyWeak : bodiesSet){
+    for(std::weak_ptr<Body> currentBodyWeak : bodiesWeakSet){
         auto currentBody = currentBodyWeak.lock();
         if(!currentBody){
             continue;
@@ -74,8 +80,11 @@ void CollisionManager::collideAllBodies(){
             continue;
         }
 
+        currentBody->collisionVerticalDir = Direction::None;
+        currentBody->collisionHorizontalDir = Direction::None;
+
         // collide body with other body 
-        for(std::weak_ptr<Body> obstacleBodyWeak : bodiesSet){
+        for(std::weak_ptr<Body> obstacleBodyWeak : bodiesWeakSet){
             auto obstacleBody = obstacleBodyWeak.lock();
             if(!obstacleBody){
                 continue;
@@ -84,12 +93,12 @@ void CollisionManager::collideAllBodies(){
                 continue;
             }
 
-            currentBody->setCollisionDirection(getCollisionDirection(currentBody, obstacleBody), obstacleBody);
+            collideTwoBodies(currentBody, obstacleBody);
         }
     }
 }
 
 // Add new body
 void CollisionManager::addNewBody(std::shared_ptr<Body> newBody){
-    bodiesSet.push_back(newBody);
+    bodiesWeakSet.push_back(newBody);
 }

@@ -14,10 +14,7 @@ private:
 
 protected:
     // Variables
-    sf::Vector2f velocity;
     sf::Vector2f acceleration;
-    Direction collisionVerticalDir;
-    Direction collisionHorizontalDir;
 public:
     // Structors
     Body();
@@ -25,15 +22,12 @@ public:
 
     // Variables
     bool solid;
+    sf::Vector2f velocity;
+    Direction collisionVerticalDir;
+    Direction collisionHorizontalDir;
 
     // Methods
     // Update the state
     virtual void update(const float& timeMs);
-    // collide self with obstacle body
-    void setCollisionDirection(Direction newDirection, std::shared_ptr<Body> obstacleBody);
-
-    // Getters
-    // velocity
-    const sf::Vector2f& getVelocity();
 };
 

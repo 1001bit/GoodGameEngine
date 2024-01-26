@@ -35,7 +35,7 @@ void TDPlayer::control(){
 
 // update state
 void TDPlayer::update(const float& timeMs){
-    Body::update(timeMs);
-    
     control();
+
+    Body::update(timeMs);
 };

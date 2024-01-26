@@ -4,32 +4,36 @@
 // Update all the objects of the GUI
 void Level::updateCurrentDialogue(){
     // if current dialogue is active
-    if(auto currentDialogue = currentDialogueWeak.lock()){
-        currentDialogue->update();
-        // set camera target
-        if(auto currentSpeaker = levelGObjectsWId.at(currentDialogue->getCurrentLine().characterId).lock()){
-            camera->setTarget(currentSpeaker);
-        }
-        // set dialogue text
-        if(auto dialogueText = dialogueTextWeak.lock()){
-            dialogueText->text.setString(currentDialogue->getCurrentLine().line);
-        }
+    auto currentDialogue = currentDialogueWeak.lock();
+    if(!currentDialogue){
+        return;
+    }
+    
+    currentDialogue->update();
+    // set camera target
+    if(auto currentSpeaker = levelGObjectsWId.at(currentDialogue->getCurrentLine().characterId).lock()){
+        camera->setTarget(currentSpeaker);
+    }
+    // set dialogue text
+    if(auto dialogueText = dialogueTextWeak.lock()){
+        dialogueText->text.setString(currentDialogue->getCurrentLine().line);
+    }
 
-        // if empty string (after last line) - stop it
-        if(currentDialogue->getCurrentLine().line == ""){
-            currentDialogueWeak.reset();
-            if(auto dialogueBox = dialogueBoxWeak.lock()){
-                dialogueBox->setRelativePos(9999, 9999);
-            }
+    // if empty string (after last line) - stop it
+    if(currentDialogue->getCurrentLine().line == ""){
+        currentDialogueWeak.reset();
+        if(auto dialogueBox = dialogueBoxWeak.lock()){
+            dialogueBox->setRelativePos(9999, 9999);
         }
     }
 };
 
 void Level::update(const float& timeMs){
-    GObject::update(timeMs);
-    
-    camera->update(timeMs);
     updateCurrentDialogue();
+
+    GObject::update(timeMs);
+
+    camera->update(timeMs);
 };
 
 // draw drawables

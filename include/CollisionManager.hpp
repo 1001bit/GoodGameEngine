@@ -12,7 +12,7 @@ private:
 
     // Variables
     // Bodies set
-    std::vector<std::weak_ptr<Body>> bodiesSet;
+    std::vector<std::weak_ptr<Body>> bodiesWeakSet;
 public:
     // Methods
     // Collide all the objects

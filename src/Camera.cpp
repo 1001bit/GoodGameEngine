@@ -23,6 +23,8 @@ void Camera::update(const float& timeMs){
     // setRelativePos(targetCenterPos);
 
     view.setCenter(getRelativePos());
+
+    GObject::update(timeMs);
 }
 
 // set size of view

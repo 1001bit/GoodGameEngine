@@ -1,12 +1,25 @@
 #include "Body.hpp"
 
+constexpr float ACCEL_COEFF = 0.1;
+
 // Structors
 Body::Body(){
-    this->type = GObjectType::Body;
+    solid = 0;
+    collisionHorizontalDir = Direction::None;
+    collisionVerticalDir = Direction::None;
 }
 
 Body::~Body(){}
 
 // Methods
-// collide seft with obstacle body
-void Body::collideWith(std::shared_ptr<Body> obstacle){}
+// Update the state
+void Body::update(const float& timeMs){
+    velocity += acceleration * ACCEL_COEFF * timeMs;
+
+    move(velocity);
+
+    // nullify velocity
+    acceleration = sf::Vector2f();
+
+    GObject::update(timeMs);
+};

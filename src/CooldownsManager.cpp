@@ -1,6 +1,13 @@
 #include "CooldownsManager.hpp"
 
+// Singleton
 CooldownsManager* CooldownsManager::instance = nullptr;
+CooldownsManager* CooldownsManager::getInstance(){
+    if (!instance)
+        instance = new CooldownsManager();
+    return instance;
+}
+
 
 // Methods
 // update all the cooldowns
@@ -16,10 +23,3 @@ std::shared_ptr<Cooldown> CooldownsManager::newCooldown(float startValue){
     cooldownsSet.insert(newCooldown);
     return newCooldown;
 };
-
-// get self singleton instance
-CooldownsManager* CooldownsManager::getInstance(){
-    if (!instance)
-        instance = new CooldownsManager();
-    return instance;
-}

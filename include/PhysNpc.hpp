@@ -7,7 +7,6 @@ class PhysNpc : public PhysBody
 private:
     // Variables
     Direction movementDir;
-    NpcType npcType;
 
     // Methods
     // npc movement
@@ -15,6 +14,13 @@ private:
     
 public:
     // Structors
-    PhysNpc(/* args */);
+    PhysNpc();
     ~PhysNpc();
+
+    // Variables
+    NpcType npcType;
+
+    // Methods
+    // update state
+    void update(const float& timeMs);
 };

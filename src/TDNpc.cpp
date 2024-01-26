@@ -66,7 +66,9 @@ void TDNpc::control(){
     }
 }
 
-// set new type of npc
-void TDNpc::setType(NpcType newType){
-    npcType = newType;
-}
+// update state
+void TDNpc::update(const float& timeMs){
+    control();
+
+    Body::update(timeMs);
+};

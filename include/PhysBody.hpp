@@ -1,18 +1,20 @@
 #pragma once
 
-#include "KinematicBody.hpp"
+#include "Body.hpp"
 
-class PhysBody : public KinematicBody
+class PhysBody : public Body
 {
 private:
     // Methods
     // Gravity force
     void gravity(const float& timeMs);
 protected:
-    // Methods
-    // control the unit
-    virtual void control();
+
 public:
+    // Methods
+    // update state
+    virtual void update(const float& timeMs);
+
     // Structors
     PhysBody();
     ~PhysBody();

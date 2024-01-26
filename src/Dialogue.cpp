@@ -28,11 +28,6 @@ void Dialogue::control(){
     }
 }
 
-// add a new participant
-void Dialogue::addParticipant(uint16_t id, std::shared_ptr<GObject> pointer){
-    participantsList.insert({id, pointer});
-}
-
 // set new lines list
 void Dialogue::setLines(std::vector<DialogueLine> newLines){
     linesList = newLines;

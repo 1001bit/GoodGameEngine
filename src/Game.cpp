@@ -48,12 +48,19 @@ void Game::loop(sf::RenderWindow& window){
             handleEvent(event);
         }
 
-        // cooldowns
+        // Updates
+        // Cooldowns
         CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
         cooldownsManager->updateCooldowns(timeMs);
+
+        // GObjects
         currentLevel->update(timeMs);
 
-        // Updates
+        // Collisions
+        CollisionManager* collisionManager = CollisionManager::getInstance();
+        collisionManager->collideAllBodies();
+
+        // Draw
         window.clear();
         currentLevel->drawGObjetcs(window);
         window.display();

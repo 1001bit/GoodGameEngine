@@ -2,7 +2,7 @@
 
 constexpr float GFORCE = 0.08;
 constexpr float GROUND_FRICTION = 0.6;
-constexpr float AIR_FRICTION = 0.95;
+constexpr float AIR_FRICTION = 0.96;
 
 // Structors
 PhysBody::PhysBody(){}
@@ -10,8 +10,6 @@ PhysBody::PhysBody(){}
 PhysBody::~PhysBody(){}
 
 // Methods
-// Control
-void PhysBody::control(){}
 // Gravity impact
 void PhysBody::gravity(const float& timeMs){
     acceleration.y += GFORCE * timeMs;
@@ -23,3 +21,10 @@ void PhysBody::gravity(const float& timeMs){
         velocity.x *= AIR_FRICTION;
     }
 }
+
+// update state
+void PhysBody::update(const float& timeMs){
+    gravity(timeMs);
+    
+    Body::update(timeMs);
+};

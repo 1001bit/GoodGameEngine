@@ -2,16 +2,20 @@
 
 // Structors
 GObject::GObject(){
-    this->type = GObjectType::None;
     this->flipped = 0;
     this->doesFlipMirror = 0;
 }
 
-GObject::~GObject(){}
+GObject::~GObject(){
+    std::cout << "deleted\n";
+}
 
 // Methods
-// Virtuals
-void GObject::update(const float& timeMs){}
+void GObject::update(const float& timeMs){
+    for(std::shared_ptr<GObject> child : children) {
+        child->update(timeMs);
+    }
+}
 void GObject::updateDrawablePos(){}
 
 // Main
@@ -23,15 +27,19 @@ void GObject::setParent(std::shared_ptr<GObject> newParent){
 
 void GObject::updatePos(){
     // set self position related to parent's
-    if(auto parent = parentWeak.lock()){
-        selfRect.left = parent->getRect().left + relativePos.x;
-        selfRect.top = parent->getRect().top + relativePos.y;
-        updateDrawablePos();
+    auto parent = parentWeak.lock();
 
-        // update children's position
-        for(std::shared_ptr<GObject> child : children) {
-            child->updatePos();
-        }
+    if(!parent){
+        return;
+    }
+    
+    selfRect.left = parent->getRect().left + relativePos.x;
+    selfRect.top = parent->getRect().top + relativePos.y;
+    updateDrawablePos();
+
+    // update children's position
+    for(std::shared_ptr<GObject> child : children) {
+        child->updatePos();
     }
 }
 
@@ -76,10 +84,6 @@ void GObject::setDoesFlipMirror(bool newDoesFlipMirror){
 
 const sf::Vector2f& GObject::getRelativePos(){
     return relativePos;
-}
-
-const GObjectType& GObject::getType(){
-    return type;
 }
 
 const sf::FloatRect& GObject::getRect(){

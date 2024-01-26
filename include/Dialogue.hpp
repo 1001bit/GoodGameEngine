@@ -28,8 +28,6 @@ class Dialogue
 {
 private:
     // Variables
-    // participant id and pointer
-    std::unordered_map<uint16_t, std::shared_ptr<GObject>> participantsList;
     // participant id and their line
     std::vector<DialogueLine> linesList;
     // current line

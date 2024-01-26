@@ -15,9 +15,10 @@ Body::~Body(){}
 // Update the state
 void Body::update(const float& timeMs){
     velocity += acceleration * ACCEL_COEFF * timeMs;
+
     move(velocity);
 
-    // nullify all
+    // nullify velocity
     acceleration = sf::Vector2f();
 
     GObject::update(timeMs);

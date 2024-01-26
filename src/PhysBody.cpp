@@ -2,7 +2,7 @@
 
 constexpr float GFORCE = 0.08;
 constexpr float GROUND_FRICTION = 0.6;
-constexpr float AIR_FRICTION = 0.95;
+constexpr float AIR_FRICTION = 0.96;
 
 // Structors
 PhysBody::PhysBody(){}

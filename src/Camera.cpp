@@ -19,8 +19,8 @@ void Camera::update(const float& timeMs){
     const sf::FloatRect& targetRect = followTarget->getRect();
     sf::Vector2f targetCenterPos(targetRect.left + (targetRect.width / 2), targetRect.top + (targetRect.height / 2));
     
-    // move((targetCenterPos - getRelativePos()) * timeMs * VIEW_LERP);
-    setRelativePos(targetCenterPos);
+    move((targetCenterPos - getRelativePos()) * timeMs * VIEW_LERP);
+    // setRelativePos(targetCenterPos);
 
     view.setCenter(getRelativePos());
 }

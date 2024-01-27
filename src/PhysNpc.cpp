@@ -9,6 +9,9 @@ PhysNpc::PhysNpc(){
     npcType = NpcType::Walking;
     movementDir = Direction::None;
 
+    weighs = 1;
+    solid = 0;
+
     CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
     selfCooldownMap["idle"] = cooldownsManager->newCooldown(2000);
     selfCooldownMap["walk"] = cooldownsManager->newCooldown(3000);
@@ -55,11 +58,11 @@ void PhysNpc::control(){
     switch (movementDir)
     {
     case Direction::Left:
-        acceleration.x -= walkSpeed;
+        accelerate(-walkSpeed, 0);
         setFlip(1);
         break;
     case Direction::Right:
-        acceleration.x += walkSpeed;
+        accelerate(walkSpeed, 0);
         setFlip(0);
         break;
     default:
@@ -71,5 +74,5 @@ void PhysNpc::control(){
 void PhysNpc::update(const float& timeMs){
     control();
 
-    PhysBody::update(timeMs);
+    Body::update(timeMs);
 };

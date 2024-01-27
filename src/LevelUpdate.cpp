@@ -43,8 +43,6 @@ void Level::update(const float& timeMs){
     updateCurrentDialogue();
 
     GObject::update(timeMs);
-    
-    camera->update(timeMs);
 };
 
 // draw drawables

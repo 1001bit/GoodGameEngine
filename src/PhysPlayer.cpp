@@ -5,7 +5,10 @@ constexpr float JUMP_FORCE = 15;
 constexpr float AIR_SLOWDOWN = 0.1;
 
 // Structors
-PhysPlayer::PhysPlayer(){}
+PhysPlayer::PhysPlayer(){
+    weighs = 1;
+    solid = 0;
+}
 
 PhysPlayer::~PhysPlayer(){}
 
@@ -22,18 +25,18 @@ void PhysPlayer::control(){
 
     // walk left
     if(controlsManager->isControlHeld("wLeft")){
-        acceleration.x -= walkSpeed;
+        accelerate(-walkSpeed, 0);
         setFlip(1);
     }
     // walk right
     if(controlsManager->isControlHeld("wRight")){
-        acceleration.x += walkSpeed;
+        accelerate(walkSpeed, 0);
         setFlip(0);
     }
 
     // jump
     if(controlsManager->isControlHeld("jump") && collisionDir.vertical == Direction::Down){
-        acceleration.y -= JUMP_FORCE;
+        accelerate(0, -JUMP_FORCE);
     }
 }
 
@@ -41,5 +44,5 @@ void PhysPlayer::control(){
 void PhysPlayer::update(const float& timeMs){
     control();
 
-    PhysBody::update(timeMs);
+    Body::update(timeMs);
 };

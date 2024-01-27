@@ -1,9 +1,9 @@
 #pragma once
 
-#include "PhysBody.hpp"
+#include "Body.hpp"
 #include "unordered_map"
 
-class PhysPlayer : public PhysBody
+class PhysPlayer : public Body
 {
 private:
     // Methods

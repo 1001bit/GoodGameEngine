@@ -56,9 +56,14 @@ void Game::loop(sf::RenderWindow& window){
         // GObjects
         currentLevel->update(timeMs);
 
-        // Collisions
-        CollisionManager* collisionManager = CollisionManager::getInstance();
-        collisionManager->collideAllBodies();
+        // Physics
+        PhysicsManager* physicsManager = PhysicsManager::getInstance();
+        physicsManager->applyGravity(timeMs);
+        physicsManager->collideAllBodies();
+        physicsManager->applyBodiesVelocity();
+
+        // Camera
+        currentLevel->camera->update(timeMs);
 
         // Draw
         window.clear();

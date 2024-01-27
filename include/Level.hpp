@@ -13,7 +13,7 @@
 #include "Dialogue.hpp"
 #include "GDrawable.hpp"
 #include "ResourceManager.hpp"
-#include "CollisionManager.hpp"
+#include "PhysicsManager.hpp"
 
 // #define DRAWCOLLIDER
 
@@ -25,8 +25,6 @@ class Level : public GObject
 {
 private:
     // Necessary GObjects
-    // game camera that is following some GObject
-    std::shared_ptr<Camera> camera;
     // dialogue box
     std::weak_ptr<GSprite> dialogueBoxWeak;
     // dialogue text inside a box
@@ -53,6 +51,8 @@ public:
     std::vector< std::vector<std::weak_ptr<GDrawable>> > levelDrawableLayers;
     // Level GObjects with own id
     std::unordered_map<uint16_t, std::weak_ptr<GObject>> levelGObjectsWId;
+    // Game camera that is following some GObject
+    std::shared_ptr<Camera> camera;
 
     // GUI GObjects
     // layers of drawable GUI GObjects

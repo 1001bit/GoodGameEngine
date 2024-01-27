@@ -1,10 +1,12 @@
 #include "TDPlayer.hpp"
 
 constexpr float WALK_SPEED = 15;
-constexpr float GROUND_FRICTION = 0.1;
 
 // Structors
-TDPlayer::TDPlayer(){}
+TDPlayer::TDPlayer(){
+    weighs = 0;
+    solid = 0;
+}
 
 TDPlayer::~TDPlayer(){}
 
@@ -13,23 +15,21 @@ TDPlayer::~TDPlayer(){}
 void TDPlayer::control(){
     ControlsManager* controlsManager = ControlsManager::getInstance();
 
-    velocity *= GROUND_FRICTION;
-
     // walk left
     if(controlsManager->isControlHeld("wLeft")){
-        acceleration.x -= WALK_SPEED;
+        accelerate(-WALK_SPEED, 0);
     }
     // walk right
     if(controlsManager->isControlHeld("wRight")){
-        acceleration.x += WALK_SPEED;
+        accelerate(WALK_SPEED, 0);
     }
     // walk up
     if(controlsManager->isControlHeld("wUp")){
-        acceleration.y -= WALK_SPEED;
+        accelerate(0, -WALK_SPEED);
     }
     // walk down
     if(controlsManager->isControlHeld("wDown")){
-        acceleration.y += WALK_SPEED;
+        accelerate(0, WALK_SPEED);
     }
 }
 

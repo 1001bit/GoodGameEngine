@@ -1,8 +1,8 @@
 #pragma once
 
-#include "PhysBody.hpp"
+#include "Body.hpp"
 
-class PhysNpc : public PhysBody
+class PhysNpc : public Body
 {
 private:
     // Variables

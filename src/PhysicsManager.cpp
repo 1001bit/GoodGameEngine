@@ -1,10 +1,14 @@
-#include "CollisionManager.hpp"
+#include "PhysicsManager.hpp"
+
+constexpr float GFORCE = 0.08;
+constexpr float AIR_FRICTION = 0.96;
+constexpr float GROUND_FRICTION = 0.6;
 
 // Singleton
-CollisionManager* CollisionManager::instance = nullptr;
-CollisionManager* CollisionManager::getInstance(){
+PhysicsManager* PhysicsManager::instance = nullptr;
+PhysicsManager* PhysicsManager::getInstance(){
     if(!instance){
-        instance = new CollisionManager();
+        instance = new PhysicsManager();
     }
     return instance;
 };
@@ -12,23 +16,22 @@ CollisionManager* CollisionManager::getInstance(){
 // Functions
 // Collide two objects
 void collideKinematicAndSolid(std::shared_ptr<Body> kinematicBody, std::shared_ptr<Body> solidBody){
-    // prev rect method (if kinematicRect in past didn't touch solidRect in some direction and now kinematicRect does, kinematicBody stops in this direction)
+    // future rect method (if futureRect in touches solidRect, in some direction and now kinematicRect doesn't, kinematicBody stops in this direction)
 
     const sf::FloatRect& kinematicRect = kinematicBody->getRect();
     const sf::FloatRect& solidRect = solidBody->getRect();
     sf::Vector2f& kinematicBodyVel = kinematicBody->velocity;
 
-    // if no collision now - return
-    if(!kinematicRect.intersects(solidRect)){
+    if(kinematicRect.intersects(solidRect)){
         return;
     }
     
-    sf::FloatRect prevRect;
+    sf::FloatRect futureRect;
     
     // vertical
-    prevRect = kinematicRect;
-    prevRect.top -= kinematicBodyVel.y;
-    if(!prevRect.intersects(solidRect)){
+    futureRect = kinematicRect;
+    futureRect.top += kinematicBodyVel.y;
+    if(futureRect.intersects(solidRect)){
         // down
         if(kinematicBodyVel.y > 0){
             kinematicBody->setRelativePos(kinematicRect.left, solidRect.top - kinematicRect.height);
@@ -44,9 +47,9 @@ void collideKinematicAndSolid(std::shared_ptr<Body> kinematicBody, std::shared_p
     }
 
     // horizontal
-    prevRect = kinematicRect;
-    prevRect.left -= kinematicBodyVel.x;
-    if(!prevRect.intersects(solidRect)){
+    futureRect = kinematicRect;
+    futureRect.left += kinematicBodyVel.x;
+    if(futureRect.intersects(solidRect)){
         // right
         if(kinematicBodyVel.x > 0){
             kinematicBody->setRelativePos(solidRect.left - kinematicRect.width, kinematicRect.top);
@@ -63,7 +66,7 @@ void collideKinematicAndSolid(std::shared_ptr<Body> kinematicBody, std::shared_p
 
 // Methods
 // Collide all the objects
-void CollisionManager::collideAllBodies(){
+void PhysicsManager::collideAllBodies(){
     for(std::weak_ptr<Body> currentBodyWeak : bodiesWeakSet){
         auto currentBody = currentBodyWeak.lock();
         // if current body is nil or no rect
@@ -84,14 +87,55 @@ void CollisionManager::collideAllBodies(){
                 continue;
             }
 
-            if(!currentBody->solid && obstacleBody->solid){
+            if(!currentBody->isSolid() && obstacleBody->isSolid()){
                 collideKinematicAndSolid(currentBody, obstacleBody);
             }
         }
     }
 }
 
+// Apply gravity on all weigh objects
+void PhysicsManager::applyGravity(const float& timeMs){
+    for(std::weak_ptr<Body> bodyWeak : bodiesWeakSet){
+        auto body = bodyWeak.lock();
+        // if current body is nil or no rect
+        if(!body || !body->doesWeigh()){
+            continue;
+        }
+
+        body->accelerate(0, GFORCE * timeMs);
+    }
+};
+
+// Apply the velocities of the bodies
+void PhysicsManager::applyBodiesVelocity(){
+    for(std::weak_ptr<Body> bodyWeak : bodiesWeakSet){
+        auto body = bodyWeak.lock();
+        // if current body is nil or no rect
+        if(!body){
+            continue;
+        }
+
+        body->move(body->velocity);
+
+        applyFrictionTo(body);
+    }
+};
+
+// Apply the friction so body doesn't move for eternity
+void PhysicsManager::applyFrictionTo(std::shared_ptr<Body> body){
+    if(body->doesWeigh()){
+        if(body->collisionDir.vertical == Direction::Down){
+            body->velocity.x *= GROUND_FRICTION;
+        } else {
+            body->velocity.x *= AIR_FRICTION;
+        }
+    } else {
+        body->velocity.x *= GROUND_FRICTION;
+    }
+}
+
 // Add new body
-void CollisionManager::addNewBody(std::shared_ptr<Body> newBody){
+void PhysicsManager::addNewBody(std::shared_ptr<Body> newBody){
     bodiesWeakSet.push_back(newBody);
 }

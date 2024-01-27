@@ -4,13 +4,13 @@
 // GObjects
 void Level::initTestGObjects(){
     ResourceManager* resourceManager = ResourceManager::getInstance();
-    CollisionManager* collisionManager = CollisionManager::getInstance();
+    PhysicsManager* physicsManager = PhysicsManager::getInstance();
 
     // Level
     // dummy
     std::shared_ptr<PhysPlayer> dummy = std::make_shared<PhysPlayer>();
     dummy->setParent(shared_from_this());
-    collisionManager->addNewBody(dummy);
+    physicsManager->addNewBody(dummy);
     levelGObjectsWId[1] = dummy;
     dummy->setRectPixelSize(16, 16);
     dummy->setRelativePos(500, 300);
@@ -18,13 +18,13 @@ void Level::initTestGObjects(){
     // his sprite
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();
     dummySprite->setParent(dummy);
-    levelDrawableLayers[0].push_back(dummySprite);
+    levelDrawableLayers[1].push_back(dummySprite);
     dummySprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
     dummySprite->playAnimation("idle");
     // his sword
     std::shared_ptr<GSprite> sword = std::make_shared<GSprite>();
     sword->setParent(dummy);
-    levelDrawableLayers[1].push_back(sword);
+    levelDrawableLayers[2].push_back(sword);
     sword->setDoesFlipMirror(1);
     sword->setTexture(resourceManager->getTexture("Assets/Textures/sword.png"));
     sword->setRelativePos(60, 0);
@@ -32,7 +32,7 @@ void Level::initTestGObjects(){
     // Npc
     std::shared_ptr<PhysNpc> npc = std::make_shared<PhysNpc>();
     npc->setParent(shared_from_this());
-    collisionManager->addNewBody(npc);
+    physicsManager->addNewBody(npc);
     levelGObjectsWId[2] = npc;
     npc->setRectPixelSize(16, 16);
     npc->setRelativePos(500, 300);
@@ -46,8 +46,7 @@ void Level::initTestGObjects(){
     // a platform
     std::shared_ptr<Body> platform = std::make_shared<Body>();
     platform->setParent(shared_from_this());
-    collisionManager->addNewBody(platform);
-    platform->solid = 1;
+    physicsManager->addNewBody(platform);
     platform->setRectPixelSize(100, 10);
     platform->setRelativePos(100, 800);
     // it's sprite
@@ -59,8 +58,7 @@ void Level::initTestGObjects(){
     // 2nd platform
     std::shared_ptr<Body> platform2 = std::make_shared<Body>();
     platform2->setParent(shared_from_this());
-    platform2->solid = 1;
-    collisionManager->addNewBody(platform2);
+    physicsManager->addNewBody(platform2);
     platform2->setRectPixelSize(100, 10);
     platform2->setRelativePos(800, 730);
     // it's sprite
@@ -72,8 +70,7 @@ void Level::initTestGObjects(){
     // 3rd platform
     std::shared_ptr<Body> platform3 = std::make_shared<Body>();
     platform3->setParent(shared_from_this());
-    platform3->solid = 1;
-    collisionManager->addNewBody(platform3);
+    physicsManager->addNewBody(platform3);
     platform3->setRectPixelSize(100, 10);
     platform3->setRelativePos(-600, 730);
     // it's sprite

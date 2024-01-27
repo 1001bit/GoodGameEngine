@@ -1,13 +1,14 @@
 #include "TDNpc.hpp"
 
 constexpr float WALK_SPEED = 4;
-constexpr float GROUND_FRICTION = 0.1;
 constexpr unsigned MOVEMENT_RAND = 500;
 
 // Structors
 TDNpc::TDNpc(){
     npcType = NpcType::Walking;
     movementDir = Direction::None;
+    weighs = 0;
+    solid = 0;
     
     CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
     selfCooldownMap["idle"] = cooldownsManager->newCooldown(2000);
@@ -18,8 +19,6 @@ TDNpc::~TDNpc(){}
 // Methods
 // npc movement
 void TDNpc::control(){
-    velocity *= GROUND_FRICTION;
-
     // no movement while on idle cooldown
     if(selfCooldownMap.at("idle")->getCurrentValueMs()){
         return;
@@ -50,16 +49,16 @@ void TDNpc::control(){
     switch (movementDir)
     {
     case Direction::Up:
-        acceleration.y -= WALK_SPEED;
+        accelerate(0, -WALK_SPEED);
         break;
     case Direction::Down:
-        acceleration.y += WALK_SPEED;
+        accelerate(0, WALK_SPEED);
         break;
     case Direction::Left:
-        acceleration.x -= WALK_SPEED;
+        accelerate(-WALK_SPEED, 0);
         break;
     case Direction::Right:
-        acceleration.x += WALK_SPEED;
+        accelerate(WALK_SPEED, 0);
         break;
     default:
         break;

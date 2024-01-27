@@ -6,9 +6,7 @@ GObject::GObject(){
     this->doesFlipMirror = 0;
 }
 
-GObject::~GObject(){
-    std::cout << "deleted\n";
-}
+GObject::~GObject(){}
 
 // Methods
 void GObject::update(const float& timeMs){

@@ -33,7 +33,7 @@ void TDNpc::control(){
     }
 
     // if collision and walking in collision direction - start idle and stop walk
-    if(selfCooldownMap.at("walk")->getCurrentValueMs() && movementDir == collisionHorizontalDir){
+    if(selfCooldownMap.at("walk")->getCurrentValueMs() && movementDir == collisionDir.horizontal){
         movementDir = Direction::None;
         selfCooldownMap.at("walk")->stop();
         selfCooldownMap.at("idle")->start(MOVEMENT_RAND);

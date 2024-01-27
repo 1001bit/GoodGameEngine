@@ -8,6 +8,11 @@ enum class NpcType {
     Hostile // fights when sees you
 };
 
+struct CollisionDirection {
+    Direction vertical;
+    Direction horizontal;
+};
+
 class Body : public GObject
 {
 private:
@@ -23,8 +28,7 @@ public:
     // Variables
     bool solid;
     sf::Vector2f velocity;
-    Direction collisionVerticalDir;
-    Direction collisionHorizontalDir;
+    CollisionDirection collisionDir;
 
     // Methods
     // Update the state

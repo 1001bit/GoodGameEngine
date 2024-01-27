@@ -5,8 +5,7 @@ constexpr float ACCEL_COEFF = 0.1;
 // Structors
 Body::Body(){
     solid = 0;
-    collisionHorizontalDir = Direction::None;
-    collisionVerticalDir = Direction::None;
+    collisionDir = {Direction::None, Direction::None};
 }
 
 Body::~Body(){}
@@ -15,11 +14,9 @@ Body::~Body(){}
 // Update the state
 void Body::update(const float& timeMs){
     velocity += acceleration * ACCEL_COEFF * timeMs;
+    acceleration = sf::Vector2f();
 
     move(velocity);
-
-    // nullify velocity
-    acceleration = sf::Vector2f();
 
     GObject::update(timeMs);
 };

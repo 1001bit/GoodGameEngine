@@ -37,7 +37,6 @@ void Level::updateCurrentDialogue(){
             dialogueBox->setRelativePos(9999, 9999);
         }
     }
-    std::cout << "\n";
 };
 
 void Level::update(const float& timeMs){

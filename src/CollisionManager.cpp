@@ -11,58 +11,53 @@ CollisionManager* CollisionManager::getInstance(){
 
 // Functions
 // Collide two objects
-void collideTwoBodies(std::shared_ptr<Body> currentBody, std::shared_ptr<Body> obstacleBody){
-    ///////////////////////////////////////////////////////////////////////
-    // prev rect method (if currentRect in past didn't touch obstacleRect in some direction and now currentRect does, kinematicBody stops in this direction)
+void collideKinematicAndSolid(std::shared_ptr<Body> kinematicBody, std::shared_ptr<Body> solidBody){
+    // prev rect method (if kinematicRect in past didn't touch solidRect in some direction and now kinematicRect does, kinematicBody stops in this direction)
 
-    const sf::FloatRect& currentRect = currentBody->getRect();
-    const sf::FloatRect& obstacleRect = obstacleBody->getRect();
-    sf::Vector2f& currentBodyVel = currentBody->velocity;
+    const sf::FloatRect& kinematicRect = kinematicBody->getRect();
+    const sf::FloatRect& solidRect = solidBody->getRect();
+    sf::Vector2f& kinematicBodyVel = kinematicBody->velocity;
 
     // if no collision now - return
-    if(!currentRect.intersects(obstacleRect)){
-        return;
-    }
-
-    if(currentBody->solid || !obstacleBody->solid){
+    if(!kinematicRect.intersects(solidRect)){
         return;
     }
     
     sf::FloatRect prevRect;
     
     // vertical
-    prevRect = currentRect;
-    prevRect.top -= currentBodyVel.y;
-    if(!prevRect.intersects(obstacleRect)){
+    prevRect = kinematicRect;
+    prevRect.top -= kinematicBodyVel.y;
+    if(!prevRect.intersects(solidRect)){
         // down
-        if(currentBodyVel.y > 0){
-            currentBody->setRelativePos(currentRect.left, obstacleRect.top - currentRect.height);
-            currentBody->collisionVerticalDir = Direction::Down;
+        if(kinematicBodyVel.y > 0){
+            kinematicBody->setRelativePos(kinematicRect.left, solidRect.top - kinematicRect.height);
+            kinematicBody->collisionDir.vertical = Direction::Down;
         } 
         // up
         else {
-            currentBody->setRelativePos(currentRect.left, obstacleRect.top + obstacleRect.height);
-            currentBody->collisionVerticalDir = Direction::Up;
+            kinematicBody->setRelativePos(kinematicRect.left, solidRect.top + solidRect.height);
+            kinematicBody->collisionDir.vertical = Direction::Up;
         }
-        currentBodyVel.y = 0;
+        kinematicBodyVel.y = 0;
         return;
     }
 
     // horizontal
-    prevRect = currentRect;
-    prevRect.left -= currentBodyVel.x;
-    if(!prevRect.intersects(obstacleRect)){
+    prevRect = kinematicRect;
+    prevRect.left -= kinematicBodyVel.x;
+    if(!prevRect.intersects(solidRect)){
         // right
-        if(currentBodyVel.x > 0){
-            currentBody->setRelativePos(obstacleRect.left - currentRect.width, currentRect.top);
-            currentBody->collisionHorizontalDir = Direction::Right;
+        if(kinematicBodyVel.x > 0){
+            kinematicBody->setRelativePos(solidRect.left - kinematicRect.width, kinematicRect.top);
+            kinematicBody->collisionDir.horizontal = Direction::Right;
         } 
         // left
         else {
-            currentBody->setRelativePos(obstacleRect.left + obstacleRect.width, currentRect.top);
-            currentBody->collisionHorizontalDir = Direction::Left;
+            kinematicBody->setRelativePos(solidRect.left + solidRect.width, kinematicRect.top);
+            kinematicBody->collisionDir.horizontal = Direction::Left;
         }
-        currentBodyVel.x = 0;
+        kinematicBodyVel.x = 0;
     }
 }
 
@@ -71,29 +66,27 @@ void collideTwoBodies(std::shared_ptr<Body> currentBody, std::shared_ptr<Body> o
 void CollisionManager::collideAllBodies(){
     for(std::weak_ptr<Body> currentBodyWeak : bodiesWeakSet){
         auto currentBody = currentBodyWeak.lock();
-        if(!currentBody){
+        // if current body is nil or no rect
+        if(!currentBody || currentBody->getRect() == sf::FloatRect()){
             continue;
         }
 
-        // don't collide if no collider
-        if(currentBody->getRect() == sf::FloatRect()){
-            continue;
-        }
-
-        currentBody->collisionVerticalDir = Direction::None;
-        currentBody->collisionHorizontalDir = Direction::None;
+        currentBody->collisionDir = {Direction::None, Direction::None};
 
         // collide body with other body 
         for(std::weak_ptr<Body> obstacleBodyWeak : bodiesWeakSet){
             auto obstacleBody = obstacleBodyWeak.lock();
-            if(!obstacleBody){
+            // if obstacle body is nil or no rect
+            if(!obstacleBody || obstacleBody->getRect() == sf::FloatRect()){
                 continue;
             }
-            if(obstacleBody == currentBody || obstacleBody->getRect() == sf::FloatRect()){
+            if(obstacleBody == currentBody){
                 continue;
             }
 
-            collideTwoBodies(currentBody, obstacleBody);
+            if(!currentBody->solid && obstacleBody->solid){
+                collideKinematicAndSolid(currentBody, obstacleBody);
+            }
         }
     }
 }

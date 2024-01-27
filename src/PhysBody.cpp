@@ -15,7 +15,7 @@ void PhysBody::gravity(const float& timeMs){
     acceleration.y += GFORCE * timeMs;
 
     // apply friction
-    if(collisionVerticalDir == Direction::Down){
+    if(collisionDir.vertical == Direction::Down){
         velocity.x *= GROUND_FRICTION;
     } else {
         velocity.x *= AIR_FRICTION;

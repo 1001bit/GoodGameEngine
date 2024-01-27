@@ -16,7 +16,7 @@ void PhysPlayer::control(){
 
     float walkSpeed = WALK_SPEED;
 
-    if(collisionVerticalDir != Direction::Down){
+    if(collisionDir.vertical != Direction::Down){
         walkSpeed *= AIR_SLOWDOWN;
     }
 
@@ -32,7 +32,7 @@ void PhysPlayer::control(){
     }
 
     // jump
-    if(controlsManager->isControlHeld("jump") && collisionVerticalDir == Direction::Down){
+    if(controlsManager->isControlHeld("jump") && collisionDir.vertical == Direction::Down){
         acceleration.y -= JUMP_FORCE;
     }
 }

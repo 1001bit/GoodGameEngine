@@ -31,10 +31,10 @@ void Game::loop(sf::RenderWindow& window){
         sf::Time deltaTime = clock.restart();
         timeMs = deltaTime.asMicroseconds()/1000.f;
         // Limit max dt
-        if(timeMs > 50){
-            timeMs = 50;
+        if(timeMs > 1000/MIN_FPS){
+            // std::cout << timeMs << "\n";
+            timeMs = 1000/MIN_FPS;
         }
-        // std::cout << 1000.0/timeMs << "FPS ; " << timeMs << "\n";
 
         // Events
         ControlsManager* controlsManager = ControlsManager::getInstance();
@@ -58,9 +58,7 @@ void Game::loop(sf::RenderWindow& window){
 
         // Physics
         PhysicsManager* physicsManager = PhysicsManager::getInstance();
-        physicsManager->applyGravity(timeMs);
-        physicsManager->collideAllBodies();
-        physicsManager->applyBodiesVelocity();
+        physicsManager->updatePhysics(timeMs);
 
         // Camera
         currentLevel->camera->update(timeMs);

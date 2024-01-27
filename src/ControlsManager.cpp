@@ -18,25 +18,25 @@ void ControlsManager::setMouseControlsMap(std::unordered_map<std::string, sf::Mo
     mouseControlsMap = newControlsMap;
 };
 
-bool ControlsManager::isControlHeld(std::string controlId){
+bool ControlsManager::isControlHeld(const std::string& controlId){
     // if there is such keyboard control and it's pressed
     if(keyboardControlsMap.count(controlId) && sf::Keyboard::isKeyPressed(keyboardControlsMap.at(controlId))){
         return 1;
     }
     // if there is such mouse control and it's pressed
-    if(mouseControlsMap.count(controlId) && sf::Mouse::isButtonPressed(mouseControlsMap.at(controlId))){
+    else if(mouseControlsMap.count(controlId) && sf::Mouse::isButtonPressed(mouseControlsMap.at(controlId))){
         return 1;
     }
     return 0;
 }
 
-bool ControlsManager::isControlPressedOnce(std::string controlId){
+bool ControlsManager::isControlPressedOnce(const std::string& controlId){
     // if there is such keyboard control and it's pressed
     if(keyboardControlsMap.count(controlId) && pressedOnceKeyboardKeys.count(keyboardControlsMap.at(controlId))){
         return 1;
     }
     // if the control wasn't pressed this frame
-    if(mouseControlsMap.count(controlId) && pressedOnceMouseButtons.count(mouseControlsMap.at(controlId))){
+    else if(mouseControlsMap.count(controlId) && pressedOnceMouseButtons.count(mouseControlsMap.at(controlId))){
         return 1;
     }
     return 0;

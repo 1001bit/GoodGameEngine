@@ -16,13 +16,17 @@ private:
 public:
     // Methods
     // Manage collisions of all the bodies with each others
-    void collideAllBodies(); 
+    void applyCollisions(std::shared_ptr<Body> body); 
     // Apply gravity on all weigh objects
-    void applyGravity(const float& timeMs);
+    void applyGravityToAccel(std::shared_ptr<Body> body, const float& timeMs);
     // Apply the velocities of the bodies
-    void applyBodiesVelocity();
+    void applyVelocityToPos(std::shared_ptr<Body> body);
+    // Apply the acceleration to the velocity
+    void applyAccelerationToVel(std::shared_ptr<Body> body, const float& timeMs);
     // Apply the friction so body doesn't move for eternity
-    void applyFrictionTo(std::shared_ptr<Body> body);
+    void applyFrictionToVel(std::shared_ptr<Body> body);
+    // Do all the physics stuff to all the bodies
+    void updatePhysics(const float& timeMs);
     // Add new body
     void addNewBody(std::shared_ptr<Body> newBody);
 

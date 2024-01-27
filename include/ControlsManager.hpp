@@ -33,9 +33,9 @@ public:
     void changeKeyboardControl(std::string controlId, sf::Keyboard::Key newKey);
 
     // returns true if key is pressed on the moment of call
-    bool isControlHeld(std::string controlId);
+    bool isControlHeld(const std::string& controlId);
     // returns true if key is pressed and wasn't pressed until last unheld (single atomic press)
-    bool isControlPressedOnce(std::string controlId);
+    bool isControlPressedOnce(const std::string& controlId);
     
     // add keyboard key that was pressed this frame
     void addOncePressedKeyboard(sf::Keyboard::Key controlId);

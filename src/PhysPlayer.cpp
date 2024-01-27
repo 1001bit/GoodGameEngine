@@ -2,7 +2,7 @@
 
 constexpr float WALK_SPEED = 2;
 constexpr float JUMP_FORCE = 15;
-constexpr float AIR_SLOWDOWN = 0.1;
+constexpr float AIR_SLOWDOWN = 0.05;
 
 // Structors
 PhysPlayer::PhysPlayer(){
@@ -28,6 +28,7 @@ void PhysPlayer::control(){
         accelerate(-walkSpeed, 0);
         setFlip(1);
     }
+
     // walk right
     if(controlsManager->isControlHeld("wRight")){
         accelerate(walkSpeed, 0);

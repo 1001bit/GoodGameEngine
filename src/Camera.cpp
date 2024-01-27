@@ -1,6 +1,6 @@
 #include "Camera.hpp"
 
-constexpr float VIEW_LERP = 0.02;
+constexpr float SPEED = 0.03;
 
 // Structors
 Camera::Camera(){}
@@ -18,8 +18,8 @@ void Camera::update(const float& timeMs){
 
     const sf::FloatRect& targetRect = followTarget->getRect();
     sf::Vector2f targetCenterPos(targetRect.left + (targetRect.width / 2), targetRect.top + (targetRect.height / 2));
-    
-    move((targetCenterPos - getRelativePos()) * timeMs * VIEW_LERP);
+
+    move((targetCenterPos - getRelativePos()) * timeMs * SPEED);
     // setRelativePos(targetCenterPos);
 
     view.setCenter(getRelativePos());

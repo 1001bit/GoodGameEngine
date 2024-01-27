@@ -1,8 +1,9 @@
 #include "PhysicsManager.hpp"
 
 constexpr float GFORCE = 0.08;
-constexpr float AIR_FRICTION = 0.96;
-constexpr float GROUND_FRICTION = 0.6;
+constexpr float AIR_FRICTION = 0.98;
+constexpr float GROUND_FRICTION = 0.7;
+constexpr float ACCEL_COEFF = 0.1;
 
 // Singleton
 PhysicsManager* PhysicsManager::instance = nullptr;
@@ -17,7 +18,6 @@ PhysicsManager* PhysicsManager::getInstance(){
 // Collide two objects
 void collideKinematicAndSolid(std::shared_ptr<Body> kinematicBody, std::shared_ptr<Body> solidBody){
     // future rect method (if futureRect in touches solidRect, in some direction and now kinematicRect doesn't, kinematicBody stops in this direction)
-
     const sf::FloatRect& kinematicRect = kinematicBody->getRect();
     const sf::FloatRect& solidRect = solidBody->getRect();
     sf::Vector2f& kinematicBodyVel = kinematicBody->velocity;
@@ -64,51 +64,8 @@ void collideKinematicAndSolid(std::shared_ptr<Body> kinematicBody, std::shared_p
     }
 }
 
-// Methods
-// Collide all the objects
-void PhysicsManager::collideAllBodies(){
-    for(std::weak_ptr<Body> currentBodyWeak : bodiesWeakSet){
-        auto currentBody = currentBodyWeak.lock();
-        // if current body is nil or no rect
-        if(!currentBody || currentBody->getRect() == sf::FloatRect()){
-            continue;
-        }
-
-        currentBody->collisionDir = {Direction::None, Direction::None};
-
-        // collide body with other body 
-        for(std::weak_ptr<Body> obstacleBodyWeak : bodiesWeakSet){
-            auto obstacleBody = obstacleBodyWeak.lock();
-            // if obstacle body is nil or no rect
-            if(!obstacleBody || obstacleBody->getRect() == sf::FloatRect()){
-                continue;
-            }
-            if(obstacleBody == currentBody){
-                continue;
-            }
-
-            if(!currentBody->isSolid() && obstacleBody->isSolid()){
-                collideKinematicAndSolid(currentBody, obstacleBody);
-            }
-        }
-    }
-}
-
-// Apply gravity on all weigh objects
-void PhysicsManager::applyGravity(const float& timeMs){
-    for(std::weak_ptr<Body> bodyWeak : bodiesWeakSet){
-        auto body = bodyWeak.lock();
-        // if current body is nil or no rect
-        if(!body || !body->doesWeigh()){
-            continue;
-        }
-
-        body->accelerate(0, GFORCE * timeMs);
-    }
-};
-
-// Apply the velocities of the bodies
-void PhysicsManager::applyBodiesVelocity(){
+// Do all the physics stuff to all the bodies
+void PhysicsManager::updatePhysics(const float& timeMs){
     for(std::weak_ptr<Body> bodyWeak : bodiesWeakSet){
         auto body = bodyWeak.lock();
         // if current body is nil or no rect
@@ -116,14 +73,80 @@ void PhysicsManager::applyBodiesVelocity(){
             continue;
         }
 
-        body->move(body->velocity);
-
-        applyFrictionTo(body);
+        applyGravityToAccel(body, timeMs);
+        applyAccelerationToVel(body, timeMs);
+        applyCollisions(body);
+        applyVelocityToPos(body);
     }
 };
 
+// Methods
+// Collide all the objects
+void PhysicsManager::applyCollisions(std::shared_ptr<Body> body){
+    // if no rect - next one
+    if(body->getRect() == sf::FloatRect()){
+        return;
+    }
+
+    // only kinematic
+    if(body->isSolid()){
+        return;
+    }
+
+    body->collisionDir = {Direction::None, Direction::None};
+
+    // collide body with other body 
+    for(std::weak_ptr<Body> otherBodyWeak : bodiesWeakSet){
+        auto otherBody = otherBodyWeak.lock();
+
+        // if obstacle body is nil - next one
+        if(!otherBody){
+            continue;
+        }
+
+        // only solid obstacle
+        if(!otherBody->isSolid()){
+            continue;
+        }
+
+        // if obstacle body is current body or no rect - next one
+        if(otherBody == body || otherBody->getRect() == sf::FloatRect()){
+            continue;
+        }
+
+        // actually collide
+        collideKinematicAndSolid(body, otherBody);
+    }
+}
+
+// Apply gravity on all weigh objects
+void PhysicsManager::applyGravityToAccel(std::shared_ptr<Body> body, const float& timeMs){
+    if(!body->doesWeigh()){
+        return;
+    }
+
+    body->accelerate(0, GFORCE * timeMs);
+};
+
+// Apply the velocities of the bodies
+void PhysicsManager::applyVelocityToPos(std::shared_ptr<Body> body){
+    if(body->isSolid()){
+        return;
+    }
+
+    body->move(body->velocity);
+
+    applyFrictionToVel(body);
+};
+
+// Apply the acceleration to the velocity
+void PhysicsManager::applyAccelerationToVel(std::shared_ptr<Body> body, const float& timeMs){
+    body->velocity += body->getAcceleration() * timeMs * ACCEL_COEFF;
+    body->acceleration = sf::Vector2f();
+};
+
 // Apply the friction so body doesn't move for eternity
-void PhysicsManager::applyFrictionTo(std::shared_ptr<Body> body){
+void PhysicsManager::applyFrictionToVel(std::shared_ptr<Body> body){
     if(body->doesWeigh()){
         if(body->collisionDir.vertical == Direction::Down){
             body->velocity.x *= GROUND_FRICTION;

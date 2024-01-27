@@ -16,8 +16,7 @@ struct CollisionDirection {
 class Body : public GObject
 {
 private:
-    // Variables
-    sf::Vector2f acceleration;
+
 protected:
     // Variables
     bool weighs;
@@ -30,6 +29,7 @@ public:
     ~Body();
 
     // Variables
+    sf::Vector2f acceleration;
     sf::Vector2f velocity;
     CollisionDirection collisionDir;
 
@@ -44,5 +44,7 @@ public:
     const bool& doesWeigh();
     // solid
     const bool& isSolid();
+    // acceleration
+    const sf::Vector2f& getAcceleration();
 };
 

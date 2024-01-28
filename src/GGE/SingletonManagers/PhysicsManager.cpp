@@ -42,7 +42,7 @@ void PhysicsManager::applyGravityToAccel(std::shared_ptr<Body> body, const float
 
 // Apply the velocities of the bodies
 void PhysicsManager::applyVelocityToPos(std::shared_ptr<Body> body){
-    if(body->isSolid()){
+    if(!body->isKinematic()){
         return;
     }
 

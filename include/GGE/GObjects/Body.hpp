@@ -20,7 +20,8 @@ private:
 protected:
     // Variables
     bool weighs;
-    bool solid;
+    bool kinematic;
+    bool collidable;
 
 public:
 
@@ -43,7 +44,9 @@ public:
     // weighs
     const bool& doesWeigh();
     // solid
-    const bool& isSolid();
+    const bool& isKinematic();
+    // collidable
+    const bool& isCollidable();
     // acceleration
     const sf::Vector2f& getAcceleration();
 };

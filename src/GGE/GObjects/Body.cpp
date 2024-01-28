@@ -2,7 +2,8 @@
 
 // Structors
 Body::Body(){
-    solid = 1;
+    collidable = 1;
+    kinematic = 0;
     weighs = 0;
     collisionDir = {Direction::None, Direction::None};
 }
@@ -27,9 +28,13 @@ const bool& Body::doesWeigh(){
     return weighs;
 }
 // solid
-const bool& Body::isSolid(){
-    return solid;
+const bool& Body::isKinematic(){
+    return kinematic;
 }
+// collidable
+const bool& Body::isCollidable(){
+    return collidable;
+};
 // acceleration
 const sf::Vector2f& Body::getAcceleration(){
     return acceleration;

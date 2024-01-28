@@ -54,7 +54,7 @@ void PhysicsManager::applyCollisions(std::shared_ptr<Body> body){
     }
 
     // only kinematic
-    if(body->isSolid()){
+    if(!body->isKinematic()){
         return;
     }
 
@@ -69,8 +69,8 @@ void PhysicsManager::applyCollisions(std::shared_ptr<Body> body){
             continue;
         }
 
-        // only solid obstacle
-        if(!otherBody->isSolid()){
+        // only solid collidable obstacle
+        if(!(otherBody->isCollidable() && !otherBody->isKinematic())){
             continue;
         }
 

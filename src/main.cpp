@@ -1,5 +1,4 @@
-#include <SFML/Graphics.hpp>
-#include "Game.hpp"
+#include "GGE/Game.hpp"
 
 int main()
 {

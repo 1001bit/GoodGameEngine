@@ -1,6 +1,18 @@
 - Trigger system (triggers for level transition, dialogue start, etc.)
-    - make level singleton and get all the stuff what is going on there (new branch)
+    - Trigger has 2 parameters: activation event, action
+    - if activation event happened, action starts
+    - Trigger is an abstract class. Custom triggers are created by developer
+
+- Easy system to make own GObjects, triggers, levels and other stuff
+    - Separate custom levels, GObjects, triggers, etc. from base stuff
+
 - Levels
     - Level editor
     - Base levels: Menu, Simple Game Level
+
+- Engine release
+
+
+Not necessary:
 - Smarter NPCs
+- Koyote effect, jump buffer, smooth edges

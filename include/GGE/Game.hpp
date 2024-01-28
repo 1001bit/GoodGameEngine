@@ -1,10 +1,7 @@
 #pragma once
 
 #include "GGE/Level/Level.hpp"
-
-// Framerate limits
-constexpr unsigned MAX_FPS = 140;
-constexpr unsigned MIN_FPS = 120;
+#include "GGE/GameConstants.hpp"
 
 class Game
 {

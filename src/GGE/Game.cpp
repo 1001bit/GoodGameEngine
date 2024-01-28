@@ -16,7 +16,6 @@ void Game::init(){
     // Level
     currentLevel = std::make_shared<Level>();
     currentLevel->init();
-    currentLevel->initTestGObjects();
 }
 
 // Main loop

@@ -4,7 +4,7 @@
 #include "GGE/GObjects/GObject.hpp"
 
 struct DialogueLine {
-    u_char characterId;
+    int16_t characterId;
     std::string line;
 };
 

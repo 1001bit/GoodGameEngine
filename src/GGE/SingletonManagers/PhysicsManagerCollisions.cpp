@@ -7,10 +7,6 @@ void collideKinematicAndSolid(std::shared_ptr<Body> kinematicBody, std::shared_p
     const sf::FloatRect& kinematicRect = kinematicBody->getRect();
     const sf::FloatRect& solidRect = solidBody->getRect();
     sf::Vector2f& kinematicBodyVel = kinematicBody->velocity;
-
-    if(kinematicRect.intersects(solidRect)){
-        return;
-    }
     
     sf::FloatRect futureRect;
     
@@ -29,7 +25,6 @@ void collideKinematicAndSolid(std::shared_ptr<Body> kinematicBody, std::shared_p
             kinematicBody->collisionDir.vertical = Direction::Up;
         }
         kinematicBodyVel.y = 0;
-        return;
     }
 
     // horizontal

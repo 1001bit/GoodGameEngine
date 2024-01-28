@@ -1,46 +1,17 @@
 #include "GGE/Level/Level.hpp"
 
 // Methods
-// Update all the objects of the GUI
-void Level::updateCurrentDialogue(){
-    // if current dialogue is active
-    auto currentDialogue = currentDialogueWeak.lock();
-    if(!currentDialogue){
-        return;
-    }
-
-    currentDialogue->update();
-
-    // if no current speaker - stop dialogue
-    if(!levelGObjectsWId.count(currentDialogue->getCurrentLine().characterId)){
-        currentDialogueWeak.reset();
-        if(auto dialogueBox = dialogueBoxWeak.lock()){
-            dialogueBox->setRelativePos(9999, 9999);
-        }
-        return;
-    };
-
-    // set camera target
-    if(auto currentSpeaker = levelGObjectsWId.at(currentDialogue->getCurrentLine().characterId).lock()){
-        camera->setTarget(currentSpeaker);
-    }
-
-    // set dialogue text
-    if(auto dialogueText = dialogueTextWeak.lock()){
-        dialogueText->text.setString(currentDialogue->getCurrentLine().line);
-    }
-
-    // if empty string (after last line) - stop it
-    if(currentDialogue->getCurrentLine().line == ""){
-        currentDialogueWeak.reset();
-        if(auto dialogueBox = dialogueBoxWeak.lock()){
-            dialogueBox->setRelativePos(9999, 9999);
-        }
-    }
-};
-
+// Update everything in the level
 void Level::update(const float& dTimeMs){
-    updateCurrentDialogue();
+    dialogueManager.updateCurrentDialogue();
+
+    // set camera target from dialogue
+    uint16_t speakerId = dialogueManager.getCurrentSpeakerId();
+    std::shared_ptr<GObject> currentSpeaker = levelGObjectsWId.at(1).lock();
+    if(levelGObjectsWId.count(speakerId)){
+        currentSpeaker = levelGObjectsWId.at(speakerId).lock();
+    }
+    camera->setTarget(currentSpeaker);
 
     GObject::update(dTimeMs);
 };

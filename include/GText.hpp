@@ -5,7 +5,10 @@
 class GText : public GDrawable
 {
 private:
-    
+    // Methods
+    // Update text and gobject pos
+    void updatePos(); 
+
 public:
     // Structors
     GText();
@@ -15,8 +18,6 @@ public:
     sf::Text text;
 
     // Methods
-    // set text's new position
-    void updateDrawablePos();
     // draw self text
     void drawSelf(sf::RenderWindow& window);
 };

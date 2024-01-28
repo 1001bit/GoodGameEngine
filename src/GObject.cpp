@@ -14,7 +14,6 @@ void GObject::update(const float& timeMs){
         child->update(timeMs);
     }
 }
-void GObject::updateDrawablePos(){}
 
 // Main
 
@@ -33,7 +32,6 @@ void GObject::updatePos(){
     
     selfRect.left = parent->getRect().left + relativePos.x;
     selfRect.top = parent->getRect().top + relativePos.y;
-    updateDrawablePos();
 
     // update children's position
     for(std::shared_ptr<GObject> child : children) {

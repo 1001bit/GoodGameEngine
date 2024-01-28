@@ -26,8 +26,6 @@ private:
     bool doesFlipMirror;
 
     // Methods
-    // set self rect relative position and children's position
-    void updatePos(); 
     // Add a new child
     void addChild(std::shared_ptr<GObject> newChild);
 
@@ -38,8 +36,8 @@ protected:
     std::unordered_map<std::string, std::shared_ptr<Cooldown>> selfCooldownMap;
 
     // Methods
-    // Set SFML object position after repositioning (if exists)
-    virtual void updateDrawablePos();
+    // set self rect relative position and children's position
+    virtual void updatePos(); 
 
 public:
     // Structors
@@ -59,7 +57,7 @@ public:
     // set rect size
     void setRectPixelSize(float x, float y);
     // set the flip of the object
-    void setFlip(bool newFlip);
+    virtual void setFlip(bool newFlip);
     // set flip ability of the object
     void setDoesFlipMirror(bool newdoesFlipMirror);
     

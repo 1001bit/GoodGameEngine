@@ -6,10 +6,11 @@ GText::GText(){}
 GText::~GText(){}
 
 // Methods
-
-void GText::updateDrawablePos(){
+// Update text and gobject pos
+void GText::updatePos(){
+    GObject::updatePos();
     text.setPosition(getRect().getPosition());
-}
+}; 
 
 // draw self sprite
 void GText::drawSelf(sf::RenderWindow& window){

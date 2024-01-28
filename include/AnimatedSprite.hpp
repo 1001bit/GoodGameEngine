@@ -18,6 +18,10 @@ private:
     Animation* currentAnimation;
     float elapsedTime;
 
+    // Methods
+    // Update sprite and gobject pos
+    void updatePos(); 
+
 public:
     // Structors
     AnimatedSprite();
@@ -31,8 +35,6 @@ public:
     void playAnimation(std::string name);
     // Update the state of current animation
     void update(const float& timeMs);
-    // Move sprite after self reposition
-    void updateDrawablePos();
     // draw self drawable object
     void drawSelf(sf::RenderWindow& window);
     // Add new animation with name

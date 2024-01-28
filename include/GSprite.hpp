@@ -6,6 +6,9 @@
 class GSprite : public GDrawable
 {
 private:
+    // Methods
+    // Update sprite and gobject pos
+    void updatePos(); 
 
 public:
     // Structors
@@ -16,12 +19,10 @@ public:
     sf::Sprite sprite;
 
     // Methods
-    // Move sprite after self reposition
-    void updateDrawablePos();
     // Set a texture
     void setTexture(const sf::Texture& newTexture);
     // draw self sprite
     void drawSelf(sf::RenderWindow& window);
-    // set sprite flip
-    void setSpriteFlip(bool newSpriteFlip);
+    // set the flip of the object
+    void setFlip(bool newFlip);
 };

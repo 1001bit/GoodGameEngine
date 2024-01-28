@@ -72,15 +72,17 @@ void AnimatedSprite::update(const float& timeMs){
     GObject::update(timeMs);
 }
 
-// update position of sprite
-void AnimatedSprite::updateDrawablePos(){
-    sprite.setPosition(getRect().getPosition());
-}
-
 // draw self drawable object
 void AnimatedSprite::drawSelf(sf::RenderWindow& window){
     window.draw(sprite);
 };
+
+// Update sprite and gobject pos
+void AnimatedSprite::updatePos(){
+    GObject::updatePos();
+    sprite.setPosition(getRect().getPosition());
+}; 
+
 
 // Getters
 

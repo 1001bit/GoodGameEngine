@@ -12,7 +12,7 @@ CooldownsManager* CooldownsManager::getInstance(){
 // Methods
 // update all the cooldowns
 void CooldownsManager::updateCooldowns(const float& dTimeMs){
-    for(std::shared_ptr<Cooldown> cooldown : cooldownsSet){
+    for(std::shared_ptr<Cooldown> cooldown : cooldownsVector){
         cooldown->update(dTimeMs);
     }
 };
@@ -20,6 +20,6 @@ void CooldownsManager::updateCooldowns(const float& dTimeMs){
 // get newly created clone of cooldown at id
 std::shared_ptr<Cooldown> CooldownsManager::newCooldown(float startValue){
     std::shared_ptr<Cooldown> newCooldown = std::make_shared<Cooldown>(startValue);
-    cooldownsSet.insert(newCooldown);
+    cooldownsVector.push_back(newCooldown);
     return newCooldown;
 };

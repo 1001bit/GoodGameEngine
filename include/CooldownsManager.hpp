@@ -1,8 +1,7 @@
 #pragma once
 
 #include <string>
-#include <unordered_map>
-#include <unordered_set>
+#include <vector>
 #include <memory>
 #include "Cooldown.hpp"
 
@@ -15,7 +14,7 @@ private:
 
     // Variables
     // all the cooldowns clones
-    std::unordered_set<std::shared_ptr<Cooldown>> cooldownsSet;
+    std::vector<std::shared_ptr<Cooldown>> cooldownsVector;
     
 public:
     // Methods

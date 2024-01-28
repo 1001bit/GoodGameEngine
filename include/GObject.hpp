@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <unordered_set>
+#include <vector>
 #include <memory>
 #include <iostream>
 #include "CooldownsManager.hpp"
@@ -32,7 +32,7 @@ private:
 protected:
     // Variables
     std::weak_ptr<GObject> parentWeak;
-    std::unordered_set<std::shared_ptr<GObject>> children;
+    std::vector<std::shared_ptr<GObject>> children;
     std::unordered_map<std::string, std::shared_ptr<Cooldown>> selfCooldownMap;
 
     // Methods

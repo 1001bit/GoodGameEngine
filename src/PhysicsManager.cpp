@@ -14,59 +14,9 @@ PhysicsManager* PhysicsManager::getInstance(){
     return instance;
 };
 
-// Functions
-// Collide two objects
-void collideKinematicAndSolid(std::shared_ptr<Body> kinematicBody, std::shared_ptr<Body> solidBody){
-    // future rect method (if futureRect in touches solidRect, in some direction and now kinematicRect doesn't, kinematicBody stops in this direction)
-    const sf::FloatRect& kinematicRect = kinematicBody->getRect();
-    const sf::FloatRect& solidRect = solidBody->getRect();
-    sf::Vector2f& kinematicBodyVel = kinematicBody->velocity;
-
-    if(kinematicRect.intersects(solidRect)){
-        return;
-    }
-    
-    sf::FloatRect futureRect;
-    
-    // vertical
-    futureRect = kinematicRect;
-    futureRect.top += kinematicBodyVel.y;
-    if(futureRect.intersects(solidRect)){
-        // down
-        if(kinematicBodyVel.y > 0){
-            kinematicBody->setRelativePos(kinematicRect.left, solidRect.top - kinematicRect.height);
-            kinematicBody->collisionDir.vertical = Direction::Down;
-        } 
-        // up
-        else {
-            kinematicBody->setRelativePos(kinematicRect.left, solidRect.top + solidRect.height);
-            kinematicBody->collisionDir.vertical = Direction::Up;
-        }
-        kinematicBodyVel.y = 0;
-        return;
-    }
-
-    // horizontal
-    futureRect = kinematicRect;
-    futureRect.left += kinematicBodyVel.x;
-    if(futureRect.intersects(solidRect)){
-        // right
-        if(kinematicBodyVel.x > 0){
-            kinematicBody->setRelativePos(solidRect.left - kinematicRect.width, kinematicRect.top);
-            kinematicBody->collisionDir.horizontal = Direction::Right;
-        } 
-        // left
-        else {
-            kinematicBody->setRelativePos(solidRect.left + solidRect.width, kinematicRect.top);
-            kinematicBody->collisionDir.horizontal = Direction::Left;
-        }
-        kinematicBodyVel.x = 0;
-    }
-}
-
 // Do all the physics stuff to all the bodies
 void PhysicsManager::updatePhysics(const float& dTimeMs){
-    for(std::weak_ptr<Body> bodyWeak : bodiesWeakSet){
+    for(std::weak_ptr<Body> bodyWeak : bodiesWeakVector){
         auto body = bodyWeak.lock();
         // if current body is nil or no rect
         if(!body){
@@ -81,44 +31,6 @@ void PhysicsManager::updatePhysics(const float& dTimeMs){
 };
 
 // Methods
-// Collide all the objects
-void PhysicsManager::applyCollisions(std::shared_ptr<Body> body){
-    // if no rect - next one
-    if(body->getRect() == sf::FloatRect()){
-        return;
-    }
-
-    // only kinematic
-    if(body->isSolid()){
-        return;
-    }
-
-    body->collisionDir = {Direction::None, Direction::None};
-
-    // collide body with other body 
-    for(std::weak_ptr<Body> otherBodyWeak : bodiesWeakSet){
-        auto otherBody = otherBodyWeak.lock();
-
-        // if obstacle body is nil - next one
-        if(!otherBody){
-            continue;
-        }
-
-        // only solid obstacle
-        if(!otherBody->isSolid()){
-            continue;
-        }
-
-        // if obstacle body is current body or no rect - next one
-        if(otherBody == body || otherBody->getRect() == sf::FloatRect()){
-            continue;
-        }
-
-        // actually collide
-        collideKinematicAndSolid(body, otherBody);
-    }
-}
-
 // Apply gravity on all weigh objects
 void PhysicsManager::applyGravityToAccel(std::shared_ptr<Body> body, const float& dTimeMs){
     if(!body->doesWeigh()){
@@ -160,5 +72,5 @@ void PhysicsManager::applyFrictionToVel(std::shared_ptr<Body> body){
 
 // Add new body
 void PhysicsManager::addNewBody(std::shared_ptr<Body> newBody){
-    bodiesWeakSet.push_back(newBody);
+    bodiesWeakVector.push_back(newBody);
 }

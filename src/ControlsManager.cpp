@@ -49,12 +49,12 @@ void ControlsManager::changeKeyboardControl(std::string controlId, sf::Keyboard:
     keyboardControlsMap.at(controlId) = newKey;
 }
 
-void ControlsManager::addOncePressedKeyboard(sf::Keyboard::Key controlId){
-    pressedOnceKeyboardKeys.insert(controlId);
+void ControlsManager::addOncePressedKeyboard(sf::Keyboard::Key key){
+    pressedOnceKeyboardKeys.insert(key);
 }
 
-void ControlsManager::addOncePressedMouse(sf::Mouse::Button controlId){
-    pressedOnceMouseButtons.insert(controlId);
+void ControlsManager::addOncePressedMouse(sf::Mouse::Button button){
+    pressedOnceMouseButtons.insert(button);
 }
 
 void ControlsManager::clearOncePressed(){

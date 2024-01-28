@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Body.hpp"
-#include <set>
+#include <vector>
 
 class PhysicsManager
 {
@@ -11,8 +11,8 @@ private:
     PhysicsManager(){};
 
     // Variables
-    // Bodies set
-    std::vector<std::weak_ptr<Body>> bodiesWeakSet;
+    // Bodies vector
+    std::vector<std::weak_ptr<Body>> bodiesWeakVector;
 public:
     // Methods
     // Manage collisions of all the bodies with each others

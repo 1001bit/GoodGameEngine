@@ -20,8 +20,6 @@ private:
     std::unordered_map<std::string, sf::Mouse::Button> mouseControlsMap;
     // all the buttons that were pressed only this frame
     std::unordered_set<sf::Mouse::Button> pressedOnceMouseButtons;
-
-    // Constructor
     
 public:
     // Methods
@@ -36,15 +34,14 @@ public:
     bool isControlHeld(const std::string& controlId);
     // returns true if key is pressed and wasn't pressed until last unheld (single atomic press)
     bool isControlPressedOnce(const std::string& controlId);
-    
+
     // add keyboard key that was pressed this frame
-    void addOncePressedKeyboard(sf::Keyboard::Key controlId);
+    void addOncePressedKeyboard(sf::Keyboard::Key key);
     // add mouse button that was pressed this frame
-    void addOncePressedMouse(sf::Mouse::Button controlId);
-    // update the state. Clear pressed once keys
+    void addOncePressedMouse(sf::Mouse::Button button);
+    // clear pressed once keys set
     void clearOncePressed();
 
-    // Getters
-    // get self singleton instance
+    // Singleton
     static ControlsManager* getInstance();
 };

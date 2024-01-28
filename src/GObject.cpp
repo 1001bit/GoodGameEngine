@@ -15,8 +15,6 @@ void GObject::update(const float& dTimeMs){
     }
 }
 
-// Main
-
 void GObject::setParent(std::shared_ptr<GObject> newParent){
     this->parentWeak = newParent;
     newParent->addChild(shared_from_this());
@@ -40,7 +38,7 @@ void GObject::updatePos(){
 }
 
 void GObject::addChild(std::shared_ptr<GObject> newChild){
-    children.insert(newChild);
+    children.push_back(newChild);
     newChild->updatePos();
 }
 

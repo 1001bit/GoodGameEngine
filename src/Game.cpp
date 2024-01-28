@@ -32,7 +32,7 @@ void Game::loop(sf::RenderWindow& window){
         dTimeMs = deltaTime.asMicroseconds()/1000.f;
         // Limit max dt
         if(dTimeMs > 1000/MIN_FPS){
-            std::cout << dTimeMs << "\n";
+            // std::cout << dTimeMs << "\n";
             dTimeMs = 1000/MIN_FPS;
         }
         // std::cout << "dTime (ms): " << dTimeMs << " ; \t\t" << " FPS: " << 1000/dTimeMs << "\n";
@@ -42,7 +42,7 @@ void Game::loop(sf::RenderWindow& window){
         controlsManager->clearOncePressed();
 
         sf::Event event;
-        while (window.pollEvent(event))
+        if (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();

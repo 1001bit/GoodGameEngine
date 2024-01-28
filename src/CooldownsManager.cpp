@@ -11,9 +11,9 @@ CooldownsManager* CooldownsManager::getInstance(){
 
 // Methods
 // update all the cooldowns
-void CooldownsManager::updateCooldowns(const float& timeMs){
+void CooldownsManager::updateCooldowns(const float& dTimeMs){
     for(std::shared_ptr<Cooldown> cooldown : cooldownsSet){
-        cooldown->update(timeMs);
+        cooldown->update(dTimeMs);
     }
 };
 

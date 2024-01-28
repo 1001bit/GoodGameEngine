@@ -65,7 +65,7 @@ void collideKinematicAndSolid(std::shared_ptr<Body> kinematicBody, std::shared_p
 }
 
 // Do all the physics stuff to all the bodies
-void PhysicsManager::updatePhysics(const float& timeMs){
+void PhysicsManager::updatePhysics(const float& dTimeMs){
     for(std::weak_ptr<Body> bodyWeak : bodiesWeakSet){
         auto body = bodyWeak.lock();
         // if current body is nil or no rect
@@ -73,8 +73,8 @@ void PhysicsManager::updatePhysics(const float& timeMs){
             continue;
         }
 
-        applyGravityToAccel(body, timeMs);
-        applyAccelerationToVel(body, timeMs);
+        applyGravityToAccel(body, dTimeMs);
+        applyAccelerationToVel(body, dTimeMs);
         applyCollisions(body);
         applyVelocityToPos(body);
     }
@@ -120,12 +120,12 @@ void PhysicsManager::applyCollisions(std::shared_ptr<Body> body){
 }
 
 // Apply gravity on all weigh objects
-void PhysicsManager::applyGravityToAccel(std::shared_ptr<Body> body, const float& timeMs){
+void PhysicsManager::applyGravityToAccel(std::shared_ptr<Body> body, const float& dTimeMs){
     if(!body->doesWeigh()){
         return;
     }
 
-    body->accelerate(0, GFORCE * timeMs);
+    body->accelerate(0, GFORCE * dTimeMs);
 };
 
 // Apply the velocities of the bodies
@@ -140,8 +140,8 @@ void PhysicsManager::applyVelocityToPos(std::shared_ptr<Body> body){
 };
 
 // Apply the acceleration to the velocity
-void PhysicsManager::applyAccelerationToVel(std::shared_ptr<Body> body, const float& timeMs){
-    body->velocity += body->getAcceleration() * timeMs * ACCEL_COEFF;
+void PhysicsManager::applyAccelerationToVel(std::shared_ptr<Body> body, const float& dTimeMs){
+    body->velocity += body->getAcceleration() * dTimeMs * ACCEL_COEFF;
     body->acceleration = sf::Vector2f();
 };
 

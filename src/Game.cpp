@@ -24,17 +24,18 @@ void Game::loop(sf::RenderWindow& window){
     window.setKeyRepeatEnabled(false);
 
     sf::Clock clock;
-    float timeMs;
+    float dTimeMs;
     while (window.isOpen())
     {
         // Time
         sf::Time deltaTime = clock.restart();
-        timeMs = deltaTime.asMicroseconds()/1000.f;
+        dTimeMs = deltaTime.asMicroseconds()/1000.f;
         // Limit max dt
-        if(timeMs > 1000/MIN_FPS){
-            // std::cout << timeMs << "\n";
-            timeMs = 1000/MIN_FPS;
+        if(dTimeMs > 1000/MIN_FPS){
+            std::cout << dTimeMs << "\n";
+            dTimeMs = 1000/MIN_FPS;
         }
+        // std::cout << "dTime (ms): " << dTimeMs << " ; \t\t" << " FPS: " << 1000/dTimeMs << "\n";
 
         // Events
         ControlsManager* controlsManager = ControlsManager::getInstance();
@@ -51,17 +52,17 @@ void Game::loop(sf::RenderWindow& window){
         // Updates
         // Cooldowns
         CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
-        cooldownsManager->updateCooldowns(timeMs);
+        cooldownsManager->updateCooldowns(dTimeMs);
 
         // GObjects
-        currentLevel->update(timeMs);
+        currentLevel->update(dTimeMs);
 
         // Physics
         PhysicsManager* physicsManager = PhysicsManager::getInstance();
-        physicsManager->updatePhysics(timeMs);
+        physicsManager->updatePhysics(dTimeMs);
 
         // Camera
-        currentLevel->camera->update(timeMs);
+        currentLevel->camera->update(dTimeMs);
 
         // Draw
         window.clear();

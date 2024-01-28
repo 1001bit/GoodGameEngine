@@ -70,7 +70,7 @@ public:
     void initTestGObjects();
 
     // Update states of all the objects
-    void update(const float& timeMs);
+    void update(const float& dTimeMs);
     // Draw drawable objects
     void drawGObjetcs(sf::RenderWindow& window);
 };

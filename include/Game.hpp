@@ -3,8 +3,8 @@
 #include "Level.hpp"
 
 // Framerate limits
-constexpr unsigned MAX_FPS = 80;
-constexpr unsigned MIN_FPS = 60;
+constexpr unsigned MAX_FPS = 120;
+constexpr unsigned MIN_FPS = 90;
 
 class Game
 {

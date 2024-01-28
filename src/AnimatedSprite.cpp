@@ -40,7 +40,7 @@ void AnimatedSprite::playAnimation(std::string name){
 }
 
 // update frames, etc
-void AnimatedSprite::update(const float& timeMs){
+void AnimatedSprite::update(const float& dTimeMs){
     // no empty animations
     if(currentAnimation == nullptr){
         return;
@@ -59,7 +59,7 @@ void AnimatedSprite::update(const float& timeMs){
         return; 
     }
 
-    elapsedTime += timeMs;
+    elapsedTime += dTimeMs;
     
     // restart or drop frame
     if(elapsedTime >= currentAnimation->playTime){
@@ -69,7 +69,7 @@ void AnimatedSprite::update(const float& timeMs){
         }
     }
 
-    GObject::update(timeMs);
+    GObject::update(dTimeMs);
 }
 
 // draw self drawable object

@@ -11,8 +11,8 @@ Body::~Body(){}
 
 // Methods
 // Update the state
-void Body::update(const float& timeMs){
-    GObject::update(timeMs);
+void Body::update(const float& dTimeMs){
+    GObject::update(dTimeMs);
 };
 
 // Accelerate the body

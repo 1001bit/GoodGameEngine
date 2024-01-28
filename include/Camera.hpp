@@ -19,7 +19,7 @@ public:
     // set size of view
     void setSize(float w, float h);
     // smoothly move camera
-    void update(const float& timeMs);
+    void update(const float& dTimeMs);
     // set target of following
     void setTarget(std::shared_ptr<GObject> newTarget);
 

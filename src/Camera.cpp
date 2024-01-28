@@ -9,7 +9,7 @@ Camera::~Camera(){}
 
 // Methods
 // Smooth movement
-void Camera::update(const float& timeMs){
+void Camera::update(const float& dTimeMs){
     auto followTarget = followTargetWeak.lock();
 
     if(!followTarget){
@@ -19,12 +19,12 @@ void Camera::update(const float& timeMs){
     const sf::FloatRect& targetRect = followTarget->getRect();
     sf::Vector2f targetCenterPos(targetRect.left + (targetRect.width / 2), targetRect.top + (targetRect.height / 2));
 
-    move((targetCenterPos - getRelativePos()) * timeMs * SPEED);
+    move((targetCenterPos - getRelativePos()) * dTimeMs * SPEED);
     // setRelativePos(targetCenterPos);
 
     view.setCenter(getRelativePos());
 
-    GObject::update(timeMs);
+    GObject::update(dTimeMs);
 }
 
 // set size of view

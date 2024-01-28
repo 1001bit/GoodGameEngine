@@ -9,9 +9,9 @@ GObject::GObject(){
 GObject::~GObject(){}
 
 // Methods
-void GObject::update(const float& timeMs){
+void GObject::update(const float& dTimeMs){
     for(std::shared_ptr<GObject> child : children) {
-        child->update(timeMs);
+        child->update(dTimeMs);
     }
 }
 

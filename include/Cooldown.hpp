@@ -19,7 +19,7 @@ public:
     // set count to 0
     void stop();
     // update cooldown
-    void update(const float& timeMs);
+    void update(const float& dTimeMs);
 
     // Getters
     // get currentValueMs

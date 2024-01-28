@@ -22,11 +22,11 @@ void Cooldown::stop(){
 };
 
 // update cooldown value
-void Cooldown::update(const float& timeMs){
+void Cooldown::update(const float& dTimeMs){
     if(currentValueMs == 0){
         return;
     }
-    currentValueMs -= timeMs;
+    currentValueMs -= dTimeMs;
     if(currentValueMs < 0){
         currentValueMs = 0;
     }

@@ -17,5 +17,5 @@ public:
 
     // Methods
     // update state
-    void update(const float& timeMs);
+    void update(const float& dTimeMs);
 };

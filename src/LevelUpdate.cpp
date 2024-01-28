@@ -39,10 +39,10 @@ void Level::updateCurrentDialogue(){
     }
 };
 
-void Level::update(const float& timeMs){
+void Level::update(const float& dTimeMs){
     updateCurrentDialogue();
 
-    GObject::update(timeMs);
+    GObject::update(dTimeMs);
 };
 
 // draw drawables

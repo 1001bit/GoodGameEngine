@@ -34,7 +34,7 @@ public:
     // Start animation with name
     void playAnimation(std::string name);
     // Update the state of current animation
-    void update(const float& timeMs);
+    void update(const float& dTimeMs);
     // draw self drawable object
     void drawSelf(sf::RenderWindow& window);
     // Add new animation with name

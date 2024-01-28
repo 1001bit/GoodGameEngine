@@ -42,8 +42,8 @@ void PhysPlayer::control(){
 }
 
 // update state
-void PhysPlayer::update(const float& timeMs){
+void PhysPlayer::update(const float& dTimeMs){
     control();
 
-    Body::update(timeMs);
+    Body::update(dTimeMs);
 };

@@ -34,7 +34,7 @@ void Game::loop(sf::RenderWindow& window){
             // std::cout << dTimeMs << "\n";
             dTimeMs = 1000/MIN_FPS;
         }
-        // std::cout << "dTime (ms): " << dTimeMs << " ; \t\t" << " FPS: " << 1000/dTimeMs << "\n";
+        std::cout << "dTime (ms): " << dTimeMs << " ; \t\t" << " FPS: " << 1000/dTimeMs << "\n";
 
         // Events
         ControlsManager* controlsManager = ControlsManager::getInstance();

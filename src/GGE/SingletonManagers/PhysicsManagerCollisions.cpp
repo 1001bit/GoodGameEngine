@@ -69,13 +69,13 @@ void PhysicsManager::applyCollisions(std::shared_ptr<Body> body){
             continue;
         }
 
-        // only solid collidable obstacle
-        if(!(otherBody->isCollidable() && !otherBody->isKinematic())){
+        // if obstacle body is current body or no rect - next one
+        if(otherBody == body || otherBody->getRect() == sf::FloatRect()){
             continue;
         }
 
-        // if obstacle body is current body or no rect - next one
-        if(otherBody == body || otherBody->getRect() == sf::FloatRect()){
+        // only solid collidable obstacle
+        if(!otherBody->isCollidable() || otherBody->isKinematic()){
             continue;
         }
 

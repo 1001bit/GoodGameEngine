@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GGE/Level/Level.hpp"
+#include "GGE/Level.hpp"
 #include "GGE/GameConstants.hpp"
 
 class Game

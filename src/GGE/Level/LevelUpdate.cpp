@@ -1,4 +1,4 @@
-#include "GGE/Level/Level.hpp"
+#include "GGE/Level.hpp"
 
 // Methods
 // Update everything in the level

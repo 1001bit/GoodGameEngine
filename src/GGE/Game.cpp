@@ -1,5 +1,8 @@
 #include "GGE/Game.hpp"
 
+// #define SHOW_FPS
+#define SHOW_FPS_SPIKES
+
 // Structors
 Game::Game(){}
 
@@ -27,10 +30,14 @@ void Game::loop(sf::RenderWindow& window){
         dTimeMs = deltaTime.asMicroseconds()/1000.f;
         // Limit max dt
         if(dTimeMs > 1000/MIN_FPS){
+            #ifdef SHOW_FPS_SPIKES
             std::cout << dTimeMs << "\n";
+            #endif
             dTimeMs = 1000/MIN_FPS;
         }
-        // std::cout << "dTime (ms): " << dTimeMs << " ; \t\t" << " FPS: " << 1000/dTimeMs << "\n";
+        #ifdef SHOW_FPS
+        std::cout << "dTime (ms): " << dTimeMs << " ; \t\t" << " FPS: " << 1000/dTimeMs << "\n";
+        #endif
 
         // Events
         ControlsManager* controlsManager = ControlsManager::getInstance();
@@ -74,12 +81,12 @@ void Game::handleEvent(const sf::Event& event){
     case sf::Event::KeyPressed:
         controlsManager->addPressedKeyboard(event.key.code);
         break;
-    case sf::Event::KeyReleased:
-        controlsManager->keyboardControlRelease(event.key.code);
-        break;
-
     case sf::Event::MouseButtonPressed:
         controlsManager->addPressedMouse(event.mouseButton.button);
+        break;
+
+    case sf::Event::KeyReleased:
+        controlsManager->keyboardControlRelease(event.key.code);
         break;
     case sf::Event::MouseButtonReleased:
         controlsManager->mouseControlRelease(event.mouseButton.button);

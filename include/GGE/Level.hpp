@@ -12,7 +12,7 @@
 #include "GGE/GObjects/GText.hpp"
 #include "GGE/GObjects/GDrawable.hpp"
 
-#include "GGE/Level/DialogueManager.hpp"
+#include "GGE/Dialogues/DialogueManager.hpp"
 
 #include "GGE/SingletonManagers/ResourceManager.hpp"
 #include "GGE/SingletonManagers/PhysicsManager.hpp"

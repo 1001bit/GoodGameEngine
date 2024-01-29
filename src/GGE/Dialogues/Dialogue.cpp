@@ -1,4 +1,4 @@
-#include "GGE/Level/Dialogue.hpp"
+#include "GGE/Dialogues/Dialogue.hpp"
 
 // Structors
 Dialogue::Dialogue(){

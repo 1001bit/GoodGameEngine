@@ -1,4 +1,4 @@
-#include "GGE/Level/DialogueManager.hpp"
+#include "GGE/Dialogues/DialogueManager.hpp"
 
 // Structors
 DialogueManager::DialogueManager(){}

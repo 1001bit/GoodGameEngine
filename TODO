@@ -14,5 +14,6 @@
 
 
 Not necessary:
+- Collidable kinematic body
 - Smarter NPCs
 - Koyote effect, jump buffer, smooth edges

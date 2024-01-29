@@ -1,7 +1,7 @@
 #pragma once
 
 #include <unordered_map>
-#include "GGE/Level/Dialogue.hpp"
+#include "GGE/Dialogues/Dialogue.hpp"
 #include "GGE/GObjects/GText.hpp"
 #include "GGE/GObjects/GSprite.hpp"
 #include "GGE/GObjects/Camera.hpp"

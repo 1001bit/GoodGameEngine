@@ -1,4 +1,4 @@
-#include "GGE/GObjects/PhysNpc.hpp"
+#include "GGE/CustomGObjects/PhysNpc.hpp"
 
 constexpr float WALK_SPEED = 2;
 constexpr float AIR_SLOWDOWN = 0.05;

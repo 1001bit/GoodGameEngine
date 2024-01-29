@@ -10,37 +10,47 @@ private:
     static ControlsManager* instance;
     ControlsManager() {};
 
-    // Variables
-    // all the controls of keyboard
+    // Keyboard
+    // Controls
     std::unordered_map<std::string, sf::Keyboard::Key> keyboardControlsMap;
-    // all the buttons that were pressed only this frame
+    // Pressed once controls
     std::unordered_set<sf::Keyboard::Key> pressedOnceKeyboardKeys;
+    // Held controls
+    std::unordered_set<sf::Keyboard::Key> heldKeyboardKeys;
 
-    // all the controls of mouse
+    // Mouse
+    // Controls
     std::unordered_map<std::string, sf::Mouse::Button> mouseControlsMap;
-    // all the buttons that were pressed only this frame
+    // Pressed once controls
     std::unordered_set<sf::Mouse::Button> pressedOnceMouseButtons;
+    // Held controls
+    std::unordered_set<sf::Mouse::Button> heldMouseButtons;
     
 public:
     // Methods
-    // set new keyboard controls
+    // Set keyboard controls
     void setKeyboardControlsMap(std::unordered_map<std::string, sf::Keyboard::Key> newControlsMap);
-    // set new mouse controls
+    // Set mouse controls
     void setMouseControlsMap(std::unordered_map<std::string, sf::Mouse::Button> newControlsMap);
-    // change control
+    
+    // Change keyboard control
     void changeKeyboardControl(std::string controlId, sf::Keyboard::Key newKey);
 
-    // returns true if key is pressed on the moment of call
+    // Is control held now
     bool isControlHeld(const std::string& controlId);
-    // returns true if key is pressed and wasn't pressed until last unheld (single atomic press)
-    bool isControlPressedOnce(const std::string& controlId);
 
-    // add keyboard key that was pressed this frame
-    void addOncePressedKeyboard(sf::Keyboard::Key key);
-    // add mouse button that was pressed this frame
-    void addOncePressedMouse(sf::Mouse::Button button);
-    // clear pressed once keys set
-    void clearOncePressed();
+    // Is control pressed once
+    bool isControlPressed(const std::string& controlId);
+
+    // Control press
+    void addPressedKeyboard(sf::Keyboard::Key key);
+    void addPressedMouse(sf::Mouse::Button button);
+    // Clear pressed list
+    void clearPressed();
+
+    // Control release
+    void keyboardControlRelease(sf::Keyboard::Key key);
+    void mouseControlRelease(sf::Mouse::Button button);
 
     // Singleton
     static ControlsManager* getInstance();

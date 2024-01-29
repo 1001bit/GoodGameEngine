@@ -1,19 +1,19 @@
 #pragma once
 
-#include "Body.hpp"
+#include "GGE/GObjects/Body.hpp"
+#include "unordered_map"
 
-// Top-Down player
-class TDPlayer : public Body
+class PhysPlayer : public Body
 {
 private:
     // Methods
-    // control your character
+    // Control your character
     void control();
-    
+
 public:
     // Structors
-    TDPlayer();
-    ~TDPlayer();
+    PhysPlayer();
+    ~PhysPlayer();
 
     // Methods
     // update state

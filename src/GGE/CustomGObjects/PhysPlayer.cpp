@@ -1,4 +1,4 @@
-#include "GGE/GObjects/PhysPlayer.hpp"
+#include "GGE/CustomGObjects/PhysPlayer.hpp"
 
 constexpr float WALK_SPEED = 2;
 constexpr float JUMP_FORCE = 15;
@@ -23,6 +23,8 @@ void PhysPlayer::control(){
     if(collisionDir.vertical != Direction::Down){
         walkSpeed *= AIR_SLOWDOWN;
     }
+
+    // return;
 
     // walk left
     if(controlsManager->isControlHeld("wLeft")){

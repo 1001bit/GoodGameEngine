@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Body.hpp"
+#include "GGE/GObjects/Body.hpp"
 
-class PhysNpc : public Body
+class TDNpc : public Body
 {
 private:
     // Variables
@@ -14,8 +14,8 @@ private:
     
 public:
     // Structors
-    PhysNpc();
-    ~PhysNpc();
+    TDNpc();
+    ~TDNpc();
 
     // Variables
     NpcType npcType;

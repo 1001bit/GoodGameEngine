@@ -14,6 +14,7 @@ PhysicsManager* PhysicsManager::getInstance(){
     return instance;
 };
 
+// Methods
 // Do all the physics stuff to all the bodies
 void PhysicsManager::updatePhysics(const float& dTimeMs){
     for(std::weak_ptr<Body> bodyWeak : bodiesWeakVector){
@@ -30,7 +31,6 @@ void PhysicsManager::updatePhysics(const float& dTimeMs){
     }
 };
 
-// Methods
 // Apply gravity on all weigh objects
 void PhysicsManager::applyGravityToAccel(std::shared_ptr<Body> body, const float& dTimeMs){
     if(!body->doesWeigh()){

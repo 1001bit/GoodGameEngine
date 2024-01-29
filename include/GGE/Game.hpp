@@ -10,9 +10,6 @@ private:
     // Handle window events
     void handleEvent(const sf::Event& event);
 
-    // Inits
-    void initControls();
-
 public:
     // Structors
     Game();

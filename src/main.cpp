@@ -52,29 +52,29 @@ void initTestObject(std::shared_ptr<Level> level){
     level->levelDrawableLayers[0].push_back(platformSprite);
     platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
-    // a platform
-    platform = std::make_shared<Body>();
-    platform->setParent(level);
-    physicsManager->addNewBody(platform);
-    platform->setRectPixelSize(100, 10);
-    platform->setRelativePos(800, 730);
+    // 2nd platform
+    std::shared_ptr<Body> platform2 = std::make_shared<Body>();
+    platform2->setParent(level);
+    physicsManager->addNewBody(platform2);
+    platform2->setRectPixelSize(100, 10);
+    platform2->setRelativePos(800, 730);
     // it's sprite
-    platformSprite = std::make_shared<GSprite>();
-    platformSprite->setParent(platform);
-    level->levelDrawableLayers[0].push_back(platformSprite);
-    platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
+    std::shared_ptr<GSprite> platformSprite2 = std::make_shared<GSprite>();
+    platformSprite2->setParent(platform2);
+    level->levelDrawableLayers[0].push_back(platformSprite2);
+    platformSprite2->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
-    // a platform
-    platform = std::make_shared<Body>();
-    platform->setParent(level);
-    physicsManager->addNewBody(platform);
-    platform->setRectPixelSize(100, 10);
-    platform->setRelativePos(-600, 730);
+    // 3rd platform
+    std::shared_ptr<Body> platform3 = std::make_shared<Body>();
+    platform3->setParent(level);
+    physicsManager->addNewBody(platform3);
+    platform3->setRectPixelSize(100, 10);
+    platform3->setRelativePos(-600, 730);
     // it's sprite
-    platformSprite = std::make_shared<GSprite>();
-    platformSprite->setParent(platform);
-    level->levelDrawableLayers[0].push_back(platformSprite);
-    platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
+    std::shared_ptr<GSprite> platformSprite3 = std::make_shared<GSprite>();
+    platformSprite3->setParent(platform3);
+    level->levelDrawableLayers[0].push_back(platformSprite3);
+    platformSprite3->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
     // Gui
     // dummy-npc dialogue
@@ -89,6 +89,22 @@ void initTestObject(std::shared_ptr<Level> level){
     level->dialogueManager.setCurrentDialogue(0);
 }
 
+void initControls(){
+    ControlsManager* controlsManager = ControlsManager::getInstance();
+    // Keyboard controls
+    controlsManager->setKeyboardControlsMap({
+        {"wLeft", sf::Keyboard::A},
+        {"wRight", sf::Keyboard::D},
+        {"wUp", sf::Keyboard::W},
+        {"wDown", sf::Keyboard::S},
+        {"jump", sf::Keyboard::Space},
+    });
+    // mouse controls
+    controlsManager->setMouseControlsMap({
+        {"dialogueNext", sf::Mouse::Left}
+    });
+}
+
 int main()
 {
     srand(time(NULL));
@@ -101,6 +117,7 @@ int main()
     std::shared_ptr<Game> game = std::make_shared<Game>();
     game->init();
 
+    initControls();
     initTestObject(game->currentLevel);
 
     // start the main loop

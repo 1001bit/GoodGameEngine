@@ -1,4 +1,4 @@
-#include "GGE/GObjects/TDPlayer.hpp"
+#include "GGE/CustomGObjects/TDPlayer.hpp"
 
 constexpr float WALK_SPEED = 15;
 

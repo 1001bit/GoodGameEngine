@@ -13,10 +13,10 @@ private:
     // Storages
     // textures
     sf::Texture nullTexture;
-    std::unordered_map<std::string, sf::Texture> textureMap;
+    std::unordered_map<std::string, sf::Texture> textureCache;
     // fonts
     sf::Font nullFont;
-    std::unordered_map<std::string, sf::Font> fontMap;
+    std::unordered_map<std::string, sf::Font> fontCache;
 
 public: 
     // Get resource

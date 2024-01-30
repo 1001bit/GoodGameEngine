@@ -25,6 +25,9 @@ public:
     // Font
     sf::Font& getFont(const std::string& path);
 
+    // Clean the cache
+    void clean();
+
     // Singleton
     static ResourceManager* getInstance();
 };

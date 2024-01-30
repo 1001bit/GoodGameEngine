@@ -23,3 +23,8 @@ std::shared_ptr<Cooldown> CooldownsManager::newCooldown(float startValue){
     cooldownsVector.push_back(newCooldown);
     return newCooldown;
 };
+
+// Clean the list of cooldowns
+void CooldownsManager::clean(){
+    cooldownsVector.clear();
+}

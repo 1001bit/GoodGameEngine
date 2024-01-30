@@ -1,1 +1,1 @@
-#include "TriggersManager.hpp"
+#include "GGE/Triggers/TriggersManager.hpp"

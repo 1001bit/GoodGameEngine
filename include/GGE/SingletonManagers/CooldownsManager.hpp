@@ -8,7 +8,7 @@
 class CooldownsManager
 {
 private:
-    // Self Singleton
+    // Singleton
     static CooldownsManager* instance;
     CooldownsManager(){};
 
@@ -23,7 +23,9 @@ public:
     // get newly created clone of cooldown at id
     std::shared_ptr<Cooldown> newCooldown(float startValue);
 
-    // Getters
-    // get self singleton instance
+    // Clean the list of cooldowns
+    void clean();
+
+    // Singleton
     static CooldownsManager* getInstance();
 };

@@ -13,12 +13,12 @@ void Level::initNecessaryGObjects(){
     // Gui
     // Dialogue box
     std::shared_ptr<GSprite> dialogueBox = std::make_shared<GSprite>();
-    dialogueBox->setParent(shared_from_this());
+    dialogueBox->setNewParent(shared_from_this());
     guiDrawableLayers[0].push_back(dialogueBox);
     
     // Dialogue text
     std::shared_ptr<GText> dialogueText = std::make_shared<GText>();
-    dialogueText->setParent(dialogueBox);
+    dialogueText->setNewParent(dialogueBox);
     guiDrawableLayers[1].push_back(dialogueText);
 
     dialogueManager.initDrawables(dialogueBox, dialogueText);

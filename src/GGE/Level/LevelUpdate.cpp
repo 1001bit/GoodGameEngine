@@ -10,6 +10,10 @@ void Level::update(const float& dTimeMs){
     std::shared_ptr<GObject> currentSpeaker = levelGObjectsWId.at(1).lock();
     if(levelGObjectsWId.count(speakerId)){
         currentSpeaker = levelGObjectsWId.at(speakerId).lock();
+        if(!currentSpeaker){
+            levelGObjectsWId.erase(speakerId);
+            currentSpeaker = levelGObjectsWId.at(1).lock();
+        }
     }
     camera->setTarget(currentSpeaker);
 
@@ -20,25 +24,33 @@ void Level::update(const float& dTimeMs){
 void Level::drawGObjetcs(sf::RenderWindow& window){
     // Level
     window.setView(camera->getView());
-    for(std::vector<std::weak_ptr<GDrawable>> drawablesWeakLayer : levelDrawableLayers){
+    // iterate through whole drawables vector
+    for(std::vector<std::weak_ptr<GDrawable>>& drawablesWeakLayer : levelDrawableLayers){
         // iterate through a single layer
-        for(std::weak_ptr<GDrawable> drawableWeak : drawablesWeakLayer){
-            // draw an object
-            if(auto drawable = drawableWeak.lock()){
-                drawable->drawSelf(window);
+        for(auto it = drawablesWeakLayer.begin(); it != drawablesWeakLayer.end();){
+            auto drawable = it->lock();
+            if(!drawable){
+                it = drawablesWeakLayer.erase(it);
+                continue;
             }
+            drawable->drawSelf(window);
+            ++it;
         }
     }
 
     // Gui
     window.setView(guiView);
-    for(std::vector<std::weak_ptr<GDrawable>> drawablesWeakLayer : guiDrawableLayers){
+    // iterate through whole drawables vector
+    for(std::vector<std::weak_ptr<GDrawable>>& drawablesWeakLayer : guiDrawableLayers){
         // iterate through a single layer
-        for(std::weak_ptr<GDrawable> drawableWeak : drawablesWeakLayer){
-            // draw an object
-            if(auto drawable = drawableWeak.lock()){
-                drawable->drawSelf(window);
+        for(auto it = drawablesWeakLayer.begin(); it != drawablesWeakLayer.end();){
+            auto drawable = it->lock();
+            if(!drawable){
+                it = drawablesWeakLayer.erase(it);
+                continue;
             }
+            drawable->drawSelf(window);
+            ++it;
         }
     }
 }

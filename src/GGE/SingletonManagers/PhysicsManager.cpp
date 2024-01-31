@@ -17,10 +17,12 @@ PhysicsManager* PhysicsManager::getInstance(){
 // Methods
 // Do all the physics stuff to all the bodies
 void PhysicsManager::updatePhysics(const float& dTimeMs){
-    for(std::weak_ptr<Body> bodyWeak : bodiesWeakVector){
-        auto body = bodyWeak.lock();
+    for(auto it = bodiesWeakVector.begin(); it != bodiesWeakVector.end();){
+        auto body = it->lock();
         // if current body is nil or no rect
         if(!body){
+            it = bodiesWeakVector.erase(it);
+            std::cout << "removed body\n";
             continue;
         }
 
@@ -28,6 +30,8 @@ void PhysicsManager::updatePhysics(const float& dTimeMs){
         applyAccelerationToVel(body, dTimeMs);
         applyCollisions(body);
         applyVelocityToPos(body);
+
+        ++it;
     }
 };
 

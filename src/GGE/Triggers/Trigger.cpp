@@ -7,11 +7,11 @@ Trigger::Trigger(){
 Trigger::~Trigger(){}
 
 // Methods
-// Set vector of gobjecs with id
-void Trigger::setLevelGObjectsWId(std::unordered_map<uint16_t, std::weak_ptr<GObject>>* newLevelGObjectsWId){
-    levelGObjectsWId = newLevelGObjectsWId;
+// checks if event has happened and does action if yes
+void Trigger::checkEvent(){
+    if(active){
+        doAction();
+    }
 }
-// tell trigger to check if it's action has happened
-void Trigger::checkEvent(){}
 // Do action of trigger if event has happened
 void Trigger::doAction(){}

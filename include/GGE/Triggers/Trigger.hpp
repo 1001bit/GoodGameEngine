@@ -6,7 +6,6 @@ class Trigger
 {
 private:
     // Variables
-    std::unordered_map<uint16_t, std::weak_ptr<GObject>>* levelGObjectsWId;
     bool active;
 
     // Methods
@@ -19,8 +18,6 @@ public:
     ~Trigger();
 
     // Methods
-    // Set vector of gobjecs with id
-    void setLevelGObjectsWId(std::unordered_map<uint16_t, std::weak_ptr<GObject>>* newLevelGObjectsWId);
-    // tell trigger to check if it's action has happened
+    // checks if event has happened and does action if yes
     virtual void checkEvent();
 };

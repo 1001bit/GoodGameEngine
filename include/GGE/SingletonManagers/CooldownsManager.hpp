@@ -14,7 +14,7 @@ private:
 
     // Variables
     // all the cooldowns clones
-    std::vector<std::shared_ptr<Cooldown>> cooldownsVector;
+    std::vector<std::weak_ptr<Cooldown>> cooldownsWeakVector;
     
 public:
     // Methods
@@ -22,9 +22,6 @@ public:
     void updateCooldowns(const float& dTimeMs);
     // get newly created clone of cooldown at id
     std::shared_ptr<Cooldown> newCooldown(float startValue);
-
-    // Clean the list of cooldowns
-    void clean();
 
     // Singleton
     static CooldownsManager* getInstance();

@@ -15,11 +15,6 @@ void GObject::update(const float& dTimeMs){
     }
 }
 
-void GObject::setParent(std::shared_ptr<GObject> newParent){
-    this->parentWeak = newParent;
-    newParent->addChild(shared_from_this());
-}
-
 void GObject::updatePos(){
     // set self position related to parent's
     auto parent = parentWeak.lock();
@@ -42,6 +37,19 @@ void GObject::addChild(std::shared_ptr<GObject> newChild){
     newChild->updatePos();
 }
 
+void GObject::removeChild(std::shared_ptr<GObject> child){
+    children.erase(std::remove(children.begin(), children.end(), child), children.end());
+}
+
+void GObject::setNewParent(std::shared_ptr<GObject> newParent){
+    if(auto parent = parentWeak.lock()){
+        parent->removeChild(shared_from_this());
+    }
+
+    this->parentWeak = newParent;
+    newParent->addChild(shared_from_this());
+}
+
 void GObject::setRelativePos(const sf::Vector2f& newPos){
     relativePos = newPos;
     updatePos();
@@ -53,7 +61,7 @@ void GObject::setRelativePos(float x, float y){
 
 void GObject::move(const sf::Vector2f& distance){
     setRelativePos(getRelativePos() + distance);
-};
+}
 
 void GObject::setRectPixelSize(float w, float h){
     selfRect.width = w*SPRITE_SCALE;
@@ -72,7 +80,7 @@ void GObject::setFlip(bool newFlip){
 
 void GObject::setDoesFlipMirror(bool newDoesFlipMirror){
     doesFlipMirror = newDoesFlipMirror;
-};
+}
 
 // Getters
 
@@ -86,4 +94,4 @@ const sf::FloatRect& GObject::getRect(){
 
 const bool& GObject::isFlipped(){
     return flipped;
-};
+}

@@ -25,10 +25,6 @@ private:
     bool flipped;
     bool doesFlipMirror;
 
-    // Methods
-    // Add a new child
-    void addChild(std::shared_ptr<GObject> newChild);
-
 protected:
     // Variables
     std::weak_ptr<GObject> parentWeak;
@@ -52,8 +48,14 @@ public:
     void setRelativePos(const sf::Vector2f& newPos);
     // move self by some distance
     void move(const sf::Vector2f& distance);
+
     // Set a parent
-    void setParent(std::shared_ptr<GObject> newParent);
+    void setNewParent(std::shared_ptr<GObject> newParent);
+    // Add a new child
+    void addChild(std::shared_ptr<GObject> newChild);
+    // Remove a child
+    void removeChild(std::shared_ptr<GObject> child);
+    
     // set rect size
     void setRectPixelSize(float x, float y);
     // set the flip of the object

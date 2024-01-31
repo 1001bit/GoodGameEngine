@@ -47,16 +47,6 @@ void collideKinematicAndSolid(std::shared_ptr<Body> kinematicBody, std::shared_p
 // Methods
 // Collide all the objects
 void PhysicsManager::applyCollisions(std::shared_ptr<Body> body){
-    // if no rect - next one
-    if(body->getRect() == sf::FloatRect()){
-        return;
-    }
-
-    // only kinematic body can be affected by collision
-    if(!body->isKinematic()){
-        return;
-    }
-
     body->collisionDir = {Direction::None, Direction::None};
 
     // collide body with other body 
@@ -64,7 +54,7 @@ void PhysicsManager::applyCollisions(std::shared_ptr<Body> body){
         auto otherBody = otherBodyWeak.lock();
 
         // if other is null, other is current, other got no rect - next;
-        if(!otherBody || otherBody == body || otherBody->getRect() == sf::FloatRect()){
+        if(!otherBody || otherBody == body){
             continue;
         }
 

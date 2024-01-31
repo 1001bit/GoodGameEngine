@@ -11,6 +11,7 @@ GSprite::~GSprite(){}
 // set a texture
 void GSprite::setTexture(const sf::Texture& newTexture){
     sprite.setTexture(newTexture);
+    setRectSize(sprite.getGlobalBounds().getSize().x, sprite.getGlobalBounds().getSize().y);
 }
 
 // set the flip of the object

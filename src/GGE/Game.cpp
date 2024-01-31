@@ -1,7 +1,7 @@
 #include "GGE/Game.hpp"
 
-// #define SHOW_FPS
-#define SHOW_FPS_SPIKES
+#define SHOW_FPS
+// #define SHOW_FPS_SPIKES
 
 // Structors
 Game::Game(){}

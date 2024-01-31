@@ -33,7 +33,11 @@ void Level::drawGObjetcs(sf::RenderWindow& window){
                 it = drawablesWeakLayer.erase(it);
                 continue;
             }
-            drawable->drawSelf(window);
+
+            // draw object if it's in bounds of the camera
+            if(camera->getRect().intersects(drawable->getRect())){
+                drawable->drawSelf(window);
+            }
             ++it;
         }
     }
@@ -49,6 +53,7 @@ void Level::drawGObjetcs(sf::RenderWindow& window){
                 it = drawablesWeakLayer.erase(it);
                 continue;
             }
+
             drawable->drawSelf(window);
             ++it;
         }

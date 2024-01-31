@@ -16,15 +16,15 @@ void GObject::update(const float& dTimeMs){
 }
 
 void GObject::updatePos(){
-    // set self position related to parent's
-    auto parent = parentWeak.lock();
+    sf::Vector2f zeroPoint;
 
-    if(!parent){
-        return;
+    if(auto parent = parentWeak.lock()){
+        zeroPoint.x = parent->getRect().left;
+        zeroPoint.y = parent->getRect().top;
     }
     
-    selfRect.left = parent->getRect().left + relativePos.x;
-    selfRect.top = parent->getRect().top + relativePos.y;
+    selfRect.left = zeroPoint.x + relativePos.x;
+    selfRect.top = zeroPoint.y + relativePos.y;
 
     // update children's position
     for(std::shared_ptr<GObject> child : children) {
@@ -50,8 +50,8 @@ void GObject::setNewParent(std::shared_ptr<GObject> newParent){
     newParent->addChild(shared_from_this());
 }
 
-void GObject::setRelativePos(const sf::Vector2f& newPos){
-    relativePos = newPos;
+void GObject::setRelativePos(const sf::Vector2f& newRelativePos){
+    relativePos = newRelativePos;
     updatePos();
 }
 
@@ -63,9 +63,13 @@ void GObject::move(const sf::Vector2f& distance){
     setRelativePos(getRelativePos() + distance);
 }
 
+void GObject::setRectSize(float w, float h){
+    selfRect.width = w;
+    selfRect.height = h;
+}
+
 void GObject::setRectPixelSize(float w, float h){
-    selfRect.width = w*SPRITE_SCALE;
-    selfRect.height = h*SPRITE_SCALE;
+    setRectSize(w*SPRITE_SCALE, h*SPRITE_SCALE);
 }
 
 void GObject::setFlip(bool newFlip){

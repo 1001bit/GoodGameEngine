@@ -56,8 +56,10 @@ public:
     // Remove a child
     void removeChild(std::shared_ptr<GObject> child);
     
-    // set rect size
-    void setRectPixelSize(float x, float y);
+    // set rect pixel-scaled size
+    void setRectPixelSize(float w, float h);
+    // set rect pixel size
+    void setRectSize(float w, float h);
     // set the flip of the object
     virtual void setFlip(bool newFlip);
     // set flip ability of the object

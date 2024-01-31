@@ -22,14 +22,17 @@ void PhysicsManager::updatePhysics(const float& dTimeMs){
         // if current body is nil or no rect
         if(!body){
             it = bodiesWeakVector.erase(it);
-            std::cout << "removed body\n";
             continue;
         }
 
-        applyGravityToAccel(body, dTimeMs);
-        applyAccelerationToVel(body, dTimeMs);
-        applyCollisions(body);
-        applyVelocityToPos(body);
+        if(body->doesWeigh()){
+            applyGravityToAccel(body, dTimeMs);
+        }
+        if(body->isKinematic()){
+            applyAccelerationToVel(body, dTimeMs);
+            applyCollisions(body);
+            applyVelocityToPos(body);
+        }
 
         ++it;
     }
@@ -37,21 +40,12 @@ void PhysicsManager::updatePhysics(const float& dTimeMs){
 
 // Apply gravity on all weigh objects
 void PhysicsManager::applyGravityToAccel(std::shared_ptr<Body> body, const float& dTimeMs){
-    if(!body->doesWeigh()){
-        return;
-    }
-
     body->accelerate(0, GFORCE * dTimeMs);
 };
 
 // Apply the velocities of the bodies
 void PhysicsManager::applyVelocityToPos(std::shared_ptr<Body> body){
-    if(!body->isKinematic()){
-        return;
-    }
-
     body->move(body->velocity);
-
     applyFrictionToVel(body);
 };
 
@@ -74,7 +68,7 @@ void PhysicsManager::applyFrictionToVel(std::shared_ptr<Body> body){
     }
 }
 
-// Add new body
+// Add new body to the vector of bodies
 void PhysicsManager::addNewBody(std::shared_ptr<Body> newBody){
     bodiesWeakVector.push_back(newBody);
 }

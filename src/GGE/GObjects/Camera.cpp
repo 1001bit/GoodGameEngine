@@ -17,12 +17,13 @@ void Camera::update(const float& dTimeMs){
     }
 
     const sf::FloatRect& targetRect = followTarget->getRect();
-    sf::Vector2f targetCenterPos(targetRect.left + (targetRect.width / 2), targetRect.top + (targetRect.height / 2));
+    sf::Vector2f targetCenterPos(targetRect.getPosition() + targetRect.getSize()/2.f);
+    sf::Vector2f cameraRectNewPos(targetCenterPos - getRect().getSize()/2.f);
 
-    move((targetCenterPos - getRelativePos()) * dTimeMs * SPEED);
-    // setRelativePos(targetCenterPos);
+    move((cameraRectNewPos - getRelativePos()) * dTimeMs * SPEED);
+    // setRelativePos(cameraRectNewPos);
 
-    view.setCenter(getRelativePos());
+    view.setCenter(getRelativePos() + getRect().getSize()/2.f);
 
     GObject::update(dTimeMs);
 }
@@ -30,6 +31,7 @@ void Camera::update(const float& dTimeMs){
 // set size of view
 void Camera::setSize(float w, float h){
     view.setSize(sf::Vector2f(w, h));
+    setRectSize(w, h);
 }
 
 // set target of following

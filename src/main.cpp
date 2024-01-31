@@ -45,21 +45,9 @@ void initTestObject(std::shared_ptr<Level> level){
     platform->setNewParent(level);
     physicsManager->addNewBody(platform);
     platform->setRectPixelSize(100, 10);
-    platform->setRelativePos(100, 800);
-    // it's sprite
-    std::shared_ptr<GSprite> platformSprite = std::make_shared<GSprite>();
-    platformSprite->setNewParent(platform);
-    level->levelDrawableLayers[0].push_back(platformSprite);
-    platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
-
-    // a platform
-    platform = std::make_shared<Body>();
-    platform->setNewParent(level);
-    physicsManager->addNewBody(platform);
-    platform->setRectPixelSize(100, 10);
     platform->setRelativePos(800, 730);
     // it's sprite
-    platformSprite = std::make_shared<GSprite>();
+    std::shared_ptr<GSprite>  platformSprite = std::make_shared<GSprite>();
     platformSprite->setNewParent(platform);
     level->levelDrawableLayers[0].push_back(platformSprite);
     platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
@@ -69,36 +57,27 @@ void initTestObject(std::shared_ptr<Level> level){
     platform->setNewParent(level);
     physicsManager->addNewBody(platform);
     platform->setRectPixelSize(100, 10);
-    platform->setRelativePos(-600, 730);
+    platform->setRelativePos(100, 800);
     // it's sprite
     platformSprite = std::make_shared<GSprite>();
     platformSprite->setNewParent(platform);
     level->levelDrawableLayers[0].push_back(platformSprite);
     platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
-    // a platform
-    platform = std::make_shared<Body>();
-    platform->setNewParent(level);
-    physicsManager->addNewBody(platform);
-    platform->setRectPixelSize(100, 10);
-    platform->setRelativePos(-1300, 730);
-    // it's sprite
-    platformSprite = std::make_shared<GSprite>();
-    platformSprite->setNewParent(platform);
-    level->levelDrawableLayers[0].push_back(platformSprite);
-    platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
-
-    // a platform
-    platform = std::make_shared<Body>();
-    platform->setNewParent(level);
-    physicsManager->addNewBody(platform);
-    platform->setRectPixelSize(100, 10);
-    platform->setRelativePos(-2000, 730);
-    // it's sprite
-    platformSprite = std::make_shared<GSprite>();
-    platformSprite->setNewParent(platform);
-    level->levelDrawableLayers[0].push_back(platformSprite);
-    platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
+    // bunch of platforms
+    for(int i = 0; i < 10000; ++i){
+        // a platform
+        platform = std::make_shared<Body>();
+        platform->setNewParent(level);
+        physicsManager->addNewBody(platform);
+        platform->setRectPixelSize(100, 10);
+        platform->setRelativePos(-600 - 700*i, 730);
+        // it's sprite
+        platformSprite = std::make_shared<GSprite>();
+        platformSprite->setNewParent(platform);
+        level->levelDrawableLayers[0].push_back(platformSprite);
+        platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
+    }
 
     // Gui
     // dummy-npc dialogue

@@ -32,8 +32,3 @@ void TDPlayer::control(){
         accelerate(0, WALK_SPEED);
     }
 }
-
-// update state
-void TDPlayer::update(const float& dTimeMs){
-    Body::update(dTimeMs);
-};

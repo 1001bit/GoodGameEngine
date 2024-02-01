@@ -1,7 +1,6 @@
 #pragma once
 
 #include "GGE/GObjects/KinematicBody.hpp"
-#include "unordered_map"
 
 class PhysPlayer : public KinematicBody
 {
@@ -13,8 +12,6 @@ public:
     ~PhysPlayer();
 
     // Methods
-    // update state
-    void update(const float& dTimeMs);
     // Control player
     void control();
 };

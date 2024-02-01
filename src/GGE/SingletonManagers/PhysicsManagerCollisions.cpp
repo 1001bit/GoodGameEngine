@@ -4,7 +4,7 @@
 // collide current body with non-kinematic collidable body
 void collideKinematicAndSolid(std::shared_ptr<KinematicBody> kinematicBody, std::shared_ptr<Body> solidBody){
     // future rect method (if futureKinematicRect in touches solidRect, in some direction and now kinematicRect doesn't, kinematicBody stops in this direction)
-    const sf::FloatRect& kinematicRect = kinematicBody->getCurrentRect();
+    const sf::FloatRect& kinematicRect = kinematicBody->currentRect;
     const sf::FloatRect& solidRect = solidBody->getRect();
     
     sf::FloatRect futureKinematicRect;

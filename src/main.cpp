@@ -40,6 +40,8 @@ void initTestObject(std::shared_ptr<Level> level){
     npcSprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
     npcSprite->playAnimation("idle");
 
+    level->removeChild(npc);
+
     // a platform
     std::shared_ptr<Body> platform = std::make_shared<Body>();
     platform->setNewParent(level);
@@ -65,13 +67,13 @@ void initTestObject(std::shared_ptr<Level> level){
     platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
     // bunch of platforms
-    for(int i = 0; i < 5000; ++i){
+    for(int i = 0; i < 10000; ++i){
         // a platform
         platform = std::make_shared<Body>();
         platform->setNewParent(level);
         physicsManager->addNewSolidBody(platform);
         platform->setRectPixelSize(100, 10);
-        platform->setRelativePos({-600 - 700*i, 730});
+        platform->setRelativePos({-600.f - 700.f*i, 730.f});
         // it's sprite
         platformSprite = std::make_shared<GSprite>();
         platformSprite->setNewParent(platform);

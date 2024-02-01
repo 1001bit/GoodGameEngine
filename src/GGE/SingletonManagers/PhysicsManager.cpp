@@ -25,8 +25,10 @@ void PhysicsManager::updatePhysics(const float& dTimeMs){
             continue;
         }
 
-        // set previousRect = currentRect
-        kinematicBody->interpolate(-1);
+        // interpolation
+        kinematicBody->previousRect = kinematicBody->currentRect;
+
+        // control body (like player, npc)
         kinematicBody->control();
 
         if(kinematicBody->doesWeigh()){
@@ -83,7 +85,11 @@ void PhysicsManager::interpolateKinematics(float alpha){
             continue;
         }
 
-        kinematicBody->interpolate(alpha);
+        sf::FloatRect& currentRect = kinematicBody->currentRect;
+        sf::FloatRect& previousRect = kinematicBody->previousRect;
+        const sf::FloatRect& rect = kinematicBody->getRect();
+
+        kinematicBody->setRelativePos(currentRect.getPosition() * alpha + previousRect.getPosition() * (1.f - alpha));
 
         ++it;
     }

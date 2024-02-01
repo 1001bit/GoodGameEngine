@@ -27,15 +27,12 @@ void KinematicBody::moveCurrentRect(sf::Vector2f moveDistance){
     setCurrentPosition(currentRect.getPosition() + moveDistance);
 }
 
-// Interpolate gobject::rect between currentRect and previousRect
-void KinematicBody::interpolate(float alpha){
-    // set previousRect = currentRect
-    if(alpha < 0){
-        currentRect = getRect();
-        previousRect = currentRect;
-        return;
-    }
-    setRelativePos(currentRect.getPosition() * alpha + previousRect.getPosition() * (1.f - alpha));
+// set size of current rect
+void KinematicBody::setRectSize(float w, float h){
+    currentRect.width = w;
+    currentRect.height = h;
+
+    GObject::setRectSize(w, h);
 }
 
 // Getters
@@ -48,8 +45,3 @@ const bool& KinematicBody::doesWeigh(){
 const sf::Vector2f& KinematicBody::getAcceleration(){
     return acceleration;
 };
-
-// currentRect
-const sf::FloatRect& KinematicBody::getCurrentRect(){
-    return currentRect;
-}

@@ -42,8 +42,3 @@ void PhysPlayer::control(){
         accelerate(0, -JUMP_FORCE);
     }
 }
-
-// update state
-void PhysPlayer::update(const float& dTimeMs){
-    Body::update(dTimeMs);
-};

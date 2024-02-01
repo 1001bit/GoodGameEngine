@@ -69,8 +69,3 @@ void PhysNpc::control(){
         break;
     }
 }
-
-// update state
-void PhysNpc::update(const float& dTimeMs){
-    Body::update(dTimeMs);
-};

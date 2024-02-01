@@ -17,8 +17,6 @@ public:
     NpcType npcType;
 
     // Methods
-    // update state
-    void update(const float& dTimeMs);
     // npc movement
     void control();
 };

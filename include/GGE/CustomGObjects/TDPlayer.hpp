@@ -14,8 +14,6 @@ public:
     ~TDPlayer();
 
     // Methods
-    // update state
-    void update(const float& dTimeMs);
     // Control player
     void control();
 };

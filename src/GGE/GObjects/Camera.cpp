@@ -30,7 +30,7 @@ void Camera::update(const float& dTimeMs){
 
 // set size of view
 void Camera::setSize(float w, float h){
-    view.setSize(sf::Vector2f(w, h));
+    view.setSize({w, h});
     setRectSize(w, h);
 }
 

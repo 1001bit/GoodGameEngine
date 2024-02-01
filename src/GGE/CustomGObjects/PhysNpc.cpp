@@ -14,8 +14,8 @@ PhysNpc::PhysNpc(){
     collidable = 0;
 
     CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
-    selfCooldownMap["idle"] = cooldownsManager->newCooldown(2000);
-    selfCooldownMap["walk"] = cooldownsManager->newCooldown(3000);
+    selfCooldownMap["idle"] = cooldownsManager->newCooldown(Cooldown(2000));
+    selfCooldownMap["walk"] = cooldownsManager->newCooldown(Cooldown(3000));
     selfCooldownMap.at("idle")->start(500);
 }
 
@@ -73,7 +73,5 @@ void PhysNpc::control(){
 
 // update state
 void PhysNpc::update(const float& dTimeMs){
-    control();
-
     Body::update(dTimeMs);
 };

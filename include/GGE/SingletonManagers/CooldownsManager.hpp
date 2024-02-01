@@ -21,7 +21,7 @@ public:
     // update all the cooldowns
     void updateCooldowns(const float& dTimeMs);
     // get newly created clone of cooldown at id
-    std::shared_ptr<Cooldown> newCooldown(float startValue);
+    std::shared_ptr<Cooldown> newCooldown(Cooldown cooldown);
 
     // Singleton
     static CooldownsManager* getInstance();

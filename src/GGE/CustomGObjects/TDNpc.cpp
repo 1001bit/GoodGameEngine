@@ -13,8 +13,8 @@ TDNpc::TDNpc(){
     collidable = 0;
     
     CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
-    selfCooldownMap["idle"] = cooldownsManager->newCooldown(2000);
-    selfCooldownMap["walk"] = cooldownsManager->newCooldown(3000);
+    selfCooldownMap["idle"] = cooldownsManager->newCooldown(Cooldown(2000));
+    selfCooldownMap["walk"] = cooldownsManager->newCooldown(Cooldown(3000));
 }
 TDNpc::~TDNpc(){}
 
@@ -69,7 +69,5 @@ void TDNpc::control(){
 
 // update state
 void TDNpc::update(const float& dTimeMs){
-    control();
-
     Body::update(dTimeMs);
 };

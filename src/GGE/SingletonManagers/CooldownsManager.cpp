@@ -24,8 +24,8 @@ void CooldownsManager::updateCooldowns(const float& dTimeMs){
 };
 
 // get newly created clone of cooldown at id
-std::shared_ptr<Cooldown> CooldownsManager::newCooldown(float startValue){
-    std::shared_ptr<Cooldown> newCooldown = std::make_shared<Cooldown>(startValue);
+std::shared_ptr<Cooldown> CooldownsManager::newCooldown(Cooldown cooldown){
+    std::shared_ptr<Cooldown> newCooldown = std::make_shared<Cooldown>(cooldown);
     cooldownsWeakVector.push_back(newCooldown);
     return newCooldown;
 };

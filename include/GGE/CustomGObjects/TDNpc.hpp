@@ -1,17 +1,13 @@
 #pragma once
 
-#include "GGE/GObjects/Body.hpp"
+#include "GGE/GObjects/KinematicBody.hpp"
 
-class TDNpc : public Body
+class TDNpc : public KinematicBody
 {
 private:
     // Variables
     Direction movementDir;
 
-    // Methods
-    // npc movement
-    void control();
-    
 public:
     // Structors
     TDNpc();
@@ -21,6 +17,6 @@ public:
     NpcType npcType;
 
     // Methods
-    // update state
-    void update(const float& dTimeMs);
+    // npc movement
+    void control();
 };

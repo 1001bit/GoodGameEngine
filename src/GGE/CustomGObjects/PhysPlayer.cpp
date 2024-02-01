@@ -7,8 +7,7 @@ constexpr float AIR_SLOWDOWN = 0.05;
 // Structors
 PhysPlayer::PhysPlayer(){
     weighs = 1;
-    kinematic = 1;
-    collidable = 0;
+    collidable = 1;
 }
 
 PhysPlayer::~PhysPlayer(){}
@@ -43,10 +42,3 @@ void PhysPlayer::control(){
         accelerate(0, -JUMP_FORCE);
     }
 }
-
-// update state
-void PhysPlayer::update(const float& dTimeMs){
-    control();
-
-    Body::update(dTimeMs);
-};

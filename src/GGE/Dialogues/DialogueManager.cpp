@@ -12,14 +12,14 @@ void DialogueManager::initDrawables(std::shared_ptr<GSprite> newDialogueBox, std
     // Dialogue box
     dialogueBoxWeak = newDialogueBox;
     newDialogueBox->setTexture(resourceManager->getTexture("Assets/Textures/dialogueBackground.png"));
-    newDialogueBox->setRelativePos((GAME_WIDTH-(newDialogueBox->sprite.getGlobalBounds().width))/2, 600); // centralize it on X position
+    newDialogueBox->setRelativePos({(GAME_WIDTH-(newDialogueBox->sprite.getGlobalBounds().width))/2, 600}); // centralize it on X position
     
     // Dialogue text
     dialogueTextWeak = newDialogueText;
     newDialogueText->text.setFont(resourceManager->getFont("Assets/Fonts/font1.ttf"));
     newDialogueText->text.setCharacterSize(30);
     newDialogueText->text.setString("Hi");
-    newDialogueText->setRelativePos(60, 20);
+    newDialogueText->setRelativePos({60, 20});
 }
 
 // Set all the dialogues list
@@ -54,7 +54,7 @@ void DialogueManager::updateCurrentDialogue(){
     if(currentDialogue->getCurrentLine().line == ""){
         currentDialogueWeak.reset();
         if(auto dialogueBox = dialogueBoxWeak.lock()){
-            dialogueBox->setRelativePos(9999, 9999);
+            dialogueBox->setRelativePos({9999, 9999});
         }
     }
 }

@@ -1,17 +1,13 @@
 #pragma once
 
-#include "GGE/GObjects/Body.hpp"
+#include "GGE/GObjects/KinematicBody.hpp"
 
-class PhysNpc : public Body
+class PhysNpc : public KinematicBody
 {
 private:
     // Variables
     Direction movementDir;
 
-    // Methods
-    // npc movement
-    void control();
-    
 public:
     // Structors
     PhysNpc();
@@ -21,6 +17,6 @@ public:
     NpcType npcType;
 
     // Methods
-    // update state
-    void update(const float& dTimeMs);
+    // npc movement
+    void control();
 };

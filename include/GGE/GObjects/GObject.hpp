@@ -44,7 +44,6 @@ public:
     // Update the state of the object
     virtual void update(const float& dTimeMs);
     // Set position relative to parent's position
-    void setRelativePos(float x, float y);
     void setRelativePos(const sf::Vector2f& newPos);
     // move self by some distance
     void move(const sf::Vector2f& distance);
@@ -56,10 +55,10 @@ public:
     // Remove a child
     void removeChild(std::shared_ptr<GObject> child);
     
+    // set rect pixel size
+    virtual void setRectSize(float w, float h);
     // set rect pixel-scaled size
     void setRectPixelSize(float w, float h);
-    // set rect pixel size
-    void setRectSize(float w, float h);
     // set the flip of the object
     virtual void setFlip(bool newFlip);
     // set flip ability of the object

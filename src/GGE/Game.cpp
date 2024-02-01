@@ -1,8 +1,5 @@
 #include "GGE/Game.hpp"
 
-#define SHOW_FPS
-// #define SHOW_FPS_SPIKES
-
 // Structors
 Game::Game(){}
 
@@ -21,26 +18,31 @@ void Game::init(){
 void Game::loop(sf::RenderWindow& window){
     window.setKeyRepeatEnabled(false);
 
+    ControlsManager* controlsManager = ControlsManager::getInstance();
+    CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
+    PhysicsManager* physicsManager = PhysicsManager::getInstance();
+
+    float accumulator = 0;
+
     sf::Clock clock;
     float dTimeMs;
     while (window.isOpen())
     {
         // Time
         sf::Time deltaTime = clock.restart();
-        dTimeMs = deltaTime.asMicroseconds()/1000.f;
+        dTimeMs = deltaTime.asMicroseconds()/1000.0;
         // Limit max dt
-        if(dTimeMs > 1000/MIN_FPS){
+        if(dTimeMs > 1000.f/MIN_FPS){
             #ifdef SHOW_FPS_SPIKES
             std::cout << dTimeMs << "\n";
             #endif
-            dTimeMs = 1000/MIN_FPS;
+            dTimeMs = 1000.f/MIN_FPS;
         }
         #ifdef SHOW_FPS
         std::cout << "dTime (ms): " << dTimeMs << " ; \t\t" << " FPS: " << 1000/dTimeMs << "\n";
         #endif
 
         // Events
-        ControlsManager* controlsManager = ControlsManager::getInstance();
         controlsManager->clearPressed();
 
         sf::Event event;
@@ -53,15 +55,19 @@ void Game::loop(sf::RenderWindow& window){
 
         // Updates
         // Cooldowns
-        CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
         cooldownsManager->updateCooldowns(dTimeMs);
 
-        // GObjects
+        // Objects update
         currentLevel->update(dTimeMs);
 
         // Physics
-        PhysicsManager* physicsManager = PhysicsManager::getInstance();
-        physicsManager->updatePhysics(dTimeMs);
+        accumulator += dTimeMs;
+        while(accumulator >= 1000.f/UPDATE_RATE){
+            physicsManager->updatePhysics(1000.f/UPDATE_RATE);
+            accumulator -= 1000.f/UPDATE_RATE;
+        }
+
+        physicsManager->interpolateKinematics(accumulator/(1000.f/UPDATE_RATE));
 
         // Camera
         currentLevel->camera->update(dTimeMs);

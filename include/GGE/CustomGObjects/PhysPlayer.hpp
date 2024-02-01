@@ -1,14 +1,10 @@
 #pragma once
 
-#include "GGE/GObjects/Body.hpp"
-#include "unordered_map"
+#include "GGE/GObjects/KinematicBody.hpp"
 
-class PhysPlayer : public Body
+class PhysPlayer : public KinematicBody
 {
 private:
-    // Methods
-    // Control your character
-    void control();
 
 public:
     // Structors
@@ -16,6 +12,6 @@ public:
     ~PhysPlayer();
 
     // Methods
-    // update state
-    void update(const float& dTimeMs);
+    // Control player
+    void control();
 };

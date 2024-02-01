@@ -9,8 +9,7 @@ TDNpc::TDNpc(){
     movementDir = Direction::None;
 
     weighs = 0;
-    kinematic = 1;
-    collidable = 0;
+    collidable = 1;
     
     CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
     selfCooldownMap["idle"] = cooldownsManager->newCooldown(Cooldown(2000));
@@ -66,8 +65,3 @@ void TDNpc::control(){
         break;
     }
 }
-
-// update state
-void TDNpc::update(const float& dTimeMs){
-    Body::update(dTimeMs);
-};

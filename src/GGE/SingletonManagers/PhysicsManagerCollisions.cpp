@@ -8,39 +8,47 @@ void collideKinematicAndSolid(std::shared_ptr<KinematicBody> kinematicBody, std:
     const sf::FloatRect& solidRect = solidBody->getRect();
     
     sf::FloatRect futureKinematicRect;
-    
-    // vertical
+
     futureKinematicRect = kinematicRect;
-    futureKinematicRect.top += kinematicBody->velocity.y;
-    if(futureKinematicRect.intersects(solidRect)){
-        // down
-        if(kinematicBody->velocity.y > 0){
+    // down
+    if(kinematicBody->velocity.y > 0){
+        futureKinematicRect.height += kinematicBody->velocity.y;
+        if(futureKinematicRect.intersects(solidRect)){
             kinematicBody->setCurrentPosition({kinematicRect.left, solidRect.top - kinematicRect.height});
             kinematicBody->collisionDir.vertical = Direction::Down;
-        } 
-        // up
-        else if (kinematicBody->velocity.y < 0) {
+            kinematicBody->velocity.y = 0;
+        }
+    } 
+    // up
+    else if (kinematicBody->velocity.y < 0){
+        futureKinematicRect.top += kinematicBody->velocity.y;
+        futureKinematicRect.height -= kinematicBody->velocity.y;
+        if(futureKinematicRect.intersects(solidRect)){
             kinematicBody->setCurrentPosition({kinematicRect.left, solidRect.top + solidRect.height});
             kinematicBody->collisionDir.vertical = Direction::Up;
+            kinematicBody->velocity.y = 0;
         }
-        kinematicBody->velocity.y = 0;
     }
 
-    // horizontal
     futureKinematicRect = kinematicRect;
-    futureKinematicRect.left += kinematicBody->velocity.x;
-    if(futureKinematicRect.intersects(solidRect)){
-        // right
-        if(kinematicBody->velocity.x > 0){
+    // right
+    if(kinematicBody->velocity.x > 0){
+        futureKinematicRect.width += kinematicBody->velocity.x;
+        if(futureKinematicRect.intersects(solidRect)){
             kinematicBody->setCurrentPosition({solidRect.left - kinematicRect.width, kinematicRect.top});
             kinematicBody->collisionDir.horizontal = Direction::Right;
-        } 
-        // left
-        else if(kinematicBody->velocity.x < 0) {
+            kinematicBody->velocity.x = 0;
+        }
+    } 
+    // left
+    else if (kinematicBody->velocity.x < 0){
+        futureKinematicRect.left += kinematicBody->velocity.x;
+        futureKinematicRect.width -= kinematicBody->velocity.x;
+        if(futureKinematicRect.intersects(solidRect)){
             kinematicBody->setCurrentPosition({solidRect.left + solidRect.width, kinematicRect.top});
             kinematicBody->collisionDir.horizontal = Direction::Left;
+            kinematicBody->velocity.x = 0;
         }
-        kinematicBody->velocity.x = 0;
     }
 }
 

@@ -2,7 +2,7 @@
 
 constexpr float GFORCE = 0.08;
 constexpr float AIR_FRICTION = 0.98;
-constexpr float GROUND_FRICTION = 0.01;
+constexpr float GROUND_FRICTION = 0.7;
 constexpr float ACCEL_COEFF = 0.1;
 
 // Singleton
@@ -72,6 +72,7 @@ void PhysicsManager::applyFrictionToVel(std::shared_ptr<KinematicBody> kinematic
         }
     } else {
         kinematicBody->velocity.x *= GROUND_FRICTION;
+        kinematicBody->velocity.y *= GROUND_FRICTION;
     }
 }
 

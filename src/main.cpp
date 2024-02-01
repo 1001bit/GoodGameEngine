@@ -11,7 +11,7 @@ void initTestObject(std::shared_ptr<Level> level){
     physicsManager->addNewKinematicBody(dummy);
     level->levelGObjectsWId[1] = dummy;
     dummy->setRectPixelSize(16, 16);
-    dummy->setRelativePos({500, 300});
+    dummy->setCurrentPosition({500, 300});
     // his sprite
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();
     dummySprite->setNewParent(dummy);
@@ -31,7 +31,7 @@ void initTestObject(std::shared_ptr<Level> level){
     physicsManager->addNewKinematicBody(npc);
     level->levelGObjectsWId[2] = npc;
     npc->setRectPixelSize(16, 16);
-    npc->setRelativePos({500, 300});
+    npc->setCurrentPosition({500, 300});
     // his sprite
     std::shared_ptr<AnimatedSprite> npcSprite = std::make_shared<AnimatedSprite>();
     npcSprite->setNewParent(npc);
@@ -64,7 +64,7 @@ void initTestObject(std::shared_ptr<Level> level){
     platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
     // bunch of platforms
-    for(int i = 0; i < 1000; ++i){
+    for(int i = 0; i < 100; ++i){
         // a platform
         platform = std::make_shared<Body>();
         platform->setNewParent(level);

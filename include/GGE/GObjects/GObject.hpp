@@ -44,7 +44,7 @@ public:
     // Update the state of the object
     virtual void update(const float& dTimeMs);
     // Set position relative to parent's position
-    virtual void setRelativePos(const sf::Vector2f& newPos);
+    void setRelativePos(const sf::Vector2f& newPos);
     // move self by some distance
     void move(const sf::Vector2f& distance);
 

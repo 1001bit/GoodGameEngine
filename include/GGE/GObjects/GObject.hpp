@@ -23,13 +23,13 @@ private:
     sf::Vector2f relativePos;
     sf::FloatRect selfRect;
     bool flipped;
-    bool doesFlipMirror;
 
 protected:
     // Variables
     std::weak_ptr<GObject> parentWeak;
     std::vector<std::shared_ptr<GObject>> children;
     std::unordered_map<std::string, std::shared_ptr<Cooldown>> selfCooldownMap;
+    bool doesFlipMirror;
 
     // Methods
     // set self rect relative position and children's position
@@ -44,7 +44,7 @@ public:
     // Update the state of the object
     virtual void update(const float& dTimeMs);
     // Set position relative to parent's position
-    void setRelativePos(const sf::Vector2f& newPos);
+    virtual void setRelativePos(const sf::Vector2f& newPos);
     // move self by some distance
     void move(const sf::Vector2f& distance);
 
@@ -61,8 +61,6 @@ public:
     void setRectPixelSize(float w, float h);
     // set the flip of the object
     virtual void setFlip(bool newFlip);
-    // set flip ability of the object
-    void setDoesFlipMirror(bool newdoesFlipMirror);
     
     // Getters
     // Get position relative to parent's position

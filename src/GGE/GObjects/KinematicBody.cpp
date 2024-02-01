@@ -40,8 +40,3 @@ void KinematicBody::setRectSize(float w, float h){
 const bool& KinematicBody::doesWeigh(){
     return weighs;
 }
-
-// acceleration
-const sf::Vector2f& KinematicBody::getAcceleration(){
-    return acceleration;
-};

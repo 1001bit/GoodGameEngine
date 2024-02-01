@@ -2,7 +2,7 @@
 
 constexpr float GFORCE = 0.08;
 constexpr float AIR_FRICTION = 0.98;
-constexpr float GROUND_FRICTION = 0.7;
+constexpr float GROUND_FRICTION = 0.01;
 constexpr float ACCEL_COEFF = 0.1;
 
 // Singleton
@@ -40,6 +40,7 @@ void PhysicsManager::updatePhysics(const float& dTimeMs){
             applyCollisions(kinematicBody);
         }
         applyVelocityToPos(kinematicBody);
+        applyFrictionToVel(kinematicBody);
 
         ++it;
     }
@@ -52,14 +53,13 @@ void PhysicsManager::applyGravityToAccel(std::shared_ptr<KinematicBody> kinemati
 
 // Apply the acceleration to the velocity
 void PhysicsManager::applyAccelerationToVel(std::shared_ptr<KinematicBody> kinematicBody, const float& dTimeMs){
-    kinematicBody->velocity += kinematicBody->getAcceleration() * dTimeMs * ACCEL_COEFF;
+    kinematicBody->velocity += kinematicBody->acceleration * dTimeMs * ACCEL_COEFF;
     kinematicBody->acceleration = sf::Vector2f();
 };
 
 // Apply the velocities of the bodies
 void PhysicsManager::applyVelocityToPos(std::shared_ptr<KinematicBody> kinematicBody){
     kinematicBody->moveCurrentRect(kinematicBody->velocity);
-    applyFrictionToVel(kinematicBody);
 };
 
 // Apply the friction so body doesn't move for eternity

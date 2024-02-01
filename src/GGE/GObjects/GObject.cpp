@@ -78,10 +78,6 @@ void GObject::setFlip(bool newFlip){
     }
 }
 
-void GObject::setDoesFlipMirror(bool newDoesFlipMirror){
-    doesFlipMirror = newDoesFlipMirror;
-}
-
 // Getters
 
 const sf::Vector2f& GObject::getRelativePos(){

@@ -22,7 +22,6 @@ void initTestObject(std::shared_ptr<Level> level){
     std::shared_ptr<GSprite> sword = std::make_shared<GSprite>();
     sword->setNewParent(dummy);
     level->levelDrawableLayers[2].push_back(sword);
-    sword->setDoesFlipMirror(1);
     sword->setTexture(resourceManager->getTexture("Assets/Textures/sword.png"));
     sword->setRelativePos({60, 0});
 
@@ -39,8 +38,6 @@ void initTestObject(std::shared_ptr<Level> level){
     level->levelDrawableLayers[0].push_back(npcSprite);
     npcSprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
     npcSprite->playAnimation("idle");
-
-    level->removeChild(npc);
 
     // a platform
     std::shared_ptr<Body> platform = std::make_shared<Body>();
@@ -67,7 +64,7 @@ void initTestObject(std::shared_ptr<Level> level){
     platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
     // bunch of platforms
-    for(int i = 0; i < 10000; ++i){
+    for(int i = 0; i < 1000; ++i){
         // a platform
         platform = std::make_shared<Body>();
         platform->setNewParent(level);

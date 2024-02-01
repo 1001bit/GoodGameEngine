@@ -35,8 +35,6 @@ public:
     // Getters
     // weighs
     const bool& doesWeigh();
-    // acceleration
-    const sf::Vector2f& getAcceleration();
 
     // Structors
     KinematicBody();

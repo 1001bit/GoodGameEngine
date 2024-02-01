@@ -1,8 +1,8 @@
 #pragma once
 
-#include "GGE/GObjects/Body.hpp"
+#include "GGE/GObjects/KinematicBody.hpp"
 
-class TDNpc : public Body
+class TDNpc : public KinematicBody
 {
 private:
     // Variables

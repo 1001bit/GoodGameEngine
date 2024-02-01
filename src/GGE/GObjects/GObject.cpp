@@ -55,10 +55,6 @@ void GObject::setRelativePos(const sf::Vector2f& newRelativePos){
     updatePos();
 }
 
-void GObject::setRelativePos(float x, float y){
-    setRelativePos(sf::Vector2f(x, y));
-}
-
 void GObject::move(const sf::Vector2f& distance){
     setRelativePos(getRelativePos() + distance);
 }
@@ -74,7 +70,7 @@ void GObject::setRectPixelSize(float w, float h){
 
 void GObject::setFlip(bool newFlip){
     if(flipped != newFlip && doesFlipMirror){
-        setRelativePos(-getRelativePos().x, getRelativePos().y);
+        setRelativePos({-getRelativePos().x, getRelativePos().y});
     }
     flipped = newFlip;
     for(std::shared_ptr<GObject> child : children) {

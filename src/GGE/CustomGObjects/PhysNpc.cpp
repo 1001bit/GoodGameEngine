@@ -10,8 +10,7 @@ PhysNpc::PhysNpc(){
     movementDir = Direction::None;
 
     weighs = 1;
-    kinematic = 1;
-    collidable = 0;
+    collidable = 1;
 
     CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
     selfCooldownMap["idle"] = cooldownsManager->newCooldown(Cooldown(2000));

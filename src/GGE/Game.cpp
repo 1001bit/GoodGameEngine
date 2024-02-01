@@ -67,6 +67,8 @@ void Game::loop(sf::RenderWindow& window){
             accumulator -= 1000.f/UPDATE_RATE;
         }
 
+        physicsManager->interpolateKinematics(accumulator/(1000.f/UPDATE_RATE));
+
         // Camera
         currentLevel->camera->update(dTimeMs);
 

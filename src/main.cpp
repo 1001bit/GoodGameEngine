@@ -8,10 +8,10 @@ void initTestObject(std::shared_ptr<Level> level){
     // dummy
     std::shared_ptr<PhysPlayer> dummy = std::make_shared<PhysPlayer>();
     dummy->setNewParent(level);
-    physicsManager->addNewBody(dummy);
+    physicsManager->addNewKinematicBody(dummy);
     level->levelGObjectsWId[1] = dummy;
     dummy->setRectPixelSize(16, 16);
-    dummy->setRelativePos(500, 300);
+    dummy->setRelativePos({500, 300});
     // his sprite
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();
     dummySprite->setNewParent(dummy);
@@ -24,15 +24,15 @@ void initTestObject(std::shared_ptr<Level> level){
     level->levelDrawableLayers[2].push_back(sword);
     sword->setDoesFlipMirror(1);
     sword->setTexture(resourceManager->getTexture("Assets/Textures/sword.png"));
-    sword->setRelativePos(60, 0);
+    sword->setRelativePos({60, 0});
 
     // Npc
     std::shared_ptr<PhysNpc> npc = std::make_shared<PhysNpc>();
     npc->setNewParent(level);
-    physicsManager->addNewBody(npc);
+    physicsManager->addNewKinematicBody(npc);
     level->levelGObjectsWId[2] = npc;
     npc->setRectPixelSize(16, 16);
-    npc->setRelativePos(500, 300);
+    npc->setRelativePos({500, 300});
     // his sprite
     std::shared_ptr<AnimatedSprite> npcSprite = std::make_shared<AnimatedSprite>();
     npcSprite->setNewParent(npc);
@@ -43,9 +43,9 @@ void initTestObject(std::shared_ptr<Level> level){
     // a platform
     std::shared_ptr<Body> platform = std::make_shared<Body>();
     platform->setNewParent(level);
-    physicsManager->addNewBody(platform);
+    physicsManager->addNewSolidBody(platform);
     platform->setRectPixelSize(100, 10);
-    platform->setRelativePos(800, 730);
+    platform->setRelativePos({800, 730});
     // it's sprite
     std::shared_ptr<GSprite>  platformSprite = std::make_shared<GSprite>();
     platformSprite->setNewParent(platform);
@@ -55,9 +55,9 @@ void initTestObject(std::shared_ptr<Level> level){
     // a platform
     platform = std::make_shared<Body>();
     platform->setNewParent(level);
-    physicsManager->addNewBody(platform);
+    physicsManager->addNewSolidBody(platform);
     platform->setRectPixelSize(100, 10);
-    platform->setRelativePos(100, 800);
+    platform->setRelativePos({100, 800});
     // it's sprite
     platformSprite = std::make_shared<GSprite>();
     platformSprite->setNewParent(platform);
@@ -65,13 +65,13 @@ void initTestObject(std::shared_ptr<Level> level){
     platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
     // bunch of platforms
-    for(int i = 0; i < 10000; ++i){
+    for(int i = 0; i < 5000; ++i){
         // a platform
         platform = std::make_shared<Body>();
         platform->setNewParent(level);
-        physicsManager->addNewBody(platform);
+        physicsManager->addNewSolidBody(platform);
         platform->setRectPixelSize(100, 10);
-        platform->setRelativePos(-600 - 700*i, 730);
+        platform->setRelativePos({-600 - 700*i, 730});
         // it's sprite
         platformSprite = std::make_shared<GSprite>();
         platformSprite->setNewParent(platform);

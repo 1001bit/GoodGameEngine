@@ -1,9 +1,9 @@
 #pragma once
 
-#include "GGE/GObjects/Body.hpp"
+#include "GGE/GObjects/KinematicBody.hpp"
 
 // Top-Down player
-class TDPlayer : public Body
+class TDPlayer : public KinematicBody
 {
 private:
     // Methods

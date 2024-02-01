@@ -1,8 +1,8 @@
 #pragma once
 
-#include "GGE/GObjects/Body.hpp"
+#include "GGE/GObjects/KinematicBody.hpp"
 
-class PhysNpc : public Body
+class PhysNpc : public KinematicBody
 {
 private:
     // Variables

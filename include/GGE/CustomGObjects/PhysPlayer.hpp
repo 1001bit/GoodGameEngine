@@ -1,9 +1,9 @@
 #pragma once
 
-#include "GGE/GObjects/Body.hpp"
+#include "GGE/GObjects/KinematicBody.hpp"
 #include "unordered_map"
 
-class PhysPlayer : public Body
+class PhysPlayer : public KinematicBody
 {
 private:
 

@@ -6,9 +6,6 @@
 class PhysPlayer : public Body
 {
 private:
-    // Methods
-    // Control your character
-    void control();
 
 public:
     // Structors
@@ -18,4 +15,6 @@ public:
     // Methods
     // update state
     void update(const float& dTimeMs);
+    // Control player
+    void control();
 };

@@ -8,10 +8,6 @@ private:
     // Variables
     Direction movementDir;
 
-    // Methods
-    // npc movement
-    void control();
-    
 public:
     // Structors
     PhysNpc();
@@ -23,4 +19,6 @@ public:
     // Methods
     // update state
     void update(const float& dTimeMs);
+    // npc movement
+    void control();
 };

@@ -7,8 +7,6 @@ class TDPlayer : public Body
 {
 private:
     // Methods
-    // control your character
-    void control();
     
 public:
     // Structors
@@ -18,4 +16,6 @@ public:
     // Methods
     // update state
     void update(const float& dTimeMs);
+    // Control player
+    void control();
 };

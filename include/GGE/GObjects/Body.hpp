@@ -37,6 +37,8 @@ public:
     // Methods
     // Update the state
     virtual void update(const float& dTimeMs);
+    // Control the body
+    virtual void control();
     // Accelerate the body
     void accelerate(float accelX, float accelY);
 

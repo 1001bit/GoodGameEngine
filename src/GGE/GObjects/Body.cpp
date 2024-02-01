@@ -11,6 +11,9 @@ Body::Body(){
 Body::~Body(){}
 
 // Methods
+// Control the body
+void Body::control(){}
+
 // Update the state
 void Body::update(const float& dTimeMs){
     GObject::update(dTimeMs);

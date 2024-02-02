@@ -66,7 +66,7 @@ void initTestObject(std::shared_ptr<Level> level){
     platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
     // bunch of platforms
-    for(int i = 0; i < 1000; ++i){
+    for(int i = 0; i < 2000; ++i){
         // a platform
         platform = std::make_shared<Body>();
         platform->setNewParent(level);

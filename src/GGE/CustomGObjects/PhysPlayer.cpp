@@ -6,8 +6,8 @@ constexpr float AIR_SLOWDOWN = 0.05;
 
 // Structors
 PhysPlayer::PhysPlayer(){
-    weighs = 1;
-    collidable = 1;
+    this->weighs = 1;
+    this->collidable = 1;
 }
 
 PhysPlayer::~PhysPlayer(){}

@@ -57,17 +57,16 @@ void Game::loop(sf::RenderWindow& window){
         // Cooldowns
         cooldownsManager->updateCooldowns(dTimeMs);
 
-        // Objects update
-        currentLevel->update(dTimeMs);
-
         // Physics
         accumulator += dTimeMs;
         while(accumulator >= 1000.f/UPDATE_RATE){
             physicsManager->updatePhysics(1000.f/UPDATE_RATE);
             accumulator -= 1000.f/UPDATE_RATE;
         }
-
         physicsManager->interpolateKinematics(accumulator/(1000.f/UPDATE_RATE));
+
+        // Objects update
+        currentLevel->update(dTimeMs);
 
         // Camera
         currentLevel->camera->update(dTimeMs);

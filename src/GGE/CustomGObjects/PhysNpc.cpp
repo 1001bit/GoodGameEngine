@@ -6,11 +6,11 @@ constexpr unsigned MOVEMENT_RAND = 500;
 
 // Structors
 PhysNpc::PhysNpc(){
-    npcType = NpcType::Walking;
-    movementDir = Direction::None;
+    this->npcType = NpcType::Walking;
+    this->movementDir = Direction::None;
 
-    weighs = 1;
-    collidable = 1;
+    this->weighs = 1;
+    this->collidable = 1;
 
     CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
     selfCooldownMap["idle"] = cooldownsManager->newCooldown(Cooldown(2000));

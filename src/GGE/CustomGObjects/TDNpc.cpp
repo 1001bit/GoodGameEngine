@@ -5,11 +5,11 @@ constexpr unsigned MOVEMENT_RAND = 500;
 
 // Structors
 TDNpc::TDNpc(){
-    npcType = NpcType::Walking;
-    movementDir = Direction::None;
+    this->npcType = NpcType::Walking;
+    this->movementDir = Direction::None;
 
-    weighs = 0;
-    collidable = 1;
+    this->weighs = 0;
+    this->collidable = 1;
     
     CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
     selfCooldownMap["idle"] = cooldownsManager->newCooldown(Cooldown(2000));

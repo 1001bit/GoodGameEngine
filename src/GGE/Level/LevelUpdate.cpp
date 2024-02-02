@@ -3,21 +3,19 @@
 // Methods
 // Update everything in the level
 void Level::update(const float& dTimeMs){
-    dialogueManager.updateCurrentDialogue();
+    dialogueManager.updateCurrentDialogue(levelGObjectsWId, camera);
 
-    // set camera target from dialogue
-    uint16_t speakerId = dialogueManager.getCurrentSpeakerId();
-    std::shared_ptr<GObject> currentSpeaker = levelGObjectsWId.at(1).lock();
-    if(levelGObjectsWId.count(speakerId)){
-        currentSpeaker = levelGObjectsWId.at(speakerId).lock();
-        if(!currentSpeaker){
-            levelGObjectsWId.erase(speakerId);
-            currentSpeaker = levelGObjectsWId.at(1).lock();
+    for(auto it = updatableGObjects.begin(); it != updatableGObjects.end();){
+        auto object = it->lock();
+        if(!object){
+            it = updatableGObjects.erase(it);
+            continue;
         }
-    }
-    camera->setTarget(currentSpeaker);
 
-    GObject::update(dTimeMs);
+        object->update(dTimeMs);
+
+        ++it;
+    }
 };
 
 // draw drawables

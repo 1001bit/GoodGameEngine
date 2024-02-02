@@ -16,6 +16,7 @@ void initTestObject(std::shared_ptr<Level> level){
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();
     dummySprite->setNewParent(dummy);
     level->levelDrawableLayers[1].push_back(dummySprite);
+    level->updatableGObjects.push_back(dummySprite);  
     dummySprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
     dummySprite->playAnimation("idle");
     // his sword
@@ -36,6 +37,7 @@ void initTestObject(std::shared_ptr<Level> level){
     std::shared_ptr<AnimatedSprite> npcSprite = std::make_shared<AnimatedSprite>();
     npcSprite->setNewParent(npc);
     level->levelDrawableLayers[0].push_back(npcSprite);
+    level->updatableGObjects.push_back(npcSprite);  
     npcSprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
     npcSprite->playAnimation("idle");
 
@@ -64,7 +66,7 @@ void initTestObject(std::shared_ptr<Level> level){
     platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
     // bunch of platforms
-    for(int i = 0; i < 10000; ++i){
+    for(int i = 0; i < 1000; ++i){
         // a platform
         platform = std::make_shared<Body>();
         platform->setNewParent(level);

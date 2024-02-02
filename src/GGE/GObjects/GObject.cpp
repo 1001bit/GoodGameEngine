@@ -9,11 +9,7 @@ GObject::GObject(){
 GObject::~GObject(){}
 
 // Methods
-void GObject::update(const float& dTimeMs){
-    for(std::shared_ptr<GObject> child : children) {
-        child->update(dTimeMs);
-    }
-}
+void GObject::update(const float& dTimeMs){}
 
 void GObject::updatePos(){
     sf::Vector2f zeroPoint;

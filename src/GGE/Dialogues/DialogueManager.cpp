@@ -36,7 +36,7 @@ void DialogueManager::setCurrentDialogue(u_char id){
 }
 
 // Update current dialogue
-void DialogueManager::updateCurrentDialogue(){
+void DialogueManager::updateCurrentDialogue(std::unordered_map<uint16_t, std::weak_ptr<GObject>>& levelGObjectsWId, std::shared_ptr<Camera> camera){
     // if current dialogue is active
     auto currentDialogue = currentDialogueWeak.lock();
     if(!currentDialogue){
@@ -50,6 +50,18 @@ void DialogueManager::updateCurrentDialogue(){
         dialogueText->text.setString(currentDialogue->getCurrentLine().line);
     }
 
+    // set camera target
+    uint16_t speakerId = currentDialogue->getCurrentLine().characterId;
+    std::shared_ptr<GObject> currentSpeaker = levelGObjectsWId.at(1).lock();
+    if(levelGObjectsWId.count(speakerId)){
+        currentSpeaker = levelGObjectsWId.at(speakerId).lock();
+        if(!currentSpeaker){
+            levelGObjectsWId.erase(speakerId);
+            currentSpeaker = levelGObjectsWId.at(1).lock();
+        }
+    }
+    camera->setTarget(currentSpeaker);
+
     // if empty string (after last line) - stop it
     if(currentDialogue->getCurrentLine().line == ""){
         currentDialogueWeak.reset();
@@ -57,14 +69,4 @@ void DialogueManager::updateCurrentDialogue(){
             dialogueBox->setRelativePos({9999, 9999});
         }
     }
-}
-
-// Getters
-// Who reads the line now
-const u_char DialogueManager::getCurrentSpeakerId(){
-    auto currentDialogue = currentDialogueWeak.lock();
-    if(!currentDialogue){
-        return 0;
-    }
-    return currentDialogue->getCurrentLine().characterId;
 }

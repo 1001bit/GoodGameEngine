@@ -1,6 +1,6 @@
 #include "GGE/GObjects/Camera.hpp"
 
-constexpr float SPEED = 0.03;
+constexpr float FACTOR = 0.97;
 
 sf::Vector2f lerp(sf::Vector2f a, sf::Vector2f b, float f) {
     return (a * (1.f - f)) + (b * f);
@@ -24,13 +24,11 @@ void Camera::update(const float& dTimeMs){
     sf::Vector2f targetCenterPos(targetRect.getPosition() + targetRect.getSize()/2.f);
     sf::Vector2f cameraRectNewPos(targetCenterPos - getRect().getSize()/2.f);
 
-    float blend = pow(0.5, dTimeMs * SPEED);
+    float blend = pow(FACTOR, dTimeMs);
     setRelativePos(lerp(cameraRectNewPos, getRelativePos(), blend));
     // setRelativePos(cameraRectNewPos);
 
     view.setCenter(getRelativePos() + getRect().getSize()/2.f);
-
-    GObject::update(dTimeMs);
 }
 
 // set size of view

@@ -70,8 +70,6 @@ void AnimatedSprite::update(const float& dTimeMs){
             currentAnimation = nullptr;
         }
     }
-
-    GObject::update(dTimeMs);
 }
 
 // draw self drawable object

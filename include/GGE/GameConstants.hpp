@@ -1,6 +1,6 @@
 #pragma once
 
-// #define SHOW_FPS
+#define SHOW_FPS
 // #define SHOW_FPS_SPIKES
 
 // Framerate limits

@@ -36,17 +36,21 @@ public:
     ~Level();
 
     ///////////////////////////
-    // Drawable Level GObjects
+    // Updatable GObjects
+    std::vector<std::weak_ptr<GObject>> updatableGObjects;
+
+    // Level GObjects
+    // Drawable
     std::vector< std::vector<std::weak_ptr<GDrawable>> > levelDrawableLayers;
-    // Level GObjects with own id
+    // With own id
     std::unordered_map<uint16_t, std::weak_ptr<GObject>> levelGObjectsWId;
     // Game camera that is following some GObject
     std::shared_ptr<Camera> camera;
 
     // GUI GObjects
-    // layers of drawable GUI GObjects
+    // Layers of drawables
     std::vector< std::vector<std::weak_ptr<GDrawable>> > guiDrawableLayers;
-    // dialogue manager
+    // Dialogue manager
     DialogueManager dialogueManager;
     ///////////////////////////
 

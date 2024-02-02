@@ -33,11 +33,7 @@ public:
     // Set all the dialogues list
     void setDialogues(std::unordered_map<u_char, std::shared_ptr<Dialogue>> newDialogues);
     // Update current dialogue
-    void updateCurrentDialogue();
+    void updateCurrentDialogue(std::unordered_map<uint16_t, std::weak_ptr<GObject>>& levelGObjectsWId, std::shared_ptr<Camera> camera);
     // Set current dialogue with id
     void setCurrentDialogue(u_char id);
-
-    // Getters
-    // Who reads the line now
-    const u_char getCurrentSpeakerId();
 };

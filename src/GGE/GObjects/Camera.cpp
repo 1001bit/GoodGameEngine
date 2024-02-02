@@ -2,6 +2,10 @@
 
 constexpr float SPEED = 0.03;
 
+sf::Vector2f lerp(sf::Vector2f a, sf::Vector2f b, float f) {
+    return (a * (1.f - f)) + (b * f);
+}
+
 // Structors
 Camera::Camera(){}
 
@@ -20,7 +24,8 @@ void Camera::update(const float& dTimeMs){
     sf::Vector2f targetCenterPos(targetRect.getPosition() + targetRect.getSize()/2.f);
     sf::Vector2f cameraRectNewPos(targetCenterPos - getRect().getSize()/2.f);
 
-    move((cameraRectNewPos - getRelativePos()) * dTimeMs * SPEED);
+    float blend = pow(0.5, dTimeMs * SPEED);
+    setRelativePos(lerp(cameraRectNewPos, getRelativePos(), blend));
     // setRelativePos(cameraRectNewPos);
 
     view.setCenter(getRelativePos() + getRect().getSize()/2.f);

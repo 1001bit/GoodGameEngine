@@ -1,8 +1,8 @@
 #include "GGE/SingletonManagers/PhysicsManager.hpp"
 
 constexpr float GFORCE = 0.08;
-constexpr float AIR_FRICTION = 0.98;
-constexpr float GROUND_FRICTION = 0.7;
+constexpr float AIR_FRICTION = 0.015;
+constexpr float GROUND_FRICTION = 0.3;
 constexpr float ACCEL_COEFF = 0.1;
 
 // Singleton
@@ -66,13 +66,13 @@ void PhysicsManager::applyVelocityToPos(std::shared_ptr<KinematicBody> kinematic
 void PhysicsManager::applyFrictionToVel(std::shared_ptr<KinematicBody> kinematicBody){
     if(kinematicBody->doesWeigh()){
         if(kinematicBody->collisionDir.vertical == Direction::Down){
-            kinematicBody->velocity.x *= GROUND_FRICTION;
+            kinematicBody->velocity.x -= kinematicBody->velocity.x * GROUND_FRICTION;
         } else {
-            kinematicBody->velocity.x *= AIR_FRICTION;
+            kinematicBody->velocity.x -= kinematicBody->velocity.x * AIR_FRICTION;
         }
     } else {
-        kinematicBody->velocity.x *= GROUND_FRICTION;
-        kinematicBody->velocity.y *= GROUND_FRICTION;
+        kinematicBody->velocity.x -= kinematicBody->velocity.x * GROUND_FRICTION;
+        kinematicBody->velocity.y -= kinematicBody->velocity.y * GROUND_FRICTION;
     }
 }
 

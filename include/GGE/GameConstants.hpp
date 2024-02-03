@@ -3,6 +3,9 @@
 #define SHOW_FPS
 // #define SHOW_FPS_SPIKES
 
+// Scale of every sprite
+constexpr float SPRITE_SCALE = 7;
+
 // Framerate limits
 constexpr unsigned MAX_FPS = 99999;
 constexpr unsigned MIN_FPS = 60;

@@ -6,8 +6,7 @@
 #include <iostream>
 #include "GGE/SingletonManagers/CooldownsManager.hpp"
 #include "GGE/SingletonManagers/ControlsManager.hpp"
-
-constexpr float SPRITE_SCALE = 7;
+#include "GGE/GameConstants.hpp"
 
 // 4 directions
 enum class Direction {

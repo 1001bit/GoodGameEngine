@@ -1,7 +1,8 @@
 #pragma once
 
-#include "GGE/GObjects/KinematicBody.hpp"
 #include <vector>
+#include "GGE/GObjects/KinematicBody.hpp"
+#include "GGE/MathHelper.hpp"
 
 class PhysicsManager
 {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GObject.hpp"
-#include <cmath>
+#include <GGE/MathHelper.hpp>
 
 class Camera : public GObject
 {

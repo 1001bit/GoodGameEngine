@@ -14,6 +14,8 @@ PhysicsManager* PhysicsManager::getInstance(){
     return instance;
 };
 
+//////////////////////////////////////////////
+
 // Methods
 // Do all the physics stuff to all the bodies
 void PhysicsManager::updatePhysics(const float& dTimeMs){
@@ -57,24 +59,31 @@ void PhysicsManager::applyAccelerationToVel(std::shared_ptr<KinematicBody> kinem
     kinematicBody->acceleration = sf::Vector2f();
 };
 
+// Apply the friction so body doesn't move for eternity
+void PhysicsManager::applyFrictionToVel(std::shared_ptr<KinematicBody> kinematicBody){
+    if(kinematicBody->doesWeigh()){
+        // ground friction if platformer body is on ground
+        if(kinematicBody->collisionDir.vertical == Direction::Down){
+            kinematicBody->velocity.x -= kinematicBody->velocity.x * GROUND_FRICTION;
+        } 
+        // air friction if platformer body is in air
+        else {
+            kinematicBody->velocity.x -= kinematicBody->velocity.x * AIR_FRICTION;
+        }
+    } 
+    // ground friction if floating body is on ground
+    else {
+        kinematicBody->velocity.x -= kinematicBody->velocity.x * GROUND_FRICTION;
+        kinematicBody->velocity.y -= kinematicBody->velocity.y * GROUND_FRICTION;
+    }
+}
+
 // Apply the velocities of the bodies
 void PhysicsManager::applyVelocityToPos(std::shared_ptr<KinematicBody> kinematicBody){
     kinematicBody->moveCurrentRect(kinematicBody->velocity);
 };
 
-// Apply the friction so body doesn't move for eternity
-void PhysicsManager::applyFrictionToVel(std::shared_ptr<KinematicBody> kinematicBody){
-    if(kinematicBody->doesWeigh()){
-        if(kinematicBody->collisionDir.vertical == Direction::Down){
-            kinematicBody->velocity.x -= kinematicBody->velocity.x * GROUND_FRICTION;
-        } else {
-            kinematicBody->velocity.x -= kinematicBody->velocity.x * AIR_FRICTION;
-        }
-    } else {
-        kinematicBody->velocity.x -= kinematicBody->velocity.x * GROUND_FRICTION;
-        kinematicBody->velocity.y -= kinematicBody->velocity.y * GROUND_FRICTION;
-    }
-}
+//////////////////////////////////////////////
 
 // Interpolate all the kinematic bodies
 void PhysicsManager::interpolateKinematics(float alpha){
@@ -90,11 +99,13 @@ void PhysicsManager::interpolateKinematics(float alpha){
         sf::FloatRect& previousRect = kinematicBody->previousRect;
         const sf::FloatRect& rect = kinematicBody->getRect();
 
-        kinematicBody->setRelativePos(currentRect.getPosition() * alpha + previousRect.getPosition() * (1.f - alpha));
-
+        kinematicBody->setRelativePos(lerp(previousRect.getPosition(), currentRect.getPosition(), alpha));
+        
         ++it;
     }
 };
+
+//////////////////////////////////////////////
 
 // Add new body to the vector of solid bodies
 void PhysicsManager::addNewSolidBody(std::shared_ptr<Body> newBody){

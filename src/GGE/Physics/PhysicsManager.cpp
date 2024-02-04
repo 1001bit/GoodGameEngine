@@ -1,20 +1,14 @@
-#include "GGE/SingletonManagers/PhysicsManager.hpp"
+#include "GGE/Physics/PhysicsManager.hpp"
 
 constexpr float GFORCE = 0.08;
 constexpr float AIR_FRICTION = 0.015;
 constexpr float GROUND_FRICTION = 0.3;
 constexpr float ACCEL_COEFF = 0.1;
 
-// Singleton
-PhysicsManager* PhysicsManager::instance = nullptr;
-PhysicsManager* PhysicsManager::getInstance(){
-    if(!instance){
-        instance = new PhysicsManager();
-    }
-    return instance;
-};
+// Structors
+PhysicsManager::PhysicsManager(){}
 
-//////////////////////////////////////////////
+PhysicsManager::~PhysicsManager(){}
 
 // Methods
 // Do all the physics stuff to all the bodies

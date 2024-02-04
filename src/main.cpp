@@ -2,13 +2,12 @@
 
 void initTestObject(std::shared_ptr<Level> level){
     ResourceManager* resourceManager = ResourceManager::getInstance();
-    PhysicsManager* physicsManager = PhysicsManager::getInstance();
 
     // Level
     // dummy
     std::shared_ptr<PhysPlayer> dummy = std::make_shared<PhysPlayer>();
     dummy->setNewParent(level);
-    physicsManager->addNewKinematicBody(dummy);
+    level->physicsManager.addNewKinematicBody(dummy);
     level->levelGObjectsWId[1] = dummy;
     dummy->setRectPixelSize(16, 16);
     dummy->setCurrentPosition({500, 300});
@@ -29,7 +28,7 @@ void initTestObject(std::shared_ptr<Level> level){
     // Npc
     std::shared_ptr<PhysNpc> npc = std::make_shared<PhysNpc>();
     npc->setNewParent(level);
-    physicsManager->addNewKinematicBody(npc);
+    level->physicsManager.addNewKinematicBody(npc);
     level->levelGObjectsWId[2] = npc;
     npc->setRectPixelSize(16, 16);
     npc->setCurrentPosition({500, 300});
@@ -44,7 +43,7 @@ void initTestObject(std::shared_ptr<Level> level){
     // a platform
     std::shared_ptr<Body> platform = std::make_shared<Body>();
     platform->setNewParent(level);
-    physicsManager->addNewSolidBody(platform);
+    level->physicsManager.addNewSolidBody(platform);
     platform->setRectPixelSize(100, 10);
     platform->setRelativePos({800, 730});
     // it's sprite
@@ -56,7 +55,7 @@ void initTestObject(std::shared_ptr<Level> level){
     // a platform
     platform = std::make_shared<Body>();
     platform->setNewParent(level);
-    physicsManager->addNewSolidBody(platform);
+    level->physicsManager.addNewSolidBody(platform);
     platform->setRectPixelSize(100, 10);
     platform->setRelativePos({100, 800});
     // it's sprite
@@ -70,7 +69,7 @@ void initTestObject(std::shared_ptr<Level> level){
         // a platform
         platform = std::make_shared<Body>();
         platform->setNewParent(level);
-        physicsManager->addNewSolidBody(platform);
+        level->physicsManager.addNewSolidBody(platform);
         platform->setRectPixelSize(100, 10);
         platform->setRelativePos({-600.f - 700.f*i, 730.f});
         // it's sprite

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GGE/GameConstants.hpp"
+
 #include "GGE/GObjects/GObject.hpp"
 #include "GGE/GObjects/AnimatedSprite.hpp"
 #include "GGE/GObjects/GSprite.hpp"
@@ -13,11 +15,9 @@
 #include "GGE/GObjects/GDrawable.hpp"
 
 #include "GGE/Dialogues/DialogueManager.hpp"
+#include "GGE/Physics/PhysicsManager.hpp"
 
 #include "GGE/SingletonManagers/ResourceManager.hpp"
-#include "GGE/SingletonManagers/PhysicsManager.hpp"
-
-#include "GGE/GameConstants.hpp"
 
 // #define DRAWCOLLIDER
 
@@ -40,6 +40,8 @@ public:
     std::vector<std::weak_ptr<GObject>> updatableGObjects;
 
     // Level GObjects
+    // Physics manager
+    PhysicsManager physicsManager;
     // Drawable
     std::vector< std::vector<std::weak_ptr<GDrawable>> > levelDrawableLayers;
     // With own id

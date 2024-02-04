@@ -20,7 +20,6 @@ void Game::loop(sf::RenderWindow& window){
 
     ControlsManager* controlsManager = ControlsManager::getInstance();
     CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
-    PhysicsManager* physicsManager = PhysicsManager::getInstance();
 
     float accumulator = 0;
 
@@ -60,10 +59,10 @@ void Game::loop(sf::RenderWindow& window){
         // Physics
         accumulator += dTimeMs;
         while(accumulator >= 1000.f/UPDATE_RATE){
-            physicsManager->updatePhysics(1000.f/UPDATE_RATE);
+            currentLevel->physicsManager.updatePhysics(1000.f/UPDATE_RATE);
             accumulator -= 1000.f/UPDATE_RATE;
         }
-        physicsManager->interpolateKinematics(accumulator/(1000.f/UPDATE_RATE));
+        currentLevel->physicsManager.interpolateKinematics(accumulator/(1000.f/UPDATE_RATE));
 
         // Objects update
         currentLevel->update(dTimeMs);

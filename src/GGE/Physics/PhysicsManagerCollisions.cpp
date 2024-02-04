@@ -1,4 +1,4 @@
-#include "GGE/SingletonManagers/PhysicsManager.hpp"
+#include "GGE/Physics/PhysicsManager.hpp"
 
 // Functions
 // collide current body with non-kinematic collidable body

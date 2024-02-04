@@ -7,10 +7,6 @@
 class PhysicsManager
 {
 private:
-    // Singleton
-    static PhysicsManager* instance;
-    PhysicsManager(){};
-
     // Variables
     // Bodies vector
     std::vector<std::weak_ptr<Body>> solidBodiesWeakVector;
@@ -33,6 +29,10 @@ private:
     void applyVelocityToPos(std::shared_ptr<KinematicBody> kinematicBody);
     
 public:
+    // Structors
+    PhysicsManager();
+    ~PhysicsManager();
+
     // Methods
     // Do all the physics stuff to all the bodies
     void updatePhysics(const float& dTimeMs);
@@ -44,7 +44,4 @@ public:
     void addNewSolidBody(std::shared_ptr<Body> newBody);
     // Add new body to the kinematics vector
     void addNewKinematicBody(std::shared_ptr<KinematicBody> newBody);
-
-    // Singleton
-    static PhysicsManager* getInstance();
 };

@@ -22,6 +22,7 @@ void Camera::update(const float& dTimeMs){
 
     float blend = pow(FACTOR, dTimeMs);
     setRelativePos(lerp(cameraRectNewPos, getRelativePos(), blend));
+
     // setRelativePos(cameraRectNewPos);
 
     view.setCenter(getRelativePos() + getRect().getSize()/2.f);

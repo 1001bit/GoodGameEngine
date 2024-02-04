@@ -68,9 +68,6 @@ void Game::loop(sf::RenderWindow& window){
         // Objects update
         currentLevel->update(dTimeMs);
 
-        // Camera
-        currentLevel->camera->update(dTimeMs);
-
         // Draw
         window.clear();
         currentLevel->drawGObjetcs(window);

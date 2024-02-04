@@ -9,6 +9,7 @@ void Level::initNecessaryGObjects(){
     // camera
     camera = std::make_shared<Camera>();
     camera->setSize(GAME_WIDTH, GAME_HEIGHT);
+    updatableGObjects.push_back(camera);
 
     // Gui
     // Dialogue box

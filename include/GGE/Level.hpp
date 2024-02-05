@@ -16,6 +16,7 @@
 
 #include "GGE/Dialogues/DialogueManager.hpp"
 #include "GGE/Physics/PhysicsManager.hpp"
+#include "GGE/Triggers/TriggersManager.hpp"
 
 #include "GGE/SingletonManagers/ResourceManager.hpp"
 
@@ -36,6 +37,9 @@ public:
     ~Level();
 
     ///////////////////////////
+    // Triggers
+    TriggersManager triggersManager;
+
     // Updatable GObjects
     std::vector<std::weak_ptr<GObject>> updatableGObjects;
 

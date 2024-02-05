@@ -1,5 +1,7 @@
 #include "GGE/Game.hpp"
 
+#include "GGE/CustomTriggers/TrCollisionDialogue.hpp"
+
 void initTestObject(std::shared_ptr<Level> level){
     ResourceManager* resourceManager = ResourceManager::getInstance();
 
@@ -10,7 +12,8 @@ void initTestObject(std::shared_ptr<Level> level){
     level->physicsManager.addNewKinematicBody(dummy);
     level->levelGObjectsWId[1] = dummy;
     dummy->setRectPixelSize(16, 16);
-    dummy->setCurrentPosition({500, 300});
+    dummy->setCurrentPosition({000, 300});
+    level->camera->setTarget(dummy);
     // his sprite
     std::shared_ptr<AnimatedSprite> dummySprite = std::make_shared<AnimatedSprite>();
     dummySprite->setNewParent(dummy);
@@ -89,7 +92,13 @@ void initTestObject(std::shared_ptr<Level> level){
         {1, "bye"},
         {2, "goodbye"}
     });
-    level->dialogueManager.setCurrentDialogue(0);
+
+    // Triggers
+    // start dialogue on collision of player and npc
+    std::shared_ptr<TrCollisionDialogue> trigger = std::make_shared<TrCollisionDialogue>();
+    trigger->setCollisionBodies(npc, dummy);
+    trigger->setDialogue(0, &level->dialogueManager);
+    level->triggersManager.addNewTrigger(trigger);
 }
 
 void initControls(){

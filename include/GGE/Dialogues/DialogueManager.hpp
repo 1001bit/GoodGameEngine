@@ -36,4 +36,6 @@ public:
     void updateCurrentDialogue(std::unordered_map<uint16_t, std::weak_ptr<GObject>>& levelGObjectsWId, std::shared_ptr<Camera> camera);
     // Set current dialogue with id
     void setCurrentDialogue(u_char id);
+    // Hide or show drawable part
+    void setDrawableVisible(bool visible);
 };

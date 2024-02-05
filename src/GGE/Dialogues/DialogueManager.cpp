@@ -12,13 +12,13 @@ void DialogueManager::initDrawables(std::shared_ptr<GSprite> newDialogueBox, std
     // Dialogue box
     dialogueBoxWeak = newDialogueBox;
     newDialogueBox->setTexture(resourceManager->getTexture("Assets/Textures/dialogueBackground.png"));
-    newDialogueBox->setRelativePos({(GAME_WIDTH-(newDialogueBox->sprite.getGlobalBounds().width))/2, 600}); // centralize it on X position
+    setDrawableVisible(0);
     
     // Dialogue text
     dialogueTextWeak = newDialogueText;
     newDialogueText->text.setFont(resourceManager->getFont("Assets/Fonts/font1.ttf"));
     newDialogueText->text.setCharacterSize(30);
-    newDialogueText->text.setString("Hi");
+    newDialogueText->text.setString("...");
     newDialogueText->setRelativePos({60, 20});
 }
 
@@ -32,6 +32,7 @@ void DialogueManager::setCurrentDialogue(u_char id){
     if(!dialogues.count(id)){
         return;
     }
+    setDrawableVisible(1);
     currentDialogueWeak = dialogues.at(id);
 }
 
@@ -65,7 +66,16 @@ void DialogueManager::updateCurrentDialogue(std::unordered_map<uint16_t, std::we
     // if empty string (after last line) - stop it
     if(currentDialogue->getCurrentLine().line == ""){
         currentDialogueWeak.reset();
-        if(auto dialogueBox = dialogueBoxWeak.lock()){
+        setDrawableVisible(0);
+    }
+}
+
+// Hide or show drawable part
+void DialogueManager::setDrawableVisible(bool visible){
+    if(auto dialogueBox = dialogueBoxWeak.lock()){
+        if(visible){
+            dialogueBox->setRelativePos({(GAME_WIDTH-(dialogueBox->sprite.getGlobalBounds().width))/2, 600}); // centralize it on X position
+        } else {
             dialogueBox->setRelativePos({9999, 9999});
         }
     }

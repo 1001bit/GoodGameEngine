@@ -6,7 +6,7 @@
 class TriggersManager
 {
 private:
-    std::vector<std::weak_ptr<Trigger>> triggersWeakVector;
+    std::vector<std::shared_ptr<Trigger>> triggersVector;
 
 public:
     // Structors

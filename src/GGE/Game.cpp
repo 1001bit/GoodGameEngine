@@ -64,7 +64,10 @@ void Game::loop(sf::RenderWindow& window){
         }
         currentLevel->physicsManager.interpolateKinematics(accumulator/(1000.f/UPDATE_RATE));
 
-        // Objects update
+        // Triggers
+        currentLevel->triggersManager.update();
+
+        // GObjects update
         currentLevel->update(dTimeMs);
 
         // Draw

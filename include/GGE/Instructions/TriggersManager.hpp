@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "GGE/Triggers/Trigger.hpp"
+#include "GGE/Instructions/Trigger.hpp"
 
 class TriggersManager
 {

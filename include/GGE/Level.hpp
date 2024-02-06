@@ -16,7 +16,7 @@
 
 #include "GGE/Dialogues/DialogueManager.hpp"
 #include "GGE/Physics/PhysicsManager.hpp"
-#include "GGE/Triggers/TriggersManager.hpp"
+#include "GGE/Instructions/TriggersManager.hpp"
 
 #include "GGE/SingletonManagers/ResourceManager.hpp"
 

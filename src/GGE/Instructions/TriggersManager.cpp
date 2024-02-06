@@ -1,4 +1,4 @@
-#include "GGE/Triggers/TriggersManager.hpp"
+#include "GGE/Instructions/TriggersManager.hpp"
 
 // Structors
 TriggersManager::TriggersManager(){}

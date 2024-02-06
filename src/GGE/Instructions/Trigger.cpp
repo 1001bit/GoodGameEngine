@@ -1,4 +1,4 @@
-#include "GGE/Triggers/Trigger.hpp"
+#include "GGE/Instructions/Trigger.hpp"
 
 // Structors
 Trigger::Trigger(){
@@ -10,8 +10,11 @@ Trigger::~Trigger(){}
 // checks if event has happened and does action if yes
 void Trigger::checkEvent(){
     if(active){
-        doAction();
+        action->doAction();
     }
 }
-// Do action of trigger if event has happened
-void Trigger::doAction(){}
+
+// set new action
+void Trigger::setAction(std::shared_ptr<Action> newAction){
+    action = newAction;
+}

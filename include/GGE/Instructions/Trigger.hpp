@@ -1,16 +1,16 @@
 #pragma once
 
 #include "GGE/GObjects/GObject.hpp"
+#include "GGE/Instructions/Action.hpp"
 
 class Trigger
 {
 private:
+
+protected:
     // Variables
     bool active;
-
-    // Methods
-    // Do action of trigger if event has happened
-    virtual void doAction();
+    std::shared_ptr<Action> action;
 
 public:
     // Structors
@@ -20,4 +20,6 @@ public:
     // Methods
     // checks if event has happened and does action if yes
     virtual void checkEvent();
+    // set new action
+    void setAction(std::shared_ptr<Action> newAction);
 };

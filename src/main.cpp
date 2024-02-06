@@ -1,6 +1,7 @@
 #include "GGE/Game.hpp"
 
-#include "GGE/CustomTriggers/TrCollisionDialogue.hpp"
+#include "GGE/CustomInstruction/TrCollision.hpp"
+#include "GGE/CustomInstruction/AcDialogue.hpp"
 
 void initTestObject(std::shared_ptr<Level> level){
     ResourceManager* resourceManager = ResourceManager::getInstance();
@@ -93,11 +94,14 @@ void initTestObject(std::shared_ptr<Level> level){
         {2, "goodbye"}
     });
 
-    // Triggers
+    // Instruction
     // start dialogue on collision of player and npc
-    std::shared_ptr<TrCollisionDialogue> trigger = std::make_shared<TrCollisionDialogue>();
+    std::shared_ptr<TrCollision> trigger = std::make_shared<TrCollision>();
     trigger->setCollisionBodies(npc, dummy);
-    trigger->setDialogue(0, &level->dialogueManager);
+    std::shared_ptr<AcDialogue> action = std::make_shared<AcDialogue>();
+    action->setDialogueParams(0, &level->dialogueManager);
+    trigger->setAction(action);
+
     level->triggersManager.addNewTrigger(trigger);
 }
 

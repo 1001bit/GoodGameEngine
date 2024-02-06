@@ -42,6 +42,7 @@ public:
     // Methods
     // Update the state of the object
     virtual void update(const float& dTimeMs);
+    
     // Set position relative to parent's position
     void setRelativePos(const sf::Vector2f& newPos);
     // move self by some distance
@@ -60,6 +61,8 @@ public:
     void setRectPixelSize(float w, float h);
     // set the flip of the object
     virtual void setFlip(bool newFlip);
+    // set doesFlipMirror to true
+    void makeFlippable();
     
     // Getters
     // Get position relative to parent's position

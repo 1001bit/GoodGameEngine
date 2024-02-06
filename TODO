@@ -1,6 +1,3 @@
-- Easy system to make own GObjects, triggers, levels and other stuff
-    - Separate custom levels, GObjects, triggers, etc. from base stuff
-
 - Levels
     - Level editor
     - Base levels: Menu, Simple Game Level
@@ -9,6 +6,6 @@
 
 
 Not necessary:
-- Collidable kinematic body
+- Moving solid body
 - Smarter NPCs
 - Koyote effect, jump buffer, smooth edges

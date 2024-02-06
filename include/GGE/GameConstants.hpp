@@ -7,8 +7,8 @@
 constexpr float SPRITE_SCALE = 7;
 
 // Framerate limits
-constexpr unsigned MAX_FPS = 99999;
-constexpr unsigned MIN_FPS = 60;
+constexpr unsigned MAX_FPS = 120;
+constexpr unsigned MIN_FPS = 90;
 constexpr unsigned UPDATE_RATE = 60;
 
 // sizes of the game

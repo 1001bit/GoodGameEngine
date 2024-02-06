@@ -28,6 +28,7 @@ void initTestObject(std::shared_ptr<Level> level){
     level->levelDrawableLayers[2].push_back(sword);
     sword->setTexture(resourceManager->getTexture("Assets/Textures/sword.png"));
     sword->setRelativePos({60, 0});
+    sword->makeFlippable();
 
     // Npc
     std::shared_ptr<PhysNpc> npc = std::make_shared<PhysNpc>();
@@ -86,7 +87,7 @@ void initTestObject(std::shared_ptr<Level> level){
     // Gui
     // dummy-npc dialogue
     std::shared_ptr<Dialogue> dialogue1 = std::make_shared<Dialogue>();
-    level->dialogueManager.setDialogues({{0, dialogue1}});
+    level->dialogueManager.setDialoguesMap({{0, dialogue1}});
     dialogue1->setLines({
         {1, "hello"},
         {2, "hi"},
@@ -94,7 +95,7 @@ void initTestObject(std::shared_ptr<Level> level){
         {2, "goodbye"}
     });
 
-    // Instruction
+    // Instructions
     // start dialogue on collision of player and npc
     std::shared_ptr<TrCollision> trigger = std::make_shared<TrCollision>();
     trigger->setCollisionBodies(npc, dummy);

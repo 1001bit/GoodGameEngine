@@ -7,7 +7,7 @@ AcDialogue::~AcDialogue(){}
 // Methods
 
 void AcDialogue::doAction(){
-    dialogueManager->setCurrentDialogue(dialogueId);
+    dialogueManager->startDialogue(dialogueId);
 }
 
 void AcDialogue::setDialogueParams(u_char newId, DialogueManager* newDialogueManager){

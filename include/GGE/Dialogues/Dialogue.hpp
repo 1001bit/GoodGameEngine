@@ -12,10 +12,10 @@ class Dialogue
 {
 private:
     // Variables
-    // participant id and their line
+    // vector of participant id and their line
     std::vector<DialogueLine> linesList;
-    // current line
-    int16_t currentLineId;
+    // id of current dialogueLine
+    int16_t currentDialogueLineId;
 
     // Methods
     // control the flow of the dialogue

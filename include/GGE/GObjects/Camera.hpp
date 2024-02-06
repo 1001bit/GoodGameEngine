@@ -17,7 +17,7 @@ public:
 
     // Methods
     // set size of view
-    void setSize(float w, float h);
+    void setRectSize(float w, float h);
     // smoothly move camera
     void update(const float& dTimeMs);
     // set target of following

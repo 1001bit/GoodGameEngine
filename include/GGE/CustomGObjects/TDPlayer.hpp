@@ -6,7 +6,6 @@
 class TDPlayer : public KinematicBody
 {
 private:
-    // Methods
     
 public:
     // Structors

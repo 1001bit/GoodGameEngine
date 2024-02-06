@@ -12,7 +12,7 @@ void DialogueManager::initDrawables(std::shared_ptr<GSprite> newDialogueBox, std
     // Dialogue box
     dialogueBoxWeak = newDialogueBox;
     newDialogueBox->setTexture(resourceManager->getTexture("Assets/Textures/dialogueBackground.png"));
-    setDrawableVisible(0);
+    setDrawableVisiblity(0);
     
     // Dialogue text
     dialogueTextWeak = newDialogueText;
@@ -23,16 +23,16 @@ void DialogueManager::initDrawables(std::shared_ptr<GSprite> newDialogueBox, std
 }
 
 // Set all the dialogues list
-void DialogueManager::setDialogues(std::unordered_map<u_char, std::shared_ptr<Dialogue>> newDialogues){
+void DialogueManager::setDialoguesMap(std::unordered_map<u_char, std::shared_ptr<Dialogue>> newDialogues){
     dialogues = newDialogues;
 }
 
 // Set current dialogue with id
-void DialogueManager::setCurrentDialogue(u_char id){
+void DialogueManager::startDialogue(u_char id){
     if(!dialogues.count(id)){
         return;
     }
-    setDrawableVisible(1);
+    setDrawableVisiblity(1);
     currentDialogueWeak = dialogues.at(id);
 }
 
@@ -66,12 +66,12 @@ void DialogueManager::updateCurrentDialogue(std::unordered_map<uint16_t, std::we
     // if empty string (after last line) - stop it
     if(currentDialogue->getCurrentLine().line == ""){
         currentDialogueWeak.reset();
-        setDrawableVisible(0);
+        setDrawableVisiblity(0);
     }
 }
 
 // Hide or show drawable part
-void DialogueManager::setDrawableVisible(bool visible){
+void DialogueManager::setDrawableVisiblity(bool visible){
     if(auto dialogueBox = dialogueBoxWeak.lock()){
         if(visible){
             dialogueBox->setRelativePos({(GAME_WIDTH-(dialogueBox->sprite.getGlobalBounds().width))/2, 600}); // centralize it on X position

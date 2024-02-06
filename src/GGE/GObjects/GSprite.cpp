@@ -2,7 +2,6 @@
 
 // Structors
 GSprite::GSprite(){
-    doesFlipMirror = 1;
     this->sprite.scale(SPRITE_SCALE, SPRITE_SCALE);
 }
 

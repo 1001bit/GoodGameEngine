@@ -35,12 +35,12 @@ public:
     void playAnimation(std::string name);
     // Update the state of current animation
     void update(const float& dTimeMs);
-    // draw self drawable object
+    // draw self sprite
     void drawSelf(sf::RenderWindow& window);
     // Add new animation with name
     void insertAnimation(std::string name, const Animation& animation);
 
     // Getters
-    // Get rect of current animation
+    // Get rect of current animation's frame
     const sf::IntRect& getCurrentFrame();
 };

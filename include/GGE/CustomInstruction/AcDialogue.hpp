@@ -16,7 +16,7 @@ public:
     ~AcDialogue();
 
     // Methods
-    // dialogueId, dialogueManager
+    // set dialogueId, dialogueManager
     void setDialogueParams(u_char newId, DialogueManager* newDialogueManager);
     // start dialogue
     void doAction();

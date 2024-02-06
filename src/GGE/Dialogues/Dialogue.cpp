@@ -2,7 +2,7 @@
 
 // Structors
 Dialogue::Dialogue(){
-    currentLineId = 1;
+    currentDialogueLineId = 1;
 }
 
 Dialogue::~Dialogue(){}
@@ -11,8 +11,8 @@ Dialogue::~Dialogue(){}
 // update the dialogue 
 void Dialogue::update(){
     // restart the dialogue if it may be played again
-    if(currentLineId == 0){
-        currentLineId = 1;
+    if(currentDialogueLineId == 0){
+        currentDialogueLineId = 1;
     }
     control();
 }
@@ -21,9 +21,9 @@ void Dialogue::update(){
 void Dialogue::control(){
     ControlsManager* controlsManager = ControlsManager::getInstance();
     if(controlsManager->isControlPressed("dialogueNext")){
-        currentLineId += 1;
-        if(currentLineId >= linesList.size()){
-            currentLineId = 0;
+        currentDialogueLineId += 1;
+        if(currentDialogueLineId >= linesList.size()){
+            currentDialogueLineId = 0;
         }
     }
 }
@@ -37,5 +37,5 @@ void Dialogue::setLines(std::vector<DialogueLine> newLines){
 // Getters
 // get current line
 const DialogueLine& Dialogue::getCurrentLine(){
-    return linesList[currentLineId];
+    return linesList[currentDialogueLineId];
 }

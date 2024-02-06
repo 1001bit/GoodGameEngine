@@ -74,6 +74,10 @@ void GObject::setFlip(bool newFlip){
     }
 }
 
+void GObject::makeFlippable(){
+    doesFlipMirror = 1;
+}
+
 // Getters
 
 const sf::Vector2f& GObject::getRelativePos(){

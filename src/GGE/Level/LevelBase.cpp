@@ -2,5 +2,4 @@
 
 // Structors
 Level::Level(){}
-
 Level::~Level(){}

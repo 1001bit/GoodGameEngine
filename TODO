@@ -1,11 +1,5 @@
-- Levels
-    - Level editor
-    - Base levels: Menu, Simple Game Level
-
-- Engine release
-
-
-Not necessary:
+Tasks:
+- Level editor
 - Moving solid body
-- Smarter NPCs
 - Koyote effect, jump buffer, smooth edges
+- Smarter NPCs

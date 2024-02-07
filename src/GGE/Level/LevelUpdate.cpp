@@ -3,8 +3,6 @@
 // Methods
 // Update everything in the level
 void Level::update(const float& dTimeMs){
-    dialogueManager.updateCurrentDialogue(levelGObjectsWId, camera);
-
     for(auto it = updatableGObjects.begin(); it != updatableGObjects.end();){
         auto object = it->lock();
         if(!object){
@@ -17,6 +15,11 @@ void Level::update(const float& dTimeMs){
         ++it;
     }
 };
+
+// Update dialogues
+void Level::updateDialogues(){
+    dialogueManager.updateCurrentDialogue(levelGObjectsWId, camera);
+}
 
 // draw drawables
 void Level::drawGObjetcs(sf::RenderWindow& window){

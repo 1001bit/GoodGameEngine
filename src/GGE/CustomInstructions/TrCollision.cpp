@@ -7,6 +7,10 @@ TrCollision::~TrCollision(){}
 // Methods
 
 void TrCollision::checkEvent(){
+    if(!active){
+        return;
+    }
+
     auto body1 = body1Weak.lock();
     auto body2 = body2Weak.lock();
 
@@ -19,6 +23,8 @@ void TrCollision::checkEvent(){
     }
 
     action->doAction();
+
+    active = 0;
 }
 
 void TrCollision::setCollisionBodies(std::shared_ptr<KinematicBody> newBody1, std::shared_ptr<KinematicBody> newBody2){

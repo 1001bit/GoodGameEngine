@@ -25,7 +25,6 @@ void Level::initNecessaryGObjects(){
     dialogueManager.initDrawables(dialogueBox, dialogueText);
 };
 
-// All
 // Init level
 void Level::init(){
     // create layers of drawables
@@ -42,3 +41,19 @@ void Level::init(){
     // init object
     initNecessaryGObjects();
 };
+
+// Remove all the GObjects
+void Level::clear(){
+    children.clear();
+
+    triggersManager.clear();
+    dialogueManager.clear();
+    physicsManager.clear();
+
+    updatableGObjects.clear();
+
+    levelDrawableLayers.clear();
+    guiDrawableLayers.clear();
+
+    levelGObjectsWId.clear();
+}

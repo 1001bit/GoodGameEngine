@@ -24,16 +24,16 @@ void DialogueManager::initDrawables(std::shared_ptr<GSprite> newDialogueBox, std
 
 // Set all the dialogues list
 void DialogueManager::setDialoguesMap(std::unordered_map<u_char, std::shared_ptr<Dialogue>> newDialogues){
-    dialogues = newDialogues;
+    dialoguesMap = newDialogues;
 }
 
 // Set current dialogue with id
 void DialogueManager::startDialogue(u_char id){
-    if(!dialogues.count(id)){
+    if(!dialoguesMap.count(id)){
         return;
     }
     setDrawableVisiblity(1);
-    currentDialogueWeak = dialogues.at(id);
+    currentDialogueWeak = dialoguesMap.at(id);
 }
 
 // Update current dialogue
@@ -79,4 +79,10 @@ void DialogueManager::setDrawableVisiblity(bool visible){
             dialogueBox->setRelativePos({9999, 9999});
         }
     }
+}
+
+// Clear all the dialogues
+void DialogueManager::clear(){
+    dialoguesMap.clear();
+    currentDialogueWeak.reset();
 }

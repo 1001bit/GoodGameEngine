@@ -110,3 +110,9 @@ void PhysicsManager::addNewSolidBody(std::shared_ptr<Body> newBody){
 void PhysicsManager::addNewKinematicBody(std::shared_ptr<KinematicBody> newBody){
     kinematicBodiesWeakVector.push_back(newBody);
 }
+
+// Clear bodies vectors
+void PhysicsManager::clear(){
+    solidBodiesWeakVector.clear();
+    kinematicBodiesWeakVector.clear();
+}

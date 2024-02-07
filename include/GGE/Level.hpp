@@ -37,27 +37,23 @@ public:
     ~Level();
 
     ///////////////////////////
-    // Triggers
+    // Managers
     TriggersManager triggersManager;
+    DialogueManager dialogueManager;
+    PhysicsManager physicsManager;
 
     // Updatable GObjects
     std::vector<std::weak_ptr<GObject>> updatableGObjects;
 
-    // Level GObjects
-    // Physics manager
-    PhysicsManager physicsManager;
-    // Drawable
+    // Drawables
     std::vector< std::vector<std::weak_ptr<GDrawable>> > levelDrawableLayers;
+    std::vector< std::vector<std::weak_ptr<GDrawable>> > guiDrawableLayers;
+
     // With own id
     std::unordered_map<uint16_t, std::weak_ptr<GObject>> levelGObjectsWId;
+
     // Game camera that is following some GObject
     std::shared_ptr<Camera> camera;
-
-    // GUI GObjects
-    // Layers of drawables
-    std::vector< std::vector<std::weak_ptr<GDrawable>> > guiDrawableLayers;
-    // Dialogue manager
-    DialogueManager dialogueManager;
     ///////////////////////////
 
     // Methods
@@ -65,9 +61,13 @@ public:
     void init();
     // Load level from file
     void loadFromFile(const sf::String& fileName);
+    // Remove all the GObjects
+    void clear();
 
     // Update states of all the objects
     void update(const float& dTimeMs);
+    // Update dialogues duh
+    void updateDialogues();
     // Draw drawable objects
     void drawGObjetcs(sf::RenderWindow& window);
 };

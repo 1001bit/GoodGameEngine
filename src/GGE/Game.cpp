@@ -41,7 +41,7 @@ void Game::loop(sf::RenderWindow& window){
         std::cout << "dTime (ms): " << dTimeMs << " ; \t\t" << " FPS: " << 1000/dTimeMs << "\n";
         #endif
 
-        // Events
+        // Events and controls
         controlsManager->clearPressed();
 
         sf::Event event;
@@ -67,8 +67,11 @@ void Game::loop(sf::RenderWindow& window){
         // Triggers
         currentLevel->triggersManager.update();
 
-        // GObjects update
+        // GObjects that are level's children
         currentLevel->update(dTimeMs);
+
+        // Dialogues
+        currentLevel->updateDialogues();
 
         // Draw
         window.clear();

@@ -40,3 +40,9 @@ sf::Font& ResourceManager::getFont(const std::string& path){
     
     return fontCache.at(path);
 };
+
+// Clear cache
+void ResourceManager::clear(){
+    textureCache.clear();
+    fontCache.clear();
+}

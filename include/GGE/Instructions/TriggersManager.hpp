@@ -18,6 +18,4 @@ public:
     void update();
     // Add new trigger
     void addNewTrigger(std::shared_ptr<Trigger> newTrigger);
-    // Remove all the triggers
-    void clear();
 };

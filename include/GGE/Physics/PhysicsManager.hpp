@@ -44,7 +44,4 @@ public:
     void addNewSolidBody(std::shared_ptr<Body> newBody);
     // Add new body to the kinematics vector
     void addNewKinematicBody(std::shared_ptr<KinematicBody> newBody);
-
-    // Clear bodies vectors
-    void clear();
 };

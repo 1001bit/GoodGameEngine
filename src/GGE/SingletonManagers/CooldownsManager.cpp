@@ -29,3 +29,8 @@ std::shared_ptr<Cooldown> CooldownsManager::newCooldown(Cooldown cooldown){
     cooldownsWeakVector.push_back(newCooldown);
     return newCooldown;
 };
+
+// clean cooldowns vector
+void CooldownsManager::clear(){
+    cooldownsWeakVector.clear();
+}

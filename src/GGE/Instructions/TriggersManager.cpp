@@ -16,8 +16,3 @@ void TriggersManager::update(){
 void TriggersManager::addNewTrigger(std::shared_ptr<Trigger> newTrigger){
     triggersVector.push_back(newTrigger);
 }
-
-// Remove all the triggers
-void TriggersManager::clear(){
-    triggersVector.clear();
-}

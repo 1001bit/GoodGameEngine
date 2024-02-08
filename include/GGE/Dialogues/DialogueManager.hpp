@@ -39,7 +39,4 @@ public:
     void startDialogue(u_char id);
     // Hide or show drawable part
     void setDrawableVisiblity(bool visible);
-
-    // Clear all the dialogues
-    void clear();
 };

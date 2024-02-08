@@ -61,8 +61,6 @@ public:
     void init();
     // Load level from file
     void loadFromFile(const sf::String& fileName);
-    // Remove all the GObjects
-    void clear();
 
     // Update states of all the objects
     void update(const float& dTimeMs);

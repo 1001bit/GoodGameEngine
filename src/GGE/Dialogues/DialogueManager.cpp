@@ -80,9 +80,3 @@ void DialogueManager::setDrawableVisiblity(bool visible){
         }
     }
 }
-
-// Clear all the dialogues
-void DialogueManager::clear(){
-    dialoguesMap.clear();
-    currentDialogueWeak.reset();
-}

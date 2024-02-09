@@ -1,4 +1,4 @@
-#include "GGE/CustomInstruction/TrCollision.hpp"
+#include "GGE/CustomInstructions/TrCollision.hpp"
 
 // Structors
 TrCollision::TrCollision(){}

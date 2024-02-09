@@ -27,9 +27,6 @@ class Level : public GObject
 private:
     // Gui
     sf::View guiView;
-
-    // Data init patterns
-    void initNecessaryGObjects();
     
 public:
     // Structors
@@ -59,8 +56,6 @@ public:
     // Methods
     // Init level
     void init();
-    // Load level from file
-    void loadFromFile(const sf::String& fileName);
 
     // Update states of all the objects
     void update(const float& dTimeMs);

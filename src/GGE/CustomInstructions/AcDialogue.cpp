@@ -1,4 +1,4 @@
-#include "GGE/CustomInstruction/AcDialogue.hpp"
+#include "GGE/CustomInstructions/AcDialogue.hpp"
 
 // Structors
 AcDialogue::AcDialogue(){}

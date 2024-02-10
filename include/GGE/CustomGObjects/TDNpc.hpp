@@ -13,9 +13,6 @@ public:
     TDNpc();
     ~TDNpc();
 
-    // Variables
-    gge::NpcType npcType;
-
     // Methods
     // npc movement
     void control();

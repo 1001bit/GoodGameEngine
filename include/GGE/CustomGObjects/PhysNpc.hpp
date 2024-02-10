@@ -13,9 +13,6 @@ public:
     PhysNpc();
     ~PhysNpc();
 
-    // Variables
-    gge::NpcType npcType;
-
     // Methods
     // npc movement
     void control();

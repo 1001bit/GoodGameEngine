@@ -6,7 +6,6 @@ constexpr unsigned MOVEMENT_RAND = 500;
 
 // Structors
 PhysNpc::PhysNpc(){
-    this->npcType = gge::NpcType::Walking;
     this->movementDir = Direction::None;
 
     this->weighs = 1;

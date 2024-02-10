@@ -10,6 +10,8 @@
 
 typedef std::unordered_map<std::string, Animation> anim_map;
 
+namespace gge {
+
 class AnimatedSprite : public GDrawable {
 
 private:
@@ -44,3 +46,5 @@ public:
     // Get rect of current animation's frame
     const sf::IntRect& getCurrentFrame();
 };
+
+}

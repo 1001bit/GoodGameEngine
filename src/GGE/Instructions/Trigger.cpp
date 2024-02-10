@@ -1,5 +1,7 @@
 #include "GGE/Instructions/Trigger.hpp"
 
+using gge::Trigger;
+
 // Structors
 Trigger::Trigger(){
     active = 1;

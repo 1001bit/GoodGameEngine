@@ -2,7 +2,7 @@
 
 #include "GGE/GObjects/KinematicBody.hpp"
 
-class PhysNpc : public KinematicBody
+class PhysNpc : public gge::KinematicBody
 {
 private:
     // Variables
@@ -14,7 +14,7 @@ public:
     ~PhysNpc();
 
     // Variables
-    NpcType npcType;
+    gge::NpcType npcType;
 
     // Methods
     // npc movement

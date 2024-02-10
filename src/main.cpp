@@ -3,7 +3,7 @@
 #include "CustomLevels/inits.hpp"
 
 void initControls(){
-    ControlsManager* controlsManager = ControlsManager::getInstance();
+    gge::ControlsManager* controlsManager = gge::ControlsManager::getInstance();
     // Keyboard controls
     controlsManager->setKeyboardControlsMap({
         {"wLeft", sf::Keyboard::A},
@@ -23,16 +23,16 @@ int main()
     srand(time(NULL));
 
     // init window
-    sf::RenderWindow window(sf::VideoMode(GAME_WIDTH, GAME_HEIGHT), "GoodGame test", sf::Style::Close);
-    window.setFramerateLimit(MAX_FPS);
+    sf::RenderWindow window(sf::VideoMode(gge::GAME_WIDTH, gge::GAME_HEIGHT), "GoodGame test", sf::Style::Close);
+    window.setFramerateLimit(gge::MAX_FPS);
 
     // init the game
-    std::shared_ptr<Game> game = std::make_shared<Game>();
+    std::shared_ptr<gge::Game> game = std::make_shared<gge::Game>();
     game->init();
     initControls();
 
     // init levels
-    std::shared_ptr<Level> level = game->currentLevel;
+    std::shared_ptr<gge::Level> level = game->currentLevel;
     necessaryInit(level);
     testInit(level);
 

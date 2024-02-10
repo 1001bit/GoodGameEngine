@@ -1,5 +1,7 @@
 #include "GGE/Level.hpp"
 
+using gge::Level;
+
 // Init level
 void Level::init(){
     // create layers of drawables

@@ -8,6 +8,8 @@
 #include "GGE/SingletonManagers/ResourceManager.hpp"
 #include "GGE/GameConstants.hpp"
 
+namespace gge {
+
 class DialogueManager
 {
 private:
@@ -40,3 +42,5 @@ public:
     // Hide or show drawable part
     void setDrawableVisiblity(bool visible);
 };
+
+}

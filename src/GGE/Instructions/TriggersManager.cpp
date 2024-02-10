@@ -1,5 +1,7 @@
 #include "GGE/Instructions/TriggersManager.hpp"
 
+using gge::TriggersManager;
+
 // Structors
 TriggersManager::TriggersManager(){}
 TriggersManager::~TriggersManager(){}

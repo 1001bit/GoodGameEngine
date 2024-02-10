@@ -1,5 +1,7 @@
 #include "GGE/Dialogues/DialogueManager.hpp"
 
+using gge::DialogueManager;
+
 // Structors
 DialogueManager::DialogueManager(){}
 DialogueManager::~DialogueManager(){}

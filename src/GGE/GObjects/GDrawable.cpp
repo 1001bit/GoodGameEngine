@@ -1,5 +1,7 @@
 #include "GGE/GObjects/GDrawable.hpp"
 
+using gge::GDrawable;
+
 // Structors
 GDrawable::GDrawable(){}
 

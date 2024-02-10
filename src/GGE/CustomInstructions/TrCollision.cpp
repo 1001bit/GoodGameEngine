@@ -27,7 +27,7 @@ void TrCollision::checkEvent(){
     active = 0;
 }
 
-void TrCollision::setCollisionBodies(std::shared_ptr<KinematicBody> newBody1, std::shared_ptr<KinematicBody> newBody2){
+void TrCollision::setCollisionBodies(std::shared_ptr<gge::KinematicBody> newBody1, std::shared_ptr<gge::KinematicBody> newBody2){
     body1Weak = newBody1;
     body2Weak = newBody2;
 }

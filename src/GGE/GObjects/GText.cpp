@@ -1,5 +1,7 @@
 #include "GGE/GObjects/GText.hpp"
 
+using gge::GText;
+
 // Structors
 GText::GText(){}
 

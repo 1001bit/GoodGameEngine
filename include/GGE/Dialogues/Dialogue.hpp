@@ -3,6 +3,8 @@
 #include <memory>
 #include "GGE/GObjects/GObject.hpp"
 
+namespace gge {
+
 struct DialogueLine {
     int16_t characterId;
     std::string line;
@@ -38,3 +40,5 @@ public:
     // Get current line from number
     const DialogueLine& getCurrentLine();
 };
+
+}

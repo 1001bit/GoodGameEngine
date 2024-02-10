@@ -2,6 +2,8 @@
 
 #include "GObject.hpp"
 
+namespace gge {
+
 class Body : public GObject
 {
 protected:
@@ -17,3 +19,4 @@ public:
     const bool& isCollidable();
 };
 
+}

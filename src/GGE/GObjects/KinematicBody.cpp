@@ -1,5 +1,7 @@
 #include "GGE/GObjects/KinematicBody.hpp"
 
+using gge::KinematicBody;
+
 // Structors
 KinematicBody::KinematicBody(){
     weighs = 0;

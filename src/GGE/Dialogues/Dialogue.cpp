@@ -1,5 +1,7 @@
 #include "GGE/Dialogues/Dialogue.hpp"
 
+using gge::Dialogue;
+
 // Structors
 Dialogue::Dialogue(){
     currentDialogueLineId = 1;
@@ -36,6 +38,6 @@ void Dialogue::setLines(std::vector<DialogueLine> newLines){
 
 // Getters
 // get current line
-const DialogueLine& Dialogue::getCurrentLine(){
+const gge::DialogueLine& Dialogue::getCurrentLine(){
     return linesList[currentDialogueLineId];
 }

@@ -6,15 +6,15 @@ constexpr unsigned MOVEMENT_RAND = 500;
 
 // Structors
 PhysNpc::PhysNpc(){
-    this->npcType = NpcType::Walking;
+    this->npcType = gge::NpcType::Walking;
     this->movementDir = Direction::None;
 
     this->weighs = 1;
     this->collidable = 1;
 
-    CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
-    selfCooldownMap["idle"] = cooldownsManager->newCooldown(Cooldown(2000));
-    selfCooldownMap["walk"] = cooldownsManager->newCooldown(Cooldown(3000));
+    gge::CooldownsManager* cooldownsManager = gge::CooldownsManager::getInstance();
+    selfCooldownMap["idle"] = cooldownsManager->newCooldown(gge::Cooldown(2000));
+    selfCooldownMap["walk"] = cooldownsManager->newCooldown(gge::Cooldown(3000));
     selfCooldownMap.at("idle")->start(500);
 }
 

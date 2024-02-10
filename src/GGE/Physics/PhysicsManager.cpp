@@ -1,5 +1,7 @@
 #include "GGE/Physics/PhysicsManager.hpp"
 
+using gge::PhysicsManager;
+
 constexpr float GFORCE = 0.08;
 constexpr float AIR_FRICTION = 0.015;
 constexpr float GROUND_FRICTION = 0.3;

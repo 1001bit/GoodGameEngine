@@ -3,6 +3,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+namespace gge {
+
 class ResourceManager
 {
 private:
@@ -31,3 +33,5 @@ public:
     // Singleton
     static ResourceManager* getInstance();
 };
+
+}

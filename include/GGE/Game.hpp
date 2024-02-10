@@ -3,6 +3,8 @@
 #include "GGE/Level.hpp"
 #include "GGE/GameConstants.hpp"
 
+namespace gge {
+
 class Game
 {
 private:
@@ -25,3 +27,5 @@ public:
     // pointer to the level
     std::shared_ptr<Level> currentLevel;
 };
+
+}

@@ -5,6 +5,8 @@
 #include <memory>
 #include "Cooldown.hpp"
 
+namespace gge {
+
 class CooldownsManager
 {
 private:
@@ -28,3 +30,5 @@ public:
     // Singleton
     static CooldownsManager* getInstance();
 };
+
+}

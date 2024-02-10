@@ -15,7 +15,7 @@ PhysPlayer::~PhysPlayer(){}
 // Methods
 // control the player
 void PhysPlayer::control(){
-    ControlsManager* controlsManager = ControlsManager::getInstance();
+    gge::ControlsManager* controlsManager = gge::ControlsManager::getInstance();
 
     float walkSpeed = WALK_SPEED;
 

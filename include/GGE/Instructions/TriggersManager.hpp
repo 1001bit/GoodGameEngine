@@ -3,6 +3,8 @@
 #include <vector>
 #include "GGE/Instructions/Trigger.hpp"
 
+namespace gge {
+
 class TriggersManager
 {
 private:
@@ -19,3 +21,5 @@ public:
     // Add new trigger
     void addNewTrigger(std::shared_ptr<Trigger> newTrigger);
 };
+
+}

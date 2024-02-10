@@ -1,5 +1,7 @@
 #include "GGE/GObjects/GSprite.hpp"
 
+using gge::GSprite;
+
 // Structors
 GSprite::GSprite(){
     this->sprite.scale(SPRITE_SCALE, SPRITE_SCALE);

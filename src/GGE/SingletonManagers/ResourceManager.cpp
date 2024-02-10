@@ -1,5 +1,7 @@
 #include "GGE/SingletonManagers/ResourceManager.hpp"
 
+using gge::ResourceManager;
+
 // Singleton
 ResourceManager* ResourceManager::instance = nullptr;
 ResourceManager* ResourceManager::getInstance(){

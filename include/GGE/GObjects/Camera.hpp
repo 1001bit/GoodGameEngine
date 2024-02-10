@@ -3,6 +3,8 @@
 #include "GObject.hpp"
 #include <GGE/MathHelper.hpp>
 
+namespace gge {
+
 class Camera : public GObject
 {
 private:
@@ -27,3 +29,5 @@ public:
     // get view
     const sf::View& getView();
 };
+
+}

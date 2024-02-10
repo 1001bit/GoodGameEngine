@@ -4,6 +4,8 @@
 #include "GGE/GObjects/KinematicBody.hpp"
 #include "GGE/MathHelper.hpp"
 
+namespace gge {
+
 class PhysicsManager
 {
 private:
@@ -45,3 +47,5 @@ public:
     // Add new body to the kinematics vector
     void addNewKinematicBody(std::shared_ptr<KinematicBody> newBody);
 };
+
+}

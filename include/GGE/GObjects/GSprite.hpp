@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "GDrawable.hpp"
 
+namespace gge {
+
 class GSprite : public GDrawable
 {
 private:
@@ -26,3 +28,5 @@ public:
     // set the flip of the object
     void setFlip(bool newFlip);
 };
+
+}

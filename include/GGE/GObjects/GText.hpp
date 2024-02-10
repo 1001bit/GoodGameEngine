@@ -2,6 +2,8 @@
 
 #include "GDrawable.hpp"
 
+namespace gge {
+
 class GText : public GDrawable
 {
 private:
@@ -21,3 +23,5 @@ public:
     // draw self text
     void drawSelf(sf::RenderWindow& window);
 };
+
+}

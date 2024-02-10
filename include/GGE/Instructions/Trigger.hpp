@@ -3,6 +3,8 @@
 #include "GGE/GObjects/GObject.hpp"
 #include "GGE/Instructions/Action.hpp"
 
+namespace gge {
+
 class Trigger
 {
 private:
@@ -23,3 +25,5 @@ public:
     // set new action
     void setAction(std::shared_ptr<Action> newAction);
 };
+
+}

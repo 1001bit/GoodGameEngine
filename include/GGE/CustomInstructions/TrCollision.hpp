@@ -5,12 +5,12 @@
 #include "GGE/Dialogues/DialogueManager.hpp"
 
 // Some random trigger
-class TrCollision : public Trigger
+class TrCollision : public gge::Trigger
 {
 private:
     // Variables
-    std::weak_ptr<KinematicBody> body1Weak;
-    std::weak_ptr<KinematicBody> body2Weak;
+    std::weak_ptr<gge::KinematicBody> body1Weak;
+    std::weak_ptr<gge::KinematicBody> body2Weak;
 
 public:
     // Structors
@@ -21,5 +21,5 @@ public:
     // checks if some bodies collided
     void checkEvent();
     // Set 2 bodies
-    void setCollisionBodies(std::shared_ptr<KinematicBody> newBody1, std::shared_ptr<KinematicBody> newBody2);
+    void setCollisionBodies(std::shared_ptr<gge::KinematicBody> newBody1, std::shared_ptr<gge::KinematicBody> newBody2);
 };

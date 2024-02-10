@@ -1,5 +1,7 @@
 #pragma once
 
+namespace gge {
+
 class Action
 {
 private:
@@ -12,3 +14,5 @@ public:
     // Do action of trigger if event has happened
     virtual void doAction();
 };
+
+}

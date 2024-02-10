@@ -13,6 +13,7 @@ enum class Direction {
     None, Up, Down, Right, Left
 };
 
+namespace gge {
 
 // GObject class
 class GObject : public std::enable_shared_from_this<GObject>
@@ -72,3 +73,5 @@ public:
     // get flipped
     const bool& isFlipped();
 };
+
+}

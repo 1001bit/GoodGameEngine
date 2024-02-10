@@ -1,5 +1,7 @@
 #include "GGE/SingletonManagers/Cooldown.hpp"
 
+using gge::Cooldown;
+
 // Structors
 Cooldown::Cooldown(float newStartValueMs){
     this->currentValueMs = 0;

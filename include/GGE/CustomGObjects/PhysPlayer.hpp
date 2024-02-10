@@ -2,7 +2,7 @@
 
 #include "GGE/GObjects/KinematicBody.hpp"
 
-class PhysPlayer : public KinematicBody
+class PhysPlayer : public gge::KinematicBody
 {
 private:
 

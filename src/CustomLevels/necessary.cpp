@@ -1,5 +1,7 @@
 #include "inits.hpp"
 
+using namespace gge;
+
 void necessaryInit(std::shared_ptr<Level> level){
     ResourceManager* resourceManager = ResourceManager::getInstance();
 

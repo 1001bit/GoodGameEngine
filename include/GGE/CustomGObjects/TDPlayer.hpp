@@ -3,7 +3,7 @@
 #include "GGE/GObjects/KinematicBody.hpp"
 
 // Top-Down player
-class TDPlayer : public KinematicBody
+class TDPlayer : public gge::KinematicBody
 {
 private:
     

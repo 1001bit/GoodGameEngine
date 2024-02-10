@@ -1,5 +1,7 @@
 #include "GGE/GObjects/Body.hpp"
 
+using gge::Body;
+
 // Structors
 Body::Body(){
     collidable = 1;

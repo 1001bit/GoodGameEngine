@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cstdlib>
 
+namespace gge {
+
 class Cooldown
 {
 private:
@@ -25,3 +27,5 @@ public:
     // get currentValueMs
     const float& getCurrentValueMs();
 };
+
+}

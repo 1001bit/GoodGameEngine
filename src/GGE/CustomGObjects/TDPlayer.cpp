@@ -13,7 +13,7 @@ TDPlayer::~TDPlayer(){}
 // Methods
 // control
 void TDPlayer::control(){
-    ControlsManager* controlsManager = ControlsManager::getInstance();
+    gge::ControlsManager* controlsManager = gge::ControlsManager::getInstance();
 
     // walk left
     if(controlsManager->isControlHeld("wLeft")){

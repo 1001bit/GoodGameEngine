@@ -1,5 +1,7 @@
 #include "GGE/GObjects/AnimatedSprite.hpp"
 
+using gge::AnimatedSprite;
+
 // Structors
 AnimatedSprite::AnimatedSprite() {
     this->sprite.scale(SPRITE_SCALE, SPRITE_SCALE);

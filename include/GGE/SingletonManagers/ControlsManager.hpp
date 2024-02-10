@@ -3,6 +3,8 @@
 #include "SFML/Graphics.hpp"
 #include <unordered_set>
 
+namespace gge {
+
 class ControlsManager
 {
 private:
@@ -55,3 +57,5 @@ public:
     // Singleton
     static ControlsManager* getInstance();
 };
+
+}

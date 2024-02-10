@@ -1,5 +1,7 @@
 #include "GGE/GObjects/GObject.hpp"
 
+using gge::GObject;
+
 // Structors
 GObject::GObject(){
     this->flipped = 0;

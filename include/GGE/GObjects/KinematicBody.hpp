@@ -2,6 +2,8 @@
 
 #include "Body.hpp"
 
+namespace gge {
+
 enum class NpcType {
     Walking, // just walking around
     Neutral, // just walking around but fights back
@@ -51,3 +53,5 @@ public:
     KinematicBody();
     ~KinematicBody();
 };
+
+}

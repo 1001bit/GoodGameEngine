@@ -1,5 +1,7 @@
 #include "GGE/Level.hpp"
 
+using gge::Level;
+
 // Methods
 // Update everything in the level
 void Level::update(const float& dTimeMs){

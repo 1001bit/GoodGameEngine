@@ -1,5 +1,7 @@
 #include "GGE/Level.hpp"
 
+using gge::Level;
+
 // Structors
 Level::Level(){}
 Level::~Level(){

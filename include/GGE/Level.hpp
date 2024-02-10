@@ -22,6 +22,8 @@
 
 // #define DRAWCOLLIDER
 
+namespace gge {
+
 class Level : public GObject
 {
 private:
@@ -64,3 +66,5 @@ public:
     // Draw drawable objects
     void drawGObjetcs(sf::RenderWindow& window);
 };
+
+}

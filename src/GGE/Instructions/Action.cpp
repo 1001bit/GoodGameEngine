@@ -1,5 +1,7 @@
 #include "GGE/Instructions/Action.hpp"
 
+using gge::Action;
+
 // Structors
 Action::Action(){}
 Action::~Action(){}

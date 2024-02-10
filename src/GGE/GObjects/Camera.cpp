@@ -1,5 +1,7 @@
 #include "GGE/GObjects/Camera.hpp"
 
+using gge::Camera;
+
 constexpr float FACTOR = 0.98;
 
 // Structors

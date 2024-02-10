@@ -1,5 +1,7 @@
 #include "GGE/SingletonManagers/ControlsManager.hpp"
 
+using gge::ControlsManager;
+
 // Singleton
 ControlsManager* ControlsManager::instance = nullptr;
 ControlsManager* ControlsManager::getInstance(){

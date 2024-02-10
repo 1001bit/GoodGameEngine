@@ -10,7 +10,7 @@ void AcDialogue::doAction(){
     dialogueManager->startDialogue(dialogueId);
 }
 
-void AcDialogue::setDialogueParams(u_char newId, DialogueManager* newDialogueManager){
+void AcDialogue::setDialogueParams(u_char newId, gge::DialogueManager* newDialogueManager){
     dialogueId = newId;
     dialogueManager = newDialogueManager;
 }

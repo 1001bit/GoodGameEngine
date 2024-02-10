@@ -1,5 +1,7 @@
 #include "GGE/Game.hpp"
 
+using gge::Game;
+
 // Structors
 Game::Game(){}
 

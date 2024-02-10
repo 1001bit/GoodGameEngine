@@ -2,6 +2,8 @@
 
 #include "GObject.hpp"
 
+namespace gge {
+
 class GDrawable : public GObject
 {
 private:
@@ -15,3 +17,5 @@ public:
     // draw self drawable object
     virtual void drawSelf(sf::RenderWindow& window);
 };
+
+}

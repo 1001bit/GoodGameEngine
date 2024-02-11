@@ -1,21 +1,21 @@
-#include "GGE/GObjects/GText.hpp"
+#include "GGE/GObjects/Text.hpp"
 
-using gge::GText;
+using gge::obj::Text;
 
 // Structors
-GText::GText(){}
+Text::Text(){}
 
-GText::~GText(){}
+Text::~Text(){}
 
 // Methods
 // Update text and gobject position
-void GText::updatePos(){
+void Text::updatePos(){
     GObject::updatePos();
 
     text.setPosition(getRect().getPosition());
 }; 
 
 // draw self text
-void GText::drawSelf(sf::RenderWindow& window){
+void Text::drawSelf(sf::RenderWindow& window){
     window.draw(text);
 };

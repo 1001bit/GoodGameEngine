@@ -11,24 +11,24 @@ class PhysicsManager
 private:
     // Variables
     // Bodies vector
-    std::vector<std::weak_ptr<Body>> solidBodiesWeakVector;
+    std::vector<std::weak_ptr<obj::Body>> solidBodiesWeakVector;
     // Kinematic bodies vector
-    std::vector<std::weak_ptr<KinematicBody>> kinematicBodiesWeakVector;
+    std::vector<std::weak_ptr<obj::KinematicBody>> kinematicBodiesWeakVector;
 
     // Methods
     // Manage collisions of all the bodies with each others
-    void applyCollisions(std::shared_ptr<KinematicBody> kinematicBody); 
+    void applyCollisions(std::shared_ptr<obj::KinematicBody> kinematicBody); 
 
     // Apply gravity on all weigh objects
-    void applyGravityToAccel(std::shared_ptr<KinematicBody> kinematicBody, const float& dTimeMs);
+    void applyGravityToAccel(std::shared_ptr<obj::KinematicBody> kinematicBody, const float& dTimeMs);
     
     // Apply the acceleration to the velocity
-    void applyAccelerationToVel(std::shared_ptr<KinematicBody> kinematicBody, const float& dTimeMs);
+    void applyAccelerationToVel(std::shared_ptr<obj::KinematicBody> kinematicBody, const float& dTimeMs);
     // Apply the friction so body doesn't move for eternity
-    void applyFrictionToVel(std::shared_ptr<KinematicBody> kinematicBody);
+    void applyFrictionToVel(std::shared_ptr<obj::KinematicBody> kinematicBody);
 
     // Apply the velocities of the bodies
-    void applyVelocityToPos(std::shared_ptr<KinematicBody> kinematicBody);
+    void applyVelocityToPos(std::shared_ptr<obj::KinematicBody> kinematicBody);
     
 public:
     // Structors
@@ -43,9 +43,9 @@ public:
     void interpolateKinematics(float alpha);
 
     // Add new body to the solids vector
-    void addNewSolidBody(std::shared_ptr<Body> newBody);
+    void addNewSolidBody(std::shared_ptr<obj::Body> newBody);
     // Add new body to the kinematics vector
-    void addNewKinematicBody(std::shared_ptr<KinematicBody> newBody);
+    void addNewKinematicBody(std::shared_ptr<obj::KinematicBody> newBody);
 };
 
 }

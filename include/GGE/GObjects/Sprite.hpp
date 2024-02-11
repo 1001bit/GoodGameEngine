@@ -1,11 +1,11 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "GDrawable.hpp"
+#include "Drawable.hpp"
 
-namespace gge {
+namespace gge::obj {
 
-class GSprite : public GDrawable
+class Sprite : public Drawable
 {
 private:
     // Methods
@@ -14,8 +14,8 @@ private:
 
 public:
     // Structors
-    GSprite();
-    ~GSprite();
+    Sprite();
+    ~Sprite();
 
     // Variables
     sf::Sprite sprite;

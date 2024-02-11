@@ -1,23 +1,23 @@
-#include "GGE/GObjects/GSprite.hpp"
+#include "GGE/GObjects/Sprite.hpp"
 
-using gge::GSprite;
+using gge::obj::Sprite;
 
 // Structors
-GSprite::GSprite(){
+Sprite::Sprite(){
     this->sprite.scale(SPRITE_SCALE, SPRITE_SCALE);
 }
 
-GSprite::~GSprite(){}
+Sprite::~Sprite(){}
 
 // Methods
 // set a texture
-void GSprite::setTexture(const sf::Texture& newTexture){
+void Sprite::setTexture(const sf::Texture& newTexture){
     sprite.setTexture(newTexture);
     setRectSize(sprite.getGlobalBounds().getSize().x, sprite.getGlobalBounds().getSize().y);
 }
 
 // set the flip of the object
-void GSprite::setFlip(bool newFlip){
+void Sprite::setFlip(bool newFlip){
     const int textureWidth = sprite.getTexture()->getSize().x;
     const int textureHeight = sprite.getTexture()->getSize().y;
 
@@ -31,12 +31,12 @@ void GSprite::setFlip(bool newFlip){
 };
 
 // Update sprite and gobject pos
-void GSprite::updatePos(){
+void Sprite::updatePos(){
     GObject::updatePos();
     sprite.setPosition(getRect().getPosition());
 } 
 
 // draw self drawable object
-void GSprite::drawSelf(sf::RenderWindow& window){
+void Sprite::drawSelf(sf::RenderWindow& window){
     window.draw(sprite);
 };

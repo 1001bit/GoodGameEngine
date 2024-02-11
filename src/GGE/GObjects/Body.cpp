@@ -1,6 +1,6 @@
 #include "GGE/GObjects/Body.hpp"
 
-using gge::Body;
+using gge::obj::Body;
 
 // Structors
 Body::Body(){

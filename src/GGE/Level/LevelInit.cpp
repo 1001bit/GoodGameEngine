@@ -7,8 +7,8 @@ void Level::init(){
     // create layers of drawables
     const int layersCount = 10;
     for(int i = 0; i < layersCount; ++i){
-        levelDrawableLayers.push_back(std::vector<std::weak_ptr<GDrawable>>());
-        guiDrawableLayers.push_back(std::vector<std::weak_ptr<GDrawable>>());
+        levelDrawableLayers.push_back(std::vector<std::weak_ptr<obj::Drawable>>());
+        guiDrawableLayers.push_back(std::vector<std::weak_ptr<obj::Drawable>>());
     }
 
     // init gui view

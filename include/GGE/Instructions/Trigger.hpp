@@ -3,7 +3,7 @@
 #include "GGE/GObjects/GObject.hpp"
 #include "GGE/Instructions/Action.hpp"
 
-namespace gge {
+namespace gge::ins {
 
 class Trigger
 {

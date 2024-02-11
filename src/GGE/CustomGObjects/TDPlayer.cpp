@@ -1,5 +1,7 @@
 #include "GGE/CustomGObjects/TDPlayer.hpp"
 
+using gge::obj::TDPlayer;
+
 constexpr float WALK_SPEED = 15;
 
 // Structors

@@ -15,6 +15,6 @@ void TriggersManager::update(){
 }
 
 // Add new trigger
-void TriggersManager::addNewTrigger(std::shared_ptr<Trigger> newTrigger){
+void TriggersManager::addNewTrigger(std::shared_ptr<gge::ins::Trigger> newTrigger){
     triggersVector.push_back(newTrigger);
 }

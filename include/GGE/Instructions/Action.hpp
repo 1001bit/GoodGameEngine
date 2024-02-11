@@ -1,6 +1,6 @@
 #pragma once
 
-namespace gge {
+namespace gge::ins {
 
 class Action
 {

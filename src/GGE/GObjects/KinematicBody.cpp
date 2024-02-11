@@ -1,6 +1,6 @@
 #include "GGE/GObjects/KinematicBody.hpp"
 
-using gge::KinematicBody;
+using gge::obj::KinematicBody;
 
 // Structors
 KinematicBody::KinematicBody(){

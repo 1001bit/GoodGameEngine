@@ -2,7 +2,9 @@
 
 #include "GGE/GObjects/KinematicBody.hpp"
 
-class TDNpc : public gge::KinematicBody
+namespace gge::obj {
+
+class TDNpc : public KinematicBody
 {
 private:
     // Variables
@@ -17,3 +19,5 @@ public:
     // npc movement
     void control();
 };
+
+}

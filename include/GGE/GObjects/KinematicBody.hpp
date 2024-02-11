@@ -2,17 +2,18 @@
 
 #include "Body.hpp"
 
-namespace gge {
+namespace gge{
+    struct CollisionDirection {
+        Direction vertical;
+        Direction horizontal;
+    };  
+}
 
-struct CollisionDirection {
-    Direction vertical;
-    Direction horizontal;
-};
+namespace gge::obj {
 
 class KinematicBody : public Body
 {
 private:
-
 
 protected:
     // Variables

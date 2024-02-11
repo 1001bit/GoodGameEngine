@@ -8,7 +8,7 @@ namespace gge {
 class TriggersManager
 {
 private:
-    std::vector<std::shared_ptr<Trigger>> triggersVector;
+    std::vector<std::shared_ptr<ins::Trigger>> triggersVector;
 
 public:
     // Structors
@@ -19,7 +19,7 @@ public:
     // Check all the triggers if their event has happened
     void update();
     // Add new trigger
-    void addNewTrigger(std::shared_ptr<Trigger> newTrigger);
+    void addNewTrigger(std::shared_ptr<ins::Trigger> newTrigger);
 };
 
 }

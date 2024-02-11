@@ -2,7 +2,7 @@
 
 #include "GObject.hpp"
 
-namespace gge {
+namespace gge::obj {
 
 class Body : public GObject
 {

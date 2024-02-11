@@ -45,18 +45,18 @@ void PhysicsManager::updatePhysics(const float& dTimeMs){
 };
 
 // Apply gravity on all weigh objects
-void PhysicsManager::applyGravityToAccel(std::shared_ptr<KinematicBody> kinematicBody, const float& dTimeMs){
+void PhysicsManager::applyGravityToAccel(std::shared_ptr<obj::KinematicBody> kinematicBody, const float& dTimeMs){
     kinematicBody->accelerate(0, GFORCE * dTimeMs);
 };
 
 // Apply the acceleration to the velocity
-void PhysicsManager::applyAccelerationToVel(std::shared_ptr<KinematicBody> kinematicBody, const float& dTimeMs){
+void PhysicsManager::applyAccelerationToVel(std::shared_ptr<obj::KinematicBody> kinematicBody, const float& dTimeMs){
     kinematicBody->velocity += kinematicBody->acceleration * dTimeMs * ACCEL_COEFF;
     kinematicBody->acceleration = sf::Vector2f();
 };
 
 // Apply the friction so body doesn't move for eternity
-void PhysicsManager::applyFrictionToVel(std::shared_ptr<KinematicBody> kinematicBody){
+void PhysicsManager::applyFrictionToVel(std::shared_ptr<obj::KinematicBody> kinematicBody){
     if(kinematicBody->doesWeigh()){
         // ground friction if platformer body is on ground
         if(kinematicBody->collisionDir.vertical == Direction::Down){
@@ -75,7 +75,7 @@ void PhysicsManager::applyFrictionToVel(std::shared_ptr<KinematicBody> kinematic
 }
 
 // Apply the velocities of the bodies
-void PhysicsManager::applyVelocityToPos(std::shared_ptr<KinematicBody> kinematicBody){
+void PhysicsManager::applyVelocityToPos(std::shared_ptr<obj::KinematicBody> kinematicBody){
     kinematicBody->moveCurrentRect(kinematicBody->velocity);
 };
 
@@ -104,11 +104,11 @@ void PhysicsManager::interpolateKinematics(float alpha){
 //////////////////////////////////////////////
 
 // Add new body to the vector of solid bodies
-void PhysicsManager::addNewSolidBody(std::shared_ptr<Body> newBody){
+void PhysicsManager::addNewSolidBody(std::shared_ptr<obj::Body> newBody){
     solidBodiesWeakVector.push_back(newBody);
 }
 
 // Add new body to the vector of kinematic bodies
-void PhysicsManager::addNewKinematicBody(std::shared_ptr<KinematicBody> newBody){
+void PhysicsManager::addNewKinematicBody(std::shared_ptr<obj::KinematicBody> newBody){
     kinematicBodiesWeakVector.push_back(newBody);
 }

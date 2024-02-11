@@ -13,7 +13,7 @@ enum class Direction {
     None, Up, Down, Right, Left
 };
 
-namespace gge {
+namespace gge::obj {
 
 // GObject class
 class GObject : public std::enable_shared_from_this<GObject>

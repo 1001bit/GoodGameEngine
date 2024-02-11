@@ -2,8 +2,9 @@
 
 #include "GGE/GObjects/KinematicBody.hpp"
 
-// Top-Down player
-class TDPlayer : public gge::KinematicBody
+namespace gge::obj {
+
+class TDPlayer : public KinematicBody
 {
 private:
     
@@ -16,3 +17,5 @@ public:
     // Control player
     void control();
 };
+
+}

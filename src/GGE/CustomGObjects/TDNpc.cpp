@@ -1,5 +1,7 @@
 #include "GGE/CustomGObjects/TDNpc.hpp"
 
+using gge::obj::TDNpc;
+
 constexpr float WALK_SPEED = 4;
 constexpr unsigned MOVEMENT_RAND = 500;
 

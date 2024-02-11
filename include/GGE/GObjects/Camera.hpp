@@ -3,7 +3,7 @@
 #include "GObject.hpp"
 #include <GGE/MathHelper.hpp>
 
-namespace gge {
+namespace gge::obj {
 
 class Camera : public GObject
 {

@@ -1,6 +1,6 @@
 #include "GGE/GObjects/AnimatedSprite.hpp"
 
-using gge::AnimatedSprite;
+using gge::obj::AnimatedSprite;
 
 // Structors
 AnimatedSprite::AnimatedSprite() {

@@ -2,16 +2,16 @@
 
 #include "GObject.hpp"
 
-namespace gge {
+namespace gge::obj {
 
-class GDrawable : public GObject
+class Drawable : public GObject
 {
 private:
     
 public:
     // Structors
-    GDrawable();
-    ~GDrawable();
+    Drawable();
+    ~Drawable();
 
     // Methods
     // draw self drawable object

@@ -4,15 +4,15 @@
 
 #include "GGE/GObjects/GObject.hpp"
 #include "GGE/GObjects/AnimatedSprite.hpp"
-#include "GGE/GObjects/GSprite.hpp"
+#include "GGE/GObjects/Sprite.hpp"
 #include "GGE/CustomGObjects/PhysPlayer.hpp"
 #include "GGE/GObjects/Camera.hpp"
 #include "GGE/GObjects/Body.hpp"
 #include "GGE/CustomGObjects/TDPlayer.hpp"
 #include "GGE/CustomGObjects/TDNpc.hpp"
 #include "GGE/CustomGObjects/PhysNpc.hpp"
-#include "GGE/GObjects/GText.hpp"
-#include "GGE/GObjects/GDrawable.hpp"
+#include "GGE/GObjects/Text.hpp"
+#include "GGE/GObjects/Drawable.hpp"
 
 #include "GGE/Dialogues/DialogueManager.hpp"
 #include "GGE/Physics/PhysicsManager.hpp"
@@ -24,7 +24,7 @@
 
 namespace gge {
 
-class Level : public GObject
+class Level : public obj::GObject
 {
 private:
     // Gui
@@ -42,17 +42,17 @@ public:
     PhysicsManager physicsManager;
 
     // Updatable GObjects
-    std::vector<std::weak_ptr<GObject>> updatableGObjects;
+    std::vector<std::weak_ptr<obj::GObject>> updatableGObjects;
 
     // Drawables
-    std::vector< std::vector<std::weak_ptr<GDrawable>> > levelDrawableLayers;
-    std::vector< std::vector<std::weak_ptr<GDrawable>> > guiDrawableLayers;
+    std::vector< std::vector<std::weak_ptr<obj::Drawable>> > levelDrawableLayers;
+    std::vector< std::vector<std::weak_ptr<obj::Drawable>> > guiDrawableLayers;
 
     // With own id
-    std::unordered_map<uint16_t, std::weak_ptr<GObject>> levelGObjectsWId;
+    std::unordered_map<uint16_t, std::weak_ptr<obj::GObject>> levelGObjectsWId;
 
     // Game camera that is following some GObject
-    std::shared_ptr<Camera> camera;
+    std::shared_ptr<obj::Camera> camera;
     ///////////////////////////
 
     // Methods

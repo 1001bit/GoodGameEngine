@@ -1,6 +1,6 @@
 #include "GGE/Instructions/Trigger.hpp"
 
-using gge::Trigger;
+using gge::ins::Trigger;
 
 // Structors
 Trigger::Trigger(){

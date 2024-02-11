@@ -3,7 +3,9 @@
 #include "GGE/Instructions/Action.hpp"
 #include "GGE/Dialogues/DialogueManager.hpp"
 
-class AcDialogue : public gge::Action
+namespace gge::ins {
+
+class AcDialogue : public Action
 {
 private:
     // Variables
@@ -21,3 +23,5 @@ public:
     // start dialogue
     void doAction();
 };
+
+}

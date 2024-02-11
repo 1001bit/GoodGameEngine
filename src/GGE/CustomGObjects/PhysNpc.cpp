@@ -1,5 +1,7 @@
 #include "GGE/CustomGObjects/PhysNpc.hpp"
 
+using gge::obj::PhysNpc;
+
 constexpr float WALK_SPEED = 2;
 constexpr float AIR_SLOWDOWN = 0.05;
 constexpr unsigned MOVEMENT_RAND = 500;

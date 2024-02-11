@@ -1,6 +1,6 @@
 #include "GGE/GObjects/GObject.hpp"
 
-using gge::GObject;
+using gge::obj::GObject;
 
 // Structors
 GObject::GObject(){

@@ -1,6 +1,6 @@
 #include "GGE/GObjects/Camera.hpp"
 
-using gge::Camera;
+using gge::obj::Camera;
 
 constexpr float FACTOR = 0.98;
 

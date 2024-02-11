@@ -8,7 +8,7 @@ DialogueManager::~DialogueManager(){}
 
 // Methods
 // Init drawable part
-void DialogueManager::initDrawables(std::shared_ptr<GSprite> newDialogueBox, std::shared_ptr<GText> newDialogueText){
+void DialogueManager::initDrawables(std::shared_ptr<obj::Sprite> newDialogueBox, std::shared_ptr<obj::Text> newDialogueText){
     ResourceManager* resourceManager = ResourceManager::getInstance();
 
     // Dialogue box
@@ -39,7 +39,7 @@ void DialogueManager::startDialogue(u_char id){
 }
 
 // Update current dialogue
-void DialogueManager::updateCurrentDialogue(std::unordered_map<uint16_t, std::weak_ptr<GObject>>& levelGObjectsWId, std::shared_ptr<Camera> camera){
+void DialogueManager::updateCurrentDialogue(std::unordered_map<uint16_t, std::weak_ptr<obj::GObject>>& levelGObjectsWId, std::shared_ptr<obj::Camera> camera){
     // if current dialogue is active
     auto currentDialogue = currentDialogueWeak.lock();
     if(!currentDialogue){
@@ -55,7 +55,7 @@ void DialogueManager::updateCurrentDialogue(std::unordered_map<uint16_t, std::we
 
     // set camera target
     uint16_t speakerId = currentDialogue->getCurrentLine().characterId;
-    std::shared_ptr<GObject> currentSpeaker = levelGObjectsWId.at(1).lock();
+    std::shared_ptr<obj::GObject> currentSpeaker = levelGObjectsWId.at(1).lock();
     if(levelGObjectsWId.count(speakerId)){
         currentSpeaker = levelGObjectsWId.at(speakerId).lock();
         if(!currentSpeaker){

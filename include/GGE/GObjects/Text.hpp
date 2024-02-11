@@ -1,10 +1,10 @@
 #pragma once
 
-#include "GDrawable.hpp"
+#include "Drawable.hpp"
 
-namespace gge {
+namespace gge::obj {
 
-class GText : public GDrawable
+class Text : public Drawable
 {
 private:
     // Methods
@@ -13,8 +13,8 @@ private:
 
 public:
     // Structors
-    GText();
-    ~GText();
+    Text();
+    ~Text();
 
     // Variables
     sf::Text text;

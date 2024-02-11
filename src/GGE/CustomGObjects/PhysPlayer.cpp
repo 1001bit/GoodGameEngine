@@ -1,5 +1,7 @@
 #include "GGE/CustomGObjects/PhysPlayer.hpp"
 
+using gge::obj::PhysPlayer;
+
 constexpr float WALK_SPEED = 2;
 constexpr float JUMP_FORCE = 15;
 constexpr float AIR_SLOWDOWN = 0.05;

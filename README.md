@@ -1,3 +1,15 @@
-<h1>GoodGameEngine</h1>
-"Game engine" of my own, so I can make games with SFML and C++ more easily.
+# GoodGameEngine
+## "Game engine" of my own, so I can make games with SFML and C++ more easily.
 
+## Main game engine parts:
+
+* **Game** - main container for game loop, init, level, etc.
+* **GObject** - unit of some in-game object. For example level, camera or player
+* **Manager** - main container for all the non-objects like dialogues, controls, cooldowns, instructions, etc.
+* **Level** - main container for all the GObjects, dialogues, etc.
+* **Instructions**:
+  - **TriggerManager** - contains all the triggers, runs "check" method to check if trigger event has happened
+  - **Trigger** - checks for event to activate action
+  - **Action** - does the thing if trigger has told to do it
+ 
+### All the folders that start with "Custom" are for custom stuff like instuctions, gobjects or levels for developers to create for their game

@@ -39,8 +39,10 @@ public:
     // Managers
     TriggersManager triggersManager;
     PhysicsManager physicsManager;
-    // custom
+    //////////
+    // Custom
     DialogueManager dialogueManager;
+    //////////
 
     // Updatable GObjects
     std::vector<std::weak_ptr<obj::GObject>> updatableGObjects;

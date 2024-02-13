@@ -18,7 +18,7 @@
 #include "GGE/Physics/PhysicsManager.hpp"
 #include "GGE/Instructions/TriggersManager.hpp"
 
-#include "GGE/SingletonManagers/ResourceManager.hpp"
+#include "GGE/ResourceManager/ResourceManager.hpp"
 
 // #define DRAWCOLLIDER
 

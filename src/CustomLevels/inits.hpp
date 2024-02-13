@@ -5,6 +5,6 @@
 #include "GGE/CustomInstructions/TrCollision.hpp"
 
 namespace clvl{
-    void necessaryInit(std::shared_ptr<gge::Level> level);
+    void dialogueInit(std::shared_ptr<gge::Level> level);
     void testInit(std::shared_ptr<gge::Level> level);
 }

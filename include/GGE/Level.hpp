@@ -38,8 +38,9 @@ public:
     ///////////////////////////
     // Managers
     TriggersManager triggersManager;
-    DialogueManager dialogueManager;
     PhysicsManager physicsManager;
+    // custom
+    DialogueManager dialogueManager;
 
     // Updatable GObjects
     std::vector<std::weak_ptr<obj::GObject>> updatableGObjects;
@@ -61,8 +62,6 @@ public:
 
     // Update states of all the objects
     void update(const float& dTimeMs);
-    // Update dialogues duh
-    void updateDialogues();
     // Draw drawable objects
     void drawGObjetcs(sf::RenderWindow& window);
 };

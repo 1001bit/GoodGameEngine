@@ -73,7 +73,7 @@ void Game::loop(sf::RenderWindow& window){
         currentLevel->update(dTimeMs);
 
         // Dialogues
-        currentLevel->updateDialogues();
+        currentLevel->dialogueManager.updateCurrentDialogue(currentLevel->levelGObjectsWId, currentLevel->camera);
 
         // Draw
         window.clear();

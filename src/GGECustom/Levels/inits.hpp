@@ -1,8 +1,8 @@
 #pragma once
 
 #include "GGE/Level.hpp"
-#include "GGE/CustomInstructions/AcDialogue.hpp"
-#include "GGE/CustomInstructions/TrCollision.hpp"
+#include "GGECustom/Instructions/AcDialogue.hpp"
+#include "GGECustom/Instructions/TrCollision.hpp"
 
 namespace clvl{
     void dialogueInit(std::shared_ptr<gge::Level> level);

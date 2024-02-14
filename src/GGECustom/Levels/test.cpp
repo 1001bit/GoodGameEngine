@@ -1,5 +1,11 @@
 #include "inits.hpp"
 
+#include "GGECustom/GObjects/PhysNpc.hpp"
+#include "GGECustom/GObjects/PhysPlayer.hpp"
+#include "GGE/GObjects/AnimatedSprite.hpp"
+#include "GGECustom/Instructions/AcDialogue.hpp"
+#include "GGECustom/Instructions/TrCollision.hpp"
+
 using namespace gge;
 
 void clvl::testInit(std::shared_ptr<Level> level){

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include "GGE/Controls/ControlsManager.hpp"
 #include "GGE/GObjects/GObject.hpp"
 
 namespace gge {

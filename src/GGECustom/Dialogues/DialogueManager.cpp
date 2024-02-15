@@ -8,20 +8,34 @@ DialogueManager::~DialogueManager(){}
 
 // Methods
 // Init drawable part
-void DialogueManager::initDrawables(std::shared_ptr<obj::Sprite> newDialogueBox, std::shared_ptr<obj::Text> newDialogueText){
+void DialogueManager::initDrawables(){
+    auto level = levelWeak.lock();
+    if(!level){
+        return;
+    }
+
     ResourceManager* resourceManager = ResourceManager::getInstance();
 
     // Dialogue box
-    dialogueBoxWeak = newDialogueBox;
-    newDialogueBox->setTexture(resourceManager->getTexture("Assets/Textures/dialogueBackground.png"));
-    setDrawableVisiblity(0);
+    std::shared_ptr<obj::Sprite> dialogueBox = std::make_shared<obj::Sprite>();
+    level->guiDrawableLayers[0].push_back(dialogueBox);
+    dialogueBox->setNewParent(level);
+    dialogueBoxWeak = dialogueBox;
+
+    dialogueBox->setTexture(resourceManager->getTexture("Assets/Textures/dialogueBackground.png"));
     
     // Dialogue text
-    dialogueTextWeak = newDialogueText;
-    newDialogueText->text.setFont(resourceManager->getFont("Assets/Fonts/font1.ttf"));
-    newDialogueText->text.setCharacterSize(30);
-    newDialogueText->text.setString("...");
-    newDialogueText->setRelativePos({60, 20});
+    std::shared_ptr<obj::Text> dialogueText = std::make_shared<obj::Text>();
+    level->guiDrawableLayers[1].push_back(dialogueText);
+    dialogueText->setNewParent(dialogueBox);
+    dialogueTextWeak = dialogueText;
+
+    dialogueText->text.setFont(resourceManager->getFont("Assets/Fonts/font1.ttf"));
+    dialogueText->text.setCharacterSize(30);
+    dialogueText->text.setString("...");
+    dialogueText->setRelativePos({60, 20});
+
+    setDrawableVisiblity(0);
 }
 
 // Set all the dialogues list
@@ -38,15 +52,24 @@ void DialogueManager::startDialogue(u_char id){
     currentDialogueWeak = dialoguesMap.at(id);
 }
 
+// Set level parent
+void DialogueManager::setLevel(std::shared_ptr<Level> level){
+    levelWeak = level;
+}
+
 // Update current dialogue
-void DialogueManager::updateCurrentDialogue(std::unordered_map<uint16_t, std::weak_ptr<obj::GObject>>& levelGObjectsWId, std::shared_ptr<obj::Camera> camera){
+void DialogueManager::update(const float& dTimeMs){
     // if current dialogue is active
     auto currentDialogue = currentDialogueWeak.lock();
     if(!currentDialogue){
         return;
     }
-
     currentDialogue->update();
+
+    auto level = levelWeak.lock();
+    if(!level){
+        return;
+    }
 
     // set dialogue text
     if(auto dialogueText = dialogueTextWeak.lock()){
@@ -55,15 +78,15 @@ void DialogueManager::updateCurrentDialogue(std::unordered_map<uint16_t, std::we
 
     // set camera target
     uint16_t speakerId = currentDialogue->getCurrentLine().characterId;
-    std::shared_ptr<obj::GObject> currentSpeaker = levelGObjectsWId.at(1).lock();
-    if(levelGObjectsWId.count(speakerId)){
-        currentSpeaker = levelGObjectsWId.at(speakerId).lock();
+    std::shared_ptr<obj::GObject> currentSpeaker = level->gObjectsWId.at(1).lock();
+    if(level->gObjectsWId.count(speakerId)){
+        currentSpeaker = level->gObjectsWId.at(speakerId).lock();
         if(!currentSpeaker){
-            levelGObjectsWId.erase(speakerId);
-            currentSpeaker = levelGObjectsWId.at(1).lock();
+            level->gObjectsWId.erase(speakerId);
+            currentSpeaker = level->gObjectsWId.at(1).lock();
         }
     }
-    camera->setTarget(currentSpeaker);
+    level->camera->setTarget(currentSpeaker);
 
     // if empty string (after last line) - stop it
     if(currentDialogue->getCurrentLine().line == ""){

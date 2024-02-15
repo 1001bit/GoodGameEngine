@@ -6,7 +6,6 @@
 #include "GGE/GObjects/Camera.hpp"
 #include "GGE/GObjects/Drawable.hpp"
 
-#include "GGECustom/Dialogues/DialogueManager.hpp"
 #include "GGE/Physics/PhysicsManager.hpp"
 #include "GGE/Instructions/TriggersManager.hpp"
 
@@ -31,10 +30,6 @@ public:
     // Managers
     TriggersManager triggersManager;
     PhysicsManager physicsManager;
-    //////////
-    // Custom
-    DialogueManager dialogueManager;
-    //////////
 
     // Updatable GObjects
     std::vector<std::weak_ptr<obj::GObject>> updatableGObjects;
@@ -44,7 +39,7 @@ public:
     std::vector< std::vector<std::weak_ptr<obj::Drawable>> > guiDrawableLayers;
 
     // With own id
-    std::unordered_map<uint16_t, std::weak_ptr<obj::GObject>> levelGObjectsWId;
+    std::unordered_map<uint16_t, std::weak_ptr<obj::GObject>> gObjectsWId;
 
     // Game camera that is following some GObject
     std::shared_ptr<obj::Camera> camera;

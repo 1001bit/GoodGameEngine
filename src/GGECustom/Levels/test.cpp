@@ -16,7 +16,7 @@ void clvl::testInit(std::shared_ptr<Level> level){
     std::shared_ptr<obj::PhysPlayer> dummy = std::make_shared<obj::PhysPlayer>();
     dummy->setNewParent(level);
     level->physicsManager.addNewKinematicBody(dummy);
-    level->levelGObjectsWId[1] = dummy;
+    level->gObjectsWId[1] = dummy;
     dummy->setRectPixelSize(16, 16);
     dummy->setCurrentPosition({000, 300});
     level->camera->setTarget(dummy);
@@ -39,7 +39,7 @@ void clvl::testInit(std::shared_ptr<Level> level){
     std::shared_ptr<obj::PhysNpc> npc = std::make_shared<obj::PhysNpc>();
     npc->setNewParent(level);
     level->physicsManager.addNewKinematicBody(npc);
-    level->levelGObjectsWId[2] = npc;
+    level->gObjectsWId[2] = npc;
     npc->setRectPixelSize(16, 16);
     npc->setCurrentPosition({500, 300});
     // his sprite
@@ -98,8 +98,14 @@ void clvl::testInit(std::shared_ptr<Level> level){
 
     // Gui
     // dummy-npc dialogue
+    std::shared_ptr<gge::DialogueManager> dialogueManager = std::make_shared<gge::DialogueManager>();
+    dialogueManager->setNewParent(level);
+    level->updatableGObjects.push_back(dialogueManager);
+    dialogueManager->setLevel(level);
+    dialogueManager->initDrawables();
+
     std::shared_ptr<Dialogue> dialogue1 = std::make_shared<Dialogue>();
-    level->dialogueManager.setDialoguesMap({{0, dialogue1}});
+    dialogueManager->setDialoguesMap({{0, dialogue1}});
     dialogue1->setLines({
         {1, "hello"},
         {2, "hi"},
@@ -111,8 +117,9 @@ void clvl::testInit(std::shared_ptr<Level> level){
     // start dialogue on collision of player and npc
     std::shared_ptr<ins::TrCollision> trigger = std::make_shared<ins::TrCollision>();
     trigger->setCollisionBodies(npc, dummy);
+
     std::shared_ptr<ins::AcDialogue> action = std::make_shared<ins::AcDialogue>();
-    action->setDialogueParams(0, &level->dialogueManager);
+    action->setDialogueParams(0, dialogueManager);
     trigger->setAction(action);
 
     level->triggersManager.addNewTrigger(trigger);

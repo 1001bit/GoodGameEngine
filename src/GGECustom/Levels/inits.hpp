@@ -1,8 +1,8 @@
 #pragma once
 
 #include "GGE/Level.hpp"
+#include "GGECustom/Dialogues/DialogueManager.hpp"
 
 namespace clvl{
-    void dialogueInit(std::shared_ptr<gge::Level> level);
     void testInit(std::shared_ptr<gge::Level> level);
 }

@@ -10,7 +10,7 @@ class AcDialogue : public Action
 private:
     // Variables
     u_char dialogueId;
-    gge::DialogueManager* dialogueManager;
+    std::weak_ptr<gge::DialogueManager> dialogueManagerWeak;
 
 public:
     // Structors
@@ -19,7 +19,7 @@ public:
 
     // Methods
     // set dialogueId, dialogueManager
-    void setDialogueParams(u_char newId, gge::DialogueManager* newDialogueManager);
+    void setDialogueParams(u_char newId, std::shared_ptr<gge::DialogueManager> dialogueManager);
     // start dialogue
     void doAction();
 };

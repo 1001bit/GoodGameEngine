@@ -9,11 +9,13 @@ AcDialogue::~AcDialogue(){}
 // Methods
 // start dialogue
 void AcDialogue::doAction(){
-    dialogueManager->startDialogue(dialogueId);
+    if(auto dialogueManager = dialogueManagerWeak.lock()){
+        dialogueManager->startDialogue(dialogueId);
+    }
 }
 
 // set dialogue id and it's manager
-void AcDialogue::setDialogueParams(u_char newId, gge::DialogueManager* newDialogueManager){
+void AcDialogue::setDialogueParams(u_char newId, std::shared_ptr<gge::DialogueManager> dialogueManager){
     dialogueId = newId;
-    dialogueManager = newDialogueManager;
+    dialogueManagerWeak = dialogueManager;
 }

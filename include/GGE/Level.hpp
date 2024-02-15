@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GGE/GameConstants.hpp"
+#include "GGECustom/GameConstants.hpp"
 
 #include "GGE/GObjects/GObject.hpp"
 #include "GGE/GObjects/Camera.hpp"

@@ -6,7 +6,7 @@
 #include "GGE/GObjects/Sprite.hpp"
 #include "GGE/GObjects/Camera.hpp"
 #include "GGE/ResourceManager/ResourceManager.hpp"
-#include "GGE/GameConstants.hpp"
+#include "GGECustom/GameConstants.hpp"
 #include "GGE/Level.hpp"
 
 namespace gge {

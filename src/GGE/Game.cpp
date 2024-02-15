@@ -44,6 +44,8 @@ void Game::loop(sf::RenderWindow& window){
         #endif
 
         // Events and controls
+        controlsManager->clearPressed();
+
         sf::Event event;
         if (window.pollEvent(event))
         {
@@ -61,9 +63,6 @@ void Game::loop(sf::RenderWindow& window){
         while(accumulator >= 1000.f/UPDATE_RATE){
             currentLevel->physicsManager.updatePhysics(1000.f/UPDATE_RATE);
             accumulator -= 1000.f/UPDATE_RATE;
-
-            // clear pressed once when they are no more needed
-            controlsManager->clearPressed();
         }
         currentLevel->physicsManager.interpolateKinematics(accumulator/(1000.f/UPDATE_RATE));
 

@@ -11,5 +11,7 @@
   - **TriggerManager** - contains all the triggers, runs "check" method to check if trigger event has happened
   - **Trigger** - checks for event to activate action
   - **Action** - does the thing if trigger has told to do it
- 
-### Developer can create their own Levels, Intructions, GObjects in GGECustom directory  
+
+##
+
+Developer can create their own *Levels*, *Intructions*, *GObjects* in **GGECustom** directory  

@@ -18,7 +18,7 @@ void clvl::testInit(std::shared_ptr<Level> level){
     level->physicsManager.addNewKinematicBody(dummy);
     level->gObjectsWId[1] = dummy;
     dummy->setRectPixelSize(16, 16);
-    dummy->setCurrentPosition({000, 300});
+    dummy->setCurrentPos({000, 300});
     level->camera->setTarget(dummy);
     // his sprite
     std::shared_ptr<obj::AnimatedSprite> dummySprite = std::make_shared<obj::AnimatedSprite>();
@@ -41,7 +41,7 @@ void clvl::testInit(std::shared_ptr<Level> level){
     level->physicsManager.addNewKinematicBody(npc);
     level->gObjectsWId[2] = npc;
     npc->setRectPixelSize(16, 16);
-    npc->setCurrentPosition({500, 300});
+    npc->setCurrentPos({500, 300});
     // his sprite
     std::shared_ptr<obj::AnimatedSprite> npcSprite = std::make_shared<obj::AnimatedSprite>();
     npcSprite->setNewParent(npc);

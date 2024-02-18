@@ -1,8 +1,9 @@
 #pragma once
 
+#include "GGE/GObjects/View.hpp"
 #include "GGE/GObjects/Drawable.hpp"
 
-namespace gge{
+namespace gge {
 
 class DrawablesManager
 {
@@ -22,7 +23,7 @@ public:
     // Insert new drawable
     void newDrawable(std::shared_ptr<obj::Drawable> drawable, bool isGui, u_char layer);
     // Draw everything
-    void draw(sf::RenderWindow& window, const sf::View& levelView, const sf::View& guiView);
+    void draw(sf::RenderWindow& window, obj::View& levelView, obj::View& guiView);
     // Set max layers count
     void setLayerCount(u_char newLayerCount);
 };

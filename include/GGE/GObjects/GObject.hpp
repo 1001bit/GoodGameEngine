@@ -55,7 +55,7 @@ public:
     // Remove a child
     void removeChild(std::shared_ptr<GObject> child);
     
-    // set rect pixel size
+    // set rect size
     virtual void setRectSize(float w, float h);
     // set rect pixel-scaled size
     void setRectPixelSize(float w, float h);

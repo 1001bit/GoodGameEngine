@@ -33,9 +33,9 @@ void DrawablesManager::newDrawable(std::shared_ptr<obj::Drawable> drawable, bool
 }
 
 // Draw everything
-void DrawablesManager::draw(sf::RenderWindow& window, const sf::View& levelView, const sf::View& guiView){
+void DrawablesManager::draw(sf::RenderWindow& window, gge::obj::View& levelView, gge::obj::View& guiView){
     // Level
-    window.setView(levelView);
+    window.setView(levelView.getView());
     for(std::vector<std::weak_ptr<obj::Drawable>>& drawablesWeakLayer : levelDrawableLayers){
         // iterate through a single layer
         for(auto it = drawablesWeakLayer.begin(); it != drawablesWeakLayer.end();){
@@ -45,13 +45,16 @@ void DrawablesManager::draw(sf::RenderWindow& window, const sf::View& levelView,
                 continue;
             }
 
-            drawable->drawSelf(window);
+            if(levelView.getRect().intersects(drawable->getRect())){
+                drawable->drawSelf(window);
+            }
+
             ++it;
         }
     }
 
     // Gui
-    window.setView(guiView);
+    window.setView(guiView.getView());
     // iterate through whole drawables vector
     for(std::vector<std::weak_ptr<obj::Drawable>>& drawablesWeakLayer : guiDrawableLayers){
         // iterate through a single layer

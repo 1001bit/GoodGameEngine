@@ -39,7 +39,7 @@ public:
     // Game camera that is following some GObject
     std::shared_ptr<obj::Camera> camera;
     // Gui view
-    sf::View guiView;
+    obj::View guiView;
     ///////////////////////////
 
     // Methods

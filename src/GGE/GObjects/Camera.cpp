@@ -30,8 +30,7 @@ void Camera::update(const float& dTimeMs){
 // set size of view
 void Camera::setRectSize(float w, float h){
     GObject::setRectSize(w, h);
-    view.setSize({w, h});
-    view.setCenter(getRect().getPosition() + getRect().getSize()/2.f);
+    view.setRectSize(w, h);
 }
 
 // set target of following
@@ -42,11 +41,5 @@ void Camera::setTarget(std::shared_ptr<GObject> newTarget){
 // update position of rect and camera
 void Camera::updatePos(){
     GObject::updatePos();
-    view.setCenter(getRect().getPosition() + getRect().getSize()/2.f);
-}
-
-// Getters
-// get view
-const sf::View& Camera::getView(){
-    return view;
+    view.setRelativePos(getRect().getPosition());
 }

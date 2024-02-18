@@ -71,7 +71,7 @@ void Game::loop(sf::RenderWindow& window){
 
         // Draw
         window.clear();
-        currentLevel->drawablesManager.draw(window, currentLevel->camera->getView(), currentLevel->guiView);
+        currentLevel->drawablesManager.draw(window, currentLevel->camera->view, currentLevel->guiView);
         window.display();
     }
 }

@@ -1,7 +1,8 @@
-- Make custom view class, where view has it's own rect.
-- Make drawablesManager draw only objects, that intersect level view.
+- Move todo list to issues
+- Make camera just a smooth follower object with view as it's child
+- fix bug: control remains in buffer until it's pressed again
 
 Non-important tasks:
-- Make object shared_ptr's storing in separate vectors inside level
+- Store objects' shared_ptrs in separate vectors inside level
 - Moving solid body
 - Koyote effect, jump buffer, smooth edges

@@ -5,8 +5,8 @@ using gge::Level;
 // Structors
 Level::Level(){
     // init gui view
-    guiView.setSize(GAME_WIDTH, GAME_HEIGHT);
-    guiView.setCenter(GAME_WIDTH/2, GAME_HEIGHT/2);
+    guiView.setRectSize(GAME_WIDTH, GAME_HEIGHT);
+    guiView.setRelativePos({0, 0});
 
     // init camera
     camera = std::make_shared<obj::Camera>();

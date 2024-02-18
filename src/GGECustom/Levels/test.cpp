@@ -15,7 +15,7 @@ void clvl::testInit(std::shared_ptr<Level> level){
     // dummy
     std::shared_ptr<obj::PhysPlayer> dummy = std::make_shared<obj::PhysPlayer>();
     dummy->setNewParent(level);
-    level->physicsManager.addNewKinematicBody(dummy);
+    level->physicsManager.addNewBody(std::static_pointer_cast<gge::obj::KinematicBody>(dummy));
     level->gObjectsWId[1] = dummy;
     dummy->setRectPixelSize(16, 16);
     dummy->setCurrentPos({000, 300});
@@ -23,14 +23,14 @@ void clvl::testInit(std::shared_ptr<Level> level){
     // his sprite
     std::shared_ptr<obj::AnimatedSprite> dummySprite = std::make_shared<obj::AnimatedSprite>();
     dummySprite->setNewParent(dummy);
-    level->levelDrawableLayers[1].push_back(dummySprite);
+    level->drawablesManager.newDrawable(dummySprite, false, 1);
     level->updatableGObjects.push_back(dummySprite);  
     dummySprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
     dummySprite->playAnimation("idle");
     // his sword
     std::shared_ptr<obj::Sprite> sword = std::make_shared<obj::Sprite>();
     sword->setNewParent(dummy);
-    level->levelDrawableLayers[2].push_back(sword);
+    level->drawablesManager.newDrawable(sword, false, 2);
     sword->setTexture(resourceManager->getTexture("Assets/Textures/sword.png"));
     sword->setRelativePos({60, 0});
     sword->makeFlippable();
@@ -38,21 +38,21 @@ void clvl::testInit(std::shared_ptr<Level> level){
     // Npc
     std::shared_ptr<obj::PhysNpc> npc = std::make_shared<obj::PhysNpc>();
     npc->setNewParent(level);
-    level->physicsManager.addNewKinematicBody(npc);
+    level->physicsManager.addNewBody(std::static_pointer_cast<gge::obj::KinematicBody>(npc));
     level->gObjectsWId[2] = npc;
     npc->setRectPixelSize(16, 16);
     npc->setCurrentPos({500, 300});
     // his sprite
     std::shared_ptr<obj::AnimatedSprite> npcSprite = std::make_shared<obj::AnimatedSprite>();
     npcSprite->setNewParent(npc);
-    level->levelDrawableLayers[0].push_back(npcSprite);
+    level->drawablesManager.newDrawable(npcSprite, false, 0);
     level->updatableGObjects.push_back(npcSprite);  
     npcSprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 100, 1));
     npcSprite->playAnimation("idle");
     // his sword
     sword = std::make_shared<obj::Sprite>();
     sword->setNewParent(npc);
-    level->levelDrawableLayers[2].push_back(sword);
+    level->drawablesManager.newDrawable(sword, false, 1);
     sword->setTexture(resourceManager->getTexture("Assets/Textures/sword.png"));
     sword->setRelativePos({60, 0});
     sword->makeFlippable();
@@ -60,25 +60,25 @@ void clvl::testInit(std::shared_ptr<Level> level){
     // a platform
     std::shared_ptr<obj::Body> platform = std::make_shared<obj::Body>();
     platform->setNewParent(level);
-    level->physicsManager.addNewSolidBody(platform);
+    level->physicsManager.addNewBody(platform);
     platform->setRectPixelSize(100, 10);
     platform->setRelativePos({800, 730});
     // it's sprite
     std::shared_ptr<obj::Sprite>  platformSprite = std::make_shared<obj::Sprite>();
     platformSprite->setNewParent(platform);
-    level->levelDrawableLayers[0].push_back(platformSprite);
+    level->drawablesManager.newDrawable(platformSprite, false, 0);
     platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
     // a platform
     platform = std::make_shared<obj::Body>();
     platform->setNewParent(level);
-    level->physicsManager.addNewSolidBody(platform);
+    level->physicsManager.addNewBody(platform);
     platform->setRectPixelSize(100, 10);
     platform->setRelativePos({100, 800});
     // it's sprite
     platformSprite = std::make_shared<obj::Sprite>();
     platformSprite->setNewParent(platform);
-    level->levelDrawableLayers[0].push_back(platformSprite);
+    level->drawablesManager.newDrawable(platformSprite, false, 0);
     platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
 
     // bunch of platforms
@@ -86,13 +86,13 @@ void clvl::testInit(std::shared_ptr<Level> level){
         // a platform
         platform = std::make_shared<obj::Body>();
         platform->setNewParent(level);
-        level->physicsManager.addNewSolidBody(platform);
+        level->physicsManager.addNewBody(platform);
         platform->setRectPixelSize(100, 10);
         platform->setRelativePos({-600.f - 700.f*i, 730.f});
         // it's sprite
         platformSprite = std::make_shared<obj::Sprite>();
         platformSprite->setNewParent(platform);
-        level->levelDrawableLayers[0].push_back(platformSprite);
+        level->drawablesManager.newDrawable(platformSprite, false, 0);
         platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
     }
 

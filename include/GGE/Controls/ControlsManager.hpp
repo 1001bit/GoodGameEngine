@@ -40,14 +40,14 @@ public:
     bool isControlPressed(const std::string& controlId, bool isPressedNow=1);
 
     // On control single press
-    void addPressedKeyboard(sf::Keyboard::Key key);
-    void addPressedMouse(sf::Mouse::Button button);
+    void controlPress(sf::Keyboard::Key key);
+    void controlPress(sf::Mouse::Button button);
     // Clear the vectors of once pressed controls of controls, that were pressed in the past
     void clearPastBuffer();
 
     // On control release
-    void keyboardControlRelease(sf::Keyboard::Key key);
-    void mouseControlRelease(sf::Mouse::Button button);
+    void controlRelease(sf::Keyboard::Key key);
+    void controlRelease(sf::Mouse::Button button);
 
     // Singleton
     static ControlsManager* getInstance();

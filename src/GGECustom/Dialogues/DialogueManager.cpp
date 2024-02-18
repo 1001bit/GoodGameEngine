@@ -18,7 +18,7 @@ void DialogueManager::initDrawables(){
 
     // Dialogue box
     std::shared_ptr<obj::Sprite> dialogueBox = std::make_shared<obj::Sprite>();
-    level->guiDrawableLayers[0].push_back(dialogueBox);
+    level->drawablesManager.newDrawable(dialogueBox, true, 0);
     dialogueBox->setNewParent(level);
     dialogueBoxWeak = dialogueBox;
 
@@ -26,7 +26,7 @@ void DialogueManager::initDrawables(){
     
     // Dialogue text
     std::shared_ptr<obj::Text> dialogueText = std::make_shared<obj::Text>();
-    level->guiDrawableLayers[1].push_back(dialogueText);
+    level->drawablesManager.newDrawable(dialogueText, true, 1);
     dialogueText->setNewParent(dialogueBox);
     dialogueTextWeak = dialogueText;
 

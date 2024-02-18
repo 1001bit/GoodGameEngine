@@ -13,7 +13,6 @@ Game::~Game(){}
 void Game::init(){
     // Level
     currentLevel = std::make_shared<Level>();
-    currentLevel->init();
 }
 
 // Main loop
@@ -72,7 +71,7 @@ void Game::loop(sf::RenderWindow& window){
 
         // Draw
         window.clear();
-        currentLevel->drawGObjetcs(window);
+        currentLevel->drawablesManager.draw(window, currentLevel->camera->getView(), currentLevel->guiView);
         window.display();
     }
 }
@@ -83,17 +82,17 @@ void Game::handleEvent(const sf::Event& event){
     switch (event.type)
     {
     case sf::Event::KeyPressed:
-        controlsManager->addPressedKeyboard(event.key.code);
+        controlsManager->controlPress(event.key.code);
         break;
     case sf::Event::MouseButtonPressed:
-        controlsManager->addPressedMouse(event.mouseButton.button);
+        controlsManager->controlPress(event.mouseButton.button);
         break;
 
     case sf::Event::KeyReleased:
-        controlsManager->keyboardControlRelease(event.key.code);
+        controlsManager->controlRelease(event.key.code);
         break;
     case sf::Event::MouseButtonReleased:
-        controlsManager->mouseControlRelease(event.mouseButton.button);
+        controlsManager->controlRelease(event.mouseButton.button);
 
     default:
         break;

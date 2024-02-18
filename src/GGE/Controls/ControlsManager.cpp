@@ -81,12 +81,12 @@ void ControlsManager::changeKeyboardControl(std::string controlId, sf::Keyboard:
 }
 
 // Add pressed once
-void ControlsManager::addPressedKeyboard(sf::Keyboard::Key key){
+void ControlsManager::controlPress(sf::Keyboard::Key key){
     pressedKeyboardBuffer[key] = 1;
     heldKeyboardKeys.insert(key);
 }
 
-void ControlsManager::addPressedMouse(sf::Mouse::Button button){
+void ControlsManager::controlPress(sf::Mouse::Button button){
     pressedMouseBuffer[button] = 1;
     heldMouseButtons.insert(button);
 }
@@ -111,10 +111,10 @@ void ControlsManager::clearPastBuffer(){
 }
 
 // Control release
-void ControlsManager::keyboardControlRelease(sf::Keyboard::Key key){
+void ControlsManager::controlRelease(sf::Keyboard::Key key){
     heldKeyboardKeys.erase(key);
 }
 
-void ControlsManager::mouseControlRelease(sf::Mouse::Button button){
+void ControlsManager::controlRelease(sf::Mouse::Button button){
     heldMouseButtons.erase(button);
 }

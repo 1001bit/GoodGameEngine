@@ -1,4 +1,7 @@
+- Make custom view class, where view has it's own rect.
+- Make drawablesManager draw only objects, that intersect level view.
+
 Non-important tasks:
+- Make object shared_ptr's storing in separate vectors inside level
 - Moving solid body
 - Koyote effect, jump buffer, smooth edges
-- Smarter NPCs

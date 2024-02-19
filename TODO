@@ -1,4 +1,0 @@
-Non-important tasks:
-- Store objects' shared_ptrs in separate vectors inside level
-- Moving solid body
-- Koyote effect, jump buffer, smooth edges

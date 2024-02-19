@@ -2,6 +2,7 @@
 
 #include "SFML/Graphics.hpp"
 #include <unordered_set>
+#include <iostream>
 
 namespace gge {
 
@@ -42,8 +43,11 @@ public:
     // On control single press
     void controlPress(sf::Keyboard::Key key);
     void controlPress(sf::Mouse::Button button);
+
     // Clear the vectors of once pressed controls of controls, that were pressed in the past
     void clearPastBuffer();
+    // Set all the buffer controls state to past
+    void updateBuffer();
 
     // On control release
     void controlRelease(sf::Keyboard::Key key);

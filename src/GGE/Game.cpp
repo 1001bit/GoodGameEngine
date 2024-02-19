@@ -41,7 +41,10 @@ void Game::loop(sf::RenderWindow& window){
         std::cout << "dTime (ms): " << dTimeMs << " ; \t\t" << " FPS: " << 1000/dTimeMs << "\n";
         #endif
 
-        // Events and controls
+        // Controls
+        controlsManager->updateBuffer();
+
+        // Events
         sf::Event event;
         if (window.pollEvent(event))
         {
@@ -59,6 +62,8 @@ void Game::loop(sf::RenderWindow& window){
         while(accumulator >= 1000.f/UPDATE_RATE){
             currentLevel->physicsManager.updatePhysics(1000.f/UPDATE_RATE);
             accumulator -= 1000.f/UPDATE_RATE;
+
+            // Controls
             controlsManager->clearPastBuffer();
         }
         currentLevel->physicsManager.interpolateKinematics(accumulator/(1000.f/UPDATE_RATE));

@@ -1,6 +1,5 @@
 - Move todo list to issues
 - Make camera just a smooth follower object with view as it's child
-- fix bug: control remains in buffer until it's pressed again
 
 Non-important tasks:
 - Store objects' shared_ptrs in separate vectors inside level

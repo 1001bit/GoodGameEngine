@@ -17,20 +17,20 @@ Level::~Level(){
 void Level::init(){
     // init gui view
     std::shared_ptr<obj::View> guiView = std::make_shared<obj::View>();
-    guiView->setNewParent(shared_from_this());
+    addChild(guiView);
     guiView->setRectSize(GAME_WIDTH, GAME_HEIGHT);
     guiView->setRelativePos({0, 0});
     guiViewWeak = guiView;
 
     // init camera
     std::shared_ptr<obj::SmoothFollower> camera = std::make_shared<obj::SmoothFollower>();
-    camera->setNewParent(shared_from_this());
+    addChild(camera);
     updatableGObjects.push_back(camera);
     cameraWeak = camera;
 
     // init level view
     std::shared_ptr<obj::View> levelView = std::make_shared<obj::View>();
-    levelView->setNewParent(camera);
+    camera->addChild(levelView);
     levelView->setRectSize(GAME_WIDTH, GAME_HEIGHT);
     levelView->setRelativePos(levelView->getRect().getSize() / -2.f);
     levelViewWeak = levelView;

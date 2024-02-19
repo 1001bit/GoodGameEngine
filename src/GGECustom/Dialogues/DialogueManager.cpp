@@ -19,7 +19,7 @@ void DialogueManager::initDrawables(){
     // Dialogue box
     std::shared_ptr<obj::Sprite> dialogueBox = std::make_shared<obj::Sprite>();
     level->drawablesManager.newDrawable(dialogueBox, true, 0);
-    dialogueBox->setNewParent(level);
+    level->addChild(dialogueBox);
     dialogueBoxWeak = dialogueBox;
 
     dialogueBox->setTexture(resourceManager->getTexture("Assets/Textures/dialogueBackground.png"));
@@ -27,7 +27,7 @@ void DialogueManager::initDrawables(){
     // Dialogue text
     std::shared_ptr<obj::Text> dialogueText = std::make_shared<obj::Text>();
     level->drawablesManager.newDrawable(dialogueText, true, 1);
-    dialogueText->setNewParent(dialogueBox);
+    dialogueBox->addChild(dialogueText);
     dialogueTextWeak = dialogueText;
 
     dialogueText->text.setFont(resourceManager->getFont("Assets/Fonts/font1.ttf"));

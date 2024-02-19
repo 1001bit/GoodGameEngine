@@ -77,16 +77,18 @@ void DialogueManager::update(const float& dTimeMs){
     }
 
     // set camera target
-    uint16_t speakerId = currentDialogue->getCurrentLine().characterId;
-    std::shared_ptr<obj::GObject> currentSpeaker = level->gObjectsWId.at(1).lock();
-    if(level->gObjectsWId.count(speakerId)){
-        currentSpeaker = level->gObjectsWId.at(speakerId).lock();
-        if(!currentSpeaker){
-            level->gObjectsWId.erase(speakerId);
-            currentSpeaker = level->gObjectsWId.at(1).lock();
+    if(auto camera = level->cameraWeak.lock()){
+        uint16_t speakerId = currentDialogue->getCurrentLine().characterId;
+        std::shared_ptr<obj::GObject> currentSpeaker = level->gObjectsWId.at(1).lock();
+        if(level->gObjectsWId.count(speakerId)){
+            currentSpeaker = level->gObjectsWId.at(speakerId).lock();
+            if(!currentSpeaker){
+                level->gObjectsWId.erase(speakerId);
+                currentSpeaker = level->gObjectsWId.at(1).lock();
+            }
         }
+        camera->setTarget(currentSpeaker);
     }
-    level->camera->setTarget(currentSpeaker);
 
     // if empty string (after last line) - stop it
     if(currentDialogue->getCurrentLine().line == ""){

@@ -13,6 +13,7 @@ Game::~Game(){}
 void Game::init(){
     // Level
     currentLevel = std::make_shared<Level>();
+    currentLevel->init();
 }
 
 // Main loop
@@ -76,7 +77,14 @@ void Game::loop(sf::RenderWindow& window){
 
         // Draw
         window.clear();
-        currentLevel->drawablesManager.draw(window, currentLevel->camera->view, currentLevel->guiView);
+        
+        auto levelView = currentLevel->levelViewWeak.lock();
+        auto guiView = currentLevel->guiViewWeak.lock();
+        if(levelView && guiView){
+            currentLevel->drawablesManager.draw(window, levelView, guiView);
+        } else {
+        }
+
         window.display();
     }
 }

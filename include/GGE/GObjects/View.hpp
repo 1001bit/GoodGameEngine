@@ -8,6 +8,8 @@ class View : public GObject
 {
 private:
     sf::View view;
+    bool centralized; 
+
 public:
     // Structors
     View();

@@ -19,7 +19,10 @@ void clvl::testInit(std::shared_ptr<Level> level){
     level->gObjectsWId[1] = dummy;
     dummy->setRectPixelSize(16, 16);
     dummy->setCurrentPos({000, 300});
-    level->camera->setTarget(dummy);
+    if(auto camera = level->cameraWeak.lock()){
+        camera->setTarget(dummy);
+    }
+    
     // his sprite
     std::shared_ptr<obj::AnimatedSprite> dummySprite = std::make_shared<obj::AnimatedSprite>();
     dummySprite->setNewParent(dummy);

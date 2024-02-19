@@ -32,7 +32,6 @@ void GObject::updatePos(){
 
 void GObject::addChild(std::shared_ptr<GObject> newChild){
     children.push_back(newChild);
-    newChild->updatePos();
 }
 
 void GObject::removeChild(std::shared_ptr<GObject> child){
@@ -46,6 +45,7 @@ void GObject::setNewParent(std::shared_ptr<GObject> newParent){
 
     this->parentWeak = newParent;
     newParent->addChild(shared_from_this());
+    updatePos();
 }
 
 void GObject::setRelativePos(const sf::Vector2f& newRelativePos){

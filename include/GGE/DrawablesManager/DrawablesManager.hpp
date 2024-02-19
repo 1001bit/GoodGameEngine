@@ -23,7 +23,7 @@ public:
     // Insert new drawable
     void newDrawable(std::shared_ptr<obj::Drawable> drawable, bool isGui, u_char layer);
     // Draw everything
-    void draw(sf::RenderWindow& window, obj::View& levelView, obj::View& guiView);
+    void draw(sf::RenderWindow& window, std::shared_ptr<obj::View> levelView, std::shared_ptr<obj::View> guiView);
     // Set max layers count
     void setLayerCount(u_char newLayerCount);
 };

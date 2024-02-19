@@ -6,27 +6,18 @@
 
 namespace gge::obj {
 
-class Camera : public GObject
+class SmoothFollower : public GObject
 {
 private:
     // Variables
     std::weak_ptr<GObject> followTargetWeak;
-
-    // Methods
-    // update position of rect and camera
-    void updatePos();
     
 public:
     // Structors
-    Camera();
-    ~Camera();
-
-    // Variables
-    View view;
+    SmoothFollower();
+    ~SmoothFollower();
 
     // Methods
-    // set size of view
-    void setRectSize(float w, float h);
     // smoothly move camera
     void update(const float& dTimeMs);
     // set target of following

@@ -1,6 +1,3 @@
-- Move todo list to issues
-- Make camera just a smooth follower object with view as it's child
-
 Non-important tasks:
 - Store objects' shared_ptrs in separate vectors inside level
 - Moving solid body

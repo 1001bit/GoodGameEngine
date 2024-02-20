@@ -3,7 +3,6 @@
 #include "GGECustom/GameConstants.hpp"
 
 #include "GGE/GObjects/GObject.hpp"
-#include "GGECustom/GObjects/SmoothFollower.hpp"
 #include "GGE/GObjects/Drawable.hpp"
 
 #include "GGE/Physics/PhysicsManager.hpp"

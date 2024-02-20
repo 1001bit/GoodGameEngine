@@ -1,4 +1,4 @@
-#include "GGE/GObjects/SmoothFollower.hpp"
+#include "GGECustom/GObjects/SmoothFollower.hpp"
 
 using gge::obj::SmoothFollower;
 

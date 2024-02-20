@@ -52,11 +52,6 @@ void DialogueManager::startDialogue(u_char id){
     currentDialogueWeak = dialoguesMap.at(id);
 }
 
-// Set level parent
-void DialogueManager::setLevel(std::shared_ptr<Level> level){
-    levelWeak = level;
-}
-
 // Update current dialogue
 void DialogueManager::update(const float& dTimeMs){
     // if current dialogue is active
@@ -77,7 +72,7 @@ void DialogueManager::update(const float& dTimeMs){
     }
 
     // set camera target
-    if(auto camera = level->cameraWeak.lock()){
+    if(auto camera = cameraWeak.lock()){
         uint16_t speakerId = currentDialogue->getCurrentLine().characterId;
         std::shared_ptr<obj::GObject> currentSpeaker = level->gObjectsWId.at(1).lock();
         if(level->gObjectsWId.count(speakerId)){

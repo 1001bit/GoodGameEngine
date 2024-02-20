@@ -12,6 +12,15 @@ void clvl::testInit(std::shared_ptr<Level> level){
     ResourceManager* resourceManager = ResourceManager::getInstance();
 
     // Level
+    // Smooth following camera
+    std::shared_ptr<obj::SmoothFollower> camera = std::make_shared<obj::SmoothFollower>();
+    level->addChild(camera);
+    if(auto levelView = level->levelViewWeak.lock()){
+        camera->addChild(levelView);
+        levelView->setRelativePos(levelView->getRect().getSize() / -2.f);
+    }
+    level->updatableGObjects.push_back(camera);
+
     // dummy
     std::shared_ptr<obj::PhysPlayer> dummy = std::make_shared<obj::PhysPlayer>();
     level->addChild(dummy);
@@ -19,9 +28,7 @@ void clvl::testInit(std::shared_ptr<Level> level){
     level->gObjectsWId[1] = dummy;
     dummy->setRectPixelSize(16, 16);
     dummy->setCurrentPos({000, 300});
-    if(auto camera = level->cameraWeak.lock()){
-        camera->setTarget(dummy);
-    }
+    camera->setTarget(dummy);
     
     // his sprite
     std::shared_ptr<obj::AnimatedSprite> dummySprite = std::make_shared<obj::AnimatedSprite>();
@@ -100,13 +107,15 @@ void clvl::testInit(std::shared_ptr<Level> level){
     }
 
     // Gui
-    // dummy-npc dialogue
+    // Dialogue manager
     std::shared_ptr<gge::DialogueManager> dialogueManager = std::make_shared<gge::DialogueManager>();
     level->addChild(dialogueManager);
     level->updatableGObjects.push_back(dialogueManager);
-    dialogueManager->setLevel(level);
+    dialogueManager->levelWeak = level;
+    dialogueManager->cameraWeak = camera;
     dialogueManager->initDrawables();
 
+    // dummy-npc dialogue
     std::shared_ptr<Dialogue> dialogue1 = std::make_shared<Dialogue>();
     dialogueManager->setDialoguesMap({{0, dialogue1}});
     dialogue1->setLines({

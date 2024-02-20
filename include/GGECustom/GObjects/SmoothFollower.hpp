@@ -1,8 +1,8 @@
 #pragma once
 
-#include "GObject.hpp"
-#include "View.hpp"
-#include <GGE/MathHelper.hpp>
+#include "GGE/GObjects/GObject.hpp"
+#include "GGE/GObjects/View.hpp"
+#include "GGE/MathHelper.hpp"
 
 namespace gge::obj {
 

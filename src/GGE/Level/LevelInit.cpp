@@ -19,7 +19,6 @@ void Level::init(){
     std::shared_ptr<obj::View> guiView = std::make_shared<obj::View>();
     addChild(guiView);
     guiView->setRectSize(GAME_WIDTH, GAME_HEIGHT);
-    guiView->setRelativePos({0, 0});
     guiViewWeak = guiView;
 
     // init level view

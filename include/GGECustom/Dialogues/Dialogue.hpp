@@ -38,7 +38,7 @@ public:
     void update();
 
     // Getters
-    // Get current line from number
+    // linesList[currentDialogueLineId]
     const DialogueLine& getCurrentLine();
 };
 

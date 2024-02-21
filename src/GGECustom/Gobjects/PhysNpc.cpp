@@ -1,4 +1,4 @@
-#include "GGECustom/GObjects/PhysNpc.hpp"
+#include "GGECustom/Gobjects/PhysNpc.hpp"
 
 using gge::obj::PhysNpc;
 

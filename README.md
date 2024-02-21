@@ -4,9 +4,9 @@
 ## Main game engine parts:
 
 * **Game** - main container for game loop, init, level, etc.
-* **GObject** - unit of some in-game object. For example level, camera or player
+* **Gobject** - unit of some in-game object. For example level, camera or player
 * **Manager** - main container for all the non-objects like dialogues, controls, cooldowns, instructions, etc.
-* **Level** - main container for all the GObjects, dialogues, etc.
+* **Level** - main container for all the Gobjects, dialogues, etc.
 * **Instructions**:
   - **TriggerManager** - contains all the triggers, runs "check" method to check if trigger event has happened
   - **Trigger** - checks for event to activate action
@@ -14,4 +14,4 @@
 
 ##
 
-Developer can create their own *Levels*, *Intructions*, *GObjects* in **GGECustom** directory  
+Developer can create their own *Levels*, *Intructions*, *Gobjects* in **GGECustom** directory  

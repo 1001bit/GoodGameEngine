@@ -74,18 +74,19 @@ void DialogueManager::update(const float& dTimeMs){
     // set camera target
     if(auto camera = cameraWeak.lock()){
         uint16_t speakerId = currentDialogue->getCurrentLine().characterId;
-        std::shared_ptr<obj::GObject> currentSpeaker = level->gObjectsWId.at(1).lock();
-        if(level->gObjectsWId.count(speakerId)){
-            currentSpeaker = level->gObjectsWId.at(speakerId).lock();
+        std::shared_ptr<obj::Gobject> currentSpeaker = level->gobjectIdMap.at(1).lock();
+        // if speaker's id is in IDs map
+        if(level->gobjectIdMap.count(speakerId)){
+            currentSpeaker = level->gobjectIdMap.at(speakerId).lock();
+            // if speaker object is deleted - remove it from map
             if(!currentSpeaker){
-                level->gObjectsWId.erase(speakerId);
-                currentSpeaker = level->gObjectsWId.at(1).lock();
+                level->gobjectIdMap.erase(speakerId);
             }
         }
         camera->setTarget(currentSpeaker);
     }
 
-    // if empty string (after last line) - stop it
+    // if empty string (after last line) - stop dialogue
     if(currentDialogue->getCurrentLine().line == ""){
         currentDialogueWeak.reset();
         setDrawableVisiblity(0);

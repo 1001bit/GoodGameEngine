@@ -1,4 +1,4 @@
-#include "GGECustom/GObjects/SmoothFollower.hpp"
+#include "GGECustom/Gobjects/SmoothFollower.hpp"
 
 using gge::obj::SmoothFollower;
 
@@ -27,6 +27,6 @@ void SmoothFollower::update(const float& dTimeMs){
 }
 
 // set target of following
-void SmoothFollower::setTarget(std::shared_ptr<GObject> newTarget){
+void SmoothFollower::setTarget(std::shared_ptr<Gobject> newTarget){
     followTargetWeak = newTarget;
 };

@@ -1,8 +1,8 @@
 #include "inits.hpp"
 
-#include "GGECustom/GObjects/PhysNpc.hpp"
-#include "GGECustom/GObjects/PhysPlayer.hpp"
-#include "GGE/GObjects/AnimatedSprite.hpp"
+#include "GGECustom/Gobjects/PhysNpc.hpp"
+#include "GGECustom/Gobjects/PhysPlayer.hpp"
+#include "GGE/Gobjects/AnimatedSprite.hpp"
 #include "GGECustom/Instructions/AcDialogue.hpp"
 #include "GGECustom/Instructions/TrCollision.hpp"
 
@@ -19,13 +19,13 @@ void clvl::testInit(std::shared_ptr<Level> level){
         camera->addChild(levelView);
         levelView->setRelativePos(levelView->getRect().getSize() / -2.f);
     }
-    level->updatableGObjects.push_back(camera);
+    level->updatableGobjects.push_back(camera);
 
     // dummy
     std::shared_ptr<obj::PhysPlayer> dummy = std::make_shared<obj::PhysPlayer>();
     level->addChild(dummy);
     level->physicsManager.addNewBody(std::static_pointer_cast<gge::obj::KinematicBody>(dummy));
-    level->gObjectsWId[1] = dummy;
+    level->gobjectIdMap[1] = dummy;
     dummy->setRectPixelSize(16, 16);
     dummy->setCurrentPos({000, 300});
     camera->setTarget(dummy);
@@ -34,7 +34,7 @@ void clvl::testInit(std::shared_ptr<Level> level){
     std::shared_ptr<obj::AnimatedSprite> dummySprite = std::make_shared<obj::AnimatedSprite>();
     dummy->addChild(dummySprite);
     level->drawablesManager.newDrawable(dummySprite, false, 1);
-    level->updatableGObjects.push_back(dummySprite);  
+    level->updatableGobjects.push_back(dummySprite);  
     dummySprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
     dummySprite->playAnimation("idle");
     // his sword
@@ -49,14 +49,14 @@ void clvl::testInit(std::shared_ptr<Level> level){
     std::shared_ptr<obj::PhysNpc> npc = std::make_shared<obj::PhysNpc>();
     level->addChild(npc);
     level->physicsManager.addNewBody(std::static_pointer_cast<gge::obj::KinematicBody>(npc));
-    level->gObjectsWId[2] = npc;
+    level->gobjectIdMap[2] = npc;
     npc->setRectPixelSize(16, 16);
     npc->setCurrentPos({500, 300});
     // his sprite
     std::shared_ptr<obj::AnimatedSprite> npcSprite = std::make_shared<obj::AnimatedSprite>();
     npc->addChild(npcSprite);
     level->drawablesManager.newDrawable(npcSprite, false, 0);
-    level->updatableGObjects.push_back(npcSprite);  
+    level->updatableGobjects.push_back(npcSprite);  
     npcSprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 100, 1));
     npcSprite->playAnimation("idle");
     // his sword
@@ -110,7 +110,7 @@ void clvl::testInit(std::shared_ptr<Level> level){
     // Dialogue manager
     std::shared_ptr<gge::DialogueManager> dialogueManager = std::make_shared<gge::DialogueManager>();
     level->addChild(dialogueManager);
-    level->updatableGObjects.push_back(dialogueManager);
+    level->updatableGobjects.push_back(dialogueManager);
     dialogueManager->levelWeak = level;
     dialogueManager->cameraWeak = camera;
     dialogueManager->initDrawables();

@@ -2,7 +2,7 @@
 
 #include <memory>
 #include "GGE/Controls/ControlsManager.hpp"
-#include "GGE/GObjects/GObject.hpp"
+#include "GGE/Gobjects/Gobject.hpp"
 
 namespace gge {
 
@@ -31,7 +31,7 @@ public:
 
     // Methods
     // add a new participant
-    void addParticipant(uint16_t id, std::shared_ptr<obj::GObject> pointer);
+    void addParticipant(uint16_t id, std::shared_ptr<obj::Gobject> pointer);
     // set new lines list
     void setLines(std::vector<DialogueLine> newLines);
     // update dialogue

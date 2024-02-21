@@ -1,10 +1,10 @@
 #pragma once
 
-#include "GGE/GObjects/KinematicBody.hpp"
+#include "GGE/Gobjects/KinematicBody.hpp"
 
 namespace gge::obj {
 
-class PhysNpc : public KinematicBody
+class TDNpc : public KinematicBody
 {
 private:
     // Variables
@@ -12,8 +12,8 @@ private:
 
 public:
     // Structors
-    PhysNpc();
-    ~PhysNpc();
+    TDNpc();
+    ~TDNpc();
 
     // Methods
     // npc movement

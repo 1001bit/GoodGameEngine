@@ -2,16 +2,15 @@
 
 #include <unordered_map>
 #include "GGECustom/Dialogues/Dialogue.hpp"
-#include "GGE/GObjects/Text.hpp"
-#include "GGE/GObjects/Sprite.hpp"
-#include "GGECustom/GObjects/SmoothFollower.hpp"
+#include "GGE/Gobjects/Text.hpp"
+#include "GGE/Gobjects/Sprite.hpp"
+#include "GGECustom/Gobjects/SmoothFollower.hpp"
 #include "GGE/ResourceManager/ResourceManager.hpp"
 #include "GGECustom/GameConstants.hpp"
 #include "GGE/Level.hpp"
 
 namespace gge {
-
-class DialogueManager : public gge::obj::GObject
+class DialogueManager : public gge::obj::Gobject
 {
 private:
     // Variables

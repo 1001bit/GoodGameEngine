@@ -11,6 +11,7 @@ PhysNpc::PhysNpc(){
     this->movementDir = Direction::None;
 
     this->weighs = 1;
+    this->friction = 1;
     this->collidable = 1;
 
     gge::CooldownsManager* cooldownsManager = gge::CooldownsManager::getInstance();

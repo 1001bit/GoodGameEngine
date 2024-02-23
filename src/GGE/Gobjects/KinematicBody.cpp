@@ -33,7 +33,7 @@ void KinematicBody::moveCurrentRect(sf::Vector2f moveDistance){
 // set size of current rect
 void KinematicBody::setRectSize(const sf::Vector2f& newSize){
     currentRect.width = newSize.x;
-    currentRect.height = newSize.x;
+    currentRect.height = newSize.y;
 
     Gobject::setRectSize(newSize);
 }

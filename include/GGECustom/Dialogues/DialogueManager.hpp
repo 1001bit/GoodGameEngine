@@ -10,6 +10,7 @@
 #include "GGE/Level.hpp"
 
 namespace gge {
+    
 class DialogueManager : public gge::obj::Gobject
 {
 private:

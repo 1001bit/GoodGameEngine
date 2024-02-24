@@ -8,7 +8,9 @@ Gobject::Gobject(){
     this->doesFlipMirror = false;
 }
 
-Gobject::~Gobject(){}
+Gobject::~Gobject(){
+    // std::cout << "deleted\n";
+}
 
 // Methods
 void Gobject::update(const float& dTimeMs){}
@@ -42,6 +44,12 @@ void Gobject::addChild(std::shared_ptr<Gobject> newChild){
 
 void Gobject::removeChild(std::shared_ptr<Gobject> child){
     children.erase(std::remove(children.begin(), children.end(), child), children.end());
+}
+
+void Gobject::removeSelf(){
+    if(auto parent = parentWeak.lock()){
+        parent->removeChild(shared_from_this());
+    }
 }
 
 void Gobject::setRelativePos(const sf::Vector2f& newRelativePos){

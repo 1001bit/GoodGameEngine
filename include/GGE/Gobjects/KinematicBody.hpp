@@ -16,6 +16,8 @@ class KinematicBody : public Body
 private:
     sf::FloatRect currentRect;
     sf::FloatRect previousRect;
+    // is setCurrentPos called for the first time
+    bool firstCurrentPosSet;
 
 protected:
     // Variables

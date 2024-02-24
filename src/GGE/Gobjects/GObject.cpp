@@ -4,8 +4,8 @@ using gge::obj::Gobject;
 
 // Structors
 Gobject::Gobject(){
-    this->flipped = 0;
-    this->doesFlipMirror = 0;
+    this->flipped = false;
+    this->doesFlipMirror = false;
 }
 
 Gobject::~Gobject(){}

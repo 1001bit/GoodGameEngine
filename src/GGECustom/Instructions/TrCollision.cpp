@@ -20,13 +20,13 @@ void TrCollision::checkEvent(){
         return;
     }
 
-    if(!body1->currentRect.intersects(body2->currentRect)){
+    if(!body1->getCurrentRect().intersects(body2->getCurrentRect())){
         return;
     }
 
     action->doAction();
 
-    active = 0;
+    active = false;
 }
 
 // set two bodies that gonna collide

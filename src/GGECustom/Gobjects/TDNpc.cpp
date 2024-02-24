@@ -9,9 +9,9 @@ constexpr unsigned MOVEMENT_RAND = 500;
 TDNpc::TDNpc(){
     this->movementDir = Direction::None;
 
-    this->weighs = 0;
-    this->friction = 1;
-    this->collidable = 1;
+    this->weighs = false;
+    this->friction = true;
+    this->collidable = true;
     
     gge::CooldownsManager* cooldownsManager = gge::CooldownsManager::getInstance();
     selfCooldownMap["idle"] = cooldownsManager->newCooldown(gge::Cooldown(2000));

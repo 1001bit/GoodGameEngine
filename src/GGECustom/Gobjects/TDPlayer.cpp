@@ -6,9 +6,9 @@ constexpr float WALK_SPEED = 15;
 
 // Structors
 TDPlayer::TDPlayer(){
-    this->weighs = 0;
-    this->friction = 1;
-    this->collidable = 1;
+    this->weighs = false;
+    this->friction = true;
+    this->collidable = true;
 }
 
 TDPlayer::~TDPlayer(){}

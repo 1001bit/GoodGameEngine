@@ -21,13 +21,15 @@ void KinematicBody::accelerate(float accelX, float accelY){
     acceleration.y += accelY;
 }
 
-void KinematicBody::setCurrentPos(sf::Vector2f newPosition){
+void KinematicBody::setCurrentPos(const sf::Vector2f& newPosition){
     currentRect.left = newPosition.x;
     currentRect.top = newPosition.y;
+
+    Gobject::setRelativePos(newPosition);
 }
 
 // Move the current rect
-void KinematicBody::moveCurrentRect(sf::Vector2f moveDistance){
+void KinematicBody::moveCurrentRect(const sf::Vector2f& moveDistance){
     setCurrentPos(currentRect.getPosition() + moveDistance);
 }
 
@@ -39,6 +41,11 @@ void KinematicBody::setRectSize(const sf::Vector2f& newSize){
     Gobject::setRectSize(newSize);
 }
 
+// set previousRect = currentRect
+void KinematicBody::updatePreviousRect(){
+    previousRect = currentRect;
+}
+
 // Getters
 // weighs
 const bool& KinematicBody::doesWeigh(){
@@ -47,4 +54,12 @@ const bool& KinematicBody::doesWeigh(){
 // friction
 const bool& KinematicBody::doesFriction(){
     return friction;
+}
+// currentRect
+const sf::FloatRect& KinematicBody::getCurrentRect(){
+    return currentRect;
+}
+// previousRect
+const sf::FloatRect& KinematicBody::getPreviousRect(){
+    return previousRect;
 }

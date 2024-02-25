@@ -12,40 +12,43 @@ TDNpc::TDNpc(){
     this->weighs = false;
     this->friction = true;
     this->collidable = true;
-    
-    gge::CooldownsManager* cooldownsManager = gge::CooldownsManager::getInstance();
-    selfCooldownMap["idle"] = cooldownsManager->newCooldown(gge::Cooldown(2000));
-    selfCooldownMap["walk"] = cooldownsManager->newCooldown(gge::Cooldown(3000));
 }
 TDNpc::~TDNpc(){}
 
 // Methods
+// init cooldowns
+void TDNpc::initCooldowns(CooldownsManager& cooldownsManager){
+    idleCooldown = cooldownsManager.newCooldown(gge::Cooldown(2000));
+    walkCooldown = cooldownsManager.newCooldown(gge::Cooldown(3000));
+    walkCooldown->start(500);
+}
+
 // npc movement
 void TDNpc::control(){
     // no movement while on idle cooldown
-    if(selfCooldownMap.at("idle")->getCurrentValueMs()){
+    if(idleCooldown->getCurrentValueMs()){
         return;
     }
 
     // if movement cooldown is over - start idle
-    if((!selfCooldownMap.at("walk")->getCurrentValueMs() && movementDir != Direction::None)){
+    if((!walkCooldown->getCurrentValueMs() && movementDir != Direction::None)){
         movementDir = Direction::None;
-        selfCooldownMap.at("idle")->start(MOVEMENT_RAND);
+        idleCooldown->start(MOVEMENT_RAND);
         return;
     }
 
     // if collision and walking in collision direction - start idle and stop walk
-    if(selfCooldownMap.at("walk")->getCurrentValueMs() && movementDir == collisionDir.horizontal){
+    if(walkCooldown->getCurrentValueMs() && movementDir == collisionDir.horizontal){
         movementDir = Direction::None;
-        selfCooldownMap.at("walk")->stop();
-        selfCooldownMap.at("idle")->start(MOVEMENT_RAND);
+        walkCooldown->stop();
+        idleCooldown->start(MOVEMENT_RAND);
         return;
     }
 
     // if idle cooldown is over and movementDir is still none
-    if(!selfCooldownMap.at("idle") && movementDir == Direction::None){
+    if(!idleCooldown->getCurrentValueMs() && movementDir == Direction::None){
         movementDir = static_cast<Direction>(rand() % 4 + 1);
-        selfCooldownMap.at("walk")->start(1000);
+        walkCooldown->start(1000);
     }
 
     // movement depending on direction

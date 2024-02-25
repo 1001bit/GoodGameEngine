@@ -13,7 +13,6 @@ void Game::loop(sf::RenderWindow& window){
     window.setKeyRepeatEnabled(false);
 
     ControlsManager* controlsManager = ControlsManager::getInstance();
-    CooldownsManager* cooldownsManager = CooldownsManager::getInstance();
 
     float accumulator = 0;
 
@@ -48,7 +47,7 @@ void Game::loop(sf::RenderWindow& window){
 
         // Updates
         // Cooldowns
-        cooldownsManager->updateCooldowns(dTimeMs);
+        currentLevel->cooldownsManager.updateCooldowns(dTimeMs);
 
         // Physics
         accumulator += dTimeMs;

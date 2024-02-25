@@ -9,6 +9,8 @@ class TDNpc : public KinematicBody
 private:
     // Variables
     Direction movementDir;
+    std::shared_ptr<Cooldown> idleCooldown;
+    std::shared_ptr<Cooldown> walkCooldown;
 
 public:
     // Structors
@@ -18,6 +20,8 @@ public:
     // Methods
     // npc movement
     void control();
+    // init cooldowns
+    void initCooldowns(CooldownsManager& cooldownsManager);
 };
 
 }

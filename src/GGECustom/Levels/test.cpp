@@ -55,6 +55,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     level->gobjectIdMap[2] = npc;
     npc->setRectPixelSize(16, 16);
     npc->setCurrentPos({500, 300});
+    npc->initCooldowns(level->cooldownsManager);
     // his sprite
     std::shared_ptr<obj::AnimatedSprite> npcSprite = std::make_shared<obj::AnimatedSprite>();
     npc->addChild(npcSprite);

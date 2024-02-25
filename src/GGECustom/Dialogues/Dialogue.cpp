@@ -1,4 +1,5 @@
 #include "GGECustom/Dialogues/Dialogue.hpp"
+#include "GGE/Controls/ControlsManager.hpp"
 
 using gge::Dialogue;
 

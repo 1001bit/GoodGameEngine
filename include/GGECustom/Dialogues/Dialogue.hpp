@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-#include "GGE/Controls/ControlsManager.hpp"
 #include "GGE/Gobjects/Gobject.hpp"
 
 namespace gge {

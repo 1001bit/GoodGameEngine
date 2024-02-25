@@ -1,4 +1,5 @@
 #include "GGECustom/Gobjects/SmoothFollower.hpp"
+#include "GGE/MathHelper.hpp"
 
 using gge::obj::SmoothFollower;
 

@@ -1,12 +1,9 @@
 #pragma once
 
-#include <unordered_map>
 #include "GGECustom/Dialogues/Dialogue.hpp"
 #include "GGE/Gobjects/Text.hpp"
 #include "GGE/Gobjects/Sprite.hpp"
 #include "GGECustom/Gobjects/SmoothFollower.hpp"
-#include "GGE/ResourceManager/ResourceManager.hpp"
-#include "GGECustom/GameConstants.hpp"
 #include "GGE/Level.hpp"
 
 namespace gge {
@@ -36,7 +33,7 @@ public:
 
     // Methods
     // Init drawable part
-    void initDrawables(ResourceManager& resourceManager);
+    void initDrawables();
     // Set all the dialogues list
     void setDialoguesMap(std::unordered_map<u_char, std::shared_ptr<Dialogue>> newDialogues);
 

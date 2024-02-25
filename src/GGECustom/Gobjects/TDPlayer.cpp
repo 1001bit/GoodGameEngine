@@ -1,4 +1,5 @@
 #include "GGECustom/Gobjects/TDPlayer.hpp"
+#include "GGE/Controls/ControlsManager.hpp"
 
 using gge::obj::TDPlayer;
 

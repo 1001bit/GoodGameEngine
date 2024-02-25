@@ -1,4 +1,5 @@
 #include "GGECustom/Gobjects/PhysPlayer.hpp"
+#include "GGE/Controls/ControlsManager.hpp"
 
 using gge::obj::PhysPlayer;
 

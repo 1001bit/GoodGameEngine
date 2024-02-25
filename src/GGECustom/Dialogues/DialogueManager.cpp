@@ -1,4 +1,5 @@
 #include "GGECustom/Dialogues/DialogueManager.hpp"
+#include "GGECustom/GameConstants.hpp"
 
 using gge::DialogueManager;
 
@@ -8,7 +9,7 @@ DialogueManager::~DialogueManager(){}
 
 // Methods
 // Init drawable part
-void DialogueManager::initDrawables(ResourceManager& resourceManager){
+void DialogueManager::initDrawables(){
     auto level = levelWeak.lock();
     if(!level){
         return;
@@ -20,7 +21,7 @@ void DialogueManager::initDrawables(ResourceManager& resourceManager){
     level->addChild(dialogueBox);
     dialogueBoxWeak = dialogueBox;
 
-    dialogueBox->setTexture(resourceManager.getTexture("Assets/Textures/dialogueBackground.png"));
+    dialogueBox->setTexture(level->resourceManager.getTexture("Assets/Textures/dialogueBackground.png"));
     
     // Dialogue text
     std::shared_ptr<obj::Text> dialogueText = std::make_shared<obj::Text>();
@@ -28,7 +29,7 @@ void DialogueManager::initDrawables(ResourceManager& resourceManager){
     dialogueBox->addChild(dialogueText);
     dialogueTextWeak = dialogueText;
 
-    dialogueText->text.setFont(resourceManager.getFont("Assets/Fonts/font1.ttf"));
+    dialogueText->text.setFont(level->resourceManager.getFont("Assets/Fonts/font1.ttf"));
     dialogueText->text.setCharacterSize(30);
     dialogueText->text.setString("...");
     dialogueText->setRelativePos({60, 20});

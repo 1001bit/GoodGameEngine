@@ -1,7 +1,6 @@
 #pragma once
 
 #include "GGE/Gobjects/KinematicBody.hpp"
-#include "GGE/Controls/ControlsManager.hpp"
 
 namespace gge::obj {
 

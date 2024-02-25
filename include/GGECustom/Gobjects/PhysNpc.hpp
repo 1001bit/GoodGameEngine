@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GGE/Gobjects/KinematicBody.hpp"
+#include "GGE/Cooldowns/CooldownsManager.hpp"
 
 namespace gge::obj {
 

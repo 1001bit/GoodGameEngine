@@ -8,13 +8,11 @@ DialogueManager::~DialogueManager(){}
 
 // Methods
 // Init drawable part
-void DialogueManager::initDrawables(){
+void DialogueManager::initDrawables(ResourceManager& resourceManager){
     auto level = levelWeak.lock();
     if(!level){
         return;
     }
-
-    ResourceManager* resourceManager = ResourceManager::getInstance();
 
     // Dialogue box
     std::shared_ptr<obj::Sprite> dialogueBox = std::make_shared<obj::Sprite>();
@@ -22,7 +20,7 @@ void DialogueManager::initDrawables(){
     level->addChild(dialogueBox);
     dialogueBoxWeak = dialogueBox;
 
-    dialogueBox->setTexture(resourceManager->getTexture("Assets/Textures/dialogueBackground.png"));
+    dialogueBox->setTexture(resourceManager.getTexture("Assets/Textures/dialogueBackground.png"));
     
     // Dialogue text
     std::shared_ptr<obj::Text> dialogueText = std::make_shared<obj::Text>();
@@ -30,7 +28,7 @@ void DialogueManager::initDrawables(){
     dialogueBox->addChild(dialogueText);
     dialogueTextWeak = dialogueText;
 
-    dialogueText->text.setFont(resourceManager->getFont("Assets/Fonts/font1.ttf"));
+    dialogueText->text.setFont(resourceManager.getFont("Assets/Fonts/font1.ttf"));
     dialogueText->text.setCharacterSize(30);
     dialogueText->text.setString("...");
     dialogueText->setRelativePos({60, 20});

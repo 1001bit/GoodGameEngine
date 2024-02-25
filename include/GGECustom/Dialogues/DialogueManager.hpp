@@ -36,7 +36,7 @@ public:
 
     // Methods
     // Init drawable part
-    void initDrawables();
+    void initDrawables(ResourceManager& resourceManager);
     // Set all the dialogues list
     void setDialoguesMap(std::unordered_map<u_char, std::shared_ptr<Dialogue>> newDialogues);
 

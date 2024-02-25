@@ -12,8 +12,6 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     std::shared_ptr<Level> level = std::make_shared<Level>();
     level->init();
 
-    ResourceManager* resourceManager = ResourceManager::getInstance();
-
     // Level
     // Smooth following camera
     std::shared_ptr<obj::SmoothFollower> camera = std::make_shared<obj::SmoothFollower>();
@@ -38,13 +36,13 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     dummy->addChild(dummySprite);
     level->drawablesManager.newDrawable(dummySprite, false, 1);
     level->updatableGobjects.push_back(dummySprite);  
-    dummySprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
+    dummySprite->insertAnimation("idle", Animation(level->resourceManager.getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
     dummySprite->playAnimation("idle");
     // his sword
     std::shared_ptr<obj::Sprite> sword = std::make_shared<obj::Sprite>();
     dummy->addChild(sword);
     level->drawablesManager.newDrawable(sword, false, 2);
-    sword->setTexture(resourceManager->getTexture("Assets/Textures/sword.png"));
+    sword->setTexture(level->resourceManager.getTexture("Assets/Textures/sword.png"));
     sword->setRelativePos({60, 0});
     sword->makeFlippable();
 
@@ -61,13 +59,13 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     npc->addChild(npcSprite);
     level->drawablesManager.newDrawable(npcSprite, false, 0);
     level->updatableGobjects.push_back(npcSprite);  
-    npcSprite->insertAnimation("idle", Animation(resourceManager->getTexture("Assets/Textures/dummy.png"), 16, 100, 1));
+    npcSprite->insertAnimation("idle", Animation(level->resourceManager.getTexture("Assets/Textures/dummy.png"), 16, 100, 1));
     npcSprite->playAnimation("idle");
     // his sword
     sword = std::make_shared<obj::Sprite>();
     npc->addChild(sword);
     level->drawablesManager.newDrawable(sword, false, 1);
-    sword->setTexture(resourceManager->getTexture("Assets/Textures/sword.png"));
+    sword->setTexture(level->resourceManager.getTexture("Assets/Textures/sword.png"));
     sword->setRelativePos({60, 0});
     sword->makeFlippable();
 
@@ -81,7 +79,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     std::shared_ptr<obj::Sprite>  platformSprite = std::make_shared<obj::Sprite>();
     platform->addChild(platformSprite);
     level->drawablesManager.newDrawable(platformSprite, false, 0);
-    platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
+    platformSprite->setTexture(level->resourceManager.getTexture("Assets/Textures/platform.png"));
 
     // a platform
     platform = std::make_shared<obj::Body>();
@@ -93,7 +91,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     platformSprite = std::make_shared<obj::Sprite>();
     platform->addChild(platformSprite);
     level->drawablesManager.newDrawable(platformSprite, false, 0);
-    platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
+    platformSprite->setTexture(level->resourceManager.getTexture("Assets/Textures/platform.png"));
 
     // bunch of platforms
     for(int i = 0; i < 100; ++i){
@@ -107,7 +105,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
         platformSprite = std::make_shared<obj::Sprite>();
         platform->addChild(platformSprite);
         level->drawablesManager.newDrawable(platformSprite, false, 0);
-        platformSprite->setTexture(resourceManager->getTexture("Assets/Textures/platform.png"));
+        platformSprite->setTexture(level->resourceManager.getTexture("Assets/Textures/platform.png"));
     }
 
     // Gui
@@ -117,7 +115,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     level->updatableGobjects.push_back(dialogueManager);
     dialogueManager->levelWeak = level;
     dialogueManager->cameraWeak = camera;
-    dialogueManager->initDrawables();
+    dialogueManager->initDrawables(level->resourceManager);
 
     // dummy-npc dialogue
     std::shared_ptr<Dialogue> dialogue1 = std::make_shared<Dialogue>();

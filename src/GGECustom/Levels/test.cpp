@@ -8,7 +8,10 @@
 
 using namespace gge;
 
-void clvl::testInit(std::shared_ptr<Level> level){
+std::shared_ptr<gge::Level> clvl::newTest(){
+    std::shared_ptr<Level> level = std::make_shared<Level>();
+    level->init();
+
     ResourceManager* resourceManager = ResourceManager::getInstance();
 
     // Level
@@ -135,4 +138,6 @@ void clvl::testInit(std::shared_ptr<Level> level){
     trigger->setAction(action);
 
     level->triggersManager.addNewTrigger(trigger);
+    
+    return level;
 }

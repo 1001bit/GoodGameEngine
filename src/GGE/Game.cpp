@@ -8,14 +8,6 @@ Game::Game(){}
 Game::~Game(){}
 
 // Methods
-
-// Game init
-void Game::init(){
-    // Level
-    currentLevel = std::make_shared<Level>();
-    currentLevel->init();
-}
-
 // Main loop
 void Game::loop(sf::RenderWindow& window){
     window.setKeyRepeatEnabled(false);
@@ -82,7 +74,6 @@ void Game::loop(sf::RenderWindow& window){
         auto guiView = currentLevel->guiViewWeak.lock();
         if(levelView && guiView){
             currentLevel->drawablesManager.draw(window, levelView, guiView);
-        } else {
         }
 
         window.display();

@@ -29,7 +29,7 @@ public:
 
     // Methods
     // add a new participant
-    void addParticipant(uint16_t id, std::shared_ptr<obj::Gobject> pointer);
+    void addParticipant(ushort id, std::shared_ptr<obj::Gobject> pointer);
     // set new lines list
     void setLines(std::vector<DialogueLine> newLines);
     // update dialogue

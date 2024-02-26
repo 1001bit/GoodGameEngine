@@ -4,7 +4,7 @@
 #include "GGE/Gobjects/Text.hpp"
 #include "GGE/Gobjects/Sprite.hpp"
 #include "GGECustom/Gobjects/SmoothFollower.hpp"
-#include "GGE/Level.hpp"
+#include "GGE/Level/Level.hpp"
 
 namespace gge {
     

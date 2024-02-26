@@ -24,7 +24,7 @@ void TrCollision::checkEvent(){
         return;
     }
 
-    action->doAction();
+    activateActions();
 
     active = false;
 }

@@ -134,7 +134,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
 
     std::shared_ptr<ins::AcDialogue> action = std::make_shared<ins::AcDialogue>();
     action->setDialogueParams(0, dialogueManager);
-    trigger->setAction(action);
+    trigger->addAction(action);
 
     level->triggersManager.addNewTrigger(trigger);
     

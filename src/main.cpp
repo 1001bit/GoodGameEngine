@@ -32,7 +32,10 @@ int main()
     initControls();
 
     // init levels
-    game.currentLevel = clvl::newTest();
+    game.levelsManager.setNewMapLevel(0, clvl::newTest());
+
+    // start level
+    game.levelsManager.setCurrentLevel(0);
 
     // start the main loop
     game.loop(window);

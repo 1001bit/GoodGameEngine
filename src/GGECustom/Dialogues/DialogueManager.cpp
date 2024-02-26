@@ -72,7 +72,7 @@ void DialogueManager::update(const float& dTimeMs){
 
     // set camera target
     if(auto camera = cameraWeak.lock()){
-        uint16_t speakerId = currentDialogue->getCurrentLine().characterId;
+        ushort speakerId = currentDialogue->getCurrentLine().characterId;
         std::shared_ptr<obj::Gobject> currentSpeaker = level->gobjectIdMap.at(1).lock();
         // if speaker's id is in IDs map
         if(level->gobjectIdMap.count(speakerId)){

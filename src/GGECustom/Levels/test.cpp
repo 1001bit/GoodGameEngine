@@ -130,14 +130,14 @@ std::shared_ptr<gge::Level> clvl::newTest(){
 
     // Instructions
     // start dialogue on collision of player and npc
-    std::shared_ptr<ins::TrCollision> trigger = std::make_shared<ins::TrCollision>();
-    trigger->setCollisionBodies(npc, dummy);
-
     std::shared_ptr<ins::AcDialogue> action = std::make_shared<ins::AcDialogue>();
     action->setDialogueParams(0, dialogueManager);
-    trigger->addAction(action);
+    level->instructionsManager.actionsVector.push_back(action);
 
-    level->triggersManager.addNewTrigger(trigger);
+    std::shared_ptr<ins::TrCollision> trigger = std::make_shared<ins::TrCollision>();
+    trigger->setCollisionBodies(npc, dummy);
+    level->instructionsManager.triggersVector.push_back(trigger);
+    trigger->addAction(action);
     
     return level;
 }

@@ -38,6 +38,8 @@ public:
     PhysicsManager();
     ~PhysicsManager();
 
+    bool active;
+
     // Methods
     // Do all the physics stuff to all the bodies
     void updatePhysics(const float& dTimeMs);

@@ -8,7 +8,6 @@ namespace gge::obj {
 class PhysNpc : public KinematicBody
 {
 private:
-    // Variables
     Direction movementDir;
     std::shared_ptr<Cooldown> idleCooldown;
     std::shared_ptr<Cooldown> walkCooldown;

@@ -12,7 +12,6 @@ struct DialogueLine {
 class Dialogue
 {
 private:
-    // Variables
     // vector of participant id and their line
     std::vector<DialogueLine> linesList;
     // id of current dialogueLine

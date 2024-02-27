@@ -8,7 +8,6 @@ namespace gge::ins {
 class AcDialogue : public Action
 {
 private:
-    // Variables
     u_char dialogueId;
     std::weak_ptr<gge::DialogueManager> dialogueManagerWeak;
 

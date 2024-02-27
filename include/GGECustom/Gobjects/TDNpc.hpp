@@ -8,7 +8,6 @@ namespace gge::obj {
 class TDNpc : public KinematicBody
 {
 private:
-    // Variables
     Direction movementDir;
     std::shared_ptr<Cooldown> idleCooldown;
     std::shared_ptr<Cooldown> walkCooldown;

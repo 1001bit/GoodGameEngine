@@ -5,11 +5,9 @@
 
 namespace gge::ins {
 
-// Some random trigger
 class TrCollision : public Trigger
 {
 private:
-    // Variables
     std::weak_ptr<gge::obj::KinematicBody> body1Weak;
     std::weak_ptr<gge::obj::KinematicBody> body2Weak;
 

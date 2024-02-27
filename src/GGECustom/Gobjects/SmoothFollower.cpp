@@ -6,8 +6,11 @@ using gge::obj::SmoothFollower;
 constexpr float FACTOR = 0.98;
 
 // Structors
-SmoothFollower::SmoothFollower(){}
-
+SmoothFollower::SmoothFollower(){
+    this->weighs = 0;
+    this->friction = 0;
+    this->collidable = 0;
+}
 SmoothFollower::~SmoothFollower(){}
 
 // Methods
@@ -23,8 +26,9 @@ void SmoothFollower::update(const float& dTimeMs){
     sf::Vector2f targetCenterPos(targetRect.getPosition() + targetRect.getSize()/2.f);
 
     float blend = pow(FACTOR, dTimeMs);
-    setRelativePos(lerp(targetCenterPos, getRelativePos(), blend));
-    // setRelativePos(targetCenterPos);
+    setCurrentPos(lerp(targetCenterPos, getCurrentRect().getPosition(), blend), true);
+
+    // setCurrentPos(targetCenterPos, true);
 }
 
 // set target of following

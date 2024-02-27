@@ -11,7 +11,6 @@ namespace gge {
 class DialogueManager : public gge::obj::Gobject
 {
 private:
-    // Variables
     // all the dialogues and their id's
     std::unordered_map<u_char, std::shared_ptr<Dialogue>> dialoguesMap;
     // current dialogue
@@ -23,13 +22,12 @@ private:
     std::weak_ptr<obj::Text> dialogueTextWeak;
 
 public:
+    std::weak_ptr<Level> levelWeak;
+    std::weak_ptr<obj::SmoothFollower> cameraWeak;
+
     // Structors
     DialogueManager();
     ~DialogueManager();
-
-    // Needed gobjects
-    std::weak_ptr<Level> levelWeak;
-    std::weak_ptr<obj::SmoothFollower> cameraWeak;
 
     // Methods
     // Init drawable part

@@ -16,6 +16,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     // Smooth following camera
     std::shared_ptr<obj::SmoothFollower> camera = std::make_shared<obj::SmoothFollower>();
     level->addChild(camera);
+    level->physicsManager.addNewBody(std::static_pointer_cast<obj::KinematicBody>(camera));
     if(auto levelView = level->levelViewWeak.lock()){
         camera->addChild(levelView);
         levelView->setRelativePos(levelView->getRect().getSize() / -2.f);
@@ -25,7 +26,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     // dummy
     std::shared_ptr<obj::PhysPlayer> dummy = std::make_shared<obj::PhysPlayer>();
     level->addChild(dummy);
-    level->physicsManager.addNewBody(std::static_pointer_cast<gge::obj::KinematicBody>(dummy));
+    level->physicsManager.addNewBody(std::static_pointer_cast<obj::KinematicBody>(dummy));
     level->gobjectIdMap[1] = dummy;
     dummy->setRectPixelSize(16, 16);
     dummy->setCurrentPos({000, 300}, true);
@@ -49,7 +50,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     // Npc
     std::shared_ptr<obj::PhysNpc> npc = std::make_shared<obj::PhysNpc>();
     level->addChild(npc);
-    level->physicsManager.addNewBody(std::static_pointer_cast<gge::obj::KinematicBody>(npc));
+    level->physicsManager.addNewBody(std::static_pointer_cast<obj::KinematicBody>(npc));
     level->gobjectIdMap[2] = npc;
     npc->setRectPixelSize(16, 16);
     npc->setCurrentPos({500, 300}, true);
@@ -110,7 +111,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
 
     // Gui
     // Dialogue manager
-    std::shared_ptr<gge::DialogueManager> dialogueManager = std::make_shared<gge::DialogueManager>();
+    std::shared_ptr<gge::DialogueManager> dialogueManager = std::make_shared<DialogueManager>();
     level->addChild(dialogueManager);
     level->updatableGobjects.push_back(dialogueManager);
     dialogueManager->levelWeak = level;

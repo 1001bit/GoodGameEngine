@@ -1,13 +1,12 @@
 #pragma once
 
-#include "GGE/Gobjects/Gobject.hpp"
+#include "GGE/Gobjects/KinematicBody.hpp"
 
 namespace gge::obj {
 
-class SmoothFollower : public Gobject
+class SmoothFollower : public KinematicBody 
 {
 private:
-    // Variables
     std::weak_ptr<Gobject> followTargetWeak;
     
 public:

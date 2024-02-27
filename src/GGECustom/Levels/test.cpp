@@ -28,7 +28,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     level->physicsManager.addNewBody(std::static_pointer_cast<gge::obj::KinematicBody>(dummy));
     level->gobjectIdMap[1] = dummy;
     dummy->setRectPixelSize(16, 16);
-    dummy->setCurrentPos({000, 300});
+    dummy->setCurrentPos({000, 300}, true);
     camera->setTarget(dummy);
     
     // his sprite
@@ -52,7 +52,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     level->physicsManager.addNewBody(std::static_pointer_cast<gge::obj::KinematicBody>(npc));
     level->gobjectIdMap[2] = npc;
     npc->setRectPixelSize(16, 16);
-    npc->setCurrentPos({500, 300});
+    npc->setCurrentPos({500, 300}, true);
     npc->initCooldowns(level->cooldownsManager);
     // his sprite
     std::shared_ptr<obj::AnimatedSprite> npcSprite = std::make_shared<obj::AnimatedSprite>();

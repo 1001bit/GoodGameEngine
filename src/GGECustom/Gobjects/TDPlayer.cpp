@@ -20,19 +20,19 @@ void TDPlayer::control(){
     gge::ControlsManager* controlsManager = gge::ControlsManager::getInstance();
 
     // walk left
-    if(controlsManager->isControlHeld("wLeft")){
+    if(controlsManager->isHeld("wLeft")){
         accelerate(-WALK_SPEED, 0);
     }
     // walk right
-    if(controlsManager->isControlHeld("wRight")){
+    if(controlsManager->isHeld("wRight")){
         accelerate(WALK_SPEED, 0);
     }
     // walk up
-    if(controlsManager->isControlHeld("wUp")){
+    if(controlsManager->isHeld("wUp")){
         accelerate(0, -WALK_SPEED);
     }
     // walk down
-    if(controlsManager->isControlHeld("wDown")){
+    if(controlsManager->isHeld("wDown")){
         accelerate(0, WALK_SPEED);
     }
 }

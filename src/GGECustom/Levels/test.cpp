@@ -111,11 +111,9 @@ std::shared_ptr<gge::Level> clvl::newTest(){
 
     // Gui
     // Dialogue manager
-    std::shared_ptr<gge::DialogueManager> dialogueManager = std::make_shared<DialogueManager>();
+    std::shared_ptr<gge::DialogueManager> dialogueManager = std::make_shared<DialogueManager>(level, camera);
     level->addChild(dialogueManager);
     level->updatableGobjects.push_back(dialogueManager);
-    dialogueManager->levelWeak = level;
-    dialogueManager->cameraWeak = camera;
     dialogueManager->initDrawables();
 
     // dummy-npc dialogue

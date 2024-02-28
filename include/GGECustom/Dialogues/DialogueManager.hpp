@@ -21,12 +21,13 @@ private:
     // dialogue text inside a box
     std::weak_ptr<obj::Text> dialogueTextWeak;
 
-public:
+    // level and camera
     std::weak_ptr<Level> levelWeak;
     std::weak_ptr<obj::SmoothFollower> cameraWeak;
 
+public:
     // Structors
-    DialogueManager();
+    DialogueManager(std::weak_ptr<Level> level, std::weak_ptr<obj::SmoothFollower> camera);
     ~DialogueManager();
 
     // Methods

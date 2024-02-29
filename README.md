@@ -14,4 +14,4 @@
 
 ##
 
-Developer can create their own *Levels*, *Intructions*, *Gobjects* in **GGECustom** directory  
+The engine and dependencies are located in *GGE* directory. Developer can make changes in engine for their needs and build a game using it. 

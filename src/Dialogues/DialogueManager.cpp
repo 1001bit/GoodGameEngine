@@ -4,7 +4,10 @@
 using gge::DialogueManager;
 
 // Structors
-DialogueManager::DialogueManager(std::weak_ptr<Level> level, std::weak_ptr<obj::SmoothFollower> camera) : levelWeak(level), cameraWeak(camera){}
+DialogueManager::DialogueManager(std::weak_ptr<Level> level, std::weak_ptr<obj::SmoothFollower> camera) : 
+levelWeak(level), 
+cameraWeak(camera)
+{}
 DialogueManager::~DialogueManager(){}
 
 // Methods

@@ -1,5 +1,6 @@
 #include "GGE/Gobjects/Gobject.hpp"
 #include "GGECustom/GameConstants.hpp"
+#include <cmath>
 
 using gge::obj::Gobject;
 
@@ -8,6 +9,13 @@ Gobject::Gobject(){
     this->flipped = false;
     this->doesFlipMirror = false;
 
+    #ifdef SHOW_OBJ_COUNT
+    objCount += 1;
+    std::cout << "Gobject count: " << objCount << "\n";
+    #endif
+}
+
+Gobject::Gobject(const Gobject& copy){
     #ifdef SHOW_OBJ_COUNT
     objCount += 1;
     std::cout << "Gobject count: " << objCount << "\n";

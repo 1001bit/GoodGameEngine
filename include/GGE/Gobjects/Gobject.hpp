@@ -37,6 +37,7 @@ public:
 
     // Structors
     Gobject();
+    Gobject(const Gobject& copy);
     ~Gobject();
 
     // Methods

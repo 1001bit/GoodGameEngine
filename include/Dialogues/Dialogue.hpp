@@ -15,7 +15,7 @@ private:
     // vector of participant id and their line
     std::vector<DialogueLine> linesList;
     // id of current dialogueLine
-    int16_t currentDialogueLineId;
+    short currentDialogueLineId;
 
     // Methods
     // control the flow of the dialogue

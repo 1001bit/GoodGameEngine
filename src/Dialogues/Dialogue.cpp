@@ -25,7 +25,7 @@ void Dialogue::control(){
     ControlsManager* controlsManager = ControlsManager::getInstance();
     if(controlsManager->isPressed("dialogueNext")){
         currentDialogueLineId += 1;
-        if(currentDialogueLineId >= linesList.size()){
+        if(currentDialogueLineId >= short(linesList.size())){
             currentDialogueLineId = 0;
         }
     }

@@ -52,7 +52,7 @@ void DialogueManager::startDialogue(u_char id){
 }
 
 // Update current dialogue
-void DialogueManager::update(const float& dTimeMs){
+void DialogueManager::update(const float&){
     // if current dialogue is active
     auto currentDialogue = currentDialogueWeak.lock();
     if(!currentDialogue){

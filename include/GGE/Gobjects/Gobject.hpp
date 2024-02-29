@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
+#include "GGE/DebugInfo.hpp"
 
 // 4 directions
 enum class Direction {
@@ -15,6 +16,10 @@ namespace gge::obj {
 class Gobject : public std::enable_shared_from_this<Gobject>
 {
 private:
+    #ifdef SHOW_OBJ_COUNT
+    inline static unsigned objCount;
+    #endif
+
     sf::Vector2f relativePos;
     sf::FloatRect selfRect;
     bool flipped;

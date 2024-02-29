@@ -1,6 +1,5 @@
 #include "GGE/Gobjects/Gobject.hpp"
 #include "GGECustom/GameConstants.hpp"
-#include "GGE/DebugInfo.hpp"
 
 using gge::obj::Gobject;
 
@@ -8,11 +7,17 @@ using gge::obj::Gobject;
 Gobject::Gobject(){
     this->flipped = false;
     this->doesFlipMirror = false;
+
+    #ifdef SHOW_OBJ_COUNT
+    objCount += 1;
+    std::cout << "Gobject count: " << objCount << "\n";
+    #endif
 }
 
 Gobject::~Gobject(){
-    #ifdef SHOW_OBJ_DELETE
-    std::cout << "deleted\n";
+    #ifdef SHOW_OBJ_COUNT
+    objCount -= 1;
+    std::cout << "Gobject count: " << objCount << "\n";
     #endif
 }
 

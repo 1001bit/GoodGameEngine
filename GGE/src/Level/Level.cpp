@@ -28,5 +28,5 @@ void Level::init(){
     drawablesManager.setLayerCount(10);
 
     // is active on start
-    this->active = true;
+    active = true;
 }

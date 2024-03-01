@@ -20,7 +20,7 @@ public:
     // set dialogueId, dialogueManager
     void setDialogueParams(u_char newId, std::shared_ptr<gge::DialogueManager> dialogueManager);
     // start dialogue
-    void doAction();
+    void activate();
 };
 
 }

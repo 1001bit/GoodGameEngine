@@ -8,7 +8,7 @@ AcDialogue::~AcDialogue(){}
 
 // Methods
 // start dialogue
-void AcDialogue::doAction(){
+void AcDialogue::activate(){
     if(auto dialogueManager = dialogueManagerWeak.lock()){
         dialogueManager->startDialogue(dialogueId);
     }

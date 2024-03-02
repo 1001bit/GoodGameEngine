@@ -1,10 +1,10 @@
 #include "inits.hpp"
 
- #include "Gobjects/PhysNpc.hpp"
- #include "Gobjects/PhysPlayer.hpp"
+#include "Gobjects/PhysNpc.hpp"
+#include "Gobjects/PhysPlayer.hpp"
 #include "GGE/Gobjects/AnimatedSprite.hpp"
- #include "Instructions/AcDialogue.hpp"
- #include "Instructions/TrCollision.hpp"
+#include "Instructions/AcDialogue.hpp"
+#include "Instructions/TrCollision.hpp"
 
 using namespace gge;
 

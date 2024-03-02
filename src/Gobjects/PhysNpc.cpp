@@ -1,4 +1,4 @@
- #include "Gobjects/PhysNpc.hpp"
+#include "Gobjects/PhysNpc.hpp"
 
 using gge::obj::PhysNpc;
 
@@ -12,11 +12,12 @@ constexpr float WALK_RAND = 1000;
 
 // Structors
 PhysNpc::PhysNpc(){
-    this->movementDir = Direction::None;
+    movementDir = Direction::None;
 
-    this->weighs = 1;
-    this->friction = 1;
-    this->collidable = 1;
+    weighs = true;
+    friction = true;
+    collidable = true;
+    controllable = true;
 }
 
 PhysNpc::~PhysNpc(){}

@@ -1,4 +1,4 @@
- #include "Gobjects/PhysPlayer.hpp"
+#include "Gobjects/PhysPlayer.hpp"
 #include "GGE/Controls/ControlsManager.hpp"
 
 using gge::obj::PhysPlayer;
@@ -9,9 +9,10 @@ constexpr float AIR_SLOWDOWN = 0.05;
 
 // Structors
 PhysPlayer::PhysPlayer(){
-    this->weighs = 1;
-    this->friction = 1;
-    this->collidable = 1;
+    weighs = true;
+    friction = true;
+    collidable = true;
+    controllable = true;
 }
 
 PhysPlayer::~PhysPlayer(){}

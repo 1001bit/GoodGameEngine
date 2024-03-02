@@ -1,4 +1,4 @@
- #include "Gobjects/TDPlayer.hpp"
+#include "Gobjects/TDPlayer.hpp"
 #include "GGE/Controls/ControlsManager.hpp"
 
 using gge::obj::TDPlayer;
@@ -7,9 +7,10 @@ constexpr float WALK_SPEED = 15;
 
 // Structors
 TDPlayer::TDPlayer(){
-    this->weighs = false;
-    this->friction = true;
-    this->collidable = true;
+    weighs = false;
+    friction = true;
+    collidable = true;
+    controllable = true;
 }
 
 TDPlayer::~TDPlayer(){}

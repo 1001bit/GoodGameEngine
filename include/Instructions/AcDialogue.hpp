@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GGE/Instructions/Action.hpp"
- #include "Dialogues/DialogueManager.hpp"
+#include "Dialogues/DialogueManager.hpp"
 
 namespace gge::ins {
 

@@ -1,5 +1,5 @@
- #include "Dialogues/DialogueManager.hpp"
- #include "BaseHeaders/GameConstants.hpp"
+#include "Dialogues/DialogueManager.hpp"
+#include "BaseHeaders/GameConstants.hpp"
 
 using gge::DialogueManager;
 

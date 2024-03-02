@@ -1,9 +1,9 @@
 #pragma once
 
- #include "Dialogues/Dialogue.hpp"
+#include "Dialogues/Dialogue.hpp"
 #include "GGE/Gobjects/Text.hpp"
 #include "GGE/Gobjects/Sprite.hpp"
- #include "Gobjects/SmoothFollower.hpp"
+#include "Gobjects/SmoothFollower.hpp"
 #include "GGE/Level/Level.hpp"
 
 namespace gge {

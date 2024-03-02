@@ -1,4 +1,4 @@
- #include "Gobjects/TDNpc.hpp"
+#include "Gobjects/TDNpc.hpp"
 
 using gge::obj::TDNpc;
 
@@ -11,11 +11,12 @@ constexpr float WALK_RAND = 1000;
 
 // Structors
 TDNpc::TDNpc(){
-    this->movementDir = Direction::None;
+    movementDir = Direction::None;
 
-    this->weighs = false;
-    this->friction = true;
-    this->collidable = true;
+    weighs = false;
+    friction = true;
+    collidable = true;
+    controllable = true;
 }
 TDNpc::~TDNpc(){}
 

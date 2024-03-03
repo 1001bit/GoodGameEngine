@@ -45,7 +45,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     level->drawablesManager.newDrawable(sword, false, 2);
     sword->setTexture(level->resourceManager.getTexture("Assets/Textures/sword.png"));
     sword->setRelativePos({60, 0});
-    sword->makeFlippable();
+    sword->makeRectMirrorable();
 
     // Npc
     std::shared_ptr<obj::PhysNpc> npc = std::make_shared<obj::PhysNpc>();
@@ -62,13 +62,14 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     level->updatableGobjects.push_back(npcSprite);  
     npcSprite->insertAnimation("idle", Animation(level->resourceManager.getTexture("Assets/Textures/dummy.png"), 16, 100, 1));
     npcSprite->playAnimation("idle");
+    npcSprite->sprite.setRotation(45);
     // his sword
     sword = std::make_shared<obj::Sprite>();
     npc->addChild(sword);
     level->drawablesManager.newDrawable(sword, false, 1);
     sword->setTexture(level->resourceManager.getTexture("Assets/Textures/sword.png"));
     sword->setRelativePos({60, 0});
-    sword->makeFlippable();
+    sword->makeRectMirrorable();
 
     // a platform
     std::shared_ptr<obj::Body> platform = std::make_shared<obj::Body>();

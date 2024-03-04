@@ -12,122 +12,124 @@ ControlsManager* ControlsManager::getInstance(){
 
 // Methods
 // Set Controls map
-void ControlsManager::setKeyboardControlsMap(std::unordered_map<std::string, sf::Keyboard::Key> controlsMap){
-    keyboardControlsMap = controlsMap;
+void ControlsManager::setControlsMap(std::unordered_map<std::string, Control> controlsMap){
+    this->controlsMap = controlsMap;
 }
-
-void ControlsManager::setMouseControlsMap(std::unordered_map<std::string, sf::Mouse::Button> controlsMap){
-    mouseControlsMap = controlsMap;
-};
 
 // Check if held
 bool ControlsManager::isHeld(const std::string& controlId){
-    // if there is such keyboard control and it's pressed
-    if(keyboardControlsMap.count(controlId)){
-        if(heldKeyboardKeys.count(keyboardControlsMap.at(controlId))){
-            return 1;
+    if(!controlsMap.count(controlId)){
+        return false;
+    }
+
+    for(sf::Keyboard::Key key : controlsMap.at(controlId).keyboard){
+        if(activeControls.keyboard.count(key)){
+            return activeControls.keyboard.at(key).held;
         }
     }
-    // if there is such mouse control and it's pressed
-    else if(mouseControlsMap.count(controlId)){
-        if(heldMouseButtons.count(mouseControlsMap.at(controlId))){
-            return 1;
+
+    for(sf::Mouse::Button button : controlsMap.at(controlId).mouse){
+        if(activeControls.mouse.count(button)){
+            return activeControls.mouse.at(button).held;
         }
     }
-    return 0;
+
+    return false;
 }
 
 // check if pressed once
-bool ControlsManager::isPressed(const std::string& controlId, bool isPressedNow){
-    // if there is such keyboard control
-    if(keyboardControlsMap.count(controlId)){
-        sf::Keyboard::Key& key = keyboardControlsMap.at(controlId);
-        // if it's pressed
-        if(pressedKeyboardBuffer.count(key)){
-            // check if it's pressed now or in past
-            if(!pressedKeyboardBuffer.at(key) && isPressedNow){
-                return 0;
+bool ControlsManager::isPressed(const std::string& controlId, bool onlyNow){
+    if(!controlsMap.count(controlId)){
+        return false;
+    }
+
+    for(sf::Keyboard::Key key : controlsMap.at(controlId).keyboard){
+        if(activeControls.keyboard.count(key)){
+            // if asked to get only current state of control but it's not pressed just now - false
+            if(onlyNow && !activeControls.keyboard.at(key).pressedNow){
+                return false;
             }
 
-            return 1;
+            return true;
         }
     }
 
-    // if there is such mouse control
-    else if(mouseControlsMap.count(controlId)){
-        sf::Mouse::Button& button = mouseControlsMap.at(controlId);
-        // if it's pressed
-        if(pressedMouseBuffer.count(button)){
-            // check if it's pressed now or in past
-            if(!pressedMouseBuffer.at(button) && isPressedNow){
-                return 0;
+    for(sf::Mouse::Button button : controlsMap.at(controlId).mouse){
+        if(activeControls.mouse.count(button)){
+            // if asked to get only current state of control but it's not pressed just now - false
+            if(onlyNow && !activeControls.mouse.at(button).pressedNow){
+                return false;
             }
 
-            return 1;
+            return true;
         }
     }
 
-    return 0;
+    return false;
 }
 
 // Change control
-void ControlsManager::changeKeyboardControl(std::string controlId, sf::Keyboard::Key key){
-    if(!keyboardControlsMap.count(controlId)){
+void ControlsManager::changeControl(const std::string& controlId, const Control& control){
+    if(!controlsMap.count(controlId)){
         return;
     }
-    keyboardControlsMap.at(controlId) = key;
+    controlsMap.at(controlId) = control;
 }
 
 // On control press
 void ControlsManager::controlPress(sf::Keyboard::Key key){
-    pressedKeyboardBuffer[key] = true;
-    heldKeyboardKeys.insert(key);
+    activeControls.keyboard[key] = {true, true, true};
 }
 
 void ControlsManager::controlPress(sf::Mouse::Button button){
-    pressedMouseBuffer[button] = 1;
-    heldMouseButtons.insert(button);
+    activeControls.mouse[button] = {true, true, true};
 }
 
 // On control release
 void ControlsManager::controlRelease(sf::Keyboard::Key key){
-    heldKeyboardKeys.erase(key);
+    if(!activeControls.keyboard.count(key)){
+        return;
+    }
+    ControlParameters& params = activeControls.keyboard.at(key);
+    params.held = false;
+    if(!params.buffered){
+        activeControls.keyboard.erase(key);
+    }
 }
 
 void ControlsManager::controlRelease(sf::Mouse::Button button){
-    heldMouseButtons.erase(button);
+    if(!activeControls.mouse.count(button)){
+        return;
+    }
+    ControlParameters& params = activeControls.mouse.at(button);
+    params.held = false;
+    if(!params.buffered){
+        activeControls.mouse.erase(button);
+    }
 }
 
 // Clear the vectors of once pressed controls of controls, that were pressed in the past
 void ControlsManager::clearPastBuffer(){
     // keyboard
-    for(auto it = pressedKeyboardBuffer.begin(); it != pressedKeyboardBuffer.end();){
-        if(!it->second){
-            it = pressedKeyboardBuffer.erase(it);
-            continue;
-        }
-        ++it;
+    for(std::pair<const sf::Keyboard::Key, ControlParameters>& pair : activeControls.keyboard){
+        pair.second.buffered = false;
     }
-
+    
     // mouse
-    for(auto it = pressedMouseBuffer.begin(); it != pressedMouseBuffer.end();){
-        if(!it->second){
-            it = pressedMouseBuffer.erase(it);
-            continue;
-        }
-        ++it;
+    for(std::pair<const sf::Mouse::Button, ControlParameters>& pair : activeControls.mouse){
+        pair.second.buffered = false;
     }
 }
 
 // Set all the buffer controls state to past
 void ControlsManager::updateBuffer(){
     // keyboard
-    for(std::pair<const sf::Keyboard::Key, bool>& pair : pressedKeyboardBuffer){
-        pair.second = false;
+    for(std::pair<const sf::Keyboard::Key, ControlParameters>& pair : activeControls.keyboard){
+        pair.second.pressedNow = false;
     }
     
     // mouse
-    for(std::pair<const sf::Mouse::Button, bool>& pair : pressedMouseBuffer){
-        pair.second = false;
+    for(std::pair<const sf::Mouse::Button, ControlParameters>& pair : activeControls.mouse){
+        pair.second.pressedNow = false;
     }
 }

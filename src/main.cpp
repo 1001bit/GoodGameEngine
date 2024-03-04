@@ -6,16 +6,13 @@
 void initControls(){
     gge::ControlsManager* controlsManager = gge::ControlsManager::getInstance();
     // Keyboard controls
-    controlsManager->setKeyboardControlsMap({
-        {"wLeft", sf::Keyboard::A},
-        {"wRight", sf::Keyboard::D},
-        {"wUp", sf::Keyboard::W},
-        {"wDown", sf::Keyboard::S},
-        {"jump", sf::Keyboard::Space},
-    });
-    // mouse controls
-    controlsManager->setMouseControlsMap({
-        {"dialogueNext", sf::Mouse::Left}
+    controlsManager->setControlsMap({
+        { "wLeft", {{sf::Keyboard::A}, {}} },
+        { "wRight", {{sf::Keyboard::D}, {}} },
+        { "wUp", {{sf::Keyboard::W}, {}} },
+        { "wDown", {{sf::Keyboard::S}, {}} },
+        { "jump", {{sf::Keyboard::Space}, {}} },
+        { "dialogueNext", {{}, {sf::Mouse::Left}} }
     });
 }
 

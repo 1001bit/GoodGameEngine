@@ -1,7 +1,9 @@
 #include "GGE/Game.hpp"
 #include "Levels/inits.hpp"
+#include "GGE/Gobjects/Sprite.hpp"
 #include "GGE/Controls/ControlsManager.hpp"
-#include "BaseHeaders/GameConstants.hpp"
+
+const float gge::obj::Sprite::SPRITE_SCALE = 7;
 
 void initControls(){
     gge::ControlsManager* controlsManager = gge::ControlsManager::getInstance();
@@ -20,10 +22,6 @@ int main()
 {
     srand(time(NULL));
 
-    // init window
-    sf::RenderWindow window(sf::VideoMode(gge::GAME_WIDTH, gge::GAME_HEIGHT), "GoodGame test", sf::Style::Close);
-    window.setFramerateLimit(gge::MAX_FPS);
-
     // init the game
     gge::Game game = gge::Game();
     initControls();
@@ -35,7 +33,7 @@ int main()
     game.levelsManager.setCurrentLevel(0);
 
     // start the main loop
-    game.loop(window);
+    game.loop(1280, 720, 150, 120, "GGE test");
 
     return 0;
 }

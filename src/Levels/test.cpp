@@ -8,9 +8,9 @@
 
 using namespace gge;
 
-std::shared_ptr<gge::Level> clvl::newTest(){
+std::shared_ptr<Level> clvl::newTest(){
     std::shared_ptr<Level> level = std::make_shared<Level>();
-    level->init();
+    level->init(1280, 720);
 
     // Level
     // Smooth following camera
@@ -28,10 +28,8 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     level->addChild(dummy);
     level->physicsManager.addNewBody(std::static_pointer_cast<obj::KinematicBody>(dummy));
     level->gobjectIdMap[1] = dummy;
-    dummy->setRectPixelSize(16, 16);
     dummy->setCurrentPos({000, 300}, true);
     camera->setTarget(dummy);
-    
     // his sprite
     std::shared_ptr<obj::AnimatedSprite> dummySprite = std::make_shared<obj::AnimatedSprite>();
     dummy->addChild(dummySprite);
@@ -39,6 +37,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     level->updatableGobjects.push_back(dummySprite);  
     dummySprite->insertAnimation("idle", Animation(level->resourceManager.getTexture("Assets/Textures/dummy.png"), 16, 500, 1));
     dummySprite->playAnimation("idle");
+    dummy->setRectSize(dummySprite->getRect().getSize());
     // his sword
     std::shared_ptr<obj::Sprite> sword = std::make_shared<obj::Sprite>();
     dummy->addChild(sword);
@@ -52,7 +51,6 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     level->addChild(npc);
     level->physicsManager.addNewBody(std::static_pointer_cast<obj::KinematicBody>(npc));
     level->gobjectIdMap[2] = npc;
-    npc->setRectPixelSize(16, 16);
     npc->setCurrentPos({500, 300}, true);
     npc->initCooldowns(level->cooldownsManager);
     // his sprite
@@ -63,6 +61,7 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     npcSprite->insertAnimation("idle", Animation(level->resourceManager.getTexture("Assets/Textures/dummy.png"), 16, 100, 1));
     npcSprite->playAnimation("idle");
     npcSprite->sprite.setRotation(45);
+    npc->setRectSize(npcSprite->getRect().getSize());
     // his sword
     sword = std::make_shared<obj::Sprite>();
     npc->addChild(sword);
@@ -75,25 +74,25 @@ std::shared_ptr<gge::Level> clvl::newTest(){
     std::shared_ptr<obj::Body> platform = std::make_shared<obj::Body>();
     level->addChild(platform);
     level->physicsManager.addNewBody(platform);
-    platform->setRectPixelSize(100, 10);
     platform->setRelativePos({800, 730});
     // it's sprite
     std::shared_ptr<obj::Sprite>  platformSprite = std::make_shared<obj::Sprite>();
     platform->addChild(platformSprite);
     level->drawablesManager.newDrawable(platformSprite, false, 0);
     platformSprite->setTexture(level->resourceManager.getTexture("Assets/Textures/platform.png"));
+    platform->setRectSize(platformSprite->getRect().getSize());
 
     // a platform
     platform = std::make_shared<obj::Body>();
     level->addChild(platform);
     level->physicsManager.addNewBody(platform);
-    platform->setRectPixelSize(100, 10);
     platform->setRelativePos({100, 800});
     // it's sprite
     platformSprite = std::make_shared<obj::Sprite>();
     platform->addChild(platformSprite);
     level->drawablesManager.newDrawable(platformSprite, false, 0);
     platformSprite->setTexture(level->resourceManager.getTexture("Assets/Textures/platform.png"));
+    platform->setRectSize(platformSprite->getRect().getSize());
 
     // bunch of platforms
     for(int i = 0; i < 100; ++i){
@@ -101,13 +100,13 @@ std::shared_ptr<gge::Level> clvl::newTest(){
         platform = std::make_shared<obj::Body>();
         level->addChild(platform);
         level->physicsManager.addNewBody(platform);
-        platform->setRectPixelSize(100, 10);
         platform->setRelativePos({-600.f - 700.f*i, 730.f});
         // it's sprite
         platformSprite = std::make_shared<obj::Sprite>();
         platform->addChild(platformSprite);
         level->drawablesManager.newDrawable(platformSprite, false, 0);
         platformSprite->setTexture(level->resourceManager.getTexture("Assets/Textures/platform.png"));
+        platform->setRectSize(platformSprite->getRect().getSize());
     }
 
     // Gui

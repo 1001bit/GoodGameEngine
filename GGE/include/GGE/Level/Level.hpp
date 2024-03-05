@@ -42,7 +42,7 @@ public:
 
     // Methods
     // Init the level
-    void init();
+    void init(float viewW, float viewH);
     // Update states of all the objects
     void update(const float& dTimeMs);
     // restartLevel = true

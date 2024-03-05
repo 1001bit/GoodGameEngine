@@ -1,5 +1,4 @@
 #include "Dialogues/DialogueManager.hpp"
-#include "BaseHeaders/GameConstants.hpp"
 
 using gge::DialogueManager;
 
@@ -97,9 +96,21 @@ void DialogueManager::update(const float&){
 
 // Hide or show drawable part
 void DialogueManager::setDrawableVisiblity(bool visible){
+    auto level = levelWeak.lock();
+    if(!level){
+        return;
+    }
+    auto guiView = level->guiViewWeak.lock();
+    if(!guiView){
+        return;
+    }
+
     if(auto dialogueBox = dialogueBoxWeak.lock()){
         if(visible){
-            dialogueBox->setRelativePos({(GAME_WIDTH-(dialogueBox->sprite.getGlobalBounds().width))/2, 600}); // centralize it on X position
+            dialogueBox->setRelativePos({
+                (guiView->getRect().width - dialogueBox->getRect().width) / 2.f, // centralize dialogue box inside view
+                guiView->getRect().height - dialogueBox->getRect().height - 50 // bottom of the screen
+            });
         } else {
             dialogueBox->setRelativePos({9999, 9999});
         }

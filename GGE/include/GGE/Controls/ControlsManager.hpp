@@ -26,7 +26,7 @@ private:
     {
         bool held;
         bool pressedNow;
-        bool buffered;
+        bool stepBuffered;
     };
     struct ActiveControls {
         std::unordered_map<sf::Keyboard::Key, ControlParameters> keyboard;
@@ -46,16 +46,16 @@ public:
     bool isHeld(const std::string& controlId);
 
     // Is control pressed once (set isPressed = false in physics update)
-    bool isPressed(const std::string& controlId, bool onlyNow = true);
+    bool isPressed(const std::string& controlId, bool checkStepBuffer = false);
 
     // On control single press
     void controlPress(sf::Keyboard::Key key);
     void controlPress(sf::Mouse::Button button);
 
-    // Clear the vectors of once pressed controls of controls, that were pressed in the past
-    void clearPastBuffer();
-    // Set all the buffer controls state to past
-    void updateBuffer();
+    // makes everyControl.buffered = false (if not pressed right this frame)
+    void clearStepBuffer();
+    // update active controls
+    void update();
 
     // On control release
     void controlRelease(sf::Keyboard::Key key);

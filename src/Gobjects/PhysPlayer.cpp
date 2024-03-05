@@ -32,18 +32,18 @@ void PhysPlayer::control(){
 
     // walk left
     if(controlsManager->isHeld("wLeft")){
-        accelerate(-walkSpeed, 0);
+        addAcceleration({-walkSpeed, 0});
         setFlip(1);
     }
 
     // walk right
     if(controlsManager->isHeld("wRight")){
-        accelerate(walkSpeed, 0);
+        addAcceleration({walkSpeed, 0});
         setFlip(0);
     }
 
     // jump
     if(controlsManager->isHeld("jump") && collisionDir.vertical == Direction::Down){
-        accelerate(0, -JUMP_FORCE);
+        addAcceleration({0, -JUMP_FORCE});
     }
 }

@@ -60,16 +60,16 @@ void TDNpc::control(){
     switch (movementDir)
     {
     case Direction::Up:
-        accelerate(0, -WALK_SPEED);
+        addAcceleration({0, -WALK_SPEED});
         break;
     case Direction::Down:
-        accelerate(0, WALK_SPEED);
+        addAcceleration({0, WALK_SPEED});
         break;
     case Direction::Left:
-        accelerate(-WALK_SPEED, 0);
+        addAcceleration({-WALK_SPEED, 0});
         break;
     case Direction::Right:
-        accelerate(WALK_SPEED, 0);
+        addAcceleration({WALK_SPEED, 0});
         break;
     default:
         break;

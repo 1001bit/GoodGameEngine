@@ -22,18 +22,18 @@ void TDPlayer::control(){
 
     // walk left
     if(controlsManager->isHeld("wLeft")){
-        accelerate(-WALK_SPEED, 0);
+        addAcceleration({-WALK_SPEED, 0});
     }
     // walk right
     if(controlsManager->isHeld("wRight")){
-        accelerate(WALK_SPEED, 0);
+        addAcceleration({WALK_SPEED, 0});
     }
     // walk up
     if(controlsManager->isHeld("wUp")){
-        accelerate(0, -WALK_SPEED);
+        addAcceleration({0, -WALK_SPEED});
     }
     // walk down
     if(controlsManager->isHeld("wDown")){
-        accelerate(0, WALK_SPEED);
+        addAcceleration({0, WALK_SPEED});
     }
 }

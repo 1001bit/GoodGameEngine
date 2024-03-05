@@ -67,11 +67,11 @@ void PhysNpc::control(){
     switch (movementDir)
     {
     case Direction::Left:
-        accelerate(-walkSpeed, 0);
+        addAcceleration({-walkSpeed, 0});
         setFlip(1);
         break;
     case Direction::Right:
-        accelerate(walkSpeed, 0);
+        addAcceleration({walkSpeed, 0});
         setFlip(0);
         break;
     default:

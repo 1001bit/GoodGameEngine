@@ -56,6 +56,8 @@ public:
     bool doRestart();
     // active
     bool isActive();
+    // levelView.getSize()
+    sf::Vector2f getViewSize();
 };
 
 }

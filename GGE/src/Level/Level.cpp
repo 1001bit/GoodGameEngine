@@ -58,3 +58,10 @@ bool Level::doRestart(){
 bool Level::isActive(){
     return active;
 }
+// levelView.getSize()
+sf::Vector2f Level::getViewSize(){
+    if(auto levelView = levelViewWeak.lock()){
+        return levelView->getRect().getSize();
+    }
+    return {0, 0};
+}

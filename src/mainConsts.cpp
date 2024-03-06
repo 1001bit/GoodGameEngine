@@ -1,5 +1,12 @@
 #include "GGE/Physics/PhysicsManager.hpp"
+#include "GGE/Gobjects/Sprite.hpp"
 
+// Sprite
+using gge::obj::Sprite;
+
+const float Sprite::SPRITE_SCALE = 7;
+
+// Physics
 using gge::PhysicsManager;
 
 const ushort PhysicsManager::UPDATE_RATE = 60;

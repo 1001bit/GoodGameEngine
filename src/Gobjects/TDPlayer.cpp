@@ -3,7 +3,7 @@
 
 using gge::obj::TDPlayer;
 
-constexpr float WALK_SPEED = 15;
+const float TDPlayer::WALK_SPEED = 15;
 
 // Structors
 TDPlayer::TDPlayer(){

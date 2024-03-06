@@ -7,6 +7,8 @@ namespace gge::obj {
 class SmoothFollower : public KinematicBody 
 {
 private:
+    static const float APPROACH_FACTOR;
+
     std::weak_ptr<Gobject> followTargetWeak;
     
 public:

@@ -7,6 +7,7 @@ namespace gge::obj {
 class TDPlayer : public KinematicBody
 {
 private:
+    static const float WALK_SPEED;
     
 public:
     // Structors

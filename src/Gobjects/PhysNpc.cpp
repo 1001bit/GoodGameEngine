@@ -2,13 +2,12 @@
 
 using gge::obj::PhysNpc;
 
-constexpr float WALK_SPEED = 2;
-constexpr float AIR_SLOWDOWN = 0.05;
-
-constexpr float IDLE_TIME = 2000;
-constexpr float WALK_TIME = 3000;
-constexpr float IDLE_RAND = 500;
-constexpr float WALK_RAND = 1000;
+const float PhysNpc::WALK_SPEED = 2;
+const float PhysNpc::AIR_SLOWDOWN = 0.05;
+const float PhysNpc::IDLE_TIME = 2000;
+const float PhysNpc::WALK_TIME = 3000;
+const float PhysNpc::IDLE_RAND = 500;
+const float PhysNpc::WALK_RAND = 1000;
 
 // Structors
 PhysNpc::PhysNpc(){

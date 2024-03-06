@@ -2,12 +2,11 @@
 
 using gge::obj::TDNpc;
 
-constexpr float WALK_SPEED = 4;
-
-constexpr float IDLE_TIME = 2000;
-constexpr float WALK_TIME = 3000;
-constexpr float IDLE_RAND = 500;
-constexpr float WALK_RAND = 1000;
+const float TDNpc::WALK_SPEED = 4;
+const float TDNpc::IDLE_TIME = 2000;
+const float TDNpc::WALK_TIME = 3000;
+const float TDNpc::IDLE_RAND = 500;
+const float TDNpc::WALK_RAND = 1000;
 
 // Structors
 TDNpc::TDNpc(){

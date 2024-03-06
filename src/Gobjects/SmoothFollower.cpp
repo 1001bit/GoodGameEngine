@@ -3,7 +3,7 @@
 
 using gge::obj::SmoothFollower;
 
-constexpr float FACTOR = 0.98;
+const float SmoothFollower::APPROACH_FACTOR = 0.98;
 
 // Structors
 SmoothFollower::SmoothFollower(){
@@ -25,7 +25,7 @@ void SmoothFollower::update(const float& dTimeMs){
     const sf::FloatRect& targetRect = followTarget->getRect();
     sf::Vector2f targetCenterPos(targetRect.getPosition() + targetRect.getSize()/2.f);
 
-    float blend = pow(FACTOR, dTimeMs);
+    float blend = pow(APPROACH_FACTOR, dTimeMs);
     setCurrentPos(lerp(targetCenterPos, getCurrentRect().getPosition(), blend), true);
 
     // setCurrentPos(targetCenterPos, true);

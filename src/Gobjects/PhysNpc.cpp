@@ -13,10 +13,10 @@ const float PhysNpc::WALK_RAND = 1000;
 PhysNpc::PhysNpc(){
     movementDir = Direction::None;
 
-    weighs = true;
-    friction = true;
-    collidable = true;
-    controllable = true;
+    applyGravity = true;
+    applyFriction = true;
+    applyCollisions = true;
+    applyControl = true;
 }
 
 PhysNpc::~PhysNpc(){}

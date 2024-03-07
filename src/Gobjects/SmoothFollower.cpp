@@ -7,9 +7,9 @@ const float SmoothFollower::APPROACH_FACTOR = 0.98;
 
 // Structors
 SmoothFollower::SmoothFollower(){
-    this->weighs = 0;
-    this->friction = 0;
-    this->collidable = 0;
+    applyGravity = false;
+    applyFriction = false;
+    applyCollisions = false;
 }
 SmoothFollower::~SmoothFollower(){}
 

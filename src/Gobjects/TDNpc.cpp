@@ -12,10 +12,10 @@ const float TDNpc::WALK_RAND = 1000;
 TDNpc::TDNpc(){
     movementDir = Direction::None;
 
-    weighs = false;
-    friction = true;
-    collidable = true;
-    controllable = true;
+    applyGravity = false;
+    applyFriction = true;
+    applyCollisions = true;
+    applyControl = true;
 }
 TDNpc::~TDNpc(){}
 

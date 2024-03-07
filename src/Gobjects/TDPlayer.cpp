@@ -7,10 +7,10 @@ const float TDPlayer::WALK_SPEED = 15;
 
 // Structors
 TDPlayer::TDPlayer(){
-    weighs = false;
-    friction = true;
-    collidable = true;
-    controllable = true;
+    applyGravity = false;
+    applyFriction = true;
+    applyCollisions = true;
+    applyControl = true;
 }
 
 TDPlayer::~TDPlayer(){}

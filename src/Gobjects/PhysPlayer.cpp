@@ -9,10 +9,10 @@ const float PhysPlayer::AIR_SLOWDOWN = 0.05;
 
 // Structors
 PhysPlayer::PhysPlayer(){
-    weighs = true;
-    friction = true;
-    collidable = true;
-    controllable = true;
+    applyGravity = true;
+    applyFriction = true;
+    applyCollisions = true;
+    applyControl = true;
 }
 
 PhysPlayer::~PhysPlayer(){}

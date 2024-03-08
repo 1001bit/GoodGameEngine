@@ -95,7 +95,7 @@ std::shared_ptr<Level> clvl::newTest(){
     platform->setRectSize(platformSprite->getRect().getSize());
 
     // bunch of platforms
-    for(int i = 0; i < 100; ++i){
+    for(int i = 0; i < 1000; ++i){
         // a platform
         platform = std::make_shared<obj::Body>();
         level->addChild(platform);
